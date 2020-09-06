@@ -42,8 +42,8 @@ class PaginatedList(Generic[T]):
             self._has_next_page = False
 
         if self.__list_item in json_response:
-            self.__total_count = json_response["totalCount"]
             elements = json_response[self.__list_item]
+            self.__total_count = json_response.get("totalCount") or len(elements)
 
             data = [self.__target_class(self.__http_client, response.headers, element) for element in elements]
         return data
