@@ -15,14 +15,14 @@ $ pip install dtapi
 ```python
 from dynatrace import Dynatrace
     
-# Create a Dynatrace instance
+# Create a Dynatrace client
 dt = Dynatrace("environment_url", "api_token" )
 
 # Get all hosts and some properties
 for entity in dt.get_entities('type("HOST")', fields="properties.memoryTotal,properties.monitoringMode"):
     print(entity.entity_id, entity.display_name, entity.properties)
 
-# Get CPU utilization for all hosts
+# Get idle CPU for all hosts
 for metric in dt.query_metrics("builtin:host.cpu.idle", page_size=5000, resolution="Inf"):
      print(metric)
 
