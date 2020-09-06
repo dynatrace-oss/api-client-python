@@ -31,6 +31,9 @@ class PaginatedList(Generic[T]):
             for element in new_elements:
                 yield element
 
+    def __len__(self):
+        return self.__total_count or len(self.__elements)
+
     def _get_next_page(self):
         response = self.__http_client.make_request(self.__target_url, self.__target_params, self.__headers)
         json_response = response.json()
