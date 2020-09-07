@@ -79,7 +79,7 @@ class EntityShortRepresentation(DynatraceObject):
         return self._name
 
     @property
-    def descriptions(self):
+    def description(self):
         return self._description
 
     def _create_from_raw_data(self, raw_element):
