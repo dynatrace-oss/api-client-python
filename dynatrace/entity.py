@@ -66,7 +66,7 @@ class Entity(DynatraceObject):
     def _create_from_raw_data(self, raw_element: dict):
         self._display_name = raw_element.get("displayName")
         self._entity_id = raw_element.get("entityId")
-        self._properties = raw_element.get("properties", [])
+        self._properties = raw_element.get("properties", {})
 
 
 class EntityShortRepresentation(DynatraceObject):
