@@ -10,7 +10,7 @@ from dynatrace.entity import Entity
 from dynatrace.entity_type import EntityType
 from dynatrace.metric import MetricSeriesCollection, MetricDescriptor
 from dynatrace.pagination import PaginatedList
-from dynatrace.plugins import PluginShortRepresentation
+from dynatrace.plugins import PluginShortRepresentation, PluginState
 
 default_log = logging.getLogger("dynatrace")
 
@@ -353,6 +353,14 @@ class Dynatrace:
         List all uploaded plugins
         """
         return PaginatedList(PluginShortRepresentation, self.__http_client, "/api/config/v1/plugins", None, list_item="values")
+
+    def get_plugin_states(self, plugin_id) -> PaginatedList[PluginState]:
+        """
+        List the states of the specified plugin
+        """
+        return PaginatedList(
+            PluginState, self.__http_client, f"/api/config/v1/plugins/{plugin_id}/states", None, list_item="states"
+        )
 
     def delete_plugin(self, plugin_id) -> Response:
         """
