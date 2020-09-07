@@ -33,4 +33,12 @@ for ag in dt.get_activegates():
 # Get metric descriptions for all host metrics
 for m in dt.get_metrics("builtin:host.*"):
     print(m)
+
+# Delete endpoints that contain the word test
+for plugin in dt.get_plugins():
+    
+    # This could also be dt.get_endpoints(plugin.id)    
+    for endpoint in plugin.endpoints:
+        if "test" in endpoint.name:
+            endpoint.delete(plugin.id)
 ```

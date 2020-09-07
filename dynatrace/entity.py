@@ -60,10 +60,29 @@ class Entity(DynatraceObject):
         return []
 
     @property
-    def properties(self) -> dict:
+    def properties(self) -> List[dict]:
         return self._properties
 
     def _create_from_raw_data(self, raw_element: dict):
         self._display_name = raw_element.get("displayName")
         self._entity_id = raw_element.get("entityId")
-        self._properties = raw_element.get("properties", {})
+        self._properties = raw_element.get("properties", [])
+
+
+class EntityShortRepresentation(DynatraceObject):
+    @property
+    def id(self):
+        return self._id
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def description(self):
+        return self._description
+
+    def _create_from_raw_data(self, raw_element):
+        self._id = raw_element.get("id")
+        self._name = raw_element.get("name")
+        self._description = raw_element.get("description")
