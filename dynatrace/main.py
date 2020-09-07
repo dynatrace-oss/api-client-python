@@ -1,12 +1,16 @@
 import logging
 from typing import Dict, Optional
 
+from requests import Response
+
 from dynatrace.activegate import ActiveGate
 from dynatrace.http_client import HttpClient
+from dynatrace.endpoint import EndpointShortRepresentation
 from dynatrace.entity import Entity
 from dynatrace.entity_type import EntityType
 from dynatrace.metric import MetricSeriesCollection, MetricDescriptor
 from dynatrace.pagination import PaginatedList
+from dynatrace.plugins import PluginShortRepresentation
 
 default_log = logging.getLogger("dynatrace")
 
@@ -287,7 +291,7 @@ class Dynatrace:
             The length of the string is limited to 1,000 characters.
         :return: The metric descriptor
         """
-        response = self.__http_client.make_request(f"/api/v2/metrics/{metric_id}", None, None).json()
+        response = self.__http_client.make_request(f"/api/v2/metrics/{metric_id}").json()
         return MetricDescriptor(self.__http_client, None, response)
 
     def get_activegates(
@@ -343,3 +347,28 @@ class Dynatrace:
             "version": version,
         }
         return PaginatedList(ActiveGate, self.__http_client, "/api/v2/activeGates", params, list_item="activeGates")
+
+    def get_plugins(self) -> PaginatedList[PluginShortRepresentation]:
+        """
+        List all uploaded plugins
+        """
+        return PaginatedList(PluginShortRepresentation, self.__http_client, "/api/config/v1/plugins", None, list_item="values")
+
+    def delete_plugin(self, plugin_id) -> Response:
+        """
+        Deletes the ZIP file of the specified plugin
+        :param plugin_id: The ID of the plugin to be deleted
+        """
+        return self.__http_client.make_request(f"/api/config/v1/plugins/{plugin_id}/binary", method="DELETE")
+
+    def get_endpoints(self, plugin_id: str) -> PaginatedList[EndpointShortRepresentation]:
+        """
+        Lists endpoints of the specified ActiveGate plugin
+        """
+        return PaginatedList(
+            EndpointShortRepresentation,
+            self.__http_client,
+            f"/api/config/v1/plugins/{plugin_id}/endpoints",
+            None,
+            list_item="values",
+        )
