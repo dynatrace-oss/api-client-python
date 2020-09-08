@@ -1,13 +1,14 @@
 import logging
-from typing import Dict, Optional
+from typing import Dict, Optional, List
 
 from requests import Response
 
 from dynatrace.activegate import ActiveGate
-from dynatrace.http_client import HttpClient
+from dynatrace.dashboard import DashboardStub, Dashboard
 from dynatrace.endpoint import EndpointShortRepresentation
 from dynatrace.entity import Entity
 from dynatrace.entity_type import EntityType
+from dynatrace.http_client import HttpClient
 from dynatrace.metric import MetricSeriesCollection, MetricDescriptor
 from dynatrace.pagination import PaginatedList
 from dynatrace.plugins import PluginShortRepresentation, PluginState
@@ -380,3 +381,26 @@ class Dynatrace:
             None,
             list_item="values",
         )
+
+    def get_dashboards(self, owner: str = None, tags: List[str] = None) -> PaginatedList[DashboardStub]:
+        """
+        Lists all dashboards of the environment
+        :param owner: The owner of the dashboard.
+        :param tags: A list of tags applied to the dashboard.
+            The dashboard must match all the specified tags.
+        """
+        params = {"owner": owner, "tags": tags}
+        return PaginatedList(DashboardStub, self.__http_client, f"/api/config/v1/dashboards", params, list_item="dashboards")
+
+    def delete_dashboard(self, dashboard_id: str) -> Response:
+        """
+        Deletes the specified dashboard
+        """
+        return self.__http_client.make_request(f"/api/config/v1/dashboards/{dashboard_id}", method="DELETE")
+
+    def get_dashboard(self, dashboard_id: str) -> Dashboard:
+        """
+        Gets the properties of the specified dashboard
+        """
+        response = self.__http_client.make_request(f"/api/config/v1/dashboards/{dashboard_id}").json()
+        return Dashboard(self.__http_client, None, response)
