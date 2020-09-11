@@ -7,14 +7,12 @@ import urllib3
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-default_log = logging.getLogger("dynatrace_http_client")
-
-from dynatrace import TOO_MANY_REQUESTS_WAIT
+from dynatrace.constants import TOO_MANY_REQUESTS_WAIT
 
 
 class HttpClient:
     def __init__(
-        self, base_url: str, token: str, log: logging.Logger = default_log, proxies: Dict = None, too_many_requests_strategy=None
+        self, base_url: str, token: str, log: logging.Logger = None, proxies: Dict = None, too_many_requests_strategy=None
     ):
         while base_url.endswith("/"):
             base_url = base_url[:-1]
@@ -26,6 +24,14 @@ class HttpClient:
 
         self.auth_header = {"Authorization": f"Api-Token {token}"}
         self.log = log
+        if self.log is None:
+            self.log = logging.getLogger(__name__)
+            self.log.setLevel(logging.WARNING)
+            st = logging.StreamHandler()
+            fmt = logging.Formatter("%(asctime)s - %(levelname)s - %(name)s - %(thread)d - %(filename)s:%(lineno)d - %(message)s")
+            st.setFormatter(fmt)
+            self.log.addHandler(st)
+
         self.too_many_requests_strategy = too_many_requests_strategy
 
     def make_request(

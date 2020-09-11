@@ -13,7 +13,8 @@ $ pip install dtapi
 ## Simple Demo
 
 ```python
-from dynatrace import Dynatrace, TOO_MANY_REQUESTS_WAIT
+from dynatrace import Dynatrace
+from dynatrace.constants import TOO_MANY_REQUESTS_WAIT
     
 # Create a Dynatrace client
 dt = Dynatrace("environment_url", "api_token" )

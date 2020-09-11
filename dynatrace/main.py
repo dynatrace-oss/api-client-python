@@ -14,12 +14,10 @@ from dynatrace.metric import MetricSeriesCollection, MetricDescriptor
 from dynatrace.pagination import PaginatedList
 from dynatrace.plugins import PluginShortRepresentation, PluginState
 
-default_log = logging.getLogger("dynatrace")
-
 
 class Dynatrace:
     def __init__(
-        self, base_url: str, token: str, log: logging.Logger = default_log, proxies: Dict = None, too_many_requests_strategy=None
+        self, base_url: str, token: str, log: logging.Logger = None, proxies: Dict = None, too_many_requests_strategy=None
     ):
         self.__http_client = HttpClient(base_url, token, log, proxies, too_many_requests_strategy)
 
