@@ -18,8 +18,10 @@ default_log = logging.getLogger("dynatrace")
 
 
 class Dynatrace:
-    def __init__(self, base_url: str, token: str, log: logging.Logger = default_log, proxies: Dict = None):
-        self.__http_client = HttpClient(base_url, token, log, proxies)
+    def __init__(
+        self, base_url: str, token: str, log: logging.Logger = default_log, proxies: Dict = None, too_many_requests_strategy=None
+    ):
+        self.__http_client = HttpClient(base_url, token, log, proxies, too_many_requests_strategy)
 
     def get_entities(
         self, entity_selector: str, time_from: str = "now-2h", time_to: str = "now", fields: Optional[str] = None, page_size=50

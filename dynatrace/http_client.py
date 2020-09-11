@@ -1,5 +1,6 @@
 import logging
 from typing import Dict, Optional
+import time
 
 import requests
 import urllib3
@@ -8,9 +9,13 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 default_log = logging.getLogger("dynatrace_http_client")
 
+from dynatrace import TOO_MANY_REQUESTS_WAIT
+
 
 class HttpClient:
-    def __init__(self, base_url: str, token: str, log: logging.Logger = default_log, proxies: Dict = None):
+    def __init__(
+        self, base_url: str, token: str, log: logging.Logger = default_log, proxies: Dict = None, too_many_requests_strategy=None
+    ):
         while base_url.endswith("/"):
             base_url = base_url[:-1]
         self.base_url = base_url
@@ -21,6 +26,7 @@ class HttpClient:
 
         self.auth_header = {"Authorization": f"Api-Token {token}"}
         self.log = log
+        self.too_many_requests_strategy = too_many_requests_strategy
 
     def make_request(
         self, path: str, params: Optional[Dict] = None, headers: Optional[Dict] = None, method="GET"
@@ -40,6 +46,12 @@ class HttpClient:
         r = requests.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies)
         self.log.debug(f"Received response '{r}'")
 
+        while r.status_code == 429 and self.too_many_requests_strategy == TOO_MANY_REQUESTS_WAIT:
+            sleep_amount = int(r.headers.get("retry-after", 5))
+            self.log.warning(f"Sleeping for {sleep_amount}s because we have received an HTTP 429")
+            time.sleep(sleep_amount)
+            r = requests.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies)
+
         if r.status_code >= 400:
-            raise Exception(f"Error making request to {url}: {r}. Response: {r.text}")
+            raise Exception(f"Error making request to {url}: {r}. Response: {r.text}, Headers: {r.headers}")
         return r

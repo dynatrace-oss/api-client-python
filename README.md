@@ -13,10 +13,14 @@ $ pip install dtapi
 ## Simple Demo
 
 ```python
-from dynatrace import Dynatrace
+from dynatrace import Dynatrace, TOO_MANY_REQUESTS_WAIT
     
 # Create a Dynatrace client
 dt = Dynatrace("environment_url", "api_token" )
+
+# Create a client that handles too many requests (429)
+dt = Dynatrace("environment_url", "api_token", too_many_requests_strategy=TOO_MANY_REQUESTS_WAIT )
+
 
 # Get all hosts and some properties
 for entity in dt.get_entities('type("HOST")', fields="properties.memoryTotal,properties.monitoringMode"):
