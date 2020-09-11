@@ -1,6 +1,7 @@
 from typing import List
 
 from dynatrace.dynatrace_object import DynatraceObject
+from dynatrace.entity import EntityShortRepresentation
 
 OS_TYPE_LINUX = "LINUX"
 OS_TYPE_WINDOWS = "WINDOWS"
@@ -24,7 +25,7 @@ VERSION_COMPARE_TYPE_LOWER = "LOWER"
 VERSION_COMPARE_TYPE_LOWER_EQUAL = "LOWER_EQUAL"
 
 
-class ActiveGate(DynatraceObject):
+class ActiveGate(EntityShortRepresentation):
     @property
     def id(self) -> str:
         return self._id

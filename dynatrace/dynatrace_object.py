@@ -12,4 +12,4 @@ class DynatraceObject:
         pass
 
     def __repr__(self):
-        return f"{self.__class__.__name__}({pprint.pformat(self._raw_element)})"
+        return f"{self.__class__.__name__}({pprint.pformat(self._raw_element, width=130)})"

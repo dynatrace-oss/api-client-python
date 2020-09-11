@@ -6,8 +6,9 @@ from requests import Response
 from dynatrace.activegate import ActiveGate
 from dynatrace.dashboard import DashboardStub, Dashboard
 from dynatrace.endpoint import EndpointShortRepresentation
-from dynatrace.entity import Entity
+from dynatrace.entity import Entity, EntityShortRepresentation
 from dynatrace.entity_type import EntityType
+from dynatrace.extension import ExtensionDto, Extension, ExtensionShortRepresentation, ExtensionConfigurationDto
 from dynatrace.http_client import HttpClient
 from dynatrace.metric import MetricSeriesCollection, MetricDescriptor
 from dynatrace.pagination import PaginatedList
@@ -353,15 +354,13 @@ class Dynatrace:
         """
         List all uploaded plugins
         """
-        return PaginatedList(PluginShortRepresentation, self.__http_client, "/api/config/v1/plugins", None, list_item="values")
+        return PaginatedList(PluginShortRepresentation, self.__http_client, "/api/config/v1/plugins", list_item="values")
 
     def get_plugin_states(self, plugin_id) -> PaginatedList[PluginState]:
         """
         List the states of the specified plugin
         """
-        return PaginatedList(
-            PluginState, self.__http_client, f"/api/config/v1/plugins/{plugin_id}/states", None, list_item="states"
-        )
+        return PaginatedList(PluginState, self.__http_client, f"/api/config/v1/plugins/{plugin_id}/states", list_item="states")
 
     def delete_plugin(self, plugin_id) -> Response:
         """
@@ -375,11 +374,7 @@ class Dynatrace:
         Lists endpoints of the specified ActiveGate plugin
         """
         return PaginatedList(
-            EndpointShortRepresentation,
-            self.__http_client,
-            f"/api/config/v1/plugins/{plugin_id}/endpoints",
-            None,
-            list_item="values",
+            EndpointShortRepresentation, self.__http_client, f"/api/config/v1/plugins/{plugin_id}/endpoints", list_item="values"
         )
 
     def get_dashboards(self, owner: str = None, tags: List[str] = None) -> PaginatedList[DashboardStub]:
@@ -404,3 +399,52 @@ class Dynatrace:
         """
         response = self.__http_client.make_request(f"/api/config/v1/dashboards/{dashboard_id}").json()
         return Dashboard(self.__http_client, None, response)
+
+    def get_extensions(self, page_size: int = 200) -> PaginatedList[ExtensionDto]:
+        """
+        List all uploaded extensions
+
+        :param page_size: The number of results per result page. Must be between 1 and 500
+            Default value : 200
+        """
+        params = {"pageSize": page_size}
+        return PaginatedList(ExtensionDto, self.__http_client, f"/api/config/v1/extensions", params, list_item="extensions")
+
+    def get_extension(self, extension_id: str):
+        response = self.__http_client.make_request(f"/api/config/v1/extensions/{extension_id}").json()
+        return Extension(self.__http_client, None, response)
+
+    def get_extension_instances(self, extension_id: str, page_size: int = 200) -> PaginatedList[ExtensionShortRepresentation]:
+        params = {"pageSize": page_size}
+        return PaginatedList(
+            ExtensionShortRepresentation,
+            self.__http_client,
+            f"/api/config/v1/extensions/{extension_id}/instances",
+            list_item="configurationsList",
+            target_params=params,
+        )
+
+    def get_extension_instance(self, extension_id: str, configuration_id: str):
+        response = self.__http_client.make_request(
+            f"/api/config/v1/extensions/{extension_id}/instances/{configuration_id}"
+        ).json()
+        return ExtensionConfigurationDto(self.__http_client, None, response)
+
+    def post_extension_instance(self, extension_configuration: ExtensionConfigurationDto):
+        return extension_configuration.post()
+
+    def create_extension_instance(
+        self,
+        extension_id: str,
+        enabled: bool = True,
+        use_global: bool = True,
+        properties: dict = None,
+        host_id: str = None,
+        active_gate: EntityShortRepresentation = None,
+        endpoint_id: str = None,
+        endpoint_name: str = None,
+    ) -> ExtensionConfigurationDto:
+
+        return ExtensionConfigurationDto(
+            self.__http_client, extension_id, enabled, use_global, properties, host_id, active_gate, endpoint_id, endpoint_name
+        )

@@ -7,7 +7,7 @@ T = TypeVar("T", bound=DynatraceObject)
 
 
 class PaginatedList(Generic[T]):
-    def __init__(self, target_class, http_client, target_url, target_params, headers=None, list_item="result"):
+    def __init__(self, target_class, http_client, target_url, target_params=None, headers=None, list_item="result"):
         self.__elements = list()
         self.__target_class = target_class
         self.__http_client: HttpClient = http_client
