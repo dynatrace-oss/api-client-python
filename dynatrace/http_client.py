@@ -48,7 +48,7 @@ class HttpClient:
             headers = {"content-type": "application/json"}
         headers.update(self.auth_header)
 
-        self.log.debug(f"Making {method} request to '{url}' with params {params}")
+        self.log.debug(f"Making {method} request to '{url}' with params {params} and body: {body}")
         r = requests.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies)
         self.log.debug(f"Received response '{r}'")
 

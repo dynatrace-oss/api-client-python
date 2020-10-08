@@ -3,6 +3,7 @@ from typing import Dict, Optional, List
 
 from requests import Response
 
+from datetime import datetime
 from dynatrace.activegate import ActiveGate
 from dynatrace.dashboard import DashboardStub, Dashboard
 from dynatrace.endpoint import EndpointShortRepresentation
@@ -13,6 +14,17 @@ from dynatrace.http_client import HttpClient
 from dynatrace.metric import MetricSeriesCollection, MetricDescriptor
 from dynatrace.pagination import PaginatedList
 from dynatrace.plugins import PluginShortRepresentation, PluginState
+from dynatrace.synthetic_third_party import (
+    ThirdPartySyntheticTests,
+    ThirdPartySyntheticLocation,
+    ThirdPartySyntheticMonitor,
+    SyntheticTestLocation,
+    ThirdPartySyntheticResult,
+    ThirdPartySyntheticLocationTestResult,
+    SyntheticMonitorStepResult,
+    SyntheticMonitorError,
+    SyntheticTestStep,
+)
 
 
 class Dynatrace:
@@ -448,3 +460,63 @@ class Dynatrace:
         return ExtensionConfigurationDto(
             self.__http_client, extension_id, enabled, use_global, properties, host_id, active_gate, endpoint_id, endpoint_name
         )
+
+    def report_simple_thirdparty_synthetic_test(
+        self,
+        engine_name: str,
+        timestamp: datetime,
+        location_id: str,
+        location_name: str,
+        test_id: str,
+        test_title: str,
+        step_title: str,
+        schedule_interval: int,
+        success: bool,
+        response_time: int,
+        icon_url: str = None,
+    ):
+
+        location = ThirdPartySyntheticLocation(self.__http_client, location_id, location_name)
+        synthetic_location = SyntheticTestLocation(self.__http_client, location_id)
+        step = SyntheticTestStep(self.__http_client, 1, step_title)
+        monitor = ThirdPartySyntheticMonitor(
+            self.__http_client, test_id, test_title, [synthetic_location], schedule_interval, steps=[step]
+        )
+        step_result = SyntheticMonitorStepResult(self.__http_client, 1, timestamp, response_time_millis=response_time)
+        location_result = ThirdPartySyntheticLocationTestResult(
+            self.__http_client, location_id, timestamp, success, step_results=[step_result]
+        )
+        test_result = ThirdPartySyntheticResult(self.__http_client, test_id, 1, [location_result])
+        tests = ThirdPartySyntheticTests(
+            self.__http_client, engine_name, timestamp, [location], [monitor], [test_result], icon_url
+        )
+        return tests.post()
+
+
+"""
+    def report_simple_test(
+        self,
+        name: str,
+        location_name: str,
+        success: bool,
+        response_time: int,
+        timestamp: datetime = None,
+        test_type="Ping",
+        interval: int = 60,
+        edit_link: str = None,
+    ):
+        test_id = f'custom_thirdparty_{name.lower().replace(" ", "_")}'
+        if timestamp is None:
+            timestamp = datetime.now()
+        step_id = 1
+        location = ThirdPartySyntheticLocation(location_name, location_name)
+        step = SyntheticTestStep(step_id, name)
+        monitor = ThirdPartySyntheticMonitor(
+            test_id, name, interval, description=name, locations=[location], steps=[step], editLink=edit_link
+        )
+        step_result = SyntheticMonitorStepResult(1, timestamp, response_time)
+        loc_result = ThirdPartySyntheticLocationTestResult(location_name, timestamp, success, stepResults=[step_result])
+        test_res = ThirdPartySyntheticTestResult(test_id, 0, [loc_result])
+        test = ThirdPartySyntheticTests(test_type, timestamp, locations=[location], tests=[monitor], testResults=[test_res])
+        return self.post_thirdparty_synthetic_tests(test)
+"""
