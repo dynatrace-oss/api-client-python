@@ -527,5 +527,6 @@ class Dynatrace:
                     resolved_events.append(ThirdPartyEventResolvedNotification(self.__http_client, test_id, event_id, timestamp))
                 del self.__open_third_party_events[test_id]
 
-        events = ThirdPartySyntheticEvents(self.__http_client, engine_name, opened_events, resolved_events)
-        return events.post()
+        if opened_events or resolved_events:
+            events = ThirdPartySyntheticEvents(self.__http_client, engine_name, opened_events, resolved_events)
+            return events.post()
