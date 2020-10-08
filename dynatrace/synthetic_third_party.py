@@ -3,6 +3,9 @@ from typing import List, Optional
 
 from dynatrace.dynatrace_object import DynatraceObject
 
+SYNTHETIC_EVENT_TYPE_OUTAGE = "testOutage"
+SYNTHETIC_EVENT_TYPE_SLOWDOWN = "testSlowdown"
+
 
 class ThirdPartySyntheticTests(DynatraceObject):
     def __init__(
@@ -151,4 +154,56 @@ class SyntheticMonitorError(DynatraceObject):
     def __init__(self, http_client, code: int, message: str):
 
         raw_element = {"code": code, "message": message}
+        super().__init__(http_client, None, raw_element)
+
+
+class ThirdPartySyntheticEvents(DynatraceObject):
+    def __init__(
+        self,
+        http_client,
+        synthetic_engine_name: str,
+        open_events: Optional[List["ThirdPartyEventOpenNotification"]],
+        resolved_events: Optional[List["ThirdPartyEventResolvedNotification"]],
+    ):
+
+        raw_element = {
+            "syntheticEngineName": synthetic_engine_name,
+            "open": [open_event._raw_element for open_event in open_events] if open_events else None,
+            "resolved": [resolved_event._raw_element for resolved_event in resolved_events] if resolved_events else None,
+        }
+        super().__init__(http_client, None, raw_element)
+
+    def post(self):
+        return self._http_client.make_request(f"/api/v1/synthetic/ext/events", params=self._raw_element, method="POST")
+
+
+class ThirdPartyEventOpenNotification(DynatraceObject):
+    def __init__(
+        self,
+        http_client,
+        test_id: str,
+        event_id: str,
+        name: str,
+        event_type: str,
+        reason: str,
+        start_timestamp: datetime,
+        location_ids: List[str],
+    ):
+
+        raw_element = {
+            "testId": test_id,
+            "eventId": event_id,
+            "name": name,
+            "eventType": event_type,
+            "reason": reason,
+            "startTimestamp": int(start_timestamp.timestamp() * 1000),
+            "locationIds": location_ids,
+        }
+        super().__init__(http_client, None, raw_element)
+
+
+class ThirdPartyEventResolvedNotification(DynatraceObject):
+    def __init__(self, http_client, test_id: str, event_id: str, end_timestamp: datetime):
+
+        raw_element = {"testId": test_id, "eventId": event_id, "endTimestamp": int(end_timestamp.timestamp() * 1000)}
         super().__init__(http_client, None, raw_element)

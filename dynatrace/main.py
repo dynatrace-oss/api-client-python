@@ -1,9 +1,10 @@
+from collections import defaultdict
+from datetime import datetime
 import logging
 from typing import Dict, Optional, List
 
 from requests import Response
 
-from datetime import datetime
 from dynatrace.activegate import ActiveGate
 from dynatrace.dashboard import DashboardStub, Dashboard
 from dynatrace.endpoint import EndpointShortRepresentation
@@ -24,6 +25,9 @@ from dynatrace.synthetic_third_party import (
     SyntheticMonitorStepResult,
     SyntheticMonitorError,
     SyntheticTestStep,
+    ThirdPartyEventResolvedNotification,
+    ThirdPartyEventOpenNotification,
+    ThirdPartySyntheticEvents,
 )
 
 
@@ -32,6 +36,7 @@ class Dynatrace:
         self, base_url: str, token: str, log: logging.Logger = None, proxies: Dict = None, too_many_requests_strategy=None
     ):
         self.__http_client = HttpClient(base_url, token, log, proxies, too_many_requests_strategy)
+        self.__open_third_party_events: Dict[str, int] = defaultdict(int)
 
     def get_entities(
         self, entity_selector: str, time_from: str = "now-2h", time_to: str = "now", fields: Optional[str] = None, page_size=50
@@ -474,13 +479,14 @@ class Dynatrace:
         success: bool,
         response_time: int,
         icon_url: str = None,
+        edit_link: str = None,
     ):
 
         location = ThirdPartySyntheticLocation(self.__http_client, location_id, location_name)
         synthetic_location = SyntheticTestLocation(self.__http_client, location_id)
         step = SyntheticTestStep(self.__http_client, 1, step_title)
         monitor = ThirdPartySyntheticMonitor(
-            self.__http_client, test_id, test_title, [synthetic_location], schedule_interval, steps=[step]
+            self.__http_client, test_id, test_title, [synthetic_location], schedule_interval, steps=[step], edit_link=edit_link
         )
         step_result = SyntheticMonitorStepResult(self.__http_client, 1, timestamp, response_time_millis=response_time)
         location_result = ThirdPartySyntheticLocationTestResult(
@@ -488,35 +494,38 @@ class Dynatrace:
         )
         test_result = ThirdPartySyntheticResult(self.__http_client, test_id, 1, [location_result])
         tests = ThirdPartySyntheticTests(
-            self.__http_client, engine_name, timestamp, [location], [monitor], [test_result], icon_url
+            self.__http_client, engine_name, timestamp, [location], [monitor], [test_result], synthetic_engine_icon_url=icon_url
         )
         return tests.post()
 
-
-"""
-    def report_simple_test(
+    def report_simple_thirdparty_synthetic_test_event(
         self,
+        test_id: str,
         name: str,
-        location_name: str,
-        success: bool,
-        response_time: int,
-        timestamp: datetime = None,
-        test_type="Ping",
-        interval: int = 60,
-        edit_link: str = None,
+        location_id: str,
+        timestamp: datetime,
+        state: str,
+        event_type: str,
+        reason: str,
+        engine_name: str,
     ):
-        test_id = f'custom_thirdparty_{name.lower().replace(" ", "_")}'
-        if timestamp is None:
-            timestamp = datetime.now()
-        step_id = 1
-        location = ThirdPartySyntheticLocation(location_name, location_name)
-        step = SyntheticTestStep(step_id, name)
-        monitor = ThirdPartySyntheticMonitor(
-            test_id, name, interval, description=name, locations=[location], steps=[step], editLink=edit_link
-        )
-        step_result = SyntheticMonitorStepResult(1, timestamp, response_time)
-        loc_result = ThirdPartySyntheticLocationTestResult(location_name, timestamp, success, stepResults=[step_result])
-        test_res = ThirdPartySyntheticTestResult(test_id, 0, [loc_result])
-        test = ThirdPartySyntheticTests(test_type, timestamp, locations=[location], tests=[monitor], testResults=[test_res])
-        return self.post_thirdparty_synthetic_tests(test)
-"""
+        opened_events: List[ThirdPartyEventOpenNotification] = []
+        resolved_events = []
+        if state == "open":
+            self.__open_third_party_events[test_id] += 1
+            event_id = f"{test_id}_{self.__open_third_party_events[test_id]}"
+
+            opened_events.append(
+                ThirdPartyEventOpenNotification(
+                    self.__http_client, test_id, event_id, name, event_type, reason, timestamp, [location_id]
+                )
+            )
+        else:
+            if test_id in self.__open_third_party_events:
+                event_ids = [f"{test_id}_{i + 1}" for i in range(self.__open_third_party_events[test_id])]
+                for event_id in event_ids:
+                    resolved_events.append(ThirdPartyEventResolvedNotification(self.__http_client, test_id, event_id, timestamp))
+                del self.__open_third_party_events[test_id]
+
+        events = ThirdPartySyntheticEvents(self.__http_client, engine_name, opened_events, resolved_events)
+        return events.post()
