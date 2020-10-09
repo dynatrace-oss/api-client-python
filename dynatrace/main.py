@@ -6,6 +6,7 @@ from typing import Dict, Optional, List
 from requests import Response
 
 from dynatrace.activegate import ActiveGate
+from dynatrace.custom_device import CustomDevicePushMessage
 from dynatrace.dashboard import DashboardStub, Dashboard
 from dynatrace.endpoint import EndpointShortRepresentation
 from dynatrace.entity import Entity, EntityShortRepresentation
@@ -23,12 +24,12 @@ from dynatrace.synthetic_third_party import (
     ThirdPartySyntheticResult,
     ThirdPartySyntheticLocationTestResult,
     SyntheticMonitorStepResult,
-    SyntheticMonitorError,
     SyntheticTestStep,
     ThirdPartyEventResolvedNotification,
     ThirdPartyEventOpenNotification,
     ThirdPartySyntheticEvents,
 )
+from dynatrace.timeseries import TimeseriesRegistrationMessage
 
 
 class Dynatrace:
@@ -530,3 +531,52 @@ class Dynatrace:
         if opened_events or resolved_events:
             events = ThirdPartySyntheticEvents(self.__http_client, engine_name, opened_events, resolved_events)
             return events.post()
+
+    def create_custom_device(
+        self,
+        device_id: str,
+        display_name: Optional[str] = None,
+        group: Optional[str] = None,
+        ip_addresses: Optional[List[str]] = None,
+        listen_ports: Optional[List[int]] = None,
+        technology: Optional[str] = None,
+        favicon: Optional[str] = None,
+        config_url: Optional[str] = None,
+        properties: Optional[Dict[str, str]] = None,
+        tags: Optional[List[str]] = None,
+        series: Optional[List] = None,
+        host_names: Optional[List[str]] = None,
+    ) -> CustomDevicePushMessage:
+        return CustomDevicePushMessage(
+            self.__http_client,
+            device_id=device_id,
+            display_name=display_name,
+            group=group,
+            ip_addresses=ip_addresses,
+            listen_ports=listen_ports,
+            technology=technology,
+            favicon=favicon,
+            config_url=config_url,
+            properties=properties,
+            tags=tags,
+            series=series,
+            host_names=host_names,
+        )
+
+    def create_timeseries(
+        self,
+        metric_id: str,
+        display_name: Optional[str],
+        unit: Optional[str] = None,
+        dimensions: Optional[List[str]] = None,
+        technologies: Optional[List[str]] = None,
+    ) -> TimeseriesRegistrationMessage:
+
+        return TimeseriesRegistrationMessage(
+            self.__http_client,
+            metric_id=metric_id,
+            display_name=display_name,
+            unit=unit,
+            dimensions=dimensions,
+            technologies=technologies,
+        )
