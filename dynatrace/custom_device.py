@@ -1,8 +1,40 @@
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
+from collections import MutableSequence
 from typing import Optional, List, Dict, Tuple
 
 
 from dynatrace.dynatrace_object import DynatraceObject
+
+
+class Series(MutableSequence):
+    def __init__(self, *args):
+        self.list: List["EntityTimeseriesData"] = []
+        self.extend(list(args))
+
+    def append(self, time_series: "EntityTimeseriesData") -> None:
+        for element in self.list:
+            if time_series.timeseries_id == element.timeseries_id and time_series.dimensions == element.dimensions:
+                element.data_points.extend(time_series.data_points)
+                return
+        self.list.append(time_series)
+
+    def __len__(self):
+        return len(self.list)
+
+    def __getitem__(self, i):
+        return self.list[i]
+
+    def __delitem__(self, i):
+        del self.list[i]
+
+    def __setitem__(self, i, v):
+        self.list[i] = v
+
+    def insert(self, i, v):
+        self.list.insert(i, v)
+
+    def __str__(self):
+        return str(self.list)
 
 
 class CustomDevicePushMessage(DynatraceObject):
@@ -19,7 +51,7 @@ class CustomDevicePushMessage(DynatraceObject):
         config_url: Optional[str] = None,
         properties: Optional[Dict[str, str]] = None,
         tags: Optional[List[str]] = None,
-        series: Optional[List] = None,
+        series: Optional[Series] = None,
         host_names: Optional[List[str]] = None,
     ):
         self.device_id = device_id
@@ -32,9 +64,9 @@ class CustomDevicePushMessage(DynatraceObject):
         self.config_url: Optional[str] = config_url
         self.properties: Optional[Dict[str, str]] = properties
         self.tags: Optional[List[str]] = tags
-        self.__series: List["EntityTimeseriesData"] = series
+        self.__series: Series = series
         if self.__series is None:
-            self.__series: List["EntityTimeseriesData"] = []
+            self.__series: Series = Series()
         self.host_names: Optional[List[str]] = host_names
 
         raw_element = {
@@ -53,11 +85,11 @@ class CustomDevicePushMessage(DynatraceObject):
         super().__init__(http_client, None, raw_element)
 
     @property
-    def series(self) -> List["EntityTimeseriesData"]:
+    def series(self) -> Series:
         return self.__series
 
     @series.setter
-    def series(self, series: List["EntityTimeseriesData"]):
+    def series(self, series: Series):
         self.__series = series
         self._raw_element["series"] = [s._raw_element for s in self.__series]
 
@@ -68,12 +100,19 @@ class CustomDevicePushMessage(DynatraceObject):
             )
             return response
         except Exception as e:
-            if only_valid_data_points and "configuration.Creation timestamp is:" in f"{e}":
-                max_timestamp = int(f"{e}".split("configuration.Creation timestamp is:")[1].split('"')[0].strip())
-                max_timestamp = datetime.fromtimestamp(max_timestamp / 1000)
+            if only_valid_data_points and (
+                "configuration.Creation timestamp is:" in f"{e}" or "Data point timestamp is too far in the past" in f"{e}"
+            ):
+                if "configuration.Creation timestamp" in f"{e}":
+                    max_timestamp = int(f"{e}".split("configuration.Creation timestamp is:")[1].split('"')[0].strip())
+                    max_timestamp = datetime.fromtimestamp(max_timestamp / 1000, tz=timezone.utc)
+                else:
+                    max_timestamp = datetime.now(tz=timezone.utc) - timedelta(minutes=59)
                 self._http_client.log.warning(f"Some data points were invalid, removing data points older than {max_timestamp}")
                 for s in self.series:
-                    s.data_points = [d for d in s.data_points if d.timestamp >= max_timestamp]
+                    s.data_points = [
+                        d for d in s.data_points if d.timestamp.replace(tzinfo=max_timestamp.tzinfo) >= max_timestamp
+                    ]
                 self._raw_element["series"] = [s._raw_element for s in self.series]
                 return self.post()
             else:
@@ -90,6 +129,7 @@ class EntityTimeseriesData(DynatraceObject):
         self, http_client, timeseries_id: str, data_points: List["DataPoint"], dimensions: Optional[Dict[str, str]] = None
     ):
         self.timeseries_id: str = timeseries_id
+        self.dimensions = dimensions
         self.__data_points: List["DataPoint"] = data_points
         raw_element = {
             "timeseriesId": timeseries_id,

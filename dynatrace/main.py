@@ -40,7 +40,13 @@ class Dynatrace:
         self.__open_third_party_events: Dict[str, int] = defaultdict(int)
 
     def get_entities(
-        self, entity_selector: str, time_from: str = "now-2h", time_to: str = "now", fields: Optional[str] = None, page_size=50
+        self,
+        entity_selector: str,
+        time_from: str = "now-2h",
+        time_to: str = "now",
+        fields: Optional[str] = None,
+        page_size=50,
+        threads=20,
     ) -> PaginatedList[Entity]:
         """
         Lists entities observed within the specified timeframe along with their properties.

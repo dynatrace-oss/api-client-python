@@ -59,5 +59,8 @@ class HttpClient:
             r = requests.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies)
 
         if r.status_code >= 400:
-            raise Exception(f"Error making request to {url}: {r}. Response: {r.text}, Headers: {r.headers}")
+            raise Exception(
+                f"Error making request to {url}: {r}. Parameters: {params}, Body: {body}, Response: {r.text}, Headers: {r.headers}"
+            )
+
         return r
