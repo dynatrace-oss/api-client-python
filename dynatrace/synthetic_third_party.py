@@ -135,14 +135,14 @@ class SyntheticMonitorStepResult(DynatraceObject):
     def __init__(
         self,
         http_client,
-        test_id: int,
+        step_id: int,
         start_timestamp: datetime,
         response_time_millis: Optional[int] = None,
         error: Optional["SyntheticMonitorError"] = None,
     ):
 
         raw_element = {
-            "id": test_id,
+            "id": step_id,
             "startTimestamp": int(start_timestamp.timestamp() * 1000),
             "responseTimeMillis": response_time_millis,
             "error": error._raw_element if error else None,

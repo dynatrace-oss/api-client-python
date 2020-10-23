@@ -481,29 +481,50 @@ class Dynatrace:
         location_name: str,
         test_id: str,
         test_title: str,
-        step_title: str,
         schedule_interval: int,
         success: bool,
         response_time: int,
         icon_url: str = None,
         edit_link: str = None,
+        step_title: Optional[str] = None,
+        detailed_steps: Optional[List[SyntheticTestStep]] = None,
+        detailed_step_results: Optional[List[SyntheticMonitorStepResult]] = None,
     ):
 
         location = ThirdPartySyntheticLocation(self.__http_client, location_id, location_name)
         synthetic_location = SyntheticTestLocation(self.__http_client, location_id)
-        step = SyntheticTestStep(self.__http_client, 1, step_title)
+        if detailed_steps is None:
+            detailed_steps = [SyntheticTestStep(self.__http_client, 1, step_title)]
+
         monitor = ThirdPartySyntheticMonitor(
-            self.__http_client, test_id, test_title, [synthetic_location], schedule_interval, steps=[step], edit_link=edit_link
+            self.__http_client,
+            test_id,
+            test_title,
+            [synthetic_location],
+            schedule_interval,
+            steps=detailed_steps,
+            edit_link=edit_link,
         )
-        step_result = SyntheticMonitorStepResult(self.__http_client, 1, timestamp, response_time_millis=response_time)
+        if detailed_step_results is None:
+            detailed_step_results = [
+                SyntheticMonitorStepResult(self.__http_client, 1, timestamp, response_time_millis=response_time)
+            ]
         location_result = ThirdPartySyntheticLocationTestResult(
-            self.__http_client, location_id, timestamp, success, step_results=[step_result]
+            self.__http_client, location_id, timestamp, success, step_results=detailed_step_results
         )
         test_result = ThirdPartySyntheticResult(self.__http_client, test_id, 1, [location_result])
         tests = ThirdPartySyntheticTests(
             self.__http_client, engine_name, timestamp, [location], [monitor], [test_result], synthetic_engine_icon_url=icon_url
         )
         return tests.post()
+
+    def create_synthetic_test_step_result(
+        self, step_id: int, timestamp: datetime, response_time: int
+    ) -> SyntheticMonitorStepResult:
+        return SyntheticMonitorStepResult(self.__http_client, step_id, timestamp, response_time_millis=response_time)
+
+    def create_synthetic_test_step(self, step_id: int, step_title: str) -> SyntheticTestStep:
+        return SyntheticTestStep(self.__http_client, step_id, step_title)
 
     def report_simple_thirdparty_synthetic_test_event(
         self,
