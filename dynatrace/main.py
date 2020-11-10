@@ -512,7 +512,7 @@ class Dynatrace:
         location_result = ThirdPartySyntheticLocationTestResult(
             self.__http_client, location_id, timestamp, success, step_results=detailed_step_results
         )
-        test_result = ThirdPartySyntheticResult(self.__http_client, test_id, 1, [location_result])
+        test_result = ThirdPartySyntheticResult(self.__http_client, test_id, len(detailed_steps), [location_result])
         tests = ThirdPartySyntheticTests(
             self.__http_client, engine_name, timestamp, [location], [monitor], [test_result], synthetic_engine_icon_url=icon_url
         )
