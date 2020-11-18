@@ -84,6 +84,8 @@ class SyntheticTestLocation(DynatraceObject):
 
 class SyntheticTestStep(DynatraceObject):
     def __init__(self, http_client, step_id: int, title: str):
+        self.step_id = step_id
+        self.title = title
 
         raw_element = {"id": step_id, "title": title}
         super().__init__(http_client, None, raw_element)
