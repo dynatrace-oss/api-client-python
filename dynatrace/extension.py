@@ -1,5 +1,7 @@
 from typing import List
 
+from requests import Response
+
 from dynatrace.configuration import ConfigurationMetadata
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.entity import EntityShortRepresentation
@@ -185,3 +187,9 @@ class ExtensionDto(DynatraceObject):
             f"/api/config/v1/extensions/{self.id}/instances",
             list_item="configurationsList",
         )
+
+    def delete(self) -> Response:
+        """
+        Deletes the ZIP file of this extension
+        """
+        return self._http_client.make_request(f"/api/config/v1/extensions/{self.id}", method="DELETE")
