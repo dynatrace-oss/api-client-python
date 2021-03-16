@@ -610,7 +610,6 @@ class Dynatrace:
 
     def metrics_ingest(self, lines: List[str]):
         lines = "\n".join(lines)
-        print(lines)
         return self.__http_client.make_request(
             f"/api/v2/metrics/ingest", method="POST", data=lines, headers={"Content-Type": "text/plain; charset=utf-8"}
         ).json()
