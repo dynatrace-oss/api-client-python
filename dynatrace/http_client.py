@@ -35,7 +35,7 @@ class HttpClient:
         self.too_many_requests_strategy = too_many_requests_strategy
 
     def make_request(
-        self, path: str, params: Optional[Dict] = None, headers: Optional[Dict] = None, method="GET"
+        self, path: str, params: Optional[Dict] = None, headers: Optional[Dict] = None, method="GET", data=None
     ) -> requests.Response:
         url = f"{self.base_url}{path}"
 
@@ -49,7 +49,9 @@ class HttpClient:
         headers.update(self.auth_header)
 
         self.log.debug(f"Making {method} request to '{url}' with params {params} and body: {body}")
-        r = requests.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies)
+        r = requests.request(
+            method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies, data=data
+        )
         self.log.debug(f"Received response '{r}'")
 
         while r.status_code == 429 and self.too_many_requests_strategy == TOO_MANY_REQUESTS_WAIT:
