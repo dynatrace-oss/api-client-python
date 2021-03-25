@@ -11,6 +11,7 @@ from dynatrace.dashboard import DashboardStub, Dashboard
 from dynatrace.endpoint import EndpointShortRepresentation
 from dynatrace.entity import Entity, EntityShortRepresentation
 from dynatrace.entity_type import EntityType
+from dynatrace.event import EventCreation, PushEventAttachRules
 from dynatrace.extension import ExtensionDto, Extension, ExtensionShortRepresentation, ExtensionConfigurationDto
 from dynatrace.http_client import HttpClient
 from dynatrace.metric import MetricSeriesCollection, MetricDescriptor
@@ -33,9 +34,7 @@ from dynatrace.timeseries import TimeseriesRegistrationMessage
 
 
 class Dynatrace:
-    def __init__(
-        self, base_url: str, token: str, log: logging.Logger = None, proxies: Dict = None, too_many_requests_strategy=None
-    ):
+    def __init__(self, base_url: str, token: str, log: logging.Logger = None, proxies: Dict = None, too_many_requests_strategy=None):
         self.__http_client = HttpClient(base_url, token, log, proxies, too_many_requests_strategy)
         self.__open_third_party_events: Dict[str, int] = defaultdict(int)
 
@@ -397,9 +396,7 @@ class Dynatrace:
         """
         Lists endpoints of the specified ActiveGate plugin
         """
-        return PaginatedList(
-            EndpointShortRepresentation, self.__http_client, f"/api/config/v1/plugins/{plugin_id}/endpoints", list_item="values"
-        )
+        return PaginatedList(EndpointShortRepresentation, self.__http_client, f"/api/config/v1/plugins/{plugin_id}/endpoints", list_item="values")
 
     def get_dashboards(self, owner: str = None, tags: List[str] = None) -> PaginatedList[DashboardStub]:
         """
@@ -449,9 +446,7 @@ class Dynatrace:
         )
 
     def get_extension_instance(self, extension_id: str, configuration_id: str):
-        response = self.__http_client.make_request(
-            f"/api/config/v1/extensions/{extension_id}/instances/{configuration_id}"
-        ).json()
+        response = self.__http_client.make_request(f"/api/config/v1/extensions/{extension_id}/instances/{configuration_id}").json()
         return ExtensionConfigurationDto(self.__http_client, None, response)
 
     def post_extension_instance(self, extension_configuration: ExtensionConfigurationDto):
@@ -469,9 +464,7 @@ class Dynatrace:
         endpoint_name: str = None,
     ) -> ExtensionConfigurationDto:
 
-        return ExtensionConfigurationDto(
-            self.__http_client, extension_id, enabled, use_global, properties, host_id, active_gate, endpoint_id, endpoint_name
-        )
+        return ExtensionConfigurationDto(self.__http_client, extension_id, enabled, use_global, properties, host_id, active_gate, endpoint_id, endpoint_name)
 
     def report_simple_thirdparty_synthetic_test(
         self,
@@ -506,21 +499,13 @@ class Dynatrace:
             edit_link=edit_link,
         )
         if detailed_step_results is None:
-            detailed_step_results = [
-                SyntheticMonitorStepResult(self.__http_client, 1, timestamp, response_time_millis=response_time)
-            ]
-        location_result = ThirdPartySyntheticLocationTestResult(
-            self.__http_client, location_id, timestamp, success, step_results=detailed_step_results
-        )
+            detailed_step_results = [SyntheticMonitorStepResult(self.__http_client, 1, timestamp, response_time_millis=response_time)]
+        location_result = ThirdPartySyntheticLocationTestResult(self.__http_client, location_id, timestamp, success, step_results=detailed_step_results)
         test_result = ThirdPartySyntheticResult(self.__http_client, test_id, len(detailed_steps), [location_result])
-        tests = ThirdPartySyntheticTests(
-            self.__http_client, engine_name, timestamp, [location], [monitor], [test_result], synthetic_engine_icon_url=icon_url
-        )
+        tests = ThirdPartySyntheticTests(self.__http_client, engine_name, timestamp, [location], [monitor], [test_result], synthetic_engine_icon_url=icon_url)
         return tests.post()
 
-    def create_synthetic_test_step_result(
-        self, step_id: int, timestamp: datetime, response_time: int
-    ) -> SyntheticMonitorStepResult:
+    def create_synthetic_test_step_result(self, step_id: int, timestamp: datetime, response_time: int) -> SyntheticMonitorStepResult:
         return SyntheticMonitorStepResult(self.__http_client, step_id, timestamp, response_time_millis=response_time)
 
     def create_synthetic_test_step(self, step_id: int, step_title: str) -> SyntheticTestStep:
@@ -543,11 +528,7 @@ class Dynatrace:
             self.__open_third_party_events[test_id] += 1
             event_id = f"{test_id}_{self.__open_third_party_events[test_id]}"
 
-            opened_events.append(
-                ThirdPartyEventOpenNotification(
-                    self.__http_client, test_id, event_id, name, event_type, reason, timestamp, [location_id]
-                )
-            )
+            opened_events.append(ThirdPartyEventOpenNotification(self.__http_client, test_id, event_id, name, event_type, reason, timestamp, [location_id]))
         else:
             if test_id in self.__open_third_party_events:
                 event_ids = [f"{test_id}_{i + 1}" for i in range(self.__open_third_party_events[test_id])]
@@ -613,3 +594,36 @@ class Dynatrace:
         return self.__http_client.make_request(
             f"/api/v2/metrics/ingest", method="POST", data=lines, headers={"Content-Type": "text/plain; charset=utf-8"}
         ).json()
+
+    def post_simple_event(
+        self,
+        event_type: str,
+        entity_id: str,
+        source: str,
+        start: Optional[datetime] = None,
+        end: Optional[datetime] = None,
+        timeout_minutes: Optional[int] = None,
+        annotation_type: Optional[str] = None,
+        annotation_description: Optional[str] = None,
+        description: Optional[str] = None,
+        title: Optional[str] = None,
+        custom_properties: Optional[str] = None,
+        allow_davis_merge: Optional[bool] = None,
+    ) -> EventCreation:
+
+        attach_rules = PushEventAttachRules(entity_ids=[entity_id], tag_rule=None)
+        return EventCreation(
+            self.__http_client,
+            event_type=event_type,
+            attach_rules=attach_rules,
+            source=source,
+            start=start,
+            end=end,
+            timeout_minutes=timeout_minutes,
+            annotation_type=annotation_type,
+            annotation_description=annotation_description,
+            description=description,
+            title=title,
+            custom_properties=custom_properties,
+            allow_davis_merge=allow_davis_merge,
+        ).post()
