@@ -51,10 +51,6 @@ class EventCreation(DynatraceObject):
         super().__init__(http_client, None, raw_element)
 
     def post(self):
-        import json
-
-        print(json.dumps(self._raw_element))
-
         return self._http_client.make_request(f"/api/v1/events", params=self._raw_element, method="POST")
 
 
