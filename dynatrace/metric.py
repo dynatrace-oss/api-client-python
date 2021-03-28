@@ -29,7 +29,6 @@ class MetricService:
         """
 
         params = {
-            "pageSize": page_size,
             "metricSelector": metric_selector,
             "resolution": resolution,
             "from": time_from,
