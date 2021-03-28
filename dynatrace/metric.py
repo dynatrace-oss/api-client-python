@@ -13,12 +13,20 @@ class MetricService:
     def query(
         self,
         metric_selector: str,
-        page_size: int = None,
         resolution: str = None,
         time_from=None,
         time_to=None,
         entity_selector=None,
     ) -> PaginatedList["MetricSeriesCollection"]:
+        """
+
+        :param metric_selector: The metric selector: https://www.dynatrace.com/support/help/shortlink/api-metrics-v2-selector
+        :param resolution:
+        :param time_from:
+        :param time_to:
+        :param entity_selector:
+        :return:
+        """
 
         params = {
             "pageSize": page_size,

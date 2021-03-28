@@ -31,7 +31,7 @@ for entity in dt.entities.list('type("HOST")', fields="properties.memoryTotal,pr
     print(entity.entity_id, entity.display_name, entity.properties)
 
 # Get idle CPU for all hosts
-for metric in dt.metrics.query("builtin:host.cpu.idle", page_size=5000, resolution="Inf"):
+for metric in dt.metrics.query("builtin:host.cpu.idle", resolution="Inf"):
     print(metric)
 
 # Print dimensions, timestamp and values for the AWS Billing Metric
