@@ -34,6 +34,12 @@ for entity in dt.entities.list('type("HOST")', fields="properties.memoryTotal,pr
 for metric in dt.metrics.query("builtin:host.cpu.idle", page_size=5000, resolution="Inf"):
     print(metric)
 
+# Print dimensions, timestamp and values for the AWS Billing Metric
+for metric in dt.metrics.query("ext:cloud.aws.billing.estimatedChargesByRegionCurrency"):
+    for data in metric.data:
+        for timestamp, value in zip(data.timestamps, data.values):
+            print(data.dimensions, timestamp, value)
+
 # Get all ActiveGates
 for ag in dt.activegates.list():
     print(ag)
@@ -53,4 +59,6 @@ for plugin in dt.plugins.list():
 # Prints dashboard ID, owner and number of tiles
 for dashboard in dt.dashboards.list():
     print(dashboard)
+
+
 ```
