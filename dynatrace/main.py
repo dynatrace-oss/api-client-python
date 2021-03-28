@@ -47,7 +47,7 @@ class Dynatrace:
     ):
         self.__http_client = HttpClient(base_url, token, log, proxies, too_many_requests_strategy, retries, retry_delay_ms)
         self.__open_third_party_events: Dict[str, int] = defaultdict(int)
-        self.dashboard = DashboardService(self.__http_client)
+        self.dashboards = DashboardService(self.__http_client)
 
     def get_entities(
         self,

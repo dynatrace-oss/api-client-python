@@ -15,9 +15,9 @@ $ pip install dtapi
 ```python
 from dynatrace import Dynatrace
 from dynatrace.constants import TOO_MANY_REQUESTS_WAIT
-    
+
 # Create a Dynatrace client
-dt = Dynatrace("environment_url", "api_token" )
+dt = Dynatrace("environment_url", "api_token")
 
 # Create a client that handles too many requests (429)
 # dt = Dynatrace("environment_url", "api_token", too_many_requests_strategy=TOO_MANY_REQUESTS_WAIT )
@@ -32,7 +32,7 @@ for entity in dt.get_entities('type("HOST")', fields="properties.memoryTotal,pro
 
 # Get idle CPU for all hosts
 for metric in dt.query_metrics("builtin:host.cpu.idle", page_size=5000, resolution="Inf"):
-     print(metric)
+    print(metric)
 
 # Get all ActiveGates
 for ag in dt.get_activegates():
@@ -44,13 +44,13 @@ for m in dt.get_metrics("builtin:host.*"):
 
 # Delete endpoints that contain the word test
 for plugin in dt.get_plugins():
-    
+
     # This could also be dt.get_endpoints(plugin.id)    
     for endpoint in plugin.endpoints:
         if "test" in endpoint.name:
             endpoint.delete(plugin.id)
 
 # Prints dashboard ID, owner and number of tiles
-for dashboard in dt.dashboard.list():
+for dashboard in dt.dashboards.list():
     print(dashboard)
 ```
