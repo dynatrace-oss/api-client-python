@@ -3,8 +3,33 @@ from datetime import datetime
 from requests import Response
 from dynatrace.entity import EntityShortRepresentation
 from dynatrace.endpoint import EndpointShortRepresentation
+from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
 from dynatrace.dynatrace_object import DynatraceObject
+
+
+class PluginService:
+    def __init__(self, http_client: HttpClient):
+        self.__http_client = http_client
+
+    def list(self) -> PaginatedList["PluginShortRepresentation"]:
+        """
+        List all uploaded plugins
+        """
+        return PaginatedList(PluginShortRepresentation, self.__http_client, "/api/config/v1/plugins", list_item="values")
+
+    def list_states(self, plugin_id) -> PaginatedList["PluginState"]:
+        """
+        List the states of the specified plugin
+        """
+        return PaginatedList(PluginState, self.__http_client, f"/api/config/v1/plugins/{plugin_id}/states", list_item="states")
+
+    def delete(self, plugin_id) -> Response:
+        """
+        Deletes the ZIP file of the specified plugin
+        :param plugin_id: The ID of the plugin to be deleted
+        """
+        return self.__http_client.make_request(f"/api/config/v1/plugins/{plugin_id}/binary", method="DELETE")
 
 
 class PluginState(DynatraceObject):

@@ -2,6 +2,52 @@ from datetime import datetime
 from typing import List
 
 from dynatrace.dynatrace_object import DynatraceObject
+from dynatrace.http_client import HttpClient
+from dynatrace.pagination import PaginatedList
+
+
+class MetricService:
+    def __init__(self, http_client: HttpClient):
+        self.__http_client = http_client
+
+    def query(
+        self,
+        metric_selector: str,
+        page_size: int = None,
+        resolution: str = None,
+        time_from=None,
+        time_to=None,
+        entity_selector=None,
+    ) -> PaginatedList["MetricSeriesCollection"]:
+
+        params = {
+            "pageSize": page_size,
+            "metricSelector": metric_selector,
+            "resolution": resolution,
+            "from": time_from,
+            "to": time_to,
+            "entitySelector": entity_selector,
+        }
+        return PaginatedList(MetricSeriesCollection, self.__http_client, "/api/v2/metrics/query", params, list_item="result")
+
+    def list(self, metric_selector: str = None, text: str = None, fields: str = None, page_size=100) -> PaginatedList["MetricDescriptor"]:
+        params = {
+            "pageSize": page_size,
+            "metricSelector": metric_selector,
+            "text": text,
+            "fields": fields,
+        }
+        return PaginatedList(MetricDescriptor, self.__http_client, "/api/v2/metrics", params, list_item="metrics")
+
+    def get(self, metric_id: str) -> "MetricDescriptor":
+        response = self.__http_client.make_request(f"/api/v2/metrics/{metric_id}").json()
+        return MetricDescriptor(self.__http_client, None, response)
+
+    def ingest(self, lines: List[str]):
+        lines = "\n".join(lines)
+        return self.__http_client.make_request(
+            f"/api/v2/metrics/ingest", method="POST", data=lines, headers={"Content-Type": "text/plain; charset=utf-8"}
+        ).json()
 
 
 class MetricSeries(DynatraceObject):
@@ -34,9 +80,7 @@ class MetricSeriesCollection(DynatraceObject):
 
     def _create_from_raw_data(self, raw_element: dict):
         self._metric_id = raw_element.get("metricId")
-        self._data = [
-            MetricSeries(self._http_client, self._headers, metric_serie) for metric_serie in raw_element.get("data", [])
-        ]
+        self._data = [MetricSeries(self._http_client, self._headers, metric_serie) for metric_serie in raw_element.get("data", [])]
 
 
 class MetricDefaultAggregation(DynatraceObject):
@@ -150,13 +194,10 @@ class MetricDescriptor(DynatraceObject):
 
     def _create_from_raw_data(self, raw_element):
         self._default_aggregation = (
-            MetricDefaultAggregation(self._http_client, self._headers, raw_element.get("defaultAggregation"))
-            if raw_element.get("defaultAggregation")
-            else None
+            MetricDefaultAggregation(self._http_client, self._headers, raw_element.get("defaultAggregation")) if raw_element.get("defaultAggregation") else None
         )
         self._dimension_definitions = [
-            MetricDimensionDefinition(self._http_client, self._headers, element)
-            for element in raw_element.get("dimensionDefinitions", [])
+            MetricDimensionDefinition(self._http_client, self._headers, element) for element in raw_element.get("dimensionDefinitions", [])
         ]
 
         self._metric_id = raw_element.get("metricId")

@@ -1,7 +1,10 @@
 from datetime import datetime
 from typing import Optional, List
 
+from requests import Response
+
 from dynatrace.dynatrace_object import DynatraceObject
+from dynatrace.http_client import HttpClient
 
 EVENT_TYPE_AVAILABILITY_EVENT = "AVAILABILITY_EVENT"
 EVENT_TYPE_CUSTOM_ALERT = "CUSTOM_ALERT"
@@ -13,6 +16,44 @@ EVENT_TYPE_ERROR_EVENT = "ERROR_EVENT"
 EVENT_TYPE_MARKED_FOR_TERMINATION = "MARKED_FOR_TERMINATION"
 EVENT_TYPE_PERFORMANCE_EVENT = "PERFORMANCE_EVENT"
 EVENT_TYPE_RESOURCE_CONTENTION = "RESOURCE_CONTENTION"
+
+
+class EventService:
+    def __init__(self, http_client: HttpClient):
+        self.__http_client = http_client
+
+    def create_event(
+        self,
+        event_type: str,
+        entity_id: str,
+        source: str,
+        start: Optional[datetime] = None,
+        end: Optional[datetime] = None,
+        timeout_minutes: Optional[int] = None,
+        annotation_type: Optional[str] = None,
+        annotation_description: Optional[str] = None,
+        description: Optional[str] = None,
+        title: Optional[str] = None,
+        custom_properties: Optional[str] = None,
+        allow_davis_merge: Optional[bool] = None,
+    ) -> Response:
+
+        attach_rules = PushEventAttachRules(entity_ids=[entity_id], tag_rule=None)
+        return EventCreation(
+            self.__http_client,
+            event_type=event_type,
+            attach_rules=attach_rules,
+            source=source,
+            start=start,
+            end=end,
+            timeout_minutes=timeout_minutes,
+            annotation_type=annotation_type,
+            annotation_description=annotation_description,
+            description=description,
+            title=title,
+            custom_properties=custom_properties,
+            allow_davis_merge=allow_davis_merge,
+        ).post()
 
 
 class EventCreation(DynatraceObject):

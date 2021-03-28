@@ -27,25 +27,25 @@ dt = Dynatrace("environment_url", "api_token")
 
 
 # Get all hosts and some properties
-for entity in dt.get_entities('type("HOST")', fields="properties.memoryTotal,properties.monitoringMode"):
+for entity in dt.entities.list('type("HOST")', fields="properties.memoryTotal,properties.monitoringMode"):
     print(entity.entity_id, entity.display_name, entity.properties)
 
 # Get idle CPU for all hosts
-for metric in dt.query_metrics("builtin:host.cpu.idle", page_size=5000, resolution="Inf"):
+for metric in dt.metrics.query("builtin:host.cpu.idle", page_size=5000, resolution="Inf"):
     print(metric)
 
 # Get all ActiveGates
-for ag in dt.get_activegates():
+for ag in dt.activegates.list():
     print(ag)
 
 # Get metric descriptions for all host metrics
-for m in dt.get_metrics("builtin:host.*"):
+for m in dt.metrics.list("builtin:host.*"):
     print(m)
 
 # Delete endpoints that contain the word test
-for plugin in dt.get_plugins():
+for plugin in dt.plugins.list():
 
-    # This could also be dt.get_endpoints(plugin.id)    
+    # This could also be dt.get_endpoints(plugin.id)
     for endpoint in plugin.endpoints:
         if "test" in endpoint.name:
             endpoint.delete(plugin.id)

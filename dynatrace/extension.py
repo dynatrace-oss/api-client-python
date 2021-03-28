@@ -4,8 +4,67 @@ from requests import Response
 
 from dynatrace.configuration import ConfigurationMetadata
 from dynatrace.dynatrace_object import DynatraceObject
+from dynatrace.endpoint import EndpointShortRepresentation
 from dynatrace.entity import EntityShortRepresentation
+from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
+
+
+class ExtensionService:
+    def __init__(self, http_client: HttpClient):
+        self.__http_client = http_client
+        pass
+
+    def list_endpoints(self, plugin_id: str) -> PaginatedList[EndpointShortRepresentation]:
+        """
+        Lists endpoints of the specified ActiveGate plugin
+        """
+        return PaginatedList("EndpointShortRepresentation", self.__http_client, f"/api/config/v1/plugins/{plugin_id}/endpoints", list_item="values")
+
+    def list(self, page_size: int = 200) -> PaginatedList["ExtensionDto"]:
+        """
+        List all uploaded extensions
+
+        :param page_size: The number of results per result page. Must be between 1 and 500
+            Default value : 200
+        """
+        params = {"pageSize": page_size}
+        return PaginatedList(ExtensionDto, self.__http_client, f"/api/config/v1/extensions", params, list_item="extensions")
+
+    def get(self, extension_id: str):
+        response = self.__http_client.make_request(f"/api/config/v1/extensions/{extension_id}").json()
+        return Extension(self.__http_client, None, response)
+
+    def list_instances(self, extension_id: str, page_size: int = 200) -> PaginatedList["ExtensionShortRepresentation"]:
+        params = {"pageSize": page_size}
+        return PaginatedList(
+            ExtensionShortRepresentation,
+            self.__http_client,
+            f"/api/config/v1/extensions/{extension_id}/instances",
+            list_item="configurationsList",
+            target_params=params,
+        )
+
+    def get_instance(self, extension_id: str, configuration_id: str):
+        response = self.__http_client.make_request(f"/api/config/v1/extensions/{extension_id}/instances/{configuration_id}").json()
+        return ExtensionConfigurationDto(self.__http_client, None, response)
+
+    def post_instance(self, extension_configuration: "ExtensionConfigurationDto"):
+        return extension_configuration.post()
+
+    def create_instance(
+        self,
+        extension_id: str,
+        enabled: bool = True,
+        use_global: bool = True,
+        properties: dict = None,
+        host_id: str = None,
+        active_gate: EntityShortRepresentation = None,
+        endpoint_id: str = None,
+        endpoint_name: str = None,
+    ) -> "ExtensionConfigurationDto":
+
+        return ExtensionConfigurationDto(self.__http_client, extension_id, enabled, use_global, properties, host_id, active_gate, endpoint_id, endpoint_name)
 
 
 class ExtensionProperty(DynatraceObject):
@@ -59,9 +118,7 @@ class ExtensionConfigurationDto(DynatraceObject):
         super().__init__(http_client, None, raw_element)
 
     def post(self):
-        return self._http_client.make_request(
-            f"/api/config/v1/extensions/{self.extension_id}/instances", params=self._raw_element, method="POST"
-        )
+        return self._http_client.make_request(f"/api/config/v1/extensions/{self.extension_id}/instances", params=self._raw_element, method="POST")
 
     @property
     def extension_id(self) -> str:

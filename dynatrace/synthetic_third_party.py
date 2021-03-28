@@ -1,10 +1,92 @@
+from collections import defaultdict
 from datetime import datetime
-from typing import List, Optional
+from typing import List, Optional, Dict
 
 from dynatrace.dynatrace_object import DynatraceObject
+from dynatrace.http_client import HttpClient
 
 SYNTHETIC_EVENT_TYPE_OUTAGE = "testOutage"
 SYNTHETIC_EVENT_TYPE_SLOWDOWN = "testSlowdown"
+
+
+class ThirdPartySyntheticTestsService:
+    def __init__(self, http_client: HttpClient):
+        self.__http_client = http_client
+        self.__open_third_party_events: Dict[str, int] = defaultdict(int)
+
+    def report_simple_thirdparty_synthetic_test(
+        self,
+        engine_name: str,
+        timestamp: datetime,
+        location_id: str,
+        location_name: str,
+        test_id: str,
+        test_title: str,
+        schedule_interval: int,
+        success: bool,
+        response_time: int,
+        icon_url: str = None,
+        edit_link: str = None,
+        step_title: Optional[str] = None,
+        detailed_steps: Optional[List["SyntheticTestStep"]] = None,
+        detailed_step_results: Optional[List["SyntheticMonitorStepResult"]] = None,
+    ):
+
+        location = ThirdPartySyntheticLocation(self.__http_client, location_id, location_name)
+        synthetic_location = SyntheticTestLocation(self.__http_client, location_id)
+        if detailed_steps is None:
+            detailed_steps = [SyntheticTestStep(self.__http_client, 1, step_title)]
+
+        monitor = ThirdPartySyntheticMonitor(
+            self.__http_client,
+            test_id,
+            test_title,
+            [synthetic_location],
+            schedule_interval,
+            steps=detailed_steps,
+            edit_link=edit_link,
+        )
+        if detailed_step_results is None:
+            detailed_step_results = [SyntheticMonitorStepResult(self.__http_client, 1, timestamp, response_time_millis=response_time)]
+        location_result = ThirdPartySyntheticLocationTestResult(self.__http_client, location_id, timestamp, success, step_results=detailed_step_results)
+        test_result = ThirdPartySyntheticResult(self.__http_client, test_id, len(detailed_steps), [location_result])
+        tests = ThirdPartySyntheticTests(self.__http_client, engine_name, timestamp, [location], [monitor], [test_result], synthetic_engine_icon_url=icon_url)
+        return tests.post()
+
+    def create_synthetic_test_step_result(self, step_id: int, timestamp: datetime, response_time: int) -> "SyntheticMonitorStepResult":
+        return SyntheticMonitorStepResult(self.__http_client, step_id, timestamp, response_time_millis=response_time)
+
+    def create_synthetic_test_step(self, step_id: int, step_title: str) -> "SyntheticTestStep":
+        return SyntheticTestStep(self.__http_client, step_id, step_title)
+
+    def report_simple_thirdparty_synthetic_test_event(
+        self,
+        test_id: str,
+        name: str,
+        location_id: str,
+        timestamp: datetime,
+        state: str,
+        event_type: str,
+        reason: str,
+        engine_name: str,
+    ):
+        opened_events: List[ThirdPartyEventOpenNotification] = []
+        resolved_events = []
+        if state == "open":
+            self.__open_third_party_events[test_id] += 1
+            event_id = f"{test_id}_{self.__open_third_party_events[test_id]}"
+
+            opened_events.append(ThirdPartyEventOpenNotification(self.__http_client, test_id, event_id, name, event_type, reason, timestamp, [location_id]))
+        else:
+            if test_id in self.__open_third_party_events:
+                event_ids = [f"{test_id}_{i + 1}" for i in range(self.__open_third_party_events[test_id])]
+                for event_id in event_ids:
+                    resolved_events.append(ThirdPartyEventResolvedNotification(self.__http_client, test_id, event_id, timestamp))
+                del self.__open_third_party_events[test_id]
+
+        if opened_events or resolved_events:
+            events = ThirdPartySyntheticEvents(self.__http_client, engine_name, opened_events, resolved_events)
+            return events.post()
 
 
 class ThirdPartySyntheticTests(DynatraceObject):

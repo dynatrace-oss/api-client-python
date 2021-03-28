@@ -1,6 +1,7 @@
 from typing import Optional, List
 
 from dynatrace.dynatrace_object import DynatraceObject
+from dynatrace.http_client import HttpClient
 
 UNIT_BIT = "Bit(bit)"
 UNIT_BITPERHOUR = "BitPerHour(bit/h)"
@@ -57,6 +58,29 @@ UNIT_WEEK = "Week(ws)"
 UNIT_YEAR = "Year(ys)"
 UNIT_K = "k"
 UNIT_M_CORES = "mCores"
+
+
+class TimeSerieService:
+    def __init__(self, http_client: HttpClient):
+        self.__http_client = http_client
+
+    def create_timeseries(
+        self,
+        metric_id: str,
+        display_name: Optional[str],
+        unit: Optional[str] = None,
+        dimensions: Optional[List[str]] = None,
+        technologies: Optional[List[str]] = None,
+    ) -> "TimeseriesRegistrationMessage":
+
+        return TimeseriesRegistrationMessage(
+            self.__http_client,
+            metric_id=metric_id,
+            display_name=display_name,
+            unit=unit,
+            dimensions=dimensions,
+            technologies=technologies,
+        )
 
 
 class TimeseriesRegistrationMessage(DynatraceObject):

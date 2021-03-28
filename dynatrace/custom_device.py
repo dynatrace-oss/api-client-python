@@ -4,6 +4,43 @@ from typing import Optional, List, Dict, Tuple
 
 
 from dynatrace.dynatrace_object import DynatraceObject
+from dynatrace.http_client import HttpClient
+
+
+class CustomDeviceService:
+    def __init__(self, http_client: HttpClient):
+        self.__http_client = http_client
+
+    def create(
+        self,
+        device_id: str,
+        display_name: Optional[str] = None,
+        group: Optional[str] = None,
+        ip_addresses: Optional[List[str]] = None,
+        listen_ports: Optional[List[int]] = None,
+        technology: Optional[str] = None,
+        favicon: Optional[str] = None,
+        config_url: Optional[str] = None,
+        properties: Optional[Dict[str, str]] = None,
+        tags: Optional[List[str]] = None,
+        series: Optional[List] = None,
+        host_names: Optional[List[str]] = None,
+    ) -> "CustomDevicePushMessage":
+        return CustomDevicePushMessage(
+            self.__http_client,
+            device_id=device_id,
+            display_name=display_name,
+            group=group,
+            ip_addresses=ip_addresses,
+            listen_ports=listen_ports,
+            technology=technology,
+            favicon=favicon,
+            config_url=config_url,
+            properties=properties,
+            tags=tags,
+            series=series,
+            host_names=host_names,
+        )
 
 
 class Series(MutableSequence):
@@ -95,14 +132,10 @@ class CustomDevicePushMessage(DynatraceObject):
 
     def post(self, only_valid_data_points=False):
         try:
-            response = self._http_client.make_request(
-                f"/api/v1/entity/infrastructure/custom/{self.device_id}", params=self._raw_element, method="POST"
-            )
+            response = self._http_client.make_request(f"/api/v1/entity/infrastructure/custom/{self.device_id}", params=self._raw_element, method="POST")
             return response
         except Exception as e:
-            if only_valid_data_points and (
-                "configuration.Creation timestamp is:" in f"{e}" or "Data point timestamp is too far in the past" in f"{e}"
-            ):
+            if only_valid_data_points and ("configuration.Creation timestamp is:" in f"{e}" or "Data point timestamp is too far in the past" in f"{e}"):
                 if "configuration.Creation timestamp" in f"{e}":
                     max_timestamp = int(f"{e}".split("configuration.Creation timestamp is:")[1].split('"')[0].strip())
                     max_timestamp = datetime.fromtimestamp(max_timestamp / 1000, tz=timezone.utc)
@@ -110,9 +143,7 @@ class CustomDevicePushMessage(DynatraceObject):
                     max_timestamp = datetime.now(tz=timezone.utc) - timedelta(minutes=59)
                 self._http_client.log.warning(f"Some data points were invalid, removing data points older than {max_timestamp}")
                 for s in self.series:
-                    s.data_points = [
-                        d for d in s.data_points if d.timestamp.replace(tzinfo=max_timestamp.tzinfo) >= max_timestamp
-                    ]
+                    s.data_points = [d for d in s.data_points if d.timestamp.replace(tzinfo=max_timestamp.tzinfo) >= max_timestamp]
                 self._raw_element["series"] = [s._raw_element for s in self.series]
                 return self.post()
             else:
@@ -125,9 +156,7 @@ class CustomDevicePushMessage(DynatraceObject):
 
 
 class EntityTimeseriesData(DynatraceObject):
-    def __init__(
-        self, http_client, timeseries_id: str, data_points: List["DataPoint"], dimensions: Optional[Dict[str, str]] = None
-    ):
+    def __init__(self, http_client, timeseries_id: str, data_points: List["DataPoint"], dimensions: Optional[Dict[str, str]] = None):
         self.timeseries_id: str = timeseries_id
         self.dimensions = dimensions
         self.__data_points: List["DataPoint"] = data_points
@@ -148,9 +177,7 @@ class EntityTimeseriesData(DynatraceObject):
     @data_points.setter
     def data_points(self, data_points: List["DataPoint"]):
         self.__data_points = data_points
-        self._raw_element["dataPoints"] = [
-            [int(data_point.timestamp.timestamp() * 1000), data_point.value] for data_point in self.__data_points
-        ]
+        self._raw_element["dataPoints"] = [[int(data_point.timestamp.timestamp() * 1000), data_point.value] for data_point in self.__data_points]
 
 
 class DataPoint:
