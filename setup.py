@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="dtapi",
-    version="1.0.21",
+    version="1.0.22",
     packages=find_packages(),
     install_requires=["requests>=2.21"],
     python_requires=">=3.6",

@@ -7,7 +7,7 @@ from requests import Response
 
 from dynatrace.activegate import ActiveGate
 from dynatrace.custom_device import CustomDevicePushMessage
-from dynatrace.dashboard import DashboardStub, Dashboard
+from dynatrace.dashboard import DashboardStub, Dashboard, DashboardService
 from dynatrace.endpoint import EndpointShortRepresentation
 from dynatrace.entity import Entity, EntityShortRepresentation
 from dynatrace.entity_type import EntityType
@@ -31,6 +31,7 @@ from dynatrace.synthetic_third_party import (
     ThirdPartySyntheticEvents,
 )
 from dynatrace.timeseries import TimeseriesRegistrationMessage
+from dynatrace.utils import deprecated
 
 
 class Dynatrace:
@@ -46,6 +47,7 @@ class Dynatrace:
     ):
         self.__http_client = HttpClient(base_url, token, log, proxies, too_many_requests_strategy, retries, retry_delay_ms)
         self.__open_third_party_events: Dict[str, int] = defaultdict(int)
+        self.dashboard = DashboardService(self.__http_client)
 
     def get_entities(
         self,
@@ -407,6 +409,7 @@ class Dynatrace:
         """
         return PaginatedList(EndpointShortRepresentation, self.__http_client, f"/api/config/v1/plugins/{plugin_id}/endpoints", list_item="values")
 
+    @deprecated(reason="Use 'dt.dashboards.list' instead")
     def get_dashboards(self, owner: str = None, tags: List[str] = None) -> PaginatedList[DashboardStub]:
         """
         Lists all dashboards of the environment
@@ -417,12 +420,14 @@ class Dynatrace:
         params = {"owner": owner, "tags": tags}
         return PaginatedList(DashboardStub, self.__http_client, f"/api/config/v1/dashboards", params, list_item="dashboards")
 
+    @deprecated(reason="Use 'dt.dashboards.delete' instead")
     def delete_dashboard(self, dashboard_id: str) -> Response:
         """
         Deletes the specified dashboard
         """
         return self.__http_client.make_request(f"/api/config/v1/dashboards/{dashboard_id}", method="DELETE")
 
+    @deprecated(reason="Use 'dt.dashboards.get' instead")
     def get_dashboard(self, dashboard_id: str) -> Dashboard:
         """
         Gets the properties of the specified dashboard

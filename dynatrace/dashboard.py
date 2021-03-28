@@ -3,7 +3,37 @@ from requests import Response
 
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.entity import EntityShortRepresentation
+from dynatrace.http_client import HttpClient
+from dynatrace.pagination import PaginatedList
 from dynatrace.tile import Tile
+
+
+class DashboardService:
+    def __init__(self, http_client: HttpClient):
+        self.__http_client = http_client
+
+    def list(self, owner: str = None, tags: List[str] = None) -> PaginatedList["DashboardStub"]:
+        """
+        Lists all dashboards of the environment
+        :param owner: The owner of the dashboard.
+        :param tags: A list of tags applied to the dashboard.
+            The dashboard must match all the specified tags.
+        """
+        params = {"owner": owner, "tags": tags}
+        return PaginatedList(DashboardStub, self.__http_client, f"/api/config/v1/dashboards", params, list_item="dashboards")
+
+    def get(self, dashboard_id: str) -> "Dashboard":
+        """
+        Gets the properties of the specified dashboard
+        """
+        response = self.__http_client.make_request(f"/api/config/v1/dashboards/{dashboard_id}").json()
+        return Dashboard(self.__http_client, None, response)
+
+    def delete(self, dashboard_id: str) -> Response:
+        """
+        Deletes the specified dashboard
+        """
+        return self.__http_client.make_request(f"/api/config/v1/dashboards/{dashboard_id}", method="DELETE")
 
 
 class DashboardFilter(DynatraceObject):
@@ -18,9 +48,7 @@ class DashboardFilter(DynatraceObject):
     def _create_from_raw_data(self, raw_element):
         self._timeframe = raw_element.get("timeframe")
         self._management_zone = (
-            EntityShortRepresentation(self._http_client, None, raw_element.get("managementZone"))
-            if raw_element.get("managementZone")
-            else None
+            EntityShortRepresentation(self._http_client, None, raw_element.get("managementZone")) if raw_element.get("managementZone") else None
         )
 
 

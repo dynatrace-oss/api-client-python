@@ -51,9 +51,6 @@ for plugin in dt.get_plugins():
             endpoint.delete(plugin.id)
 
 # Prints dashboard ID, owner and number of tiles
-for dashboard in dt.get_dashboards():
-    # To get the tiles, we need the full dashboard details
-    # This could also be dt.get_dashboard(dashboard.id)    
-    full = dashboard.get_full_dashboard()
-    print(dashboard.id, dashboard.owner, len(full.tiles))
+for dashboard in dt.dashboard.list():
+    print(dashboard)
 ```
