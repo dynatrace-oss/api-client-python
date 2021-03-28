@@ -34,8 +34,17 @@ from dynatrace.timeseries import TimeseriesRegistrationMessage
 
 
 class Dynatrace:
-    def __init__(self, base_url: str, token: str, log: logging.Logger = None, proxies: Dict = None, too_many_requests_strategy=None):
-        self.__http_client = HttpClient(base_url, token, log, proxies, too_many_requests_strategy)
+    def __init__(
+        self,
+        base_url: str,
+        token: str,
+        log: logging.Logger = None,
+        proxies: Dict = None,
+        too_many_requests_strategy=None,
+        retries: int = 0,
+        retry_delay_ms: int = 0,
+    ):
+        self.__http_client = HttpClient(base_url, token, log, proxies, too_many_requests_strategy, retries, retry_delay_ms)
         self.__open_third_party_events: Dict[str, int] = defaultdict(int)
 
     def get_entities(
@@ -609,7 +618,7 @@ class Dynatrace:
         title: Optional[str] = None,
         custom_properties: Optional[str] = None,
         allow_davis_merge: Optional[bool] = None,
-    ) -> EventCreation:
+    ) -> Response:
 
         attach_rules = PushEventAttachRules(entity_ids=[entity_id], tag_rule=None)
         return EventCreation(

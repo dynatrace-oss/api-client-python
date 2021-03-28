@@ -20,7 +20,10 @@ from dynatrace.constants import TOO_MANY_REQUESTS_WAIT
 dt = Dynatrace("environment_url", "api_token" )
 
 # Create a client that handles too many requests (429)
-dt = Dynatrace("environment_url", "api_token", too_many_requests_strategy=TOO_MANY_REQUESTS_WAIT )
+# dt = Dynatrace("environment_url", "api_token", too_many_requests_strategy=TOO_MANY_REQUESTS_WAIT )
+
+# Create a client that automatically retries on errors, up to 5 times, with a 1 second delay between retries
+# dt = Dynatrace("environment_url", "api_token", retries=5, retry_delay_ms=1000 )
 
 
 # Get all hosts and some properties
