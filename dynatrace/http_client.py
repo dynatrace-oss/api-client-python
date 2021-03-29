@@ -30,6 +30,9 @@ class HttpClient:
         too_many_requests_strategy=None,
         retries: int = 0,
         retry_delay_ms: int = 0,
+        mc_jsession_id: Optional[str] = None,
+        mc_b925d32c: Optional[str] = None,
+        mc_sso_csrf_cookie: Optional[str] = None,
     ):
         while base_url.endswith("/"):
             base_url = base_url[:-1]
@@ -58,6 +61,11 @@ class HttpClient:
             method_whitelist=["TRACE", "PUT", "DELETE", "OPTIONS", "HEAD", "GET", "POST"],
         )
 
+        # This is for internal dynatrace usage
+        self.mc_jsession_id = mc_jsession_id
+        self.mc_b925d32c = mc_b925d32c
+        self.mc_sso_csrf_cookie = mc_sso_csrf_cookie
+
     def make_request(self, path: str, params: Optional[Dict] = None, headers: Optional[Dict] = None, method="GET", data=None) -> requests.Response:
         url = f"{self.base_url}{path}"
 
@@ -70,11 +78,16 @@ class HttpClient:
             headers = {"content-type": "application/json"}
         headers.update(self.auth_header)
 
+        cookies = None
+        if self.mc_b925d32c and self.mc_sso_csrf_cookie and self.mc_jsession_id:
+            headers.update({"Cookie": f"JSESSIONID={self.mc_jsession_id}; ssoCSRFCookie={self.mc_sso_csrf_cookie}; b925d32c={self.mc_b925d32c}"})
+            cookies = {"JSESSIONID": self.mc_jsession_id, "ssoCSRFCookie": self.mc_sso_csrf_cookie, "b925d32c": self.mc_b925d32c}
+
         s = requests.Session()
         s.mount("https://", HTTPAdapter(max_retries=self.retries))
 
         self.log.debug(f"Making {method} request to '{url}' with params {params} and body: {body}")
-        r = s.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies, data=data)
+        r = s.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies, data=data, cookies=cookies)
         self.log.debug(f"Received response '{r}'")
 
         while r.status_code == 429 and self.too_many_requests_strategy == TOO_MANY_REQUESTS_WAIT:

@@ -1,8 +1,8 @@
 import logging
-from typing import Dict
-
+from typing import Dict, Optional
 
 from dynatrace.activegate import ActiveGateService
+from dynatrace.cluster_time import ClusterTimeService
 from dynatrace.custom_device import CustomDeviceService
 from dynatrace.dashboard import DashboardService
 from dynatrace.entity import EntityService
@@ -24,10 +24,25 @@ class Dynatrace:
         too_many_requests_strategy=None,
         retries: int = 0,
         retry_delay_ms: int = 0,
+        mc_jsession_id: Optional[str] = None,
+        mc_b925d32c: Optional[str] = None,
+        mc_sso_csrf_cookie: Optional[str] = None,
     ):
-        self.__http_client = HttpClient(base_url, token, log, proxies, too_many_requests_strategy, retries, retry_delay_ms)
+        self.__http_client = HttpClient(
+            base_url,
+            token,
+            log,
+            proxies,
+            too_many_requests_strategy,
+            retries,
+            retry_delay_ms,
+            mc_jsession_id,
+            mc_b925d32c,
+            mc_sso_csrf_cookie,
+        )
 
         self.activegates: ActiveGateService = ActiveGateService(self.__http_client)
+        self.cluster_time: ClusterTimeService = ClusterTimeService(self.__http_client)
         self.custom_devices: CustomDeviceService = CustomDeviceService(self.__http_client)
         self.dashboards: DashboardService = DashboardService(self.__http_client)
         self.entities: EntityService = EntityService(self.__http_client)
