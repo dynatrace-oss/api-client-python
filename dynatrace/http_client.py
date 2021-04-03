@@ -59,6 +59,7 @@ class HttpClient:
             backoff_factor=retry_delay_s,
             status_forcelist=[400, 401, 403, 413, 429, 500, 502, 503, 504],
             method_whitelist=["TRACE", "PUT", "DELETE", "OPTIONS", "HEAD", "GET", "POST"],
+            raise_on_status=False,
         )
 
         # This is for internal dynatrace usage
@@ -97,6 +98,6 @@ class HttpClient:
             r = requests.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies)
 
         if r.status_code >= 400:
-            raise Exception(f"Error making request to {url}: {r}. Parameters: {params}, Body: {body}, Response: {r.text}, Headers: {r.headers}")
+            raise Exception(f"Error making request to {url}: {r}. Response: {r.text}, Parameters: {params}, Body: {body}, Headers: {r.headers}")
 
         return r
