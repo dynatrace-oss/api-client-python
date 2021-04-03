@@ -12,6 +12,7 @@ from dynatrace.http_client import HttpClient
 from dynatrace.metric import MetricService
 from dynatrace.plugins import PluginService
 from dynatrace.synthetic_third_party import ThirdPartySyntheticTestsService
+from dynatrace.token import TokenService
 
 
 class Dynatrace:
@@ -51,3 +52,4 @@ class Dynatrace:
         self.metrics: MetricService = MetricService(self.__http_client)
         self.plugins: PluginService = PluginService(self.__http_client)
         self.third_part_synthetic_tests: ThirdPartySyntheticTestsService = ThirdPartySyntheticTestsService(self.__http_client)
+        self.tokens: TokenService = TokenService(self.__http_client)

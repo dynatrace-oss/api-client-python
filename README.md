@@ -1,4 +1,4 @@
-# dt-api
+from dynatrace.token import SCOPE_METRICS_READ# dt-api
 
 dtapi is a Python library to access the [Dynatrace Rest API]
 
@@ -13,8 +13,11 @@ $ pip install dtapi
 ## Simple Demo
 
 ```python
+from datetime import datetime, timedelta
+
 from dynatrace import Dynatrace
 from dynatrace.constants import TOO_MANY_REQUESTS_WAIT
+from dynatrace.token import SCOPE_METRICS_READ, SCOPE_METRICS_INGEST
 
 # Create a Dynatrace client
 dt = Dynatrace("environment_url", "api_token")
@@ -58,7 +61,16 @@ for plugin in dt.plugins.list():
 
 # Prints dashboard ID, owner and number of tiles
 for dashboard in dt.dashboards.list():
-    print(dashboard)
+    full_dashboard = dashboard.get_full_dashboard()
+    print(full_dashboard.id, dashboard.owner, len(full_dashboard.tiles))
+    
+# Delete API Tokens that haven't been used for more than 3 months
+for token in dt.tokens.list(fields="+lastUsedDate,+scopes"):
+    if token.last_used_date < datetime.now() - timedelta(days=90):
+        print(f"Deleting token! {token}, last used date: {token.last_used_date}")
 
-
+        
+# Create an API Token that can read and ingest metrics
+new_token = dt.tokens.create("metrics_token", scopes=[SCOPE_METRICS_READ, SCOPE_METRICS_INGEST])
+print(new_token.token)
 ```
