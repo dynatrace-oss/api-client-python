@@ -1,7 +1,7 @@
 from typing import List
 
-from dynatrace.management_zone import ManagementZone
-from dynatrace.metag import METag
+from dynatrace.configuration_v1.management_zone import ManagementZone
+from dynatrace.configuration_v1.metag import METag
 from dynatrace.dynatrace_object import DynatraceObject
 
 

@@ -1,5 +1,5 @@
 from requests import Response
-from dynatrace.entity import EntityShortRepresentation
+from dynatrace.environment_v2.entity import EntityShortRepresentation
 
 
 class EndpointShortRepresentation(EntityShortRepresentation):

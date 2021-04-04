@@ -9,10 +9,8 @@ from requests.adapters import HTTPAdapter
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-from dynatrace.constants import TOO_MANY_REQUESTS_WAIT
 
-
-from urllib3.util.retry import Retry
+TOO_MANY_REQUESTS_WAIT = "wait"
 
 
 class DynatraceRetry(Retry):

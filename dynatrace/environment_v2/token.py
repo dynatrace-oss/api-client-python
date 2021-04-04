@@ -90,7 +90,7 @@ class TokenService:
 
     def get(self, token_id: str):
         response = self.__http_client.make_request(f"/api/v2/apiTokens/{token_id}", method="GET")
-        return ApiToken(None, None, response.json())
+        return ApiToken(raw_element=response.json())
 
     def delete(self, token_id: str) -> Response:
         return self.__http_client.make_request(f"/api/v2/apiTokens/{token_id}", method="DELETE")
@@ -102,11 +102,11 @@ class TokenService:
         body = {"personalAccessToken": personal_access_token, "expirationDate": expiration_date, "name": name, "scopes": scopes}
 
         response = self.__http_client.make_request("/api/v2/apiTokens", method="POST", params=body)
-        return ApiTokenCreated(None, None, response.json())
+        return ApiTokenCreated(raw_element=response.json())
 
     def lookup(self, token: str):
         response = self.__http_client.make_request("/api/v2/apiTokens/lookup", method="POST", params={"token": token})
-        return ApiToken(None, None, response.json())
+        return ApiToken(raw_element=response.json())
 
 
 class ApiToken(DynatraceObject):
