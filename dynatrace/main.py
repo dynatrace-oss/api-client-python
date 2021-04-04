@@ -2,6 +2,7 @@ import logging
 from typing import Dict, Optional
 
 from dynatrace.activegate import ActiveGateService
+from dynatrace.activegate_autoupdate import ActiveGateAutoUpdateService
 from dynatrace.cluster_time import ClusterTimeService
 from dynatrace.custom_device import CustomDeviceService
 from dynatrace.dashboard import DashboardService
@@ -43,6 +44,7 @@ class Dynatrace:
         )
 
         self.activegates: ActiveGateService = ActiveGateService(self.__http_client)
+        self.activegates_autoupdate: ActiveGateAutoUpdateService = ActiveGateAutoUpdateService(self.__http_client)
         self.cluster_time: ClusterTimeService = ClusterTimeService(self.__http_client)
         self.custom_devices: CustomDeviceService = CustomDeviceService(self.__http_client)
         self.dashboards: DashboardService = DashboardService(self.__http_client)

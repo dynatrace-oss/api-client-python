@@ -15,7 +15,7 @@ class DynatraceObject:
         self._raw_element = raw_element
         self._create_from_raw_data(raw_element)
 
-    def _create_from_raw_data(self, raw_element):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         pass
 
     def __repr__(self):
