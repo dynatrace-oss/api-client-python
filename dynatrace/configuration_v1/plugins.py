@@ -1,8 +1,8 @@
 from datetime import datetime
 
 from requests import Response
-from dynatrace.entity import EntityShortRepresentation
-from dynatrace.endpoint import EndpointShortRepresentation
+from dynatrace.environment_v2.entity import EntityShortRepresentation
+from dynatrace.configuration_v1.endpoint import EndpointShortRepresentation
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
 from dynatrace.dynatrace_object import DynatraceObject

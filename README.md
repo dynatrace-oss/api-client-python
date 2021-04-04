@@ -16,8 +16,8 @@ $ pip install dtapi
 from datetime import datetime, timedelta
 
 from dynatrace import Dynatrace
-from dynatrace.constants import TOO_MANY_REQUESTS_WAIT
-from dynatrace.token import SCOPE_METRICS_READ, SCOPE_METRICS_INGEST
+from dynatrace import TOO_MANY_REQUESTS_WAIT
+from dynatrace.environment_v2.token import SCOPE_METRICS_READ, SCOPE_METRICS_INGEST
 
 # Create a Dynatrace client
 dt = Dynatrace("environment_url", "api_token")
@@ -63,14 +63,32 @@ for plugin in dt.plugins.list():
 for dashboard in dt.dashboards.list():
     full_dashboard = dashboard.get_full_dashboard()
     print(full_dashboard.id, dashboard.owner, len(full_dashboard.tiles))
-    
+
 # Delete API Tokens that haven't been used for more than 3 months
 for token in dt.tokens.list(fields="+lastUsedDate,+scopes"):
     if token.last_used_date < datetime.now() - timedelta(days=90):
         print(f"Deleting token! {token}, last used date: {token.last_used_date}")
 
-        
 # Create an API Token that can read and ingest metrics
 new_token = dt.tokens.create("metrics_token", scopes=[SCOPE_METRICS_READ, SCOPE_METRICS_INGEST])
 print(new_token.token)
 ```
+
+## Implementation Progress
+
+Spec                | API                                       | Level              | Access  |
+:-------------      | :-------------                            |:-------------:     | :-----  |
+Environment API v2  | Access Tokens - API tokens                | :heavy_check_mark: | `dt.tokens`   |
+Environment API v2  | Access tokens - Tenant tokens             | :x:                |     |
+Environment API v2  | ActiveGates                               | :heavy_check_mark: | `dt.activegates`    |
+Environment API v2  | ActiveGates - Auto-update configuration   | :warning:          | `dt.activegates_autoupdate`    |
+Environment API v2  | ActiveGates - Auto-update jobs            | :x:                |     |
+Environment API v2  | Audit Logs                                | :x:                |      |
+Environment API v2  | Extensions 2.0                            | :warning:          | `dt.extensions`     |
+Environment API v2  | Metrics                                   | :warning:          | `dt.metrics`     |
+Environment API v2  | Monitored entities                        | :warning:          | `dt.entities`     |
+Environment API v2  | Monitored entities - Custom tags          | :x:                |     |
+Environment API v2  | Network zones                             | :x:                |     |
+Environment API v2  | Problems                                  | :x:                |     |
+Environment API v2  | Security problems                         | :x:                |     |
+Environment API v2  | Service-level objectives                  | :x:                |     |

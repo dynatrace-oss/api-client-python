@@ -1,7 +1,6 @@
 from typing import List, Optional
 
 from dynatrace.dynatrace_object import DynatraceObject
-from dynatrace.entity import EntityShortRepresentation
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
 

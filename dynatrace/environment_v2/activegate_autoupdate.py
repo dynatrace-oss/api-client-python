@@ -1,7 +1,5 @@
-from typing import List, Optional
-
 from dynatrace.dynatrace_object import DynatraceObject
-from dynatrace.configuration import ConfigurationMetadata
+from dynatrace.environment_v2.configuration import ConfigurationMetadata
 from dynatrace.http_client import HttpClient
 
 
