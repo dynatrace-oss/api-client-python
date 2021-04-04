@@ -104,19 +104,7 @@ class Entity(DynatraceObject):
 
 
 class EntityShortRepresentation(DynatraceObject):
-    @property
-    def id(self):
-        return self._id
-
-    @property
-    def name(self):
-        return self._name
-
-    @property
-    def description(self):
-        return self._description
-
     def _create_from_raw_data(self, raw_element):
-        self._id = raw_element.get("id")
-        self._name = raw_element.get("name")
-        self._description = raw_element.get("description")
+        self.id = raw_element.get("id")
+        self.name = raw_element.get("name")
+        self.description = raw_element.get("description")

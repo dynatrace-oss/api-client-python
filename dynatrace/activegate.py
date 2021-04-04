@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.entity import EntityShortRepresentation
@@ -26,6 +26,25 @@ VERSION_COMPARE_TYPE_GREATER_EQUAL = "GREATER_EQUAL"
 VERSION_COMPARE_TYPE_LOWER = "LOWER"
 VERSION_COMPARE_TYPE_LOWER_EQUAL = "LOWER_EQUAL"
 
+AUTO_UPDATE_ENABLED = "ENABLED"
+AUTO_UPDATE_DISABLED = "DISABLED"
+
+MODULE_AWS = "AWS"
+MODULE_AZURE = "AZURE"
+MODULE_BEACON_FORWARDER = "BEACON_FORWARDER"
+MODULE_CLOUD_FOUNDRY = "CLOUD_FOUNDRY"
+MODULE_DB_INSIGHT = "DB_INSIGHT"
+MODULE_EXTENSIONS_V1 = "EXTENSIONS_V1"
+MODULE_EXTENSIONS_V2 = "EXTENSIONS_V2"
+MODULE_KUBERNETES = "KUBERNETES"
+MODULE_LOGS = "LOGS"
+MODULE_MEMORY_DUMPS = "MEMORY_DUMPS"
+MODULE_METRIC_API = "METRIC_API"
+MODULE_ONE_AGENT_ROUTING = "ONE_AGENT_ROUTING"
+MODULE_OTLP_INGEST = "OTLP_INGEST"
+MODULE_REST_API = "REST_API"
+MODULE_SYNTHETIC = "SYNTHETIC"
+
 
 class ActiveGateService:
     def __init__(self, http_client: HttpClient):
@@ -33,44 +52,22 @@ class ActiveGateService:
 
     def list(
         self,
-        hostname: str = None,
-        os_type: str = None,
-        network_address: str = None,
-        activegate_type: str = None,
-        network_zone: str = None,
-        update_status: str = None,
-        version_compare_type: str = None,
-        version: str = None,
+        hostname: Optional[str] = None,
+        os_type: Optional[str] = None,
+        network_address: Optional[str] = None,
+        activegate_type: Optional[str] = None,
+        network_zone: Optional[str] = None,
+        update_status: Optional[str] = None,
+        version_compare_type: Optional[str] = None,
+        version: Optional[str] = None,
+        auto_update: Optional[str] = None,
+        group: Optional[str] = None,
+        online: Optional[bool] = None,
+        enabled_modules: Optional[List[str]] = None,
+        disabled_modules: Optional[List[str]] = None,
     ) -> PaginatedList["ActiveGate"]:
         """
         Lists all available ActiveGates
-
-        :param hostname: Filters the resulting set of ActiveGates by the name of the host it's running on.
-            You can specify a partial name. In that case, the CONTAINS operator is used.
-
-        :param os_type: Filters the resulting set of ActiveGates by the OS type of the host it's running on.
-            Available values : LINUX, WINDOWS
-
-        :param network_address: Filters the resulting set of ActiveGates by the network address.
-            You can specify a partial address. In that case, the CONTAINS operator is used.
-
-        :param activegate_type: Filters the resulting set of ActiveGates by the ActiveGate type.
-            Available values : ENVIRONMENT, ENVIRONMENT_MULTI
-
-        :param network_zone: Filters the resulting set of ActiveGates by the network zone.
-            You can specify a partial name. In that case, the CONTAINS operator is used.
-
-        :param update_status: Filters the resulting set of ActiveGates by the auto-update status.
-            Available values : INCOMPATIBLE, OUTDATED, SUPPRESSED, UNKNOWN, UP2DATE, UPDATE_IN_PROGRESS, UPDATE_PENDING, UPDATE_PROBLEM
-
-        :param version_compare_type: Filters the resulting set of ActiveGates by the specified version.
-            Specify the comparison operator here.
-            Available values : EQUAL, GREATER, GREATER_EQUAL, LOWER, LOWER_EQUAL
-            Default value : EQUAL
-
-        :param version: Filters the resulting set of ActiveGates by the specified version.
-            Specify the version in <major>.<minor>.<revision> format (for example, 1.195.0) here.
-
         :return: A list of ActiveGates.
         """
         params = {
@@ -82,60 +79,39 @@ class ActiveGateService:
             "updateStatus": update_status,
             "versionCompareType": version_compare_type,
             "version": version,
+            "autoUpdate": auto_update,
+            "group": group,
+            "online": online,
+            "enabledModule": enabled_modules,
+            "disabledModule": disabled_modules,
         }
         return PaginatedList(ActiveGate, self.__http_client, "/api/v2/activeGates", params, list_item="activeGates")
 
+    def get(self, activegate_id: str) -> "ActiveGate":
+        return ActiveGate(raw_element=self.__http_client.make_request(f"/api/v2/activeGates/{activegate_id}").json())
 
-class ActiveGate(EntityShortRepresentation):
-    @property
-    def id(self) -> str:
-        return self._id
 
-    @property
-    def network_addresses(self) -> List[str]:
-        return self._network_addresses
-
-    @property
-    def os_type(self) -> str:
-        return self._os_type
-
-    @property
-    def auto_update_status(self) -> str:
-        return self._auto_update_status
-
-    @property
-    def type(self) -> str:
-        return self._type
-
-    @property
-    def offline_since(self) -> str:
-        return self._offline_since
-
-    @property
-    def hostname(self) -> str:
-        return self._hostname
-
-    @property
-    def main_environment(self) -> str:
-        return self._main_environment
-
-    @property
-    def environments(self) -> List[str]:
-        return self._environments
-
-    @property
-    def network_zone(self) -> List[str]:
-        return self._network_zone
-
+class ActiveGate(DynatraceObject):
     def _create_from_raw_data(self, raw_element: dict):
-        self._id = raw_element.get("id")
-        self._network_addresses = raw_element.get("networkAddresses", [])
-        self._os_type = raw_element.get("osType")
-        self._auto_update_status = raw_element.get("autoUpdateStatus")
-        self._offline_since = raw_element.get("offlineSince")
-        self._version = raw_element.get("version")
-        self._type = raw_element.get("type")
-        self._hostname = raw_element.get("hostname")
-        self._main_environment = raw_element.get("mainEnvironment")
-        self._environments = raw_element.get("environments", [])
-        self._network_zone = raw_element.get("networkZone")
+        self.id: str = raw_element.get("id")
+        self.network_addresses = raw_element.get("networkAddresses", [])
+        self.os_type: str = raw_element.get("osType")
+        self.auto_update_status: str = raw_element.get("autoUpdateStatus")
+        self.offline_since: int = raw_element.get("offlineSince")
+        self.version: str = raw_element.get("version")
+        self.type: str = raw_element.get("type")
+        self.hostname: str = raw_element.get("hostname")
+        self.main_environment: str = raw_element.get("mainEnvironment")
+        self.environments: str = raw_element.get("environments", [])
+        self.network_zone: str = raw_element.get("networkZone")
+        self.group: str = raw_element.get("group")
+        self.modules: List["ActiveGateModule"] = [ActiveGateModule(raw_element=module) for module in raw_element.get("modules")]
+
+
+class ActiveGateModule(DynatraceObject):
+    def _create_from_raw_data(self, raw_element: dict):
+        self.misconfigured: bool = raw_element.get("misconfigured")
+        self.type: str = raw_element.get("type")
+        self.attributes: bool = raw_element.get("attributes")
+        self.enabled: bool = raw_element.get("enabled")
+        self.version: str = raw_element.get("version")
