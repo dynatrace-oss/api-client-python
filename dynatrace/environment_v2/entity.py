@@ -37,7 +37,7 @@ class EntityService:
         :return: A list of properties of all available entity types.
         """
         params = {"pageSize": page_size}
-        return PaginatedList("EntityType", self.__http_client, "/api/v2/entityTypes", params, list_item="types")
+        return PaginatedList(EntityType, self.__http_client, "/api/v2/entityTypes", params, list_item="types")
 
 
 class Entity(DynatraceObject):
