@@ -1,4 +1,4 @@
-from dynatrace.token import SCOPE_METRICS_READ# dt-api
+# dt-api
 
 dtapi is a Python library to access the [Dynatrace Rest API]
 
