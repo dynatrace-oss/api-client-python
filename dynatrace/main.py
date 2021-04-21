@@ -13,6 +13,7 @@ from dynatrace.environment_v2.entity import EntityService
 from dynatrace.environment_v2.extension import ExtensionService
 from dynatrace.environment_v2.metric import MetricService
 from dynatrace.environment_v2.token import TokenService
+from dynatrace.configuration_v1.maintenance_windows import MaintenanceWindowService
 from dynatrace.http_client import HttpClient
 
 
@@ -55,3 +56,4 @@ class Dynatrace:
         self.plugins: PluginService = PluginService(self.__http_client)
         self.third_part_synthetic_tests: ThirdPartySyntheticTestsService = ThirdPartySyntheticTestsService(self.__http_client)
         self.tokens: TokenService = TokenService(self.__http_client)
+        self.maintenance_windows = MaintenanceWindowService(self.__http_client)
