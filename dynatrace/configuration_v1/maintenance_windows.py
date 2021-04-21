@@ -17,7 +17,7 @@ class Scope(DynatraceObject):
 
 class Recurrence(DynatraceObject):
     def __init__(self, start_time: str, duration: int, day_of_week: Optional[str] = None, day_of_month: Optional[int] = None):
-        self._day_of_week = day_of_week
+        self._day_of_week = day_of_week.upper()
         self._day_of_month = day_of_month
         self._start_time = start_time
         self._duration = duration
@@ -46,7 +46,7 @@ class Recurrence(DynatraceObject):
 
 class Schedule(DynatraceObject):    
     def __init__(self, recurrence_type:str, start: str, end: str, zone_id: str, recurrence: Optional[Recurrence] = None):
-        self._recurrence_type = recurrence_type
+        self._recurrence_type = recurrence_type.upper()
         self._recurrence = recurrence
         self._start_time = start
         self._end_time = end
@@ -74,9 +74,13 @@ class Schedule(DynatraceObject):
 
     @property
     def schedule_snippet(self) -> dict:
-        if self._recurrence_type != "ONCE":
-            representation = {"recurrenceType": self._recurrence_type, "recurrence": {"dayOfWeek": self._recurrence.day_of_week, "dayOfMonth": self._recurrence.day_of_month, "startTime": self._recurrence.start_time, "durationMinutes": self._recurrence.duration}, "start": self._start_time, "end": self._end_time, "zoneId": self._zone_id}
-        else:
+        if self._recurrence_type == "DAILY":
+            representation = {"recurrenceType": self._recurrence_type, "recurrence": {"startTime": self._recurrence.start_time, "durationMinutes": self._recurrence.duration}, "start": self._start_time, "end": self._end_time, "zoneId": self._zone_id}
+        if self._recurrence_type == "WEEKLY":
+            representation = {"recurrenceType": self._recurrence_type, "recurrence": {"dayOfWeek": self._recurrence.day_of_week, "startTime": self._recurrence.start_time, "durationMinutes": self._recurrence.duration}, "start": self._start_time, "end": self._end_time, "zoneId": self._zone_id}
+        if self._recurrence_type == "MONTHLY":
+            representation = {"recurrenceType": self._recurrence_type, "recurrence": {"dayOfMonth": self._recurrence.day_of_month, "startTime": self._recurrence.start_time, "durationMinutes": self._recurrence.duration}, "start": self._start_time, "end": self._end_time, "zoneId": self._zone_id}
+        if self._recurrence_type == "ONCE":
             representation = {"recurrenceType": self._recurrence_type, "start": self._start_time, "end": self._end_time, "zoneId": self._zone_id}
         return representation
 
@@ -104,7 +108,6 @@ class MaintenanceWindowService:
         """
         Create a schedule to be used when creating a maintenance window.
         """
-
         recurrence = Recurrence(recurrence_start_time, recurrence_duration, recurrence_day_of_week, recurrence_day_of_month) if recurrence_type != "ONCE" else None
 
         return Schedule(recurrence_type, start, end, zone_id, recurrence)
@@ -116,7 +119,6 @@ class MaintenanceWindowService:
         Create a maintenance window with the specified parameters.
         You must first use create_schedule() to create a schedule with optional recurrence.
         """
-
         body = {"id": id, "name": name, "description": description, "type": window_type, "suppression": suppression, "suppressSyntheticMonitorsExecution": suppress_synthetic, 
                 "schedule": schedule.schedule_snippet, "scope": {"entities": scope_entities, "matches": []}}
 
