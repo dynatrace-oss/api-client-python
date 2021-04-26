@@ -4,7 +4,6 @@ from requests import Response
 
 from dynatrace.environment_v2.configuration import ConfigurationMetadata
 from dynatrace.dynatrace_object import DynatraceObject
-from dynatrace.configuration_v1.endpoint import EndpointShortRepresentation
 from dynatrace.environment_v2.entity import EntityShortRepresentation
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
@@ -14,12 +13,6 @@ class ExtensionService:
     def __init__(self, http_client: HttpClient):
         self.__http_client = http_client
         pass
-
-    def list_endpoints(self, plugin_id: str) -> PaginatedList[EndpointShortRepresentation]:
-        """
-        Lists endpoints of the specified ActiveGate plugin
-        """
-        return PaginatedList("EndpointShortRepresentation", self.__http_client, f"/api/config/v1/plugins/{plugin_id}/endpoints", list_item="values")
 
     def list(self, page_size: int = 200) -> PaginatedList["ExtensionDto"]:
         """
@@ -223,13 +216,13 @@ class ExtensionDto(DynatraceObject):
         return Extension(self._http_client, None, response)
 
     @property
-    def instances(self) -> PaginatedList[ExtensionShortRepresentation]:
-        return PaginatedList(
-            ExtensionShortRepresentation,
-            self._http_client,
-            f"/api/config/v1/extensions/{self.id}/instances",
-            list_item="configurationsList",
-        )
+    def instances(self, page_size: int = 200) -> PaginatedList["ExtensionShortRepresentation"]:
+        """
+        Returns the list of instances for this extension
+        :param page_size: Page size, default 200
+        """
+        params = {"pageSize": page_size}
+        return PaginatedList(ExtensionShortRepresentation, self._http_client, f"/api/config/v1/extensions/{self.id}/instances", list_item="configurationsList", target_params=params)
 
     def delete(self) -> Response:
         """

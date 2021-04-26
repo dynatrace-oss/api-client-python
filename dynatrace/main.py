@@ -2,6 +2,8 @@ import logging
 from typing import Dict, Optional
 
 from dynatrace.configuration_v1.dashboard import DashboardService
+from dynatrace.configuration_v1.extension import ExtensionService
+from dynatrace.configuration_v1.maintenance_windows import MaintenanceWindowService
 from dynatrace.configuration_v1.plugins import PluginService
 from dynatrace.environment_v1.cluster_time import ClusterTimeService
 from dynatrace.environment_v1.custom_device import CustomDeviceService
@@ -10,10 +12,8 @@ from dynatrace.environment_v1.synthetic_third_party import ThirdPartySyntheticTe
 from dynatrace.environment_v2.activegate import ActiveGateService
 from dynatrace.environment_v2.activegate_autoupdate import ActiveGateAutoUpdateService
 from dynatrace.environment_v2.entity import EntityService
-from dynatrace.environment_v2.extension import ExtensionService
 from dynatrace.environment_v2.metric import MetricService
 from dynatrace.environment_v2.token import TokenService
-from dynatrace.configuration_v1.maintenance_windows import MaintenanceWindowService
 from dynatrace.http_client import HttpClient
 
 

@@ -22,7 +22,7 @@ ActiveGates                               | :heavy_check_mark: | `dt.activegates
 ActiveGates - Auto-update configuration   | :warning:          | `dt.activegates_autoupdate`    |
 ActiveGates - Auto-update jobs            | :x:                |     |
 Audit Logs                                | :x:                |      |
-Extensions 2.0                            | :warning:          | `dt.extensions`     |
+Extensions 2.0                            | :x:          |      |
 Metrics                                   | :warning:          | `dt.metrics`     |
 Monitored entities                        | :warning:          | `dt.entities`     |
 Monitored entities - Custom tags          | :x:                |     |
@@ -91,7 +91,7 @@ Conditional naming | :x:                |     |
 Credential vault | :x:                |     |
 Dashboards | :warning:                |`dt.dashboards`     |
 Data privacy and security | :x:                |     |
-Extensions | :x:                |     |
+Extensions | :warning:                | `dt.extensions`     |
 Frequent issue detection | :x:                |     |
 Kubernetes credentials configuration | :x:                |     |
 Maintenance windows | :x:                |     |
