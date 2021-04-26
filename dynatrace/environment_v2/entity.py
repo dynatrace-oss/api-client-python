@@ -91,7 +91,7 @@ class Entity(DynatraceObject):
 
     @property
     def tags(self) -> List[METag]:
-        return []
+        return self._tags
 
     @property
     def properties(self) -> List[dict]:
@@ -101,7 +101,7 @@ class Entity(DynatraceObject):
         self._display_name = raw_element.get("displayName")
         self._entity_id = raw_element.get("entityId")
         self._properties = raw_element.get("properties", {})
-
+        self._tags: List[METag] = [METag(raw_element=tag) for tag in raw_element.get("tags", {})]
 
 class EntityShortRepresentation(DynatraceObject):
     def _create_from_raw_data(self, raw_element):
