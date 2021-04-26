@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict, Any, Optional
 
 from requests import Response
 
@@ -55,16 +55,27 @@ class ExtensionService:
     def create_instance(
         self,
         extension_id: str,
-        enabled: bool = True,
-        use_global: bool = True,
-        properties: dict = None,
-        host_id: str = None,
-        active_gate: EntityShortRepresentation = None,
-        endpoint_id: str = None,
-        endpoint_name: str = None,
+        properties: Dict[str, Any] = None,
+        enabled: Optional[bool] = True,
+        use_global: Optional[bool] = True,
+        host_id: Optional[str] = None,
+        active_gate: Optional[EntityShortRepresentation] = None,
+        endpoint_id: Optional[str] = None,
+        endpoint_name: Optional[str] = None,
     ) -> "ExtensionConfigurationDto":
 
-        return ExtensionConfigurationDto(self.__http_client, extension_id, enabled, use_global, properties, host_id, active_gate, endpoint_id, endpoint_name)
+        raw_element = {
+            "extensionId": extension_id,
+            "enabled": enabled,
+            "useGlobal": use_global,
+            "properties": properties,
+            "hostId": host_id,
+            "activeGate": active_gate._raw_element if active_gate else {},
+            "endpointId": endpoint_id,
+            "endpointName": endpoint_name,
+        }
+
+        return ExtensionConfigurationDto(self.__http_client, None, raw_element)
 
 
 class ExtensionProperty(DynatraceObject):
@@ -92,31 +103,6 @@ class ExtensionProperty(DynatraceObject):
 
 
 class ExtensionConfigurationDto(DynatraceObject):
-    def __init__(
-        self,
-        http_client,
-        extension_id: str,
-        enabled: bool = True,
-        use_global: bool = True,
-        properties: dict = None,
-        host_id: str = None,
-        active_gate: EntityShortRepresentation = None,
-        endpoint_id: str = None,
-        endpoint_name: str = None,
-    ):
-        raw_element = {
-            "extensionId": extension_id,
-            "enabled": enabled,
-            "useGlobal": use_global,
-            "properties": properties,
-            "hostId": host_id,
-            "activeGate": active_gate._raw_element,
-            "endpointId": endpoint_id,
-            "endpointName": endpoint_name,
-        }
-
-        super().__init__(http_client, None, raw_element)
-
     def post(self):
         return self._http_client.make_request(f"/api/config/v1/extensions/{self.extension_id}/instances", params=self._raw_element, method="POST")
 
@@ -169,7 +155,7 @@ class ExtensionShortRepresentation(EntityShortRepresentation):
         Gets the full extension configuration for this ExtensionShortRepresentation
         """
         response = self._http_client.make_request(f"/api/config/v1/extensions/{extension_id}/instances/{self.id}").json()
-        return ExtensionConfigurationDto(self._http_client, None, response)
+        return ExtensionConfigurationDto(self._http_client, raw_element=response)
 
 
 class Extension(DynatraceObject):
