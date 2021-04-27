@@ -4,6 +4,7 @@ from typing import Dict, Optional
 from dynatrace.configuration_v1.dashboard import DashboardService
 from dynatrace.configuration_v1.extension import ExtensionService
 from dynatrace.configuration_v1.maintenance_windows import MaintenanceWindowService
+from dynatrace.configuration_v1.metric_events import MetricEventService
 from dynatrace.configuration_v1.plugins import PluginService
 from dynatrace.environment_v1.cluster_time import ClusterTimeService
 from dynatrace.environment_v1.custom_device import CustomDeviceService
@@ -57,3 +58,4 @@ class Dynatrace:
         self.third_part_synthetic_tests: ThirdPartySyntheticTestsService = ThirdPartySyntheticTestsService(self.__http_client)
         self.tokens: TokenService = TokenService(self.__http_client)
         self.maintenance_windows = MaintenanceWindowService(self.__http_client)
+        self.anomaly_detection_metric_events = MetricEventService(self.__http_client)
