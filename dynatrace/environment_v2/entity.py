@@ -1,9 +1,7 @@
-from datetime import datetime
 from typing import List, Optional
 
 from dynatrace.environment_v2.entity_type import EntityType
 from dynatrace.http_client import HttpClient
-from dynatrace.configuration_v1.management_zone import ManagementZone
 from dynatrace.configuration_v1.metag import METag
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.pagination import PaginatedList
@@ -41,67 +39,13 @@ class EntityService:
 
 
 class Entity(DynatraceObject):
-    @property
-    def from_relationships(self):
-        # TODO
-        return ""
-
-    @property
-    def to_relationships(self):
-        # TODO
-        return ""
-
-    @property
-    def first_seen_t_ms(self) -> datetime:
-        # TODO
-        """
-        The timestamp at which the entity was first seen, in UTC milliseconds.
-        :return:
-        """
-        return datetime.now()
-
-    @property
-    def last_seen_t_ms(self) -> datetime:
-        # TODO
-        """
-        The timestamp at which the entity was last seen, in UTC milliseconds.
-        :return:
-        """
-        return datetime.now()
-
-    @property
-    def entity_id(self) -> str:
-        """
-        The ID of the entity.
-        :return:
-        """
-        return self._entity_id
-
-    @property
-    def display_name(self) -> str:
-        """
-        The name of the entity, displayed in the UI.
-        :return:
-        """
-        return self._display_name
-
-    @property
-    def management_zones(self) -> List[ManagementZone]:
-        return []
-
-    @property
-    def tags(self) -> List[METag]:
-        return self._tags
-
-    @property
-    def properties(self) -> List[dict]:
-        return self._properties
-
     def _create_from_raw_data(self, raw_element: dict):
-        self._display_name = raw_element.get("displayName")
-        self._entity_id = raw_element.get("entityId")
-        self._properties = raw_element.get("properties", {})
-        self._tags: List[METag] = [METag(raw_element=tag) for tag in raw_element.get("tags", {})]
+        # TODO - Implement rest of properties
+        self.display_name = raw_element.get("displayName")
+        self.entity_id = raw_element.get("entityId")
+        self.properties = raw_element.get("properties", {})
+        self.tags: List[METag] = [METag(raw_element=tag) for tag in raw_element.get("tags", {})]
+
 
 class EntityShortRepresentation(DynatraceObject):
     def _create_from_raw_data(self, raw_element):

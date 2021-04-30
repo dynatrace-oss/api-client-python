@@ -179,7 +179,7 @@ for dashboard in dt.dashboards.list():
 
 # Delete API Tokens that haven't been used for more than 3 months
 for token in dt.tokens.list(fields="+lastUsedDate,+scopes"):
-    if token.last_used_date < datetime.now() - timedelta(days=90):
+    if token.last_used_date and token.last_used_date < datetime.now() - timedelta(days=90):
         print(f"Deleting token! {token}, last used date: {token.last_used_date}")
 
 # Create an API Token that can read and ingest metrics
