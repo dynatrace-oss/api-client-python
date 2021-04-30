@@ -33,7 +33,7 @@ class Schedule(DynatraceObject):
         return Schedule(raw_element=raw_element)
 
     @property
-    def schedule_snippet(self) -> Dict[str:Any]:
+    def schedule_snippet(self) -> Dict[str, Any]:
         representation = {}
         if self.recurrence_type == "DAILY":
             representation = {
