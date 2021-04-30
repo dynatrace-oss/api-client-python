@@ -1,10 +1,12 @@
 import logging
 from typing import Dict, Optional
 
+from dynatrace.configuration_v1.alerting_profiles import AlertingProfileService
 from dynatrace.configuration_v1.dashboard import DashboardService
 from dynatrace.configuration_v1.extension import ExtensionService
 from dynatrace.configuration_v1.maintenance_windows import MaintenanceWindowService
 from dynatrace.configuration_v1.metric_events import MetricEventService
+from dynatrace.configuration_v1.notifications import NotificationService
 from dynatrace.configuration_v1.plugins import PluginService
 from dynatrace.environment_v1.cluster_time import ClusterTimeService
 from dynatrace.environment_v1.custom_device import CustomDeviceService
@@ -47,6 +49,7 @@ class Dynatrace:
 
         self.activegates: ActiveGateService = ActiveGateService(self.__http_client)
         self.activegates_autoupdate: ActiveGateAutoUpdateService = ActiveGateAutoUpdateService(self.__http_client)
+        self.alerting_profiles: AlertingProfileService = AlertingProfileService(self.__http_client)
         self.cluster_time: ClusterTimeService = ClusterTimeService(self.__http_client)
         self.custom_devices: CustomDeviceService = CustomDeviceService(self.__http_client)
         self.dashboards: DashboardService = DashboardService(self.__http_client)
@@ -54,6 +57,7 @@ class Dynatrace:
         self.events: EventService = EventService(self.__http_client)
         self.extensions: ExtensionService = ExtensionService(self.__http_client)
         self.metrics: MetricService = MetricService(self.__http_client)
+        self.notifications: NotificationService = NotificationService(self.__http_client)
         self.plugins: PluginService = PluginService(self.__http_client)
         self.third_part_synthetic_tests: ThirdPartySyntheticTestsService = ThirdPartySyntheticTestsService(self.__http_client)
         self.tokens: TokenService = TokenService(self.__http_client)
