@@ -84,7 +84,7 @@ class ExtensionConfigurationDto(DynatraceObject):
         return self._http_client.make_request(f"/api/config/v1/extensions/{self.extension_id}/instances", params=self._raw_element, method="POST")
 
     def _create_from_raw_data(self, raw_element):
-        self._extension_id: str = raw_element.get("extensionId")
+        self.extension_id: str = raw_element.get("extensionId")
         self.enabled: bool = raw_element.get("enabled")
         self.use_global: bool = raw_element.get("useGlobal")
         self.properties: Dict[str, Any] = raw_element.get("properties")
