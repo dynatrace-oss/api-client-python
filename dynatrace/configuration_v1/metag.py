@@ -1,5 +1,6 @@
 from dynatrace.dynatrace_object import DynatraceObject
 
+
 class METag(DynatraceObject):
     def _create_from_raw_data(self, raw_element: dict):
         self.context: str = raw_element.get("context")
