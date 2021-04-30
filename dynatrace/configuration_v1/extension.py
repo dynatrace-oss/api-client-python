@@ -72,74 +72,26 @@ class ExtensionService:
 
 
 class ExtensionProperty(DynatraceObject):
-    @property
-    def key(self) -> str:
-        return self._key
-
-    @property
-    def type(self) -> str:
-        return self._type
-
-    @property
-    def default_value(self) -> str:
-        return self._default_value
-
-    @property
-    def dropdown_values(self) -> List[str]:
-        return self._dropdown_values
-
     def _create_from_raw_data(self, raw_element):
-        self._key = raw_element.get("key")
-        self._type = raw_element.get("type")
-        self._default_value = raw_element.get("defaultValue")
-        self._dropdown_values = raw_element.get("dropdownValues")
+        self.key: str = raw_element.get("key")
+        self.type: str = raw_element.get("type")
+        self.default_value: str = raw_element.get("defaultValue")
+        self.dropdown_values: List[str] = raw_element.get("dropdownValues")
 
 
 class ExtensionConfigurationDto(DynatraceObject):
     def post(self):
         return self._http_client.make_request(f"/api/config/v1/extensions/{self.extension_id}/instances", params=self._raw_element, method="POST")
 
-    @property
-    def extension_id(self) -> str:
-        return self._extension_id
-
-    @property
-    def enabled(self) -> bool:
-        return self._enabled
-
-    @property
-    def use_global(self) -> bool:
-        return self._use_global
-
-    @property
-    def properties(self) -> dict:
-        return self._properties
-
-    @property
-    def host_id(self) -> str:
-        return self._host_id
-
-    @property
-    def active_gate(self) -> EntityShortRepresentation:
-        return self._active_gate
-
-    @property
-    def endpoint_id(self) -> str:
-        return self._endpoint_id
-
-    @property
-    def endpoint_name(self) -> str:
-        return self._endpoint_name
-
     def _create_from_raw_data(self, raw_element):
-        self._extension_id = raw_element.get("extensionId")
-        self._enabled = raw_element.get("enabled")
-        self._use_global = raw_element.get("useGlobal")
-        self._properties = raw_element.get("properties")
-        self._host_id = raw_element.get("hostId")
-        self._active_gate = EntityShortRepresentation(self._http_client, None, raw_element.get("activeGate"))
-        self._endpoint_id = raw_element.get("endpointId")
-        self._endpoint_name = raw_element.get("endpointName")
+        self._extension_id: str = raw_element.get("extensionId")
+        self.enabled: bool = raw_element.get("enabled")
+        self.use_global: bool = raw_element.get("useGlobal")
+        self.properties: Dict[str, Any] = raw_element.get("properties")
+        self.host_id: str = raw_element.get("hostId")
+        self.active_gate: EntityShortRepresentation = EntityShortRepresentation(self._http_client, None, raw_element.get("activeGate"))
+        self.endpoint_id: str = raw_element.get("endpointId")
+        self.endpoint_name: str = raw_element.get("endpointName")
 
 
 class ExtensionShortRepresentation(EntityShortRepresentation):
@@ -152,61 +104,21 @@ class ExtensionShortRepresentation(EntityShortRepresentation):
 
 
 class Extension(DynatraceObject):
-    @property
-    def id(self) -> str:
-        return self._id
-
-    @property
-    def name(self) -> str:
-        return self._name
-
-    @property
-    def type(self) -> str:
-        return self._type
-
-    @property
-    def version(self):
-        return self._version
-
-    @property
-    def metric_group(self):
-        return self._metric_group
-
-    @property
-    def metadata(self) -> ConfigurationMetadata:
-        return self._metadata
-
-    @property
-    def properties(self) -> List[ExtensionProperty]:
-        return self._properties
-
     def _create_from_raw_data(self, raw_element):
-        self._id = raw_element.get("id")
-        self._name = raw_element.get("name")
-        self._type = raw_element.get("type")
-        self._version = raw_element.get("version")
-        self._metric_group = raw_element.get("metricGroup")
-        self._metadata = ConfigurationMetadata(self._http_client, None, raw_element.get("metadata"))
-        self._properties = [ExtensionProperty(self._http_client, None, prop) for prop in raw_element.get("properties")]
+        self.id: str = raw_element.get("id")
+        self.name: str = raw_element.get("name")
+        self.type: str = raw_element.get("type")
+        self.version: str = raw_element.get("version")
+        self.metric_group: str = raw_element.get("metricGroup")
+        self.metadata: ConfigurationMetadata = ConfigurationMetadata(self._http_client, None, raw_element.get("metadata"))
+        self.properties: List[ExtensionProperty] = [ExtensionProperty(self._http_client, None, prop) for prop in raw_element.get("properties")]
 
 
 class ExtensionDto(DynatraceObject):
-    @property
-    def id(self) -> str:
-        return self._id
-
-    @property
-    def name(self):
-        return self._name
-
-    @property
-    def type(self):
-        return self._type
-
     def _create_from_raw_data(self, raw_element):
-        self._id = raw_element.get("id")
-        self._name = raw_element.get("name")
-        self._type = raw_element.get("type")
+        self.id: str = raw_element.get("id")
+        self.name: str = raw_element.get("name")
+        self.type: str = raw_element.get("type")
 
     def get_full_extension(self) -> Extension:
         """
