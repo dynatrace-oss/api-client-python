@@ -37,106 +37,34 @@ class DashboardService:
 
 
 class DashboardFilter(DynatraceObject):
-    @property
-    def timeframe(self) -> str:
-        return self._timeframe
-
-    @property
-    def management_zone(self) -> Optional[EntityShortRepresentation]:
-        return self._management_zone
-
     def _create_from_raw_data(self, raw_element):
         if raw_element is None:
             raw_element = {}
-        self._timeframe = raw_element.get("timeframe")
-        self._management_zone = (
-            EntityShortRepresentation(self._http_client, None, raw_element.get("managementZone")) if raw_element.get("managementZone") else None
-        )
-
-
-class SharingInfo(DynatraceObject):
-    @property
-    def link_shared(self):
-        return self._link_shared
-
-    @property
-    def published(self):
-        return self.published
-
-    def _create_from_raw_data(self, raw_element):
-        self._link_shared = raw_element.get("linkShared")
-        self._published = raw_element.get("published")
+        self.timeframe: str = raw_element.get("timeframe")
+        self.management_zone: Optional[EntityShortRepresentation] = EntityShortRepresentation(self._http_client, None, raw_element.get("managementZone")) if raw_element.get("managementZone") else None
 
 
 class DashboardMetadata(DynatraceObject):
-    @property
-    def name(self) -> str:
-        return self._name
-
-    @property
-    def shared(self) -> bool:
-        return self._shared
-
-    @property
-    def owner(self) -> str:
-        return self._owner
-
-    @property
-    def dashboard_filter(self):
-        return self._dashboard_filter
-
-    @property
-    def tags(self) -> List[str]:
-        return self._tags
-
-    @property
-    def preset(self) -> bool:
-        return self._preset
-
     def _create_from_raw_data(self, raw_element):
         # TODO - Schema changed, add extra fields dynamicFilters
-        self._name = raw_element.get("name")
-        self._shared = raw_element.get("shared")
-        self._owner = raw_element.get("owner")
-        self._dashboard_filter = DashboardFilter(self._http_client, None, raw_element.get("dashboardFilter"))
-        self._tags = raw_element.get("tags")
-        self._preset = raw_element.get("preset")
+        self.name: str = raw_element.get("name")
+        self.shared: bool = raw_element.get("shared")
+        self.owner: str = raw_element.get("owner")
+        self.dashboard_filter: DashboardFilter = DashboardFilter(self._http_client, None, raw_element.get("dashboardFilter"))
+        self.tags: List[str] = raw_element.get("tags")
+        self.preset: bool = raw_element.get("preset")
 
 
 class Dashboard(DynatraceObject):
-    @property
-    def id(self) -> str:
-        return self._id
-
-    @property
-    def dashboard_metadata(self) -> DashboardMetadata:
-        return self._dashboard_metadata
-
-    @property
-    def tiles(self) -> List[Tile]:
-        return self._tiles
-
     def _create_from_raw_data(self, raw_element):
         if raw_element is None:
             raw_element = {}
-        self._id = raw_element.get("id")
-        self._dashboard_metadata = DashboardMetadata(self._http_client, None, raw_element.get("dashboardMetadata"))
-        self._tiles = [Tile(self._http_client, None, raw_tile) for raw_tile in raw_element.get("tiles", [])]
+        self.id: str = raw_element.get("id")
+        self.dashboard_metadata: DashboardMetadata = DashboardMetadata(self._http_client, None, raw_element.get("dashboardMetadata"))
+        self.tiles: List[Tile] = [Tile(self._http_client, None, raw_tile) for raw_tile in raw_element.get("tiles", [])]
 
 
 class DashboardStub(DynatraceObject):
-    @property
-    def id(self) -> str:
-        return self._id
-
-    @property
-    def name(self) -> str:
-        return self._name
-
-    @property
-    def owner(self) -> str:
-        return self._owner
-
     def delete(self) -> Response:
         """
         Deletes this dashboard
@@ -144,9 +72,9 @@ class DashboardStub(DynatraceObject):
         return self._http_client.make_request(f"/api/config/v1/dashboards/{self.id}", method="DELETE")
 
     def _create_from_raw_data(self, raw_element):
-        self._id = raw_element.get("id")
-        self._name = raw_element.get("name")
-        self._owner = raw_element.get("owner")
+        self.id: str = raw_element.get("id")
+        self.name: str = raw_element.get("name")
+        self.owner: str = raw_element.get("owner")
 
     def get_full_dashboard(self) -> Dashboard:
         """
