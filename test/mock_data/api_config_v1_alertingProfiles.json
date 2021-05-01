@@ -1,0 +1,28 @@
+{
+  "values": [
+    {
+      "id": "b1f379d9-98b4-4efe-be38-0289609c9295",
+      "name": "deployment_change_autoremediation"
+    },
+    {
+      "id": "c21f969b-5f03-333d-83e0-4f8f136e7682",
+      "name": "Default"
+    },
+    {
+      "id": "142e6edb-280a-4e9c-85b1-e01f5d2ee829",
+      "name": "dbslowdwon_autoremediation"
+    },
+    {
+      "id": "b68e03c2-8a28-45a1-a516-4abce33317e7",
+      "name": "process_crash_autoremediation"
+    },
+    {
+      "id": "caa901e6-8163-413c-ac64-5de723a400ab",
+      "name": "rguerrero"
+    },
+    {
+      "id": "ebb53f45-6cc6-4efa-a271-1a9657a433c0",
+      "name": "Keptn"
+    }
+  ]
+}

@@ -56,7 +56,7 @@ class HttpClient:
             total=retries,
             backoff_factor=retry_delay_s,
             status_forcelist=[400, 401, 403, 413, 429, 500, 502, 503, 504],
-            method_whitelist=["TRACE", "PUT", "DELETE", "OPTIONS", "HEAD", "GET", "POST"],
+            allowed_methods=["TRACE", "PUT", "DELETE", "OPTIONS", "HEAD", "GET", "POST"],
             raise_on_status=False,
         )
 
