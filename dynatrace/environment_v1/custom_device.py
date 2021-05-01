@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta, timezone
-from collections import MutableSequence
+from collections.abc import MutableSequence
 from typing import Optional, List, Dict, Tuple
 
 

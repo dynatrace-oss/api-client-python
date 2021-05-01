@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "currentConfigurationVersions": [
+      "0"
+    ],
+    "configurationVersions": [],
+    "clusterVersion": "1.214.112.20210409-064503"
+  },
+  "id": "b1f379d9-98b4-4efe-be38-0289609c9295",
+  "displayName": "deployment_change_autoremediation",
+  "rules": [
+    {
+      "severityLevel": "PERFORMANCE",
+      "tagFilter": {
+        "includeMode": "NONE",
+        "tagFilters": []
+      },
+      "delayInMinutes": 15
+    },
+    {
+      "severityLevel": "AVAILABILITY",
+      "tagFilter": {
+        "includeMode": "NONE",
+        "tagFilters": []
+      },
+      "delayInMinutes": 10
+    }
+  ],
+  "managementZoneId": null,
+  "mzId": null,
+  "eventTypeFilters": []
+}

@@ -1,0 +1,4 @@
+requests>=2.21
+pytest>=6.2.3
+mock
+tox
