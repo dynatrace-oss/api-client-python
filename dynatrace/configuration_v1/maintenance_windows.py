@@ -29,7 +29,7 @@ class Recurrence(DynatraceObject):
 class Schedule(DynatraceObject):
     @staticmethod
     def create(recurrence_type: str, start: str, end: str, zone_id: str, recurrence: Optional[Recurrence] = None):
-        raw_element = {"recurrenceType": recurrence_type, "recurrence": recurrence, "start_time": start, "end_time": end, "zone_id": zone_id}
+        raw_element = {"recurrenceType": recurrence_type, "recurrence": recurrence, "start": start, "end": end, "zoneId": zone_id}
         return Schedule(raw_element=raw_element)
 
     @property
