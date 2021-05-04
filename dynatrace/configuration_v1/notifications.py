@@ -29,6 +29,17 @@ class EmailNotificationConfig(Notification):
         self.cc_receivers: List[str] = raw_element.get("ccReceivers")
         self.bcc_receivers: List[str] = raw_element.get("bccReceivers")
 
+class SlackNotificationConfig(Notification):
+    def _create_from_raw_data(self, raw_element):
+        self.id: str = raw_element.get("id")
+        self.name: str = raw_element.get("name")
+        self.notification_type: str = raw_element.get("type")
+        self.alerting_profile: AlertingProfile = AlertingProfile(raw_element=self._http_client.make_request(f"/api/config/v1/alertingProfiles/{raw_element.get('alertingProfile')}").json())
+        self.active: bool = raw_element.get("active")
+        self.url: str = raw_element.get("url")
+        self.channel: str = raw_element.get("channel")
+        self.title: str = raw_element.get("title")
+
 
 class NotificationConfigStub(DynatraceObject):
     def get_full_configuration(self) -> Notification:
@@ -38,6 +49,8 @@ class NotificationConfigStub(DynatraceObject):
         response = self._http_client.make_request(f"/api/config/v1/notifications/{self.id}").json()
         if self.notification_type == "EMAIL":
             notification = EmailNotificationConfig(self._http_client, None, response)
+        if self.notification_type == "SLACK":
+            notification = SlackNotificationConfig(self._http_client, None, response)
         else:
             notification = Notification(self._http_client, None, response)
         return notification
