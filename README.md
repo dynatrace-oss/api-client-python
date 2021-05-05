@@ -96,7 +96,7 @@ Frequent issue detection | :x:                |     |
 Kubernetes credentials configuration | :x:                |     |
 Maintenance windows | :x:                |     |
 Management zones | :warning:                |     |
-Notifications | :x:                |     |
+Notifications | :warning:                | `dt.notifications`    |
 OneAgent - Environment-wide configuration | :x:                |     |
 OneAgent in a host group | :x:                |     |
 OneAgent on a host | :x:                |     |

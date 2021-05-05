@@ -15,6 +15,7 @@ class Notification(DynatraceObject):
         self.alerting_profile: AlertingProfile = AlertingProfile(raw_element=self._http_client.make_request(f"/api/config/v1/alertingProfiles/{raw_element.get('alertingProfile')}").json())
         self.active: bool = raw_element.get("active")
 
+
 class AnsibleTowerNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
@@ -29,6 +30,7 @@ class AnsibleTowerNotificationConfig(Notification):
         self.job_template_id: str = raw_element.get("jobTemplateID")
         self.custom_message: str = raw_element.get("customMessage")
 
+
 class EmailNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
@@ -42,6 +44,7 @@ class EmailNotificationConfig(Notification):
         self.cc_receivers: List[str] = raw_element.get("ccReceivers")
         self.bcc_receivers: List[str] = raw_element.get("bccReceivers")
 
+
 class HipChatNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
@@ -51,6 +54,7 @@ class HipChatNotificationConfig(Notification):
         self.active: bool = raw_element.get("active")
         self.url: str = raw_element.get("url")
         self.message: str = raw_element.get("message")
+
 
 class JiraNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
@@ -67,6 +71,7 @@ class JiraNotificationConfig(Notification):
         self.summary: str = raw_element.get("summary")
         self.description: str = raw_element.get("description")
 
+
 class OpsGenieNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
@@ -78,6 +83,7 @@ class OpsGenieNotificationConfig(Notification):
         self.domain: str = raw_element.get("domain")
         self.message: str = raw_element.get("message")
 
+
 class PagerDutyNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
@@ -88,6 +94,7 @@ class PagerDutyNotificationConfig(Notification):
         self.account: str = raw_element.get("account")
         self.service_api_key: str = raw_element.get("serviceApiKey")
         self.service_name: str = raw_element.get("serviceName")
+
 
 class ServiceNowNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
@@ -104,6 +111,7 @@ class ServiceNowNotificationConfig(Notification):
         self.send_incidents: bool = raw_element.get("sendIncidents")
         self.send_events: bool = raw_element.get("sendEvents")
 
+
 class SlackNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
@@ -114,6 +122,7 @@ class SlackNotificationConfig(Notification):
         self.url: str = raw_element.get("url")
         self.channel: str = raw_element.get("channel")
         self.title: str = raw_element.get("title")
+
 
 class TrelloNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
@@ -130,6 +139,7 @@ class TrelloNotificationConfig(Notification):
         self.text: str = raw_element.get("text")
         self.description: str = raw_element.get("description")
 
+
 class VictorOpsNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
@@ -141,10 +151,12 @@ class VictorOpsNotificationConfig(Notification):
         self.routing_key: str = raw_element.get("routingKey")
         self.message: str = raw_element.get("message")
 
+
 class HttpHeader(DynatraceObject):
     def _create_from_raw_data(self, raw_element):
         self.name: str = raw_element.get("name")
         self.value: str = raw_element.get("value")
+
 
 class WebHookNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
@@ -159,6 +171,7 @@ class WebHookNotificationConfig(Notification):
         self.headers: List[HttpHeader] = [HttpHeader(raw_element=header) for header in raw_element.get("headers", {})]
         self.notify_event_merges_enabled: bool = raw_element.get("notifyEventMergesEnabled")
 
+
 class XMattersNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
@@ -170,6 +183,7 @@ class XMattersNotificationConfig(Notification):
         self.accept_any_certificate: bool = raw_element.get("acceptAnyCertificate")
         self.headers: List[HttpHeader] = [HttpHeader(raw_element=header) for header in raw_element.get("headers", {})]
         self.payload: str = raw_element.get("payload")
+
 
 class NotificationConfigStub(DynatraceObject):
     def get_full_configuration(self) -> Notification:
@@ -216,6 +230,7 @@ class NotificationConfigStub(DynatraceObject):
         self.name = raw_element.get("name")
         self.description = raw_element.get("description")
         self.notification_type = raw_element.get("type")
+
 
 class NotificationService:
     def __init__(self, http_client: HttpClient):
