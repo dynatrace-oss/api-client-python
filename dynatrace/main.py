@@ -12,11 +12,11 @@ from dynatrace.environment_v1.cluster_time import ClusterTimeService
 from dynatrace.environment_v1.custom_device import CustomDeviceService
 from dynatrace.environment_v1.event import EventService
 from dynatrace.environment_v1.synthetic_third_party import ThirdPartySyntheticTestsService
-from dynatrace.environment_v2.activegate import ActiveGateService
-from dynatrace.environment_v2.activegate_autoupdate import ActiveGateAutoUpdateService
-from dynatrace.environment_v2.entity import EntityService
-from dynatrace.environment_v2.metric import MetricService
-from dynatrace.environment_v2.token import TokenService
+from dynatrace.environment_v2.activegates import ActiveGateService
+from dynatrace.environment_v2.activegates_autoupdate_configuration import ActiveGateAutoUpdateService
+from dynatrace.environment_v2.monitored_entities import EntityService
+from dynatrace.environment_v2.metrics import MetricService
+from dynatrace.environment_v2.tokens_api import TokenService
 from dynatrace.http_client import HttpClient
 
 

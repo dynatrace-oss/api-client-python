@@ -2,7 +2,7 @@ from typing import List, Optional
 from requests import Response
 
 from dynatrace.dynatrace_object import DynatraceObject
-from dynatrace.environment_v2.entity import EntityShortRepresentation
+from dynatrace.environment_v2.monitored_entities import EntityShortRepresentation
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
 from dynatrace.configuration_v1.tile import Tile

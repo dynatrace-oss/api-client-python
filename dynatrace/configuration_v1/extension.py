@@ -2,9 +2,9 @@ from typing import List, Dict, Any, Optional
 
 from requests import Response
 
-from dynatrace.environment_v2.configuration import ConfigurationMetadata
+from dynatrace.environment_v2.schemas import ConfigurationMetadata
 from dynatrace.dynatrace_object import DynatraceObject
-from dynatrace.environment_v2.entity import EntityShortRepresentation
+from dynatrace.environment_v2.monitored_entities import EntityShortRepresentation
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
 

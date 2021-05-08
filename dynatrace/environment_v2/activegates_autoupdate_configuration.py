@@ -3,7 +3,7 @@ from typing import Dict, Any
 from requests import Response
 
 from dynatrace.dynatrace_object import DynatraceObject
-from dynatrace.environment_v2.configuration import ConfigurationMetadata
+from dynatrace.environment_v2.schemas import ConfigurationMetadata
 from dynatrace.http_client import HttpClient
 
 

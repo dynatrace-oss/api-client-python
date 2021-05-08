@@ -1,5 +1,5 @@
 from requests import Response
-from dynatrace.environment_v2.entity import EntityShortRepresentation
+from dynatrace.environment_v2.monitored_entities import EntityShortRepresentation
 from dynatrace.configuration_v1.endpoint import EndpointShortRepresentation
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList

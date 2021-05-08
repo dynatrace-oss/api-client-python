@@ -1,9 +1,18 @@
 from typing import List
 from dynatrace.dynatrace_object import DynatraceObject
 
+# Schemas that don't belong to a specific api tag
+
 
 class ConfigurationMetadata(DynatraceObject):
     def _create_from_raw_data(self, raw_element):
         self.cluster_version: str = raw_element.get("clusterVersion")
         self.configuration_versions: List[int] = raw_element.get("configurationVersions")
         self.current_configuration_versions: List[int] = raw_element.get("currentConfigurationVersions")
+
+
+class EntityType(DynatraceObject):
+    def _create_from_raw_data(self, raw_element: dict):
+        # TODO - Implement other properties
+        self.entity_type = raw_element.get("type")
+        self.properties = raw_element.get("properties", [])

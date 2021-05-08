@@ -14,7 +14,7 @@ $ pip install dtapi
 ```python
 from dynatrace import Dynatrace
 from dynatrace import TOO_MANY_REQUESTS_WAIT
-from dynatrace.environment_v2.token import SCOPE_METRICS_READ, SCOPE_METRICS_INGEST
+from dynatrace.environment_v2.tokens_api import SCOPE_METRICS_READ, SCOPE_METRICS_INGEST
 
 from datetime import datetime, timedelta
 

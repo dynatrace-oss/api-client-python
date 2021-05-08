@@ -1,10 +1,10 @@
 from typing import List
 from requests import Response
 
-from dynatrace.environment_v2.configuration import ConfigurationMetadata
+from dynatrace.environment_v2.schemas import ConfigurationMetadata
 from dynatrace.pagination import PaginatedList
 from dynatrace.dynatrace_object import DynatraceObject
-from dynatrace.environment_v2.entity import EntityShortRepresentation
+from dynatrace.environment_v2.monitored_entities import EntityShortRepresentation
 from dynatrace.configuration_v1.metag import METag
 from dynatrace.http_client import HttpClient
 
