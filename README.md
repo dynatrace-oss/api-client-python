@@ -80,7 +80,7 @@ print(new_token.token)
 API                                      |  Level               |  Access                         |
 :-------------                           |  :-------------:     |  :-----                         |
 Access Tokens - API tokens               |  :heavy_check_mark:  |  `dt.tokens`                    |
-Access tokens - Tenant tokens            |  :x:                 |                                 |
+Access tokens - Tenant tokens            |  :heavy_check_mark:  |  `dt.tenant_tokens`             |
 ActiveGates                              |  :heavy_check_mark:  |  `dt.activegates`               |
 ActiveGates - Auto-update configuration  |  :heavy_check_mark:  |  `dt.activegates_autoupdate`    |
 ActiveGates - Auto-update jobs           |  :x:                 |                                 |
