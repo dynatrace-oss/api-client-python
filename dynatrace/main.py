@@ -17,6 +17,7 @@ from dynatrace.environment_v2.activegates_autoupdate_configuration import Active
 from dynatrace.environment_v2.monitored_entities import EntityService
 from dynatrace.environment_v2.metrics import MetricService
 from dynatrace.environment_v2.tokens_api import TokenService
+from dynatrace.environment_v2.tokens_tenant import TenantTokenService
 from dynatrace.http_client import HttpClient
 
 
@@ -63,3 +64,4 @@ class Dynatrace:
         self.tokens: TokenService = TokenService(self.__http_client)
         self.maintenance_windows = MaintenanceWindowService(self.__http_client)
         self.anomaly_detection_metric_events = MetricEventService(self.__http_client)
+        self.tenant_tokens = TenantTokenService(self.__http_client)
