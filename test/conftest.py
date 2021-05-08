@@ -22,7 +22,7 @@ class MockResponse:
 
 
 def local_make_request(self, path: str, params: Optional[Dict] = None, headers: Optional[Dict] = None, method="GET", data=None) -> MockResponse:
-    file_name = f'{path.replace("/", "_").lstrip("_")}.json'
+    file_name = f'{method}{path.replace("/", "_")}.json'
     file_path = Path(current_file_path, "mock_data", file_name)
     with open(file_path) as f:
         json_data = json.load(f)
