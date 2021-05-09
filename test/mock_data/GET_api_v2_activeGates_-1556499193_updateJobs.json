@@ -1,0 +1,53 @@
+{
+  "agId": "-1556499193",
+  "updateJobs": [
+    {
+      "jobId": "-4754066816153208332",
+      "jobState": "SUCCEED",
+      "updateMethod": "MANUAL_INSTALLATION",
+      "updateType": "ACTIVE_GATE",
+      "cancelable": false,
+      "startVersion": "1.217.89.20210506-182520",
+      "targetVersion": "1.217.96.20210507-181038",
+      "timestamp": 1620419177047,
+      "agType": "ENVIRONMENT",
+      "environments": [
+        "eaa50379"
+      ],
+      "error": null,
+      "duration": null
+    },
+    {
+      "jobId": "5075770917171973084",
+      "jobState": "SUCCEED",
+      "updateMethod": "MANUAL_INSTALLATION",
+      "updateType": "ACTIVE_GATE",
+      "cancelable": false,
+      "startVersion": "1.217.84.20210505-174021",
+      "targetVersion": "1.217.89.20210506-182520",
+      "timestamp": 1620332833412,
+      "agType": "ENVIRONMENT",
+      "environments": [
+        "eaa50379"
+      ],
+      "error": null,
+      "duration": null
+    },
+    {
+      "jobId": "-6499213237883713862",
+      "jobState": "SUCCEED",
+      "updateMethod": "MANUAL_INSTALLATION",
+      "updateType": "ACTIVE_GATE",
+      "cancelable": false,
+      "startVersion": "1.217.75.20210504-201049",
+      "targetVersion": "1.217.84.20210505-174021",
+      "timestamp": 1620245814673,
+      "agType": "ENVIRONMENT",
+      "environments": [
+        "eaa50379"
+      ],
+      "error": null,
+      "duration": null
+    }
+  ]
+}

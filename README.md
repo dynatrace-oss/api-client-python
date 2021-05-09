@@ -77,23 +77,22 @@ print(new_token.token)
 
 ### Environment API V2
 
-API                                      |  Level               |  Access                         |
-:-------------                           |  :-------------:     |  :-----                         |
-Access Tokens - API tokens               |  :heavy_check_mark:  |  `dt.tokens`                    |
-Access tokens - Tenant tokens            |  :heavy_check_mark:  |  `dt.tenant_tokens`             |
-ActiveGates                              |  :heavy_check_mark:  |  `dt.activegates`               |
-ActiveGates - Auto-update configuration  |  :heavy_check_mark:  |  `dt.activegates_autoupdate`    |
-ActiveGates - Auto-update jobs           |  :x:                 |                                 |
-Audit Logs                               |  :x:                 |                                 |
-Extensions 2.0                           |  :x:                 |                                 |
-Metrics                                  |  :warning:           |  `dt.metrics`                   |
-Monitored entities                       |  :warning:           |  `dt.entities`                  |
-Monitored entities - Custom tags         |  :x:                 |                                 |
-Network zones                            |  :x:                 |                                 |
-Problems                                 |  :x:                 |                                 |
-Security problems                        |  :x:                 |                                 |
-Service-level objectives                 |  :x:                 |                                 |
-
+API                                      |  Level               |  Access                                     |
+:-------------                           |  :-------------:     |  :-----                                     |
+Access Tokens - API tokens               |  :heavy_check_mark:  |  `dt.tokens`                                |
+Access tokens - Tenant tokens            |  :heavy_check_mark:  |  `dt.tenant_tokens`                         |
+ActiveGates                              |  :heavy_check_mark:  |  `dt.activegates`                           |
+ActiveGates - Auto-update configuration  |  :heavy_check_mark:  |  `dt.activegates_autoupdate_configuration`  |
+ActiveGates - Auto-update jobs           |  :heavy_check_mark:  |  `dt.activegates_autoupdate_jobs`           |
+Audit Logs                               |  :x:                 |                                             |
+Extensions 2.0                           |  :x:                 |                                             |
+Metrics                                  |  :warning:           |  `dt.metrics`                               |
+Monitored entities                       |  :warning:           |  `dt.entities`                              |
+Monitored entities - Custom tags         |  :x:                 |                                             |
+Network zones                            |  :x:                 |                                             |
+Problems                                 |  :x:                 |                                             |
+Security problems                        |  :x:                 |                                             |
+Service-level objectives                 |  :x:                 |                                             
 
 ### Environment API V1
 
