@@ -6,8 +6,8 @@ from datetime import datetime, timedelta
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
-from dynatrace.utils import iso8601_to_datetime, timestamp_to_string
-from environment_v2.schemas import VersionCompareType
+from dynatrace.utils import timestamp_to_string
+from dynatrace.environment_v2.schemas import VersionCompareType
 
 
 class UpdateType(Enum):

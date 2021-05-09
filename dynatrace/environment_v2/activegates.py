@@ -4,7 +4,7 @@ from typing import List, Optional, Union
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
-from environment_v2.schemas import VersionCompareType
+from dynatrace.environment_v2.schemas import VersionCompareType
 
 
 class OsType(Enum):
