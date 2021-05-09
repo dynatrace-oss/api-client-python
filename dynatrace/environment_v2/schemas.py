@@ -16,3 +16,11 @@ class EntityType(DynatraceObject):
         # TODO - Implement other properties
         self.entity_type = raw_element.get("type")
         self.properties = raw_element.get("properties", [])
+
+
+class VersionCompareType(Enum):
+    EQUAL: str = "EQUAL"
+    GREATER: str = "GREATER"
+    GREATER_EQUAL: str = "GREATER_EQUAL"
+    LOWER: str = "LOWER"
+    LOWER_EQUAL: str = "LOWER_EQUAL"

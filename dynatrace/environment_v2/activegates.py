@@ -1,48 +1,54 @@
-from typing import List, Optional
+from enum import Enum
+from typing import List, Optional, Union
 
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
+from environment_v2.schemas import VersionCompareType
 
-OS_TYPE_LINUX = "LINUX"
-OS_TYPE_WINDOWS = "WINDOWS"
 
-TYPE_ENVIRONMENT = "ENVIRONMENT"
-TYPE_ENVIRONMENT_MULTI = "ENVIRONMENT_MULTI"
+class OsType(Enum):
+    LINUX = "LINUX"
+    WINDOWS = "WINDOWS"
 
-UPDATE_STATUS_INCOMPATIBLE = "INCOMPATIBLE"
-UPDATE_STATUS_OUTDATED = "OUTDATED"
-UPDATE_STATUS_SUPPRESSED = "SUPPRESSED"
-UPDATE_STATUS_UNKNOWN = "UNKNOWN"
-UPDATE_STATUS_UP2DATE = "UP2DATE"
-UPDATE_STATUS_UPDATE_IN_PROGRESS = "UPDATE_IN_PROGRESS"
-UPDATE_STATUS_UPDATE_PENDING = "UPDATE_PENDING"
-UPDATE_STATUS_UPDATE_PROBLEM = "UPDATE_PROBLEM"
 
-VERSION_COMPARE_TYPE_EQUAL = "EQUAL"
-VERSION_COMPARE_TYPE_GREATER = "GREATER"
-VERSION_COMPARE_TYPE_GREATER_EQUAL = "GREATER_EQUAL"
-VERSION_COMPARE_TYPE_LOWER = "LOWER"
-VERSION_COMPARE_TYPE_LOWER_EQUAL = "LOWER_EQUAL"
+class ActivegateType(Enum):
+    ENVIRONMENT = "ENVIRONMENT"
+    ENVIRONMENT_MULTI = "ENVIRONMENT_MULTI"
 
-AUTO_UPDATE_ENABLED = "ENABLED"
-AUTO_UPDATE_DISABLED = "DISABLED"
 
-MODULE_AWS = "AWS"
-MODULE_AZURE = "AZURE"
-MODULE_BEACON_FORWARDER = "BEACON_FORWARDER"
-MODULE_CLOUD_FOUNDRY = "CLOUD_FOUNDRY"
-MODULE_DB_INSIGHT = "DB_INSIGHT"
-MODULE_EXTENSIONS_V1 = "EXTENSIONS_V1"
-MODULE_EXTENSIONS_V2 = "EXTENSIONS_V2"
-MODULE_KUBERNETES = "KUBERNETES"
-MODULE_LOGS = "LOGS"
-MODULE_MEMORY_DUMPS = "MEMORY_DUMPS"
-MODULE_METRIC_API = "METRIC_API"
-MODULE_ONE_AGENT_ROUTING = "ONE_AGENT_ROUTING"
-MODULE_OTLP_INGEST = "OTLP_INGEST"
-MODULE_REST_API = "REST_API"
-MODULE_SYNTHETIC = "SYNTHETIC"
+class UpdateStatus(Enum):
+    INCOMPATIBLE = "INCOMPATIBLE"
+    OUTDATED = "OUTDATED"
+    SUPPRESSED = "SUPPRESSED"
+    UNKNOWN = "UNKNOWN"
+    UP2DATE = "UP2DATE"
+    UPDATE_IN_PROGRESS = "UPDATE_IN_PROGRESS"
+    UPDATE_PENDING = "UPDATE_PENDING"
+    UPDATE_PROBLEM = "UPDATE_PROBLEM"
+
+
+class AutoUpdate(Enum):
+    ENABLED = "ENABLED"
+    DISABLED = "DISABLED"
+
+
+class Module(Enum):
+    AWS = "AWS"
+    AZURE = "AZURE"
+    BEACON_FORWARDER = "BEACON_FORWARDER"
+    CLOUD_FOUNDRY = "CLOUD_FOUNDRY"
+    DB_INSIGHT = "DB_INSIGHT"
+    EXTENSIONS_V1 = "EXTENSIONS_V1"
+    EXTENSIONS_V2 = "EXTENSIONS_V2"
+    KUBERNETES = "KUBERNETES"
+    LOGS = "LOGS"
+    MEMORY_DUMPS = "MEMORY_DUMPS"
+    METRIC_API = "METRIC_API"
+    ONE_AGENT_ROUTING = "ONE_AGENT_ROUTING"
+    OTLP_INGEST = "OTLP_INGEST"
+    REST_API = "REST_API"
+    SYNTHETIC = "SYNTHETIC"
 
 
 class ActiveGateService:
@@ -52,18 +58,18 @@ class ActiveGateService:
     def list(
         self,
         hostname: Optional[str] = None,
-        os_type: Optional[str] = None,
+        os_type: Optional[Union[OsType, str]] = None,
         network_address: Optional[str] = None,
-        activegate_type: Optional[str] = None,
+        activegate_type: Optional[Union[ActivegateType, str]] = None,
         network_zone: Optional[str] = None,
-        update_status: Optional[str] = None,
-        version_compare_type: Optional[str] = None,
+        update_status: Optional[Union[UpdateStatus, str]] = None,
+        version_compare_type: Optional[Union[VersionCompareType, str]] = None,
         version: Optional[str] = None,
-        auto_update: Optional[str] = None,
+        auto_update: Optional[Union[AutoUpdate, str]] = None,
         group: Optional[str] = None,
         online: Optional[bool] = None,
-        enabled_modules: Optional[List[str]] = None,
-        disabled_modules: Optional[List[str]] = None,
+        enabled_modules: Optional[List[Union[Module, str]]] = None,
+        disabled_modules: Optional[List[Union[Module, str]]] = None,
     ) -> PaginatedList["ActiveGate"]:
         """
         Lists all available ActiveGates

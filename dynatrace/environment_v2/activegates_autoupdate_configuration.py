@@ -7,7 +7,7 @@ from dynatrace.environment_v2.schemas import ConfigurationMetadata
 from dynatrace.http_client import HttpClient
 
 
-class ActiveGateAutoUpdateService:
+class ActiveGateAutoUpdateConfigurationService:
     def __init__(self, http_client: HttpClient):
         self.__http_client = http_client
 

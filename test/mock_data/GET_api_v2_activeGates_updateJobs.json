@@ -1,0 +1,848 @@
+{
+  "allUpdateJobs": [
+    {
+      "agId": "-1556499193",
+      "updateJobs": [
+        {
+          "jobId": "-4754066816153208332",
+          "jobState": "SUCCEED",
+          "updateMethod": "MANUAL_INSTALLATION",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.217.89.20210506-182520",
+          "targetVersion": "1.217.96.20210507-181038",
+          "timestamp": 1620419177047,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": null
+        },
+        {
+          "jobId": "5075770917171973084",
+          "jobState": "SUCCEED",
+          "updateMethod": "MANUAL_INSTALLATION",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.217.84.20210505-174021",
+          "targetVersion": "1.217.89.20210506-182520",
+          "timestamp": 1620332833412,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": null
+        },
+        {
+          "jobId": "-6499213237883713862",
+          "jobState": "SUCCEED",
+          "updateMethod": "MANUAL_INSTALLATION",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.217.75.20210504-201049",
+          "targetVersion": "1.217.84.20210505-174021",
+          "timestamp": 1620245814673,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": null
+        }
+      ]
+    },
+    {
+      "agId": "1987937616",
+      "updateJobs": [
+        {
+          "jobId": "-1933142735501436935",
+          "jobState": "SUCCEED",
+          "updateMethod": "MANUAL_INSTALLATION",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.217.89.20210506-182520",
+          "targetVersion": "1.217.96.20210507-181038",
+          "timestamp": 1620419177679,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": null
+        },
+        {
+          "jobId": "1853627878182265475",
+          "jobState": "SUCCEED",
+          "updateMethod": "MANUAL_INSTALLATION",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.217.84.20210505-174021",
+          "targetVersion": "1.217.89.20210506-182520",
+          "timestamp": 1620332828657,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": null
+        },
+        {
+          "jobId": "1263434813331085658",
+          "jobState": "SUCCEED",
+          "updateMethod": "MANUAL_INSTALLATION",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.217.75.20210504-201049",
+          "targetVersion": "1.217.84.20210505-174021",
+          "timestamp": 1620245814690,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": null
+        }
+      ]
+    },
+    {
+      "agId": "1513404008",
+      "updateJobs": [
+        {
+          "jobId": "-4113200564735429238",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.217.89.20210506-182520",
+          "targetVersion": "1.217.96.20210507-181038",
+          "timestamp": 1620421416590,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 165107
+        },
+        {
+          "jobId": "4329018563710068620",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "REMOTE_PLUGIN_AGENT",
+          "cancelable": false,
+          "startVersion": "1.217.77.20210505-105253",
+          "targetVersion": "1.217.90.20210506-212742",
+          "timestamp": 1620419455402,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 93247
+        },
+        {
+          "jobId": "7087779111832507803",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.217.84.20210505-174021",
+          "targetVersion": "1.217.89.20210506-182520",
+          "timestamp": 1620332410533,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 81241
+        },
+        {
+          "jobId": "-2846623661968868000",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.217.64.20210503-163640",
+          "targetVersion": "1.217.84.20210505-174021",
+          "timestamp": 1620246539724,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 212634
+        },
+        {
+          "jobId": "-6559600055751543626",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "REMOTE_PLUGIN_AGENT",
+          "cancelable": false,
+          "startVersion": "1.217.74.20210504-135638",
+          "targetVersion": "1.217.77.20210505-105253",
+          "timestamp": 1620246416556,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 61907
+        },
+        {
+          "jobId": "1489271805890176727",
+          "jobState": "SKIPPED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.217.64.20210503-163640",
+          "targetVersion": "1.217.75.20210504-201049",
+          "timestamp": 1620168744590,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": "{collectorId=0x5a34b668, installer=INSTALLER_SG, startup=2021-05-03 20:49:22, version=1.217.64.20210503-163640, tenant=eaa50379, serverId=8, downloaded.on=2021-05-04 22:22:22, validity=2021-05-04 22:52:22}",
+          "duration": 1802555
+        },
+        {
+          "jobId": "185387348558602155",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "REMOTE_PLUGIN_AGENT",
+          "cancelable": false,
+          "startVersion": "1.217.60.20210430-103153",
+          "targetVersion": "1.217.74.20210504-135638",
+          "timestamp": 1620167028036,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 49820
+        },
+        {
+          "jobId": "553671775012031670",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.217.61.20210430-122301",
+          "targetVersion": "1.217.64.20210503-163640",
+          "timestamp": 1620074976830,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 452270
+        },
+        {
+          "jobId": "-2197869214416020036",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "REMOTE_PLUGIN_AGENT",
+          "cancelable": false,
+          "startVersion": "1.215.163.20210428-232414",
+          "targetVersion": "1.217.60.20210430-103153",
+          "timestamp": 1619815731951,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 70015
+        },
+        {
+          "jobId": "8852445844284375561",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.215.163.20210428-232414",
+          "targetVersion": "1.217.61.20210430-122301",
+          "timestamp": 1619815636705,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 232679
+        },
+        {
+          "jobId": "-3223975595216122255",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.215.160.20210428-202125",
+          "targetVersion": "1.215.163.20210428-232414",
+          "timestamp": 1619728910650,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 268174
+        },
+        {
+          "jobId": "-6898176338539612997",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "REMOTE_PLUGIN_AGENT",
+          "cancelable": false,
+          "startVersion": "1.215.157.20210427-191116",
+          "targetVersion": "1.215.163.20210428-232414",
+          "timestamp": 1619728733171,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 63174
+        },
+        {
+          "jobId": "4435335513698086229",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "REMOTE_PLUGIN_AGENT",
+          "cancelable": false,
+          "startVersion": "1.195.130.20200619-113559",
+          "targetVersion": "1.215.157.20210427-191116",
+          "timestamp": 1619694423471,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 62936
+        },
+        {
+          "jobId": "-268138012248093764",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.195.68.20200603-170501",
+          "targetVersion": "1.215.160.20210428-202125",
+          "timestamp": 1619694298667,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 226625
+        }
+      ]
+    },
+    {
+      "agId": "1774961781",
+      "updateJobs": [
+        {
+          "jobId": "-4256690985054896829",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "REMOTE_PLUGIN_AGENT",
+          "cancelable": false,
+          "startVersion": "1.217.74.20210504-135638",
+          "targetVersion": "1.217.90.20210506-212742",
+          "timestamp": 1620419610736,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 40384
+        },
+        {
+          "jobId": "-7986791880469367725",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.217.89.20210506-182520",
+          "targetVersion": "1.217.96.20210507-181038",
+          "timestamp": 1620419433667,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 29810
+        },
+        {
+          "jobId": "4589804764080159749",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.217.84.20210505-174021",
+          "targetVersion": "1.217.89.20210506-182520",
+          "timestamp": 1620332347498,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 35573
+        },
+        {
+          "jobId": "-1720846962198425957",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.217.75.20210504-201049",
+          "targetVersion": "1.217.84.20210505-174021",
+          "timestamp": 1620247357961,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 32486
+        },
+        {
+          "jobId": "5546426631464517692",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "REMOTE_PLUGIN_AGENT",
+          "cancelable": false,
+          "startVersion": "1.217.60.20210430-103153",
+          "targetVersion": "1.217.74.20210504-135638",
+          "timestamp": 1620160928631,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 33015
+        },
+        {
+          "jobId": "-35788745957787870",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.217.64.20210503-163640",
+          "targetVersion": "1.217.75.20210504-201049",
+          "timestamp": 1620160817950,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 23649
+        },
+        {
+          "jobId": "-6974352512182927329",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.217.61.20210430-122301",
+          "targetVersion": "1.217.64.20210503-163640",
+          "timestamp": 1620073665870,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 59341
+        },
+        {
+          "jobId": "-5300069805231741407",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "REMOTE_PLUGIN_AGENT",
+          "cancelable": false,
+          "startVersion": "1.215.163.20210428-232414",
+          "targetVersion": "1.217.60.20210430-103153",
+          "timestamp": 1619815879191,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 27717
+        },
+        {
+          "jobId": "-4835900667536578359",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.215.163.20210428-232414",
+          "targetVersion": "1.217.61.20210430-122301",
+          "timestamp": 1619815730411,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 21612
+        },
+        {
+          "jobId": "8324902749941556450",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "REMOTE_PLUGIN_AGENT",
+          "cancelable": false,
+          "startVersion": "1.215.157.20210427-191116",
+          "targetVersion": "1.215.163.20210428-232414",
+          "timestamp": 1619728734494,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 39899
+        },
+        {
+          "jobId": "4759824100127790769",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.215.160.20210428-202125",
+          "targetVersion": "1.215.163.20210428-232414",
+          "timestamp": 1619728613398,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 38199
+        },
+        {
+          "jobId": "-4513528359499657449",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "REMOTE_PLUGIN_AGENT",
+          "cancelable": false,
+          "startVersion": "1.215.154.20210426-171228",
+          "targetVersion": "1.215.157.20210427-191116",
+          "timestamp": 1619643678613,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 48721
+        },
+        {
+          "jobId": "6437873268152445038",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.215.154.20210426-171228",
+          "targetVersion": "1.215.160.20210428-202125",
+          "timestamp": 1619643468038,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 51609
+        },
+        {
+          "jobId": "5144241524506870130",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "REMOTE_PLUGIN_AGENT",
+          "cancelable": false,
+          "startVersion": "1.215.149.20210423-105703",
+          "targetVersion": "1.215.154.20210426-171228",
+          "timestamp": 1619469902179,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 46362
+        },
+        {
+          "jobId": "-4568737182149528029",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.215.150.20210423-130926",
+          "targetVersion": "1.215.154.20210426-171228",
+          "timestamp": 1619469781110,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 20920
+        },
+        {
+          "jobId": "-9036561196845073094",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "REMOTE_PLUGIN_AGENT",
+          "cancelable": false,
+          "startVersion": "1.215.141.20210421-205344",
+          "targetVersion": "1.215.149.20210423-105703",
+          "timestamp": 1619210553557,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 28826
+        },
+        {
+          "jobId": "7180001061542432516",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.215.142.20210422-114333",
+          "targetVersion": "1.215.150.20210423-130926",
+          "timestamp": 1619210461815,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 53990
+        },
+        {
+          "jobId": "1661901700912651583",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "REMOTE_PLUGIN_AGENT",
+          "cancelable": false,
+          "startVersion": "1.215.128.20210420-112214",
+          "targetVersion": "1.215.141.20210421-205344",
+          "timestamp": 1619123700664,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 28868
+        },
+        {
+          "jobId": "-2138623970005558689",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.215.139.20210421-125109",
+          "targetVersion": "1.215.142.20210422-114333",
+          "timestamp": 1619123523770,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 30736
+        },
+        {
+          "jobId": "-4607247160563559171",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.215.136.20210420-185032",
+          "targetVersion": "1.215.139.20210421-125109",
+          "timestamp": 1619036380451,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 33925
+        },
+        {
+          "jobId": "-7788209598313363399",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "REMOTE_PLUGIN_AGENT",
+          "cancelable": false,
+          "startVersion": "1.215.115.20210416-142421",
+          "targetVersion": "1.215.128.20210420-112214",
+          "timestamp": 1618951420588,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 29239
+        },
+        {
+          "jobId": "3104020852143827671",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.215.122.20210419-184314",
+          "targetVersion": "1.215.136.20210420-185032",
+          "timestamp": 1618951329800,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 18580
+        },
+        {
+          "jobId": "4445435083291660083",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.215.116.20210416-153212",
+          "targetVersion": "1.215.122.20210419-184314",
+          "timestamp": 1618864452752,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 44169
+        },
+        {
+          "jobId": "-3890756700560038160",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "REMOTE_PLUGIN_AGENT",
+          "cancelable": false,
+          "startVersion": "1.215.104.20210414-105445",
+          "targetVersion": "1.215.115.20210416-142421",
+          "timestamp": 1618605857135,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 31398
+        },
+        {
+          "jobId": "2143824444926312387",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.215.111.20210415-141435",
+          "targetVersion": "1.215.116.20210416-153212",
+          "timestamp": 1618605677236,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 21147
+        },
+        {
+          "jobId": "1032791955709645547",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.215.107.20210414-181420",
+          "targetVersion": "1.215.111.20210415-141435",
+          "timestamp": 1618520233799,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 20786
+        },
+        {
+          "jobId": "-7258057277823368681",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "REMOTE_PLUGIN_AGENT",
+          "cancelable": false,
+          "startVersion": "1.215.100.20210413-115918",
+          "targetVersion": "1.215.104.20210414-105445",
+          "timestamp": 1618433217487,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 36027
+        },
+        {
+          "jobId": "-7740809505900749225",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.215.100.20210413-115918",
+          "targetVersion": "1.215.107.20210414-181420",
+          "timestamp": 1618433102956,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 51144
+        },
+        {
+          "jobId": "-6566107619797378375",
+          "jobState": "SUCCEED",
+          "updateMethod": "MANUAL_INSTALLATION",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.215.91.20210409-102818",
+          "targetVersion": "1.215.100.20210413-115918",
+          "timestamp": 1618409254565,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": null
+        },
+        {
+          "jobId": "8653817229223353765",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "REMOTE_PLUGIN_AGENT",
+          "cancelable": false,
+          "startVersion": "1.215.62.20210406-104312",
+          "targetVersion": "1.215.90.20210408-213805",
+          "timestamp": 1618000401187,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 49184
+        },
+        {
+          "jobId": "8341676700883266724",
+          "jobState": "SUCCEED",
+          "updateMethod": "AUTOMATIC",
+          "updateType": "ACTIVE_GATE",
+          "cancelable": false,
+          "startVersion": "1.215.89.20210408-203445",
+          "targetVersion": "1.215.91.20210409-102818",
+          "timestamp": 1618000193964,
+          "agType": "ENVIRONMENT",
+          "environments": [
+            "eaa50379"
+          ],
+          "error": null,
+          "duration": 18664
+        }
+      ]
+    },
+    {
+      "agId": "-1563265240",
+      "updateJobs": []
+    },
+    {
+      "agId": "-1810742340",
+      "updateJobs": []
+    }
+  ]
+}

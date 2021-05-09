@@ -13,7 +13,8 @@ from dynatrace.environment_v1.custom_device import CustomDeviceService
 from dynatrace.environment_v1.event import EventService
 from dynatrace.environment_v1.synthetic_third_party import ThirdPartySyntheticTestsService
 from dynatrace.environment_v2.activegates import ActiveGateService
-from dynatrace.environment_v2.activegates_autoupdate_configuration import ActiveGateAutoUpdateService
+from dynatrace.environment_v2.activegates_autoupdate_configuration import ActiveGateAutoUpdateConfigurationService
+from dynatrace.environment_v2.activegates_autoupdate_jobs import ActiveGateAutoUpdateJobsService
 from dynatrace.environment_v2.monitored_entities import EntityService
 from dynatrace.environment_v2.metrics import MetricService
 from dynatrace.environment_v2.tokens_api import TokenService
@@ -49,19 +50,20 @@ class Dynatrace:
         )
 
         self.activegates: ActiveGateService = ActiveGateService(self.__http_client)
-        self.activegates_autoupdate: ActiveGateAutoUpdateService = ActiveGateAutoUpdateService(self.__http_client)
+        self.activegates_autoupdate_configuration: ActiveGateAutoUpdateConfigurationService = ActiveGateAutoUpdateConfigurationService(self.__http_client)
+        self.activegates_autoupdate_jobs = ActiveGateAutoUpdateJobsService(self.__http_client)
         self.alerting_profiles: AlertingProfileService = AlertingProfileService(self.__http_client)
+        self.anomaly_detection_metric_events = MetricEventService(self.__http_client)
         self.cluster_time: ClusterTimeService = ClusterTimeService(self.__http_client)
         self.custom_devices: CustomDeviceService = CustomDeviceService(self.__http_client)
         self.dashboards: DashboardService = DashboardService(self.__http_client)
         self.entities: EntityService = EntityService(self.__http_client)
         self.events: EventService = EventService(self.__http_client)
         self.extensions: ExtensionService = ExtensionService(self.__http_client)
+        self.maintenance_windows = MaintenanceWindowService(self.__http_client)
         self.metrics: MetricService = MetricService(self.__http_client)
         self.notifications: NotificationService = NotificationService(self.__http_client)
         self.plugins: PluginService = PluginService(self.__http_client)
+        self.tenant_tokens = TenantTokenService(self.__http_client)
         self.third_part_synthetic_tests: ThirdPartySyntheticTestsService = ThirdPartySyntheticTestsService(self.__http_client)
         self.tokens: TokenService = TokenService(self.__http_client)
-        self.maintenance_windows = MaintenanceWindowService(self.__http_client)
-        self.anomaly_detection_metric_events = MetricEventService(self.__http_client)
-        self.tenant_tokens = TenantTokenService(self.__http_client)
