@@ -11,15 +11,18 @@ class MonitorCollectionElement(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.name: str = raw_element.get("name")
         self.entity_id: str = raw_element.get("entityId")
-        self.type: str = raw_element.get("type")
+        self.monitor_type: str = raw_element.get("type")
         self.enabled: bool = raw_element.get("enabled")
 
 class SyntheticMonitorsService:
     def __init__(self, http_client: HttpClient):
         self.__http_client = http_client
 
-    def list(self) -> PaginatedList[MonitorCollectionElement]:
+    def list(self, monitor_type: Optional[str] = None) -> PaginatedList[MonitorCollectionElement]:
         """
         Lists all Synthetic monitors in the environment.
         """
-        return PaginatedList(MonitorCollectionElement, self.__http_client, f"/api/v1/synthetic/monitors", list_item="monitors")
+        params = {}
+        if monitor_type is not None:
+            params.update({"type": monitor_type})
+        return PaginatedList(MonitorCollectionElement, self.__http_client, f"/api/v1/synthetic/monitors",target_params=params, list_item="monitors")
