@@ -127,59 +127,59 @@ User sessions                          |  :x:                 |                 
 
 ### Configuration API V1
 
-API                                                  |  Level            |  Access                |
-:-------------                                       |  :-------------:  |  :-----                |
-Alerting Profiles                                    |  :x:              |                        |
-Anomaly detection - Applications                     |  :x:              |                        |
-Anomaly detection - AWS                              |  :x:              |                        |
-Anomaly detection - Database services                |  :x:              |                        |
-Anomaly detection - Disk events                      |  :x:              |                        |
-Anomaly detection - Hosts                            |  :x:              |                        |
-Anomaly detection - Metric events                    |  :x:              |                        |
-Anomaly detection - Process groups                   |  :x:              |                        |
-Anomaly detection - Services                         |  :x:              |                        |
-Anomaly detection - VMware                           |  :x:              |                        |
-Automatically applied tags                           |  :x:              |                        |
-AWS credentials configuration                        |  :x:              |                        |
-AWS PrivateLink                                      |  :x:              |                        |
-Azure credentials configuration                      |  :x:              |                        |
-Calculated metrics - Log monitoring                  |  :x:              |                        |
-Calculated metrics - Mobile & custom applications    |  :x:              |                        |
-Calculated metrics - Services                        |  :x:              |                        |
-Calculated metrics - Synthetic                       |  :x:              |                        |
-Calculated metrics - Web applications                |  :x:              |                        |
-Cloud Foundry credentials configuration              |  :x:              |                        |
-Conditional naming                                   |  :x:              |                        |
-Credential vault                                     |  :x:              |                        |
-Dashboards                                           |  :warning:        |  `dt.dashboards`       |
-Data privacy and security                            |  :x:              |                        |
-Extensions                                           |  :warning:        |  `dt.extensions`       |
-Frequent issue detection                             |  :x:              |                        |
-Kubernetes credentials configuration                 |  :x:              |                        |
-Maintenance windows                                  |  :x:              |                        |
-Management zones                                     |  :warning:        |                        |
-Notifications                                        |  :warning:        |  `dt.notifications`    |
-OneAgent - Environment-wide configuration            |  :x:              |                        |
-OneAgent in a host group                             |  :x:              |                        |
-OneAgent on a host                                   |  :x:              |                        |
-Plugins                                              |  :warning:        |  `dt.plugins`          |
-Remote environments                                  |  :x:              |                        |
-Reports                                              |  :x:              |                        |
-RUM - Allowed beacon origins for CORS                |  :x:              |                        |
-RUM - Application detection rules                    |  :x:              |                        |
-RUM - Application detection rules - Host detection   |  :x:              |                        |
-RUM - Content resources                              |  :x:              |                        |
-RUM - Geographic regions - custom client IP headers  |  :x:              |                        |
-RUM - Geographic regions - IP address mapping        |  :x:              |                        |
-RUM - Mobile and custom application configuration    |  :x:              |                        |
-RUM - Web application configuration                  |  :x:              |                        |
-Service - Custom services                            |  :x:              |                        |
-Service - Detection full web request                 |  :x:              |                        |
-Service - Detection full web service                 |  :x:              |                        |
-Service - Detection opaque and external web request  |  :x:              |                        |
-Service - Detection opaque and external web service  |  :x:              |                        |
-Service - Failure detection parameter sets           |  :x:              |                        |
-Service - Failure detection rules                    |  :x:              |                        |
-Service - IBM MQ tracing                             |  :x:              |                        |
-Service - Request attributes                         |  :x:              |                        |
-Service - Request naming                             |  :x:              |                        |
+API                                                  |  Level               |  Access                |
+:-------------                                       |  :-------------:     |  :-----                |
+Alerting Profiles                                    |  :x:                 |                        |
+Anomaly detection - Applications                     |  :x:                 |                        |
+Anomaly detection - AWS                              |  :x:                 |                        |
+Anomaly detection - Database services                |  :x:                 |                        |
+Anomaly detection - Disk events                      |  :x:                 |                        |
+Anomaly detection - Hosts                            |  :x:                 |                        |
+Anomaly detection - Metric events                    |  :x:                 |                        |
+Anomaly detection - Process groups                   |  :x:                 |                        |
+Anomaly detection - Services                         |  :x:                 |                        |
+Anomaly detection - VMware                           |  :x:                 |                        |
+Automatically applied tags                           |  :x:                 |                        |
+AWS credentials configuration                        |  :x:                 |                        |
+AWS PrivateLink                                      |  :x:                 |                        |
+Azure credentials configuration                      |  :x:                 |                        |
+Calculated metrics - Log monitoring                  |  :x:                 |                        |
+Calculated metrics - Mobile & custom applications    |  :x:                 |                        |
+Calculated metrics - Services                        |  :x:                 |                        |
+Calculated metrics - Synthetic                       |  :x:                 |                        |
+Calculated metrics - Web applications                |  :x:                 |                        |
+Cloud Foundry credentials configuration              |  :x:                 |                        |
+Conditional naming                                   |  :x:                 |                        |
+Credential vault                                     |  :x:                 |                        |
+Dashboards                                           |  :warning:           |  `dt.dashboards`       |
+Data privacy and security                            |  :x:                 |                        |
+Extensions                                           |  :heavy_check_mark:  |  `dt.extensions`       |
+Frequent issue detection                             |  :x:                 |                        |
+Kubernetes credentials configuration                 |  :x:                 |                        |
+Maintenance windows                                  |  :x:                 |                        |
+Management zones                                     |  :warning:           |                        |
+Notifications                                        |  :warning:           |  `dt.notifications`    |
+OneAgent - Environment-wide configuration            |  :x:                 |                        |
+OneAgent in a host group                             |  :x:                 |                        |
+OneAgent on a host                                   |  :x:                 |                        |
+Plugins                                              |  :warning:           |  `dt.plugins`          |
+Remote environments                                  |  :x:                 |                        |
+Reports                                              |  :x:                 |                        |
+RUM - Allowed beacon origins for CORS                |  :x:                 |                        |
+RUM - Application detection rules                    |  :x:                 |                        |
+RUM - Application detection rules - Host detection   |  :x:                 |                        |
+RUM - Content resources                              |  :x:                 |                        |
+RUM - Geographic regions - custom client IP headers  |  :x:                 |                        |
+RUM - Geographic regions - IP address mapping        |  :x:                 |                        |
+RUM - Mobile and custom application configuration    |  :x:                 |                        |
+RUM - Web application configuration                  |  :x:                 |                        |
+Service - Custom services                            |  :x:                 |                        |
+Service - Detection full web request                 |  :x:                 |                        |
+Service - Detection full web service                 |  :x:                 |                        |
+Service - Detection opaque and external web request  |  :x:                 |                        |
+Service - Detection opaque and external web service  |  :x:                 |                        |
+Service - Failure detection parameter sets           |  :x:                 |                        |
+Service - Failure detection rules                    |  :x:                 |                        |
+Service - IBM MQ tracing                             |  :x:                 |                        |
+Service - Request attributes                         |  :x:                 |                        |
+Service - Request naming                             |  :x:                 |                        |

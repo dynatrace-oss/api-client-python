@@ -1,0 +1,180 @@
+{
+  "extensions": [
+    {
+      "id": "custom.remote.python.certificates",
+      "name": "Certificates Plugin",
+      "type": "ACTIVEGATE"
+    },
+    {
+      "id": "custom.remote.python.dbquery",
+      "name": "Generic DB Query Plugin",
+      "type": "ACTIVEGATE"
+    },
+    {
+      "id": "custom.remote.python.salesforce_eventstream",
+      "name": "Salesforce EventStream",
+      "type": "ACTIVEGATE"
+    },
+    {
+      "id": "dynatrace.jmx.Hadoop.HDFS",
+      "name": "Apache Hadoop HDFS",
+      "type": "JMX"
+    },
+    {
+      "id": "dynatrace.jmx.Hadoop.yarn",
+      "name": "Apache Hadoop YARN",
+      "type": "JMX"
+    },
+    {
+      "id": "dynatrace.jmx.activemq",
+      "name": "ActiveMQ JMX",
+      "type": "JMX"
+    },
+    {
+      "id": "dynatrace.jmx.appserver.jetty",
+      "name": "Jetty JMX",
+      "type": "JMX"
+    },
+    {
+      "id": "dynatrace.jmx.cassandra",
+      "name": "Cassandra JMX",
+      "type": "JMX"
+    },
+    {
+      "id": "dynatrace.jmx.hornetq",
+      "name": "HornetQ JMX",
+      "type": "JMX"
+    },
+    {
+      "id": "dynatrace.jmx.jboss.connectionpool",
+      "name": "JBoss Connection Pools",
+      "type": "JMX"
+    },
+    {
+      "id": "dynatrace.jmx.kafka",
+      "name": "Kafka JMX",
+      "type": "JMX"
+    },
+    {
+      "id": "dynatrace.jmx.liberty.appserver",
+      "name": "WebSphere Liberty Appserver",
+      "type": "JMX"
+    },
+    {
+      "id": "dynatrace.jmx.liberty.connectionpool",
+      "name": "WebSphere Liberty Connection Pools",
+      "type": "JMX"
+    },
+    {
+      "id": "dynatrace.jmx.netflix.servo",
+      "name": "Netflix OSS JMX",
+      "type": "JMX"
+    },
+    {
+      "id": "dynatrace.jmx.solr",
+      "name": "Solr JMX",
+      "type": "JMX"
+    },
+    {
+      "id": "dynatrace.jmx.spark",
+      "name": "Apache Spark",
+      "type": "JMX"
+    },
+    {
+      "id": "dynatrace.jmx.tomcat.connectionpool",
+      "name": "Tomcat Connection Pools",
+      "type": "JMX"
+    },
+    {
+      "id": "dynatrace.jmx.weblogic.connectionpool",
+      "name": "WebLogic Connection Pools",
+      "type": "JMX"
+    },
+    {
+      "id": "dynatrace.jmx.wso2-api-manager",
+      "name": "WSO2 API Manager",
+      "type": "JMX"
+    },
+    {
+      "id": "dynatrace.python.coredns",
+      "name": "CoreDNS",
+      "type": "ONEAGENT"
+    },
+    {
+      "id": "dynatrace.python.couchbase",
+      "name": "Couchbase",
+      "type": "ONEAGENT"
+    },
+    {
+      "id": "dynatrace.python.couchdb",
+      "name": "CouchDB",
+      "type": "ONEAGENT"
+    },
+    {
+      "id": "dynatrace.python.docker",
+      "name": "Docker technology monitoring",
+      "type": "ONEAGENT"
+    },
+    {
+      "id": "dynatrace.python.elasticsearch",
+      "name": "Elasticsearch",
+      "type": "ONEAGENT"
+    },
+    {
+      "id": "dynatrace.python.haproxy",
+      "name": "HAProxy",
+      "type": "ONEAGENT"
+    },
+    {
+      "id": "dynatrace.python.memcached",
+      "name": "Memcached",
+      "type": "ONEAGENT"
+    },
+    {
+      "id": "dynatrace.python.mongodb",
+      "name": "MongoDB",
+      "type": "ONEAGENT"
+    },
+    {
+      "id": "dynatrace.python.mssql",
+      "name": "MS SQL",
+      "type": "ONEAGENT"
+    },
+    {
+      "id": "dynatrace.python.mysql",
+      "name": "MySQL",
+      "type": "ONEAGENT"
+    },
+    {
+      "id": "dynatrace.python.ntp",
+      "name": "NTP",
+      "type": "ONEAGENT"
+    },
+    {
+      "id": "dynatrace.python.phpfpm",
+      "name": "PHP-FPM",
+      "type": "ONEAGENT"
+    },
+    {
+      "id": "dynatrace.python.postgresql",
+      "name": "PostgreSQL",
+      "type": "ONEAGENT"
+    },
+    {
+      "id": "dynatrace.python.rabbitmq",
+      "name": "RabbitMQ",
+      "type": "ONEAGENT"
+    },
+    {
+      "id": "dynatrace.python.redis",
+      "name": "Redis",
+      "type": "ONEAGENT"
+    },
+    {
+      "id": "dynatrace.remote.python.elasticsearch",
+      "name": "Elasticsearch Cloud",
+      "type": "ACTIVEGATE"
+    }
+  ],
+  "totalResults": 35
+}

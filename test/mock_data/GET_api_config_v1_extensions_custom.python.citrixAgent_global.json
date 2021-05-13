@@ -1,0 +1,17 @@
+{
+  "extensionId": "custom.python.citrixAgent",
+  "enabled": true,
+  "infraOnlyEnabled": false,
+  "properties": {
+    "openkit_verify_certificates": "",
+    "openkit_use_oneagent_endpoints": "false",
+    "openkit_application_id": "",
+    "monitoring_mode": "Basic",
+    "openkit_beacon_url": "",
+    "openkit_proxy_username": "",
+    "log_level": "INFO",
+    "citrixagent_run": "Enabled",
+    "openkit_proxy_address": "",
+    "openkit_proxy_password": null
+  }
+}

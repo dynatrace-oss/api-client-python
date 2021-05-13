@@ -65,7 +65,7 @@ class HttpClient:
         self.mc_b925d32c = mc_b925d32c
         self.mc_sso_csrf_cookie = mc_sso_csrf_cookie
 
-    def make_request(self, path: str, params: Optional[Dict] = None, headers: Optional[Dict] = None, method="GET", data=None) -> requests.Response:
+    def make_request(self, path: str, params: Optional[Dict] = None, headers: Optional[Dict] = None, method="GET", data=None, files=None) -> requests.Response:
         url = f"{self.base_url}{path}"
 
         body = None
@@ -74,7 +74,9 @@ class HttpClient:
             params = None
 
         if headers is None:
-            headers = {"content-type": "application/json"}
+            headers = {}
+        if files is None:
+            headers.update({"content-type": "application/json"})
         headers.update(self.auth_header)
 
         cookies = None
@@ -86,7 +88,7 @@ class HttpClient:
         s.mount("https://", HTTPAdapter(max_retries=self.retries))
 
         self.log.debug(f"Making {method} request to '{url}' with params {params} and body: {body}")
-        r = s.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies, data=data, cookies=cookies)
+        r = s.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies, data=data, cookies=cookies, files=files)
         self.log.debug(f"Received response '{r}'")
 
         while r.status_code == 429 and self.too_many_requests_strategy == TOO_MANY_REQUESTS_WAIT:
@@ -96,6 +98,6 @@ class HttpClient:
             r = requests.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies)
 
         if r.status_code >= 400:
-            raise Exception(f"Error making request to {url}: {r}. Response: {r.text}, Parameters: {params}, Body: {body}, Headers: {r.headers}")
+            raise Exception(f"Error making request to {url}: {r}. Response: {r.text}")
 
         return r
