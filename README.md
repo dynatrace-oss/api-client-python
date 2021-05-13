@@ -1,6 +1,6 @@
 # dt-api
 
-dtapi is a Python library to access the [Dynatrace Rest API]
+dtapi is a Python client to the [Dynatrace Rest API]. It focuses on simplicity of usage and nice type hints, perfect to explore the API and create quick scripts
 
 [Dynatrace Rest API]: https://www.dynatrace.com/support/help/dynatrace-api
 
