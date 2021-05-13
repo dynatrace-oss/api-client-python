@@ -1,0 +1,78 @@
+{
+  "id": "custom.python.citrixAgent",
+  "name": "Citrix Virtual Apps & Virtual Desktops",
+  "version": "2.034",
+  "type": "ONEAGENT",
+  "metricGroup": "tech.Citrix",
+  "metadata": {
+    "configurationVersions": [
+      0
+    ],
+    "clusterVersion": "1.217.103.20210511-092057"
+  },
+  "properties": [
+    {
+      "key": "openkit_verify_certificates",
+      "type": "BOOLEAN",
+      "defaultValue": ""
+    },
+    {
+      "key": "openkit_use_oneagent_endpoints",
+      "type": "BOOLEAN",
+      "defaultValue": "false"
+    },
+    {
+      "key": "openkit_application_id",
+      "type": "STRING",
+      "defaultValue": ""
+    },
+    {
+      "key": "monitoring_mode",
+      "type": "DROPDOWN",
+      "defaultValue": "Basic",
+      "dropdownValues": [
+        "Basic",
+        "Default",
+        "Advanced"
+      ]
+    },
+    {
+      "key": "openkit_beacon_url",
+      "type": "STRING",
+      "defaultValue": ""
+    },
+    {
+      "key": "openkit_proxy_username",
+      "type": "STRING",
+      "defaultValue": ""
+    },
+    {
+      "key": "log_level",
+      "type": "DROPDOWN",
+      "defaultValue": "INFO",
+      "dropdownValues": [
+        "INFO",
+        "DEBUG"
+      ]
+    },
+    {
+      "key": "citrixagent_run",
+      "type": "DROPDOWN",
+      "defaultValue": "Enabled",
+      "dropdownValues": [
+        "Enabled",
+        "Disabled"
+      ]
+    },
+    {
+      "key": "openkit_proxy_address",
+      "type": "STRING",
+      "defaultValue": ""
+    },
+    {
+      "key": "openkit_proxy_password",
+      "type": "PASSWORD",
+      "defaultValue": ""
+    }
+  ]
+}

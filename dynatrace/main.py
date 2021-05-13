@@ -3,7 +3,7 @@ from typing import Dict, Optional
 
 from dynatrace.configuration_v1.alerting_profiles import AlertingProfileService
 from dynatrace.configuration_v1.dashboard import DashboardService
-from dynatrace.configuration_v1.extension import ExtensionService
+from dynatrace.configuration_v1.extensions import ExtensionService
 from dynatrace.configuration_v1.maintenance_windows import MaintenanceWindowService
 from dynatrace.configuration_v1.metric_events import MetricEventService
 from dynatrace.configuration_v1.notifications import NotificationService

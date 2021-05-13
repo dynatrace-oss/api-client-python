@@ -1,4 +1,7 @@
-from typing import List, Dict, Any, Optional
+from datetime import datetime
+from enum import Enum
+from pathlib import Path
+from typing import List, Dict, Any, Optional, Union
 
 from requests import Response
 
@@ -10,6 +13,8 @@ from dynatrace.pagination import PaginatedList
 
 
 class ExtensionService:
+
+    # TODO - Early adopter as of May 12th 2021. Check back for updates
     def __init__(self, http_client: HttpClient):
         self.__http_client = http_client
         pass
@@ -26,7 +31,21 @@ class ExtensionService:
 
     def get(self, extension_id: str):
         response = self.__http_client.make_request(f"/api/config/v1/extensions/{extension_id}").json()
-        return Extension(self.__http_client, None, response)
+        return Extension(raw_element=response)
+
+    def post(self, zip_file_path: str) -> EntityShortRepresentation:
+
+        file = Path(zip_file_path)
+        with open(file, "rb") as f:
+            response = self.__http_client.make_request("/api/config/v1/extensions", method="POST", files={"file": f})
+
+        return EntityShortRepresentation(raw_element=response.json())
+
+    def validate(self, zip_file_path: str) -> Response:
+
+        file = Path(zip_file_path)
+        with open(file, "rb") as f:
+            return self.__http_client.make_request("/api/config/v1/extensions/validator", method="POST", files={"file": f})
 
     def list_instances(self, extension_id: str, page_size: int = 200) -> PaginatedList["ExtensionShortRepresentation"]:
         params = {"pageSize": page_size}
@@ -40,10 +59,45 @@ class ExtensionService:
 
     def get_instance(self, extension_id: str, configuration_id: str):
         response = self.__http_client.make_request(f"/api/config/v1/extensions/{extension_id}/instances/{configuration_id}").json()
-        return ExtensionConfigurationDto(self.__http_client, None, response)
+        return ExtensionConfigurationDto(http_client=self.__http_client, raw_element=response)
 
     def post_instance(self, extension_configuration: "ExtensionConfigurationDto"):
         return extension_configuration.post()
+
+    def validate_instance(self, extension_configuration: "ExtensionConfigurationDto") -> Response:
+        return extension_configuration.validate()
+
+    def get_instance_configuration(self, extension_id: str, configuration_id: str) -> "ExtensionConfigurationDto":
+        response = self.__http_client.make_request(f"/api/config/v1/extensions/{extension_id}/instances/{configuration_id}").json()
+        return ExtensionConfigurationDto(http_client=self.__http_client, raw_element=response)
+
+    # TODO - Can't implement put_instance because of APM-300262, fixed in 1.219
+
+    def delete_instance_configuration(self, extension_id: str, configuration_id: str) -> Response:
+        return self.__http_client.make_request(f"/api/config/v1/extensions/{extension_id}/instances/{configuration_id}", method="DELETE")
+
+    def get_global_configuration(self, extension_id: str) -> "GlobalExtensionConfiguration":
+        response = self.__http_client.make_request(f"/api/config/v1/extensions/{extension_id}/global").json()
+        return GlobalExtensionConfiguration(raw_element=response)
+
+    def get_binary(self, extension_id: str) -> bytes:
+        return self.__http_client.make_request(f"/api/config/v1/extensions/{extension_id}/binary").content
+
+    def list_states(self, extension_id: str) -> PaginatedList["ExtensionState"]:
+        return PaginatedList(
+            ExtensionState,
+            self.__http_client,
+            f"/api/config/v1/extensions/{extension_id}/states",
+            list_item="states",
+        )
+
+    def list_activegate_extension_modules(self) -> PaginatedList[EntityShortRepresentation]:
+        return PaginatedList(
+            EntityShortRepresentation,
+            self.__http_client,
+            f"/api/config/v1/extensions/activeGateExtensionModules",
+            list_item="values",
+        )
 
     def create_instance(
         self,
@@ -52,7 +106,7 @@ class ExtensionService:
         enabled: Optional[bool] = True,
         use_global: Optional[bool] = True,
         host_id: Optional[str] = None,
-        active_gate: Optional[EntityShortRepresentation] = None,
+        activegate: Optional[EntityShortRepresentation] = None,
         endpoint_id: Optional[str] = None,
         endpoint_name: Optional[str] = None,
     ) -> "ExtensionConfigurationDto":
@@ -63,12 +117,12 @@ class ExtensionService:
             "useGlobal": use_global,
             "properties": properties,
             "hostId": host_id,
-            "activeGate": active_gate._raw_element if active_gate else {},
+            "activeGate": activegate._raw_element if activegate else {},
             "endpointId": endpoint_id,
             "endpointName": endpoint_name,
         }
 
-        return ExtensionConfigurationDto(self.__http_client, None, raw_element)
+        return ExtensionConfigurationDto(http_client=self.__http_client, raw_element=raw_element)
 
 
 class ExtensionProperty(DynatraceObject):
@@ -82,6 +136,9 @@ class ExtensionProperty(DynatraceObject):
 class ExtensionConfigurationDto(DynatraceObject):
     def post(self):
         return self._http_client.make_request(f"/api/config/v1/extensions/{self.extension_id}/instances", params=self._raw_element, method="POST")
+
+    def validate(self):
+        return self._http_client.make_request(f"/api/config/v1/extensions/{self.extension_id}/instances/validator", params=self._raw_element, method="POST")
 
     def _create_from_raw_data(self, raw_element):
         self.extension_id: str = raw_element.get("extensionId")
@@ -107,18 +164,27 @@ class Extension(DynatraceObject):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
         self.name: str = raw_element.get("name")
-        self.type: str = raw_element.get("type")
+        self.type: str = ExtensionType(raw_element.get("type"))
         self.version: str = raw_element.get("version")
         self.metric_group: str = raw_element.get("metricGroup")
         self.metadata: ConfigurationMetadata = ConfigurationMetadata(self._http_client, None, raw_element.get("metadata"))
         self.properties: List[ExtensionProperty] = [ExtensionProperty(self._http_client, None, prop) for prop in raw_element.get("properties")]
 
 
+class ExtensionType(Enum):
+    ACTIVEGATE = "ACTIVEGATE"
+    CODEMODULE = "CODEMODULE"
+    JMX = "JMX"
+    ONEAGENT = "ONEAGENT"
+    PMI = "PMI"
+    UNKNOWN = "UNKNOWN"
+
+
 class ExtensionDto(DynatraceObject):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
         self.name: str = raw_element.get("name")
-        self.type: str = raw_element.get("type")
+        self.type: ExtensionType = ExtensionType(raw_element.get("type"))
 
     def get_full_extension(self) -> Extension:
         """
@@ -141,3 +207,39 @@ class ExtensionDto(DynatraceObject):
         Deletes the ZIP file of this extension
         """
         return self._http_client.make_request(f"/api/config/v1/extensions/{self.id}", method="DELETE")
+
+
+class GlobalExtensionConfiguration(DynatraceObject):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        self.enabled: bool = raw_element.get("enabled")
+        self.extension_id: Optional[str] = raw_element.get("extensionId")
+        self.infraOnlyEnabled: Optional[bool] = raw_element.get("infraOnlyEnabled")
+        self.properties: Optional[Dict[str, Any]] = raw_element.get("properties")
+
+
+class ExtensionStateEnum(Enum):
+    ERROR_AUTH = "ERROR_AUTH"
+    ERROR_COMMUNICATION_FAILURE = "ERROR_COMMUNICATION_FAILURE"
+    ERROR_CONFIG = "ERROR_CONFIG"
+    ERROR_TIMEOUT = "ERROR_TIMEOUT"
+    ERROR_UNKNOWN = "ERROR_UNKNOWN"
+    INCOMPATIBLE = "INCOMPATIBLE"
+    LIMIT_REACHED = "LIMIT_REACHED"
+    NOTHING_TO_REPORT = "NOTHING_TO_REPORT"
+    OK = "OK"
+    STATE_TYPE_UNKNOWN = "STATE_TYPE_UNKNOWN"
+    UNINITIALIZED = "UNINITIALIZED"
+    UNSUPPORTED = "UNSUPPORTED"
+    WAITING_FOR_STATE = "WAITING_FOR_STATE"
+
+
+class ExtensionState(DynatraceObject):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        self.extension_id: Optional[str] = raw_element.get("extensionId")
+        self.version: Optional[str] = raw_element.get("version")
+        self.endpoint_id: Optional[str] = raw_element.get("endpointId")
+        self.state: Optional[ExtensionStateEnum] = ExtensionStateEnum(raw_element.get("state"))
+        self.state_description: Optional[str] = raw_element.get("stateDescription")
+        self.host_id: Optional[str] = raw_element.get("hostId")
+        self.process_id: Optional[str] = raw_element.get("processId")
+        self.timestamp: Optional[datetime] = datetime.utcfromtimestamp(raw_element.get("timestamp") / 1000)

@@ -1,0 +1,29 @@
+{
+  "extensionId": "5649014104314746667",
+  "enabled": true,
+  "useGlobal": null,
+  "properties": {
+    "salesforce_password": null,
+    "capture_listview": "true",
+    "max_session_age_minutes": "1440",
+    "proxy_address": "http://192.168.15.101:3128",
+    "proxy_username": "",
+    "capture_uri": "true",
+    "log_level": "INFO",
+    "salesforce_username": "david.lopes@dynapoc.unicredit0001",
+    "proxy_password": null,
+    "capture_report": "true",
+    "capture_lightning_uri": "true",
+    "salesforce_security_token": null,
+    "openkit_application_id": "87eee414-9338-446b-988b-bbdbf495c4f4",
+    "openkit_beacon_url": "https://localhost:9999/mbeacon/eaa50379",
+    "capture_api": "true",
+    "capture_user_details": "true"
+  },
+  "activeGate": {
+    "id": "-7885258652650793909",
+    "name": "arch-david"
+  },
+  "endpointId": "5649014104314746667",
+  "endpointName": "curious-hawk"
+}

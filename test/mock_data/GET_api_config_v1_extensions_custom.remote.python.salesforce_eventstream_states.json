@@ -1,0 +1,15 @@
+{
+  "states": [
+    {
+      "extensionId": "custom.remote.python.salesforce_eventstream",
+      "version": "",
+      "endpointId": "5649014104314746667",
+      "state": "ERROR_CONFIG",
+      "stateDescription": "Extension doesn't exist on given host",
+      "timestamp": 1620943873929,
+      "hostId": null,
+      "processId": null
+    }
+  ],
+  "totalResults": 1
+}
