@@ -12,6 +12,7 @@ from dynatrace.configuration_v1.plugins import PluginService
 from dynatrace.environment_v1.cluster_time import ClusterTimeService
 from dynatrace.environment_v1.custom_device import CustomDeviceService
 from dynatrace.environment_v1.event import EventService
+from dynatrace.environment_v1.synthetic_monitors import SyntheticMonitorsService
 from dynatrace.environment_v1.synthetic_third_party import ThirdPartySyntheticTestsService
 from dynatrace.environment_v2.activegates import ActiveGateService
 from dynatrace.environment_v2.activegates_autoupdate_configuration import ActiveGateAutoUpdateConfigurationService
@@ -68,6 +69,7 @@ class Dynatrace:
         self.metrics: MetricService = MetricService(self.__http_client)
         self.notifications: NotificationService = NotificationService(self.__http_client)
         self.plugins: PluginService = PluginService(self.__http_client)
+        self.synthetic_monitors: SyntheticMonitorsService = SyntheticMonitorsService(self.__http_client)
         self.tenant_tokens = TenantTokenService(self.__http_client)
         self.third_part_synthetic_tests: ThirdPartySyntheticTestsService = ThirdPartySyntheticTestsService(self.__http_client)
         self.tokens: TokenService = TokenService(self.__http_client)
