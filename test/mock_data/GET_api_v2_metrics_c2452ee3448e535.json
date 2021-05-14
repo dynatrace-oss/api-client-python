@@ -1,0 +1,606 @@
+{
+  "totalCount": 2374,
+  "nextPageKey": "__-rq96t3q0DBAABAgMBACpidWlsdGluOmFwcHMud2ViLmxvYWRFdmVudEVuZC5sb2FkLmJyb3dzZXIAAAAAAAAAZAABAAEqAAAAAAAAAAAQAAAAAGP__6ur3q3erQ",
+  "metrics": [
+    {
+      "metricId": "builtin:apps.other.apdex.osAndGeo",
+      "displayName": "Apdex (by OS, geolocation) [mobile, custom]",
+      "description": "",
+      "unit": "NotApplicable"
+    },
+    {
+      "metricId": "builtin:apps.other.apdex.osAndVersion",
+      "displayName": "Apdex (by OS, app version) [mobile, custom]",
+      "description": "",
+      "unit": "NotApplicable"
+    },
+    {
+      "metricId": "builtin:apps.other.crashAffectedUsers.os",
+      "displayName": "User count - estimated users affected by crashes (by OS) [mobile, custom]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.other.crashAffectedUsersRate.os",
+      "displayName": "User rate - estimated users affected by crashes (by OS) [mobile, custom]",
+      "description": "",
+      "unit": "Percent"
+    },
+    {
+      "metricId": "builtin:apps.other.crashCount.osAndGeo",
+      "displayName": "Crash count (by OS, geolocation) [mobile, custom]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.other.crashCount.osAndVersion",
+      "displayName": "Crash count (by OS, app version) [mobile, custom]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.other.crashFreeUsersRate.os",
+      "displayName": "User rate - estimated crash free users (by OS) [mobile, custom]",
+      "description": "",
+      "unit": "Percent"
+    },
+    {
+      "metricId": "builtin:apps.other.keyUserActions.apdexValue.os",
+      "displayName": "Apdex (by key user action, OS) [mobile, custom]",
+      "description": "",
+      "unit": "NotApplicable"
+    },
+    {
+      "metricId": "builtin:apps.other.keyUserActions.count.osAndApdex",
+      "displayName": "Action count (by key user action, OS, Apdex category) [mobile, custom]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.other.keyUserActions.duration.os",
+      "displayName": "Action duration (by key user action, OS) [mobile, custom]",
+      "description": "",
+      "unit": "MicroSecond"
+    },
+    {
+      "metricId": "builtin:apps.other.keyUserActions.reportedErrorCount.os",
+      "displayName": "Reported error count (by key user action, OS) [mobile, custom]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.other.keyUserActions.requestCount.os",
+      "displayName": "Request count (by key user action, OS) [mobile, custom]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.other.keyUserActions.requestDuration.os",
+      "displayName": "Request duration (by key user action, OS) [mobile, custom]",
+      "description": "",
+      "unit": "MicroSecond"
+    },
+    {
+      "metricId": "builtin:apps.other.keyUserActions.requestErrorCount.os",
+      "displayName": "Request error count (by key user action, OS) [mobile, custom]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.other.keyUserActions.requestErrorRate.os",
+      "displayName": "Request error rate (by key user action, OS) [mobile, custom]",
+      "description": "",
+      "unit": "Percent"
+    },
+    {
+      "metricId": "builtin:apps.other.newUsers.os",
+      "displayName": "New user count (by OS) [mobile, custom]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.other.requestCount.osAndProvider",
+      "displayName": "Request count (by OS, provider) [mobile, custom]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.other.requestCount.osAndVersion",
+      "displayName": "Request count (by OS, app version) [mobile, custom]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.other.requestErrorCount.osAndProvider",
+      "displayName": "Request error count (by OS, provider) [mobile, custom]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.other.requestErrorCount.osAndVersion",
+      "displayName": "Request error count (by OS, app version) [mobile, custom]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.other.requestErrorRate.osAndProvider",
+      "displayName": "Request error rate (by OS, provider) [mobile, custom]",
+      "description": "",
+      "unit": "Percent"
+    },
+    {
+      "metricId": "builtin:apps.other.requestErrorRate.osAndVersion",
+      "displayName": "Request error rate (by OS, app version) [mobile, custom]",
+      "description": "",
+      "unit": "Percent"
+    },
+    {
+      "metricId": "builtin:apps.other.requestTimes.osAndProvider",
+      "displayName": "Request duration (by OS, provider) [mobile, custom]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.other.requestTimes.osAndVersion",
+      "displayName": "Request duration (by OS, app version) [mobile, custom]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.other.sessionCount.agentVersionAndOs",
+      "displayName": "Session count (by agent version, OS) [mobile, custom]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.other.sessionCount.osAndCrashReportingLevel",
+      "displayName": "Session count (by OS, crash reporting level) [mobile, custom]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.other.sessionCount.osAndDataCollectionLevel",
+      "displayName": "Session count (by OS, data collection level) [mobile, custom]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.other.sessionCount.osAndGeo",
+      "displayName": "Session count - estimated (by OS, geolocation) [mobile, custom]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.other.uaCount.geoAndApdex",
+      "displayName": "Action count (by geolocation, Apdex category) [mobile, custom]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.other.uaCount.osAndApdex",
+      "displayName": "Action count (by OS, Apdex category) [mobile, custom]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.other.uaCount.osAndVersion",
+      "displayName": "Action count (by OS, app version) [mobile, custom]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.other.uaDuration.osAndVersion",
+      "displayName": "Action duration (by OS, app version) [mobile, custom]",
+      "description": "",
+      "unit": "MicroSecond"
+    },
+    {
+      "metricId": "builtin:apps.other.userCount.osAndGeo",
+      "displayName": "User count - estimated (by OS, geolocation) [mobile, custom]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.web.action.affectedUas",
+      "displayName": "User action rate - affected by JavaScript errors (by key user action, user type) [web]",
+      "description": "",
+      "unit": "Percent"
+    },
+    {
+      "metricId": "builtin:apps.web.action.apdex",
+      "displayName": "Apdex (by key user action) [web]",
+      "description": "",
+      "unit": "NotApplicable"
+    },
+    {
+      "metricId": "builtin:apps.web.action.count.custom.browser",
+      "displayName": "Action count - custom action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.web.action.count.load.browser",
+      "displayName": "Action count - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.web.action.count.xhr.browser",
+      "displayName": "Action count - XHR action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.web.action.cumulativeLayoutShift.load.userType",
+      "displayName": "Cumulative Layout Shift - load action (by key user action, user type) [web]",
+      "description": "",
+      "unit": "NotApplicable"
+    },
+    {
+      "metricId": "builtin:apps.web.action.cumulativeLayoutShift.load.userType.geo",
+      "displayName": "Cumulative Layout Shift - load action (by key user action, geolocation, user type) [web]",
+      "description": "",
+      "unit": "NotApplicable"
+    },
+    {
+      "metricId": "builtin:apps.web.action.cumulativeLayoutShift.load.browser",
+      "displayName": "Cumulative Layout Shift - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "NotApplicable"
+    },
+    {
+      "metricId": "builtin:apps.web.action.domInteractive.load.browser",
+      "displayName": "DOM interactive - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.duration.custom.browser",
+      "displayName": "Action duration - custom action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.duration.load.browser",
+      "displayName": "Action duration - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.duration.xhr.browser",
+      "displayName": "Action duration - XHR action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.firstByte.load.browser",
+      "displayName": "Time to first byte - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.firstByte.xhr.browser",
+      "displayName": "Time to first byte - XHR action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.firstInputDelay.load.userType",
+      "displayName": "First Input Delay - load action (by key user action, user type) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.firstInputDelay.load.userType.geo",
+      "displayName": "First Input Delay - load action (by key user action, geolocation, user type) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.firstInputDelay.load.browser",
+      "displayName": "First Input Delay - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.largestContentfulPaint.load.userType",
+      "displayName": "Largest Contentful Paint - load action (by key user action, user type) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.largestContentfulPaint.load.userType.geo",
+      "displayName": "Largest Contentful Paint - load action (by key user action, geolocation, user type) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.largestContentfulPaint.load.browser",
+      "displayName": "Largest Contentful Paint - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.loadEventEnd.load.browser",
+      "displayName": "Load event end - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.loadEventStart.load.browser",
+      "displayName": "Load event start - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.networkContribution.load",
+      "displayName": "Network contribution - load action (by key user action, user type) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.networkContribution.xhr",
+      "displayName": "Network contribution - XHR action (by key user action, user type) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.responseEnd.load.browser",
+      "displayName": "Response end - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.responseEnd.xhr.browser",
+      "displayName": "Response end - XHR action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.serverContribution.load",
+      "displayName": "Server contribution - load action (by key user action, user type) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.serverContribution.xhr",
+      "displayName": "Server contribution - XHR action (by key user action, user type) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.speedIndex.load.browser",
+      "displayName": "Speed index - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.visuallyComplete.load.browser",
+      "displayName": "Visually complete - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.visuallyComplete.xhr.browser",
+      "displayName": "Visually complete - XHR action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.action.countOfErrors",
+      "displayName": "Error count (by key user action, user type, error type, error origin) [web]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.web.action.countOfUserActionsWithErrors",
+      "displayName": "User action count with errors (by key user action, user type) [web]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.web.action.jsErrorsDuringUa",
+      "displayName": "JavaScript errors count during user actions (by key user action, user type) [web]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.web.action.jsErrorsWithoutUa",
+      "displayName": "JavaScript error count without user actions (by key user action, user type) [web]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.web.action.percentageOfUserActionsAffectedByErrors",
+      "displayName": "User action rate - affected by errors (by user type) [web]",
+      "description": "",
+      "unit": "Percent"
+    },
+    {
+      "metricId": "builtin:apps.web.actionCount.custom.browser",
+      "displayName": "Action count - custom action (by browser) [web]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.web.actionCount.load.browser",
+      "displayName": "Action count - load action (by browser) [web]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.web.actionCount.xhr.browser",
+      "displayName": "Action count - XHR action (by browser) [web]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.web.actionCount.category",
+      "displayName": "Action count (by Apdex category) [web]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.web.actionCount.summary",
+      "displayName": "Action count (by action type, geolocation) [web]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.web.actionDuration.custom.browser",
+      "displayName": "Action duration - custom action (by browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.actionDuration.load.browser",
+      "displayName": "Action duration - load action (by browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.actionDuration.xhr.browser",
+      "displayName": "Action duration - XHR action (by browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.actionsPerSession",
+      "displayName": "Actions per session average (by users, user type) [web]",
+      "description": "",
+      "unit": "NotApplicable"
+    },
+    {
+      "metricId": "builtin:apps.web.activeSessions",
+      "displayName": "Session count - estimated active sessions (by users, user type) [web]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.web.activeUsersEst",
+      "displayName": "User count - estimated active users (by users, user type) [web]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.web.affectedUas",
+      "displayName": "User action rate - affected by JavaScript errors (by user type) [web]",
+      "description": "",
+      "unit": "Percent"
+    },
+    {
+      "metricId": "builtin:apps.web.apdex.userType",
+      "displayName": "Apdex (by user type) [web]",
+      "description": "",
+      "unit": "NotApplicable"
+    },
+    {
+      "metricId": "builtin:apps.web.apdex.userType.geoBig",
+      "displayName": "Apdex (by geolocation, user type) [web]",
+      "description": "",
+      "unit": "NotApplicable"
+    },
+    {
+      "metricId": "builtin:apps.web.bouncedSessionRatio",
+      "displayName": "Bounce rate (by users, user type) [web]",
+      "description": "",
+      "unit": "Percent"
+    },
+    {
+      "metricId": "builtin:apps.web.conversionRate",
+      "displayName": "Conversion rate - sessions (by users, user type) [web]",
+      "description": "",
+      "unit": "Percent"
+    },
+    {
+      "metricId": "builtin:apps.web.converted",
+      "displayName": "Session count - converted sessions (by users, user type) [web]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.web.cumulativeLayoutShift.load.userType",
+      "displayName": "Cumulative Layout Shift - load action (by user type) [web]",
+      "description": "",
+      "unit": "NotApplicable"
+    },
+    {
+      "metricId": "builtin:apps.web.cumulativeLayoutShift.load.userType.geo",
+      "displayName": "Cumulative Layout Shift - load action (by geolocation, user type) [web]",
+      "description": "",
+      "unit": "NotApplicable"
+    },
+    {
+      "metricId": "builtin:apps.web.cumulativeLayoutShift.load.browser",
+      "displayName": "Cumulative Layout Shift - load action (by browser) [web]",
+      "description": "",
+      "unit": "NotApplicable"
+    },
+    {
+      "metricId": "builtin:apps.web.domInteractive.load.browser",
+      "displayName": "DOM interactive - load action (by browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.endedSessions",
+      "displayName": "Session count - estimated ended sessions (by users, user type) [web]",
+      "description": "",
+      "unit": "Count"
+    },
+    {
+      "metricId": "builtin:apps.web.firstByte.load.browser",
+      "displayName": "Time to first byte - load action (by browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.firstByte.xhr.browser",
+      "displayName": "Time to first byte - XHR action (by browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.firstInputDelay.load.userType",
+      "displayName": "First Input Delay - load action (by user type) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.firstInputDelay.load.userType.geo",
+      "displayName": "First Input Delay - load action (by geolocation, user type) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.firstInputDelay.load.browser",
+      "displayName": "First Input Delay - load action (by browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.largestContentfulPaint.load.userType",
+      "displayName": "Largest Contentful Paint - load action (by user type) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.largestContentfulPaint.load.userType.geo",
+      "displayName": "Largest Contentful Paint - load action (by geolocation, user type) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.largestContentfulPaint.load.browser",
+      "displayName": "Largest Contentful Paint - load action (by browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    },
+    {
+      "metricId": "builtin:apps.web.loadEventEnd.load.browser",
+      "displayName": "Load event end - load action (by browser) [web]",
+      "description": "",
+      "unit": "MilliSecond"
+    }
+  ]
+}

@@ -54,7 +54,11 @@ class Schedule(DynatraceObject):
         if self.recurrence_type == "MONTHLY":
             representation = {
                 "recurrenceType": self.recurrence_type,
-                "recurrence": {"dayOfMonth": self.recurrence.day_of_month, "startTime": self.recurrence.start_time, "durationMinutes": self.recurrence.duration},
+                "recurrence": {
+                    "dayOfMonth": self.recurrence.day_of_month,
+                    "startTime": self.recurrence.start_time,
+                    "durationMinutes": self.recurrence.duration,
+                },
                 "start": self.start_time,
                 "end": self.end_time,
                 "zoneId": self.zone_id,
@@ -95,7 +99,11 @@ class MaintenanceWindowService:
         """
         Create a schedule to be used when creating a maintenance window.
         """
-        recurrence = Recurrence.create(recurrence_start_time, recurrence_duration, recurrence_day_of_week, recurrence_day_of_month) if recurrence_type != "ONCE" else None
+        recurrence = (
+            Recurrence.create(recurrence_start_time, recurrence_duration, recurrence_day_of_week, recurrence_day_of_month)
+            if recurrence_type != "ONCE"
+            else None
+        )
         return Schedule.create(recurrence_type, start, end, zone_id, recurrence)
 
     def create(

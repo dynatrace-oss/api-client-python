@@ -69,8 +69,12 @@ class MetricEvent(DynatraceObject):
         self.enabled: bool = raw_element.get("enabled")
         self.disabled_reason: str = raw_element.get("disabledReason")
         self.warning_reason: str = raw_element.get("warningReason")
-        self.alerting_scope: List[MetricEventAlertingScope] = [MetricEventAlertingScope(raw_element=raw_scope) for raw_scope in raw_element.get("alertingScope", [])]
-        self.metric_dimensions: List[MetricEventDimension] = [MetricEventDimension(raw_element=raw_dimension) for raw_dimension in raw_element.get("metricDimensions", [])]
+        self.alerting_scope: List[MetricEventAlertingScope] = [
+            MetricEventAlertingScope(raw_element=raw_scope) for raw_scope in raw_element.get("alertingScope", [])
+        ]
+        self.metric_dimensions: List[MetricEventDimension] = [
+            MetricEventDimension(raw_element=raw_dimension) for raw_dimension in raw_element.get("metricDimensions", [])
+        ]
         self.monitoring_strategy: MetricEventMonitoringStrategy = MetricEventMonitoringStrategy(raw_element=raw_element.get("monitoringStrategy"))
         self.primary_dimension_key: str = raw_element.get("primaryDimensionKey")
 

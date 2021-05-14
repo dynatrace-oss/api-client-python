@@ -1,9 +1,11 @@
 from datetime import datetime
-from typing import List
+from enum import Enum
+from typing import List, Optional, Union, Dict, Any
 
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
+from dynatrace.utils import timestamp_to_string, int64_to_datetime
 
 
 class MetricService:
@@ -37,12 +39,22 @@ class MetricService:
         }
         return PaginatedList(MetricSeriesCollection, self.__http_client, "/api/v2/metrics/query", params, list_item="result")
 
-    def list(self, metric_selector: str = None, text: str = None, fields: str = None, page_size=100) -> PaginatedList["MetricDescriptor"]:
+    def list(
+        self,
+        metric_selector: Optional[str] = None,
+        text: Optional[str] = None,
+        fields: Optional[str] = None,
+        written_since: Optional[Union[str, datetime]] = None,
+        metadata_selector: Optional[str] = None,
+        page_size=100,
+    ) -> PaginatedList["MetricDescriptor"]:
         params = {
             "pageSize": page_size,
             "metricSelector": metric_selector,
             "text": text,
             "fields": fields,
+            "writtenSince": timestamp_to_string(written_since),
+            "metadataSelector": metadata_selector,
         }
         return PaginatedList(MetricDescriptor, self.__http_client, "/api/v2/metrics", params, list_item="metrics")
 
@@ -52,7 +64,9 @@ class MetricService:
 
     def ingest(self, lines: List[str]):
         lines = "\n".join(lines)
-        return self.__http_client.make_request(f"/api/v2/metrics/ingest", method="POST", data=lines, headers={"Content-Type": "text/plain; charset=utf-8"}).json()
+        return self.__http_client.make_request(
+            f"/api/v2/metrics/ingest", method="POST", data=lines, headers={"Content-Type": "text/plain; charset=utf-8"}
+        ).json()
 
 
 class MetricSeries(DynatraceObject):
@@ -82,18 +96,127 @@ class MetricDimensionDefinition(DynatraceObject):
         self.type: str = raw_element.get("type")
 
 
+class AggregationType(Enum):
+    AUTO = "auto"
+    AVG = "avg"
+    COUNT = "count"
+    MAX = "max"
+    MEDIAN = "median"
+    MIN = "min"
+    PERCENTILE = "percentile"
+    SUM = "sum"
+    VALUE = "value"
+
+
+class Transformation(Enum):
+    DEFAULT = "default"
+    FILTER = "filter"
+    FOLD = "fold"
+    LAST = "last"
+    LIMIT = "limit"
+    MERGE = "merge"
+    NAMES = "names"
+    PARENTS = "parents"
+    RATE = "rate"
+    SORT = "sort"
+    SPLITBY = "splitBy"
+    TIMESHIFT = "timeshift"
+
+
+class Unit(Enum):
+    BIT = "Bit"
+    BITPERHOUR = "BitPerHour"
+    BITPERMINUTE = "BitPerMinute"
+    BITPERSECOND = "BitPerSecond"
+    BYTE = "Byte"
+    BYTEPERHOUR = "BytePerHour"
+    BYTEPERMINUTE = "BytePerMinute"
+    BYTEPERSECOND = "BytePerSecond"
+    CORES = "Cores"
+    COUNT = "Count"
+    DAY = "Day"
+    DECIBELMILLIWATT = "DecibelMilliWatt"
+    GIBIBYTE = "GibiByte"
+    GIGA = "Giga"
+    GIGABYTE = "GigaByte"
+    HOUR = "Hour"
+    KIBIBYTE = "KibiByte"
+    KIBIBYTEPERHOUR = "KibiBytePerHour"
+    KIBIBYTEPERMINUTE = "KibiBytePerMinute"
+    KIBIBYTEPERSECOND = "KibiBytePerSecond"
+    KILO = "Kilo"
+    KILOBYTE = "KiloByte"
+    KILOBYTEPERHOUR = "KiloBytePerHour"
+    KILOBYTEPERMINUTE = "KiloBytePerMinute"
+    KILOBYTEPERSECOND = "KiloBytePerSecond"
+    MSU = "MSU"
+    MEBIBYTE = "MebiByte"
+    MEBIBYTEPERHOUR = "MebiBytePerHour"
+    MEBIBYTEPERMINUTE = "MebiBytePerMinute"
+    MEBIBYTEPERSECOND = "MebiBytePerSecond"
+    MEGA = "Mega"
+    MEGABYTE = "MegaByte"
+    MEGABYTEPERHOUR = "MegaBytePerHour"
+    MEGABYTEPERMINUTE = "MegaBytePerMinute"
+    MEGABYTEPERSECOND = "MegaBytePerSecond"
+    MICROSECOND = "MicroSecond"
+    MILLICORES = "MilliCores"
+    MILLISECOND = "MilliSecond"
+    MILLISECONDPERMINUTE = "MilliSecondPerMinute"
+    MINUTE = "Minute"
+    MONTH = "Month"
+    NANOSECOND = "NanoSecond"
+    NANOSECONDPERMINUTE = "NanoSecondPerMinute"
+    NOTAPPLICABLE = "NotApplicable"
+    PERHOUR = "PerHour"
+    PERMINUTE = "PerMinute"
+    PERSECOND = "PerSecond"
+    PERCENT = "Percent"
+    PIXEL = "Pixel"
+    PROMILLE = "Promille"
+    RATIO = "Ratio"
+    SECOND = "Second"
+    STATE = "State"
+    UNSPECIFIED = "Unspecified"
+    WEEK = "Week"
+    YEAR = "Year"
+
+
 class MetricDescriptor(DynatraceObject):
     def _create_from_raw_data(self, raw_element):
-        # TODO - Several more properties needed, document optional ones
-        self.default_aggregation: MetricDefaultAggregation = (
-            MetricDefaultAggregation(self._http_client, self._headers, raw_element.get("defaultAggregation")) if raw_element.get("defaultAggregation") else None
-        )
-        self.dimension_definitions: List[MetricDimensionDefinition] = [MetricDimensionDefinition(self._http_client, self._headers, element) for element in raw_element.get("dimensionDefinitions", [])]
 
+        # required
         self.metric_id: str = raw_element.get("metricId")
-        self.description: str = raw_element.get("description")
-        self.entity_type: str = raw_element.get("entityType")
-        self.aggregation_types: str = raw_element.get("aggregationTypes")
-        self.transformations: List[str] = raw_element.get("transformations")
-        self.unit: str = raw_element.get("unit")
-        self.display_name: str = raw_element.get("displayName")
+
+        # optional
+        self.aggregation_types: Optional[List[AggregationType]] = [AggregationType(element) for element in raw_element.get("aggregationTypes", [])]
+        self.created: Optional[datetime] = int64_to_datetime(raw_element.get("created"))
+        self.ddu_billable: Optional[bool] = raw_element.get("dduBillable")
+        self.default_aggregation: Optional[MetricDefaultAggregation] = MetricDefaultAggregation(raw_element=raw_element.get("defaultAggregation"))
+        self.description: Optional[str] = raw_element.get("description")
+        self.dimension_definitions: Optional[List[MetricDimensionDefinition]] = [
+            MetricDimensionDefinition(raw_element=element) for element in raw_element.get("dimensionDefinitions", [])
+        ]
+        self.display_name: Optional[str] = raw_element.get("displayName")
+        self.entity_type: Optional[List[str]] = raw_element.get("entityType", [])
+        self.impact_relevant: Optional[bool] = raw_element.get("impactRelevant")
+        self.last_written: Optional[datetime] = int64_to_datetime(raw_element.get("lastWritten"))
+        self.maximum_value: Optional[float] = raw_element.get("maximumValue")
+        self.metric_value_type: Optional["MetricValueType"] = raw_element.get("metricValueType")
+        self.minimum_value: Optional[float] = raw_element.get("minimumValue")
+        self.root_cause_relevant: Optional[bool] = raw_element.get("rootCauseRelevant")
+        self.tags: Optional[List[str]] = raw_element.get("tags")
+        self.transformations: Optional[List[Transformation]] = [Transformation(element) for element in raw_element.get("transformations", [])]
+        self.unit: Optional[Unit] = Unit(raw_element.get("unit"))
+        self.warnings: Optional[List[str]] = raw_element.get("warnings")
+
+
+class ValueType(Enum):
+    ERROR = "error"
+    SCORE = "score"
+    UNKNOWN = "unknown"
+
+
+class MetricValueType(DynatraceObject):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        self.type = ValueType(raw_element.get("type"))

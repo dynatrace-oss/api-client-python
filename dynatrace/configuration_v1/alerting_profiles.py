@@ -56,7 +56,9 @@ class AlertingProfile(DynatraceObject):
         self.display_name: str = raw_element.get("displayName")
         self.rules: List[AlertingProfileSeverityRule] = [AlertingProfileSeverityRule(raw_element=rule) for rule in raw_element.get("rules", {})]
         self.management_zone_id: str = raw_element.get("mzId")
-        self.event_type_filters: List[AlertingEventTypeFilter] = [AlertingEventTypeFilter(raw_element=event_filter) for event_filter in raw_element.get("eventTypeFilters", {})]
+        self.event_type_filters: List[AlertingEventTypeFilter] = [
+            AlertingEventTypeFilter(raw_element=event_filter) for event_filter in raw_element.get("eventTypeFilters", {})
+        ]
 
 
 class AlertingProfileStub(EntityShortRepresentation):

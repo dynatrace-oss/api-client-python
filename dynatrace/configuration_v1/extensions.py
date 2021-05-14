@@ -200,7 +200,13 @@ class ExtensionDto(DynatraceObject):
         :param page_size: Page size, default 200
         """
         params = {"pageSize": page_size}
-        return PaginatedList(ExtensionShortRepresentation, self._http_client, f"/api/config/v1/extensions/{self.id}/instances", list_item="configurationsList", target_params=params)
+        return PaginatedList(
+            ExtensionShortRepresentation,
+            self._http_client,
+            f"/api/config/v1/extensions/{self.id}/instances",
+            list_item="configurationsList",
+            target_params=params,
+        )
 
     def delete(self) -> Response:
         """
