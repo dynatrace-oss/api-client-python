@@ -1,8 +1,6 @@
 from typing import List, Optional, Dict, Any
 from requests import Response
 
-from dynatrace.environment_v2.schemas import ConfigurationMetadata
-from dynatrace.environment_v2.monitored_entities import EntityShortRepresentation
 from dynatrace.pagination import PaginatedList
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.http_client import HttpClient
@@ -14,10 +12,17 @@ class MonitorCollectionElement(DynatraceObject):
         self.monitor_type: str = raw_element.get("type")
         self.enabled: bool = raw_element.get("enabled")
 
+class LocalOutagePolicy(DynatraceObject):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        self.affected_locations: int = raw_element.get("affectedLocations")
+        self.consecutive_runs: int = raw_element.get("consecutiveRuns")
+
 class OutageHandlingPolicy(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.global_outage: bool = raw_element.get("globalOutage")
         self.local_outage: bool = raw_element.get("localOutage")
+        self.local_outage_policy: LocalOutagePolicy = LocalOutagePolicy(raw_element=raw_element.get("localOutagePolicy"))
+        self.retry_on_error: bool = raw_element.get("retryOnError")
 
 class LoadingTimeThreshold(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
@@ -26,14 +31,15 @@ class LoadingTimeThreshold(DynatraceObject):
         self.request_index: int = raw_element.get("requestIndex")
         self.event_index: int = raw_element.get("eventIndex")
 
-class LoadingTimeThresholdsPolicy(DynatraceObject):
+class LoadingTimeThresholdsPolicyDto(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.enabled: bool = raw_element.get("enabled")
         self.thresholds: List[LoadingTimeThreshold] = [LoadingTimeThreshold(raw_element=threshold) for threshold in raw_element.get("thresholds")]
 
 class AnomalyDetection(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        pass
+        self.outage_handling: OutageHandlingPolicy = OutageHandlingPolicy(raw_element=raw_element.get("outageHandling"))
+        self.loading_time_thresholds: LoadingTimeThresholdsPolicyDto = LoadingTimeThresholdsPolicyDto(raw_element=raw_element.get("loadingTimeThresholds"))
 
 class TagWithSourceInfo(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
@@ -47,12 +53,12 @@ class ManagementZone(DynatraceObject):
         self.id: str = raw_element.get("id")
         self.name: str = raw_element.get("name")
 
-class SyntheticMonitor(DynatraceObject):
+class SyntheticMonitor(DynatraceObject):     
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.entity_id: str = raw_element.get("entityId")
         self.name: str = raw_element.get("name")
         self.frequency_min: int = raw_element.get("frequencyMin")
-        self.enabled: bool = raw_element.hget("enabled")
+        self.enabled: bool = raw_element.get("enabled")
         self.type: str = raw_element.get("type")
         self.created_from: str = raw_element.get("createdFrom")
         self.script: dict = raw_element.get("script")
@@ -80,4 +86,4 @@ class SyntheticMonitorsService:
         """
         Get full monitor configuration for the specified monitor id (aka entity id).
         """
-        return SyntheticMonitor(raw_element=self.__http_client.make_request(f"/api/v1/synthetic/monitors/{monitor_id}").json())
+        return SyntheticMonitor(self.__http_client, raw_element=self.__http_client.make_request(f"/api/v1/synthetic/monitors/{monitor_id}").json())
