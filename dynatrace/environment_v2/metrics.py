@@ -2,6 +2,8 @@ from datetime import datetime
 from enum import Enum
 from typing import List, Optional, Union, Dict, Any
 
+from requests import Response
+
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
@@ -61,6 +63,9 @@ class MetricService:
     def get(self, metric_id: str) -> "MetricDescriptor":
         response = self.__http_client.make_request(f"/api/v2/metrics/{metric_id}").json()
         return MetricDescriptor(http_client=self.__http_client, raw_element=response)
+
+    def delete(self, metric_id) -> Response:
+        return self.__http_client.make_request(f"/api/v2/metrics/{metric_id}", method="DELETE")
 
     def ingest(self, lines: List[str]):
         lines = "\n".join(lines)
