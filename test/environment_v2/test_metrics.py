@@ -1,6 +1,6 @@
 from dynatrace import Dynatrace
 
-from dynatrace.environment_v2.metrics import MetricDescriptor, Unit, AggregationType, Transformation
+from dynatrace.environment_v2.metrics import MetricDescriptor, Unit, AggregationType, Transformation, ValueType
 from dynatrace.pagination import PaginatedList
 from dynatrace.utils import int64_to_datetime
 
@@ -67,3 +67,20 @@ def test_list_params(dt: Dynatrace):
         assert metric.tags == []
         assert metric.dimension_definitions[0].key == "dt.entity.host"
         break
+
+
+def test_get(dt: Dynatrace):
+
+    metric = dt.metrics.get("builtin:host.cpu.idle")
+
+    assert metric.metric_id == "builtin:host.cpu.idle"
+    assert metric.display_name == "CPU idle"
+    assert metric.description == ""
+    assert metric.unit == Unit.PERCENT
+    assert not metric.ddu_billable
+    assert metric.last_written == int64_to_datetime(1621030565348)
+    assert metric.entity_type == ["HOST"]
+    assert metric.default_aggregation.type == "avg"
+    assert metric.tags == []
+    assert metric.dimension_definitions[0].key == "dt.entity.host"
+    assert metric.metric_value_type.type == ValueType.SCORE

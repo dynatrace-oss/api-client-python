@@ -60,7 +60,7 @@ class MetricService:
 
     def get(self, metric_id: str) -> "MetricDescriptor":
         response = self.__http_client.make_request(f"/api/v2/metrics/{metric_id}").json()
-        return MetricDescriptor(self.__http_client, None, response)
+        return MetricDescriptor(http_client=self.__http_client, raw_element=response)
 
     def ingest(self, lines: List[str]):
         lines = "\n".join(lines)
@@ -202,7 +202,9 @@ class MetricDescriptor(DynatraceObject):
         self.impact_relevant: Optional[bool] = raw_element.get("impactRelevant")
         self.last_written: Optional[datetime] = int64_to_datetime(raw_element.get("lastWritten"))
         self.maximum_value: Optional[float] = raw_element.get("maximumValue")
-        self.metric_value_type: Optional["MetricValueType"] = raw_element.get("metricValueType")
+        self.metric_value_type: Optional["MetricValueType"] = (
+            MetricValueType(raw_element=raw_element.get("metricValueType")) if raw_element.get("metricValueType") else None
+        )
         self.minimum_value: Optional[float] = raw_element.get("minimumValue")
         self.root_cause_relevant: Optional[bool] = raw_element.get("rootCauseRelevant")
         self.tags: Optional[List[str]] = raw_element.get("tags")
