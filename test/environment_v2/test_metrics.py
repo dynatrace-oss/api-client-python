@@ -106,3 +106,11 @@ def test_query(dt: Dynatrace):
     assert len(first_data.timestamps) == len(first_data.values)
     assert first_data.timestamps[0] == int64_to_datetime(1621020060000)
     assert first_data.values[0] == 89.91581217447917
+
+
+def test_ingest(dt: Dynatrace):
+    ingest = dt.metrics.ingest(["a 1", "b 2"])
+    assert isinstance(ingest, dict)
+    assert ingest["linesOk"] == 1
+    assert ingest["linesInvalid"] == 0
+    assert ingest["error"] is None
