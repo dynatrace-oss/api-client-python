@@ -39,6 +39,7 @@ class AnomalyDetectionPG(DynatraceObject):
         self.availability_monitoring: AvailabilityMonitoringPG = AvailabilityMonitoringPG(self._http_client, raw_element=raw_element.get("availabilityMonitoring"))
 
 class AnomalyDetectionPGService:
+    # TODO - Early adopter endpoint, be sure to check back in for updates
     def __init__(self, http_client: HttpClient):
         self.__http_client = http_client
 
