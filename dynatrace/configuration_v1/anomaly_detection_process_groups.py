@@ -2,9 +2,6 @@ from typing import List, Optional, Dict, Any, Union
 from enum import Enum
 from requests import Response
 
-from dynatrace.environment_v2.schemas import ConfigurationMetadata
-from dynatrace.environment_v2.monitored_entities import EntityShortRepresentation
-from dynatrace.pagination import PaginatedList
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.http_client import HttpClient
 
@@ -21,15 +18,25 @@ class AvailabilityMonitoringPG(DynatraceObject):
 class AnomalyDetectionPG(DynatraceObject):
     @staticmethod
     def create(method: Union[str, Method], minimum_threshold: Optional[int] = None):
-        method = Method(method)
-        if method == Method.MINIMUM_THRESHOLD:
-            raw_element = {"availabilityMonitoring": {"method": method.value, "minimumThreshold": minimum_threshold}}
+	    method = Method(method)
+	    if method == Method.MINIMUM_THRESHOLD:
+		    raw_element = {"availabilityMonitoring": {"method": method.value, "minimumThreshold": minimum_threshold}}
+	    else:
+		    raw_element = {"availabilityMonitoring": {"method": method.value}}
+	    return AnomalyDetectionPG(raw_element=raw_element)
+
+    def json(self):
+        """
+        Get the json representation of this process group anomaly detection config.
+        """
+        if self.availability_monitoring.method == Method.MINIMUM_THRESHOLD:
+            json = {"availabilityMonitoring": {"method": self.availability_monitoring.method.value, "minimumThreshold": self.availability_monitoring.minimum_threshold}}
         else:
-            raw_element = {"availabilityMonitoring": {"method": method.value}}
-        return AnomalyDetectionPG(raw_element=raw_element)
+            json = {"availabilityMonitoring": {"method": self.availability_monitoring.method.value}}
+        return json
 
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.availability_monitoring: AvailabilityMonitoringPG = AvailabilityMonitoringPG(raw_element=raw_element.get("availabilityMonitoring"))
+        self.availability_monitoring: AvailabilityMonitoringPG = AvailabilityMonitoringPG(self._http_client, raw_element=raw_element.get("availabilityMonitoring"))
 
 class AnomalyDetectionPGService:
     def __init__(self, http_client: HttpClient):
@@ -39,18 +46,13 @@ class AnomalyDetectionPGService:
         """
         Get the anomaly detection configuration for the specified process group.
         """
-        return AnomalyDetectionPG(raw_element=self.__http_client.make_request(f"/api/config/v1/anomalyDetection/processGroups/{id}").json())
+        return AnomalyDetectionPG(self.__http_client, raw_element=self.__http_client.make_request(f"/api/config/v1/anomalyDetection/processGroups/{id}").json())
 
-    def update_configuration(self, id: str, anomaly_detection_config: AnomalyDetectionPG):
+    def put_configuration(self, id: str, anomaly_detection_config: AnomalyDetectionPG):
         """
         Update the anomaly detection configuration for the specified process group.
         """
-        if anomaly_detection_config.availability_monitoring.method == Method.MINIMUM_THRESHOLD:
-            print(anomaly_detection_config)
-            body = {"availabilityMonitoring": {"method": anomaly_detection_config.availability_monitoring.method.value, "minimumThreshold": anomaly_detection_config.availability_monitoring.minimum_threshold}}
-        else:
-            body = {"availabilityMonitoring": {"method": anomaly_detection_config.availability_monitoring.method.value}}
-        return self.__http_client.make_request(f"/api/config/v1/anomalyDetection/processGroups/{id}", method="PUT", params=body)
+        return self.__http_client.make_request(f"/api/config/v1/anomalyDetection/processGroups/{id}", method="PUT", params=anomaly_detection_config.json())
 
     def delete_configuration(self, id:str):
         """
