@@ -2,6 +2,7 @@ import logging
 from typing import Dict, Optional
 
 from dynatrace.configuration_v1.alerting_profiles import AlertingProfileService
+from dynatrace.configuration_v1.anomaly_detection_process_groups import AnomalyDetectionPGService
 from dynatrace.configuration_v1.dashboard import DashboardService
 from dynatrace.configuration_v1.extensions import ExtensionService
 from dynatrace.configuration_v1.maintenance_windows import MaintenanceWindowService
@@ -54,6 +55,7 @@ class Dynatrace:
         self.activegates_autoupdate_jobs = ActiveGateAutoUpdateJobsService(self.__http_client)
         self.alerting_profiles: AlertingProfileService = AlertingProfileService(self.__http_client)
         self.anomaly_detection_metric_events = MetricEventService(self.__http_client)
+        self.anomaly_detection_process_groups = AnomalyDetectionPGService(self.__http_client)
         self.cluster_time: ClusterTimeService = ClusterTimeService(self.__http_client)
         self.custom_devices: CustomDeviceService = CustomDeviceService(self.__http_client)
         self.dashboards: DashboardService = DashboardService(self.__http_client)
