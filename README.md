@@ -85,7 +85,7 @@ Access tokens - Tenant tokens            |  :heavy_check_mark:  |  `dt.tenant_to
 ActiveGates                              |  :heavy_check_mark:  |  `dt.activegates`                           |
 ActiveGates - Auto-update configuration  |  :heavy_check_mark:  |  `dt.activegates_autoupdate_configuration`  |
 ActiveGates - Auto-update jobs           |  :heavy_check_mark:  |  `dt.activegates_autoupdate_jobs`           |
-Audit Logs                               |  :x:                 |                                             |
+Audit Logs                               |  :heavy_check_mark:  |  `dt.audit_logs`                            |
 Extensions 2.0                           |  :x:                 |                                             |
 Metrics                                  |  :warning:           |  `dt.metrics`                               |
 Monitored entities                       |  :warning:           |  `dt.entities`                              |
