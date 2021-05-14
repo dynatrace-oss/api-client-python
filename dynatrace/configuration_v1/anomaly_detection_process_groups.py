@@ -23,7 +23,7 @@ class AnomalyDetectionPG(DynatraceObject):
     def create(method: Union[str, Method], minimum_threshold: Optional[int] = None):
         method = Method(method)
         if method == Method.MINIMUM_THRESHOLD:
-            raw_element = {"availabilityMonitoring": {"method": method.value, "minimum_threshold": minimum_threshold}}
+            raw_element = {"availabilityMonitoring": {"method": method.value, "minimumThreshold": minimum_threshold}}
         else:
             raw_element = {"availabilityMonitoring": {"method": method.value}}
         return AnomalyDetectionPG(raw_element=raw_element)
@@ -41,15 +41,15 @@ class AnomalyDetectionPGService:
         """
         return AnomalyDetectionPG(raw_element=self.__http_client.make_request(f"/api/config/v1/anomalyDetection/processGroups/{id}").json())
 
-    def update_configuration(self, id: str, method: Union[Method, str], minimum_threshold: Optional[int] = None):
+    def update_configuration(self, id: str, anomaly_detection_config: AnomalyDetectionPG):
         """
         Update the anomaly detection configuration for the specified process group.
         """
-        method = Method(method)
-        if method == Method.MINIMUM_THRESHOLD:
-            body = {"availabilityMonitoring": {"method": method.value, "minimumThreshold": minimum_threshold}}
+        if anomaly_detection_config.availability_monitoring.method == Method.MINIMUM_THRESHOLD:
+            print(anomaly_detection_config)
+            body = {"availabilityMonitoring": {"method": anomaly_detection_config.availability_monitoring.method.value, "minimumThreshold": anomaly_detection_config.availability_monitoring.minimum_threshold}}
         else:
-            body = {"availabilityMonitoring": {"method": method.value}}
+            body = {"availabilityMonitoring": {"method": anomaly_detection_config.availability_monitoring.method.value}}
         return self.__http_client.make_request(f"/api/config/v1/anomalyDetection/processGroups/{id}", method="PUT", params=body)
 
     def delete_configuration(self, id:str):
