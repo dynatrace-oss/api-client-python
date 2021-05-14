@@ -1,9 +1,33 @@
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any,  Union
+from enum import Enum
 from requests import Response
 
 from dynatrace.pagination import PaginatedList
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.http_client import HttpClient
+
+class MonitorType(Enum):
+    BROWSER = "BROWSER"
+    HTTP = "HTTP"
+
+class LoadingTimeThresholdType(Enum):
+    ACTION = "ACTION"
+    TOTAL = "TOTAL"
+
+class TagSource(Enum):
+    AUTO = "AUTO"
+    RULE_BASED = "RULE_BASED"
+    USER = "USER"
+
+class TagContext(Enum):
+    AWS = "AWS"
+    AWS_GENERIC = "AWS_GENERIC"
+    AZURE = "AZURE"
+    CLOUD_FOUNDRY = "CLOUD_FOUNDRY"
+    CONTEXTLESS = "CONTEXTLESS"
+    ENVIRONMENT = "ENVIRONMENT"
+    GOOGLE_CLOUD = "GOOGLE_CLOUD"
+    KUBERNETES = "KUBERNETES"
 
 class MonitorCollectionElement(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
@@ -26,7 +50,7 @@ class OutageHandlingPolicy(DynatraceObject):
 
 class LoadingTimeThreshold(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.type: str = raw_element.get("type")
+        self.type: LoadingTimeThresholdType = LoadingTimeThresholdType(raw_element.get("type"))
         self.value_ms: int = raw_element.get("valueMs")
         self.request_index: int = raw_element.get("requestIndex")
         self.event_index: int = raw_element.get("eventIndex")
@@ -43,8 +67,8 @@ class AnomalyDetection(DynatraceObject):
 
 class TagWithSourceInfo(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.source: str = raw_element.get("source")
-        self.context: str = raw_element.get("context")
+        self.source: TagSource = TagSource(raw_element.get("source"))
+        self.context: TagContext = TagContext(raw_element.get("context"))
         self.key: str = raw_element.get("key")
         self.value: str = raw_element.get("value")
 
@@ -59,7 +83,7 @@ class SyntheticMonitor(DynatraceObject):
         self.name: str = raw_element.get("name")
         self.frequency_min: int = raw_element.get("frequencyMin")
         self.enabled: bool = raw_element.get("enabled")
-        self.type: str = raw_element.get("type")
+        self.type: MonitorType = MonitorType(raw_element.get("type"))
         self.created_from: str = raw_element.get("createdFrom")
         self.script: dict = raw_element.get("script")
         self.locations: List[str] = raw_element.get("locations")
@@ -73,13 +97,14 @@ class SyntheticMonitorsService:
     def __init__(self, http_client: HttpClient):
         self.__http_client = http_client
 
-    def list(self, monitor_type: Optional[str] = None) -> PaginatedList[MonitorCollectionElement]:
+    def list(self, monitor_type: Optional[Union[MonitorType, str]] = None) -> PaginatedList[MonitorCollectionElement]:
         """
         Lists all synthetic monitors in the environment.
         """
         params = {}
         if monitor_type is not None:
-            params.update({"type": monitor_type})
+            monitor_type = MonitorType(monitor_type)
+            params.update({"type": monitor_type.value})
         return PaginatedList(MonitorCollectionElement, self.__http_client, f"/api/v1/synthetic/monitors",target_params=params, list_item="monitors")
 
     def get_full_monitor_configuration(self, monitor_id: str) -> SyntheticMonitor:
