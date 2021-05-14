@@ -15,6 +15,7 @@ from dynatrace.environment_v1.synthetic_third_party import ThirdPartySyntheticTe
 from dynatrace.environment_v2.activegates import ActiveGateService
 from dynatrace.environment_v2.activegates_autoupdate_configuration import ActiveGateAutoUpdateConfigurationService
 from dynatrace.environment_v2.activegates_autoupdate_jobs import ActiveGateAutoUpdateJobsService
+from dynatrace.environment_v2.audit_logs import AuditLogsService
 from dynatrace.environment_v2.monitored_entities import EntityService
 from dynatrace.environment_v2.metrics import MetricService
 from dynatrace.environment_v2.tokens_api import TokenService
@@ -54,6 +55,7 @@ class Dynatrace:
         self.activegates_autoupdate_jobs = ActiveGateAutoUpdateJobsService(self.__http_client)
         self.alerting_profiles: AlertingProfileService = AlertingProfileService(self.__http_client)
         self.anomaly_detection_metric_events = MetricEventService(self.__http_client)
+        self.audit_logs: AuditLogsService = AuditLogsService(self.__http_client)
         self.cluster_time: ClusterTimeService = ClusterTimeService(self.__http_client)
         self.custom_devices: CustomDeviceService = CustomDeviceService(self.__http_client)
         self.dashboards: DashboardService = DashboardService(self.__http_client)

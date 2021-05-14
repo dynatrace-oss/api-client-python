@@ -1,0 +1,61 @@
+{
+  "logId": "162100314800090003",
+  "eventType": "DELETE",
+  "category": "CONFIG",
+  "entityId": "builtin:alerting.profile (tenant): d89472d3-f9f4-420d-9398-768bb3351e85: test",
+  "environmentId": "eaa50379",
+  "user": "Dynatrace support user #649982176",
+  "userType": "USER_NAME",
+  "userOrigin": "webui (xxx.xxx.xxx.xxx)",
+  "timestamp": 1621003148800,
+  "success": true,
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/",
+      "value": null,
+      "oldValue": {
+        "name (Name)": "test",
+        "severityRules": [
+          {
+            "severityLevel (Problem severity level)": "PERFORMANCE",
+            "delayInMinutes (Problem send delay in minutes)": 30,
+            "tagFilterIncludeMode (Filter problems by tag)": "NONE",
+            "tagFilter (Tags)": []
+          },
+          {
+            "severityLevel (Problem severity level)": "RESOURCE_CONTENTION",
+            "delayInMinutes (Problem send delay in minutes)": 30,
+            "tagFilterIncludeMode (Filter problems by tag)": "NONE",
+            "tagFilter (Tags)": []
+          },
+          {
+            "severityLevel (Problem severity level)": "MONITORING_UNAVAILABLE",
+            "delayInMinutes (Problem send delay in minutes)": 0,
+            "tagFilterIncludeMode (Filter problems by tag)": "NONE",
+            "tagFilter (Tags)": []
+          },
+          {
+            "severityLevel (Problem severity level)": "CUSTOM_ALERT",
+            "delayInMinutes (Problem send delay in minutes)": 0,
+            "tagFilterIncludeMode (Filter problems by tag)": "NONE",
+            "tagFilter (Tags)": []
+          },
+          {
+            "severityLevel (Problem severity level)": "AVAILABILITY",
+            "delayInMinutes (Problem send delay in minutes)": 0,
+            "tagFilterIncludeMode (Filter problems by tag)": "NONE",
+            "tagFilter (Tags)": []
+          },
+          {
+            "severityLevel (Problem severity level)": "ERRORS",
+            "delayInMinutes (Problem send delay in minutes)": 0,
+            "tagFilterIncludeMode (Filter problems by tag)": "NONE",
+            "tagFilter (Tags)": []
+          }
+        ],
+        "eventFilters": []
+      }
+    }
+  ]
+}
