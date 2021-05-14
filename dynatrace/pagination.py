@@ -35,7 +35,7 @@ class PaginatedList(Generic[T]):
         return self.__total_count or len(self.__elements)
 
     def _get_next_page(self):
-        response = self.__http_client.make_request(self.__target_url, self.__target_params, self.__headers)
+        response = self.__http_client.make_request(self.__target_url, params=self.__target_params, headers=self.__headers)
         json_response = response.json()
         data = []
         if json_response.get("nextPageKey", None):

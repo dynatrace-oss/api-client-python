@@ -1,0 +1,5562 @@
+{
+  "totalCount": 2374,
+  "nextPageKey": "__-rq96t3q0DDQABAgMJBwQIBQYKCwwBACpidWlsdGluOmFwcHMud2ViLmxvYWRFdmVudEVuZC5sb2FkLmJyb3dzZXIAAAAAAAAAZAABAAEqAAAAAAAAAAAQAAAAAGP__6ur3q3erQ",
+  "metrics": [
+    {
+      "metricId": "builtin:apps.other.apdex.osAndGeo",
+      "displayName": "Apdex (by OS, geolocation) [mobile, custom]",
+      "description": "",
+      "unit": "NotApplicable",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620514220905,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.geolocation",
+          "name": "Geolocation",
+          "displayName": "Geolocation",
+          "index": 2,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.apdex.osAndVersion",
+      "displayName": "Apdex (by OS, app version) [mobile, custom]",
+      "description": "",
+      "unit": "NotApplicable",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620514220905,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "App Version",
+          "name": "App Version",
+          "displayName": "App Version",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.crashAffectedUsers.os",
+      "displayName": "User count - estimated users affected by crashes (by OS) [mobile, custom]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620514220905,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.crashAffectedUsersRate.os",
+      "displayName": "User rate - estimated users affected by crashes (by OS) [mobile, custom]",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620514220905,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.crashCount.osAndGeo",
+      "displayName": "Crash count (by OS, geolocation) [mobile, custom]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620514220905,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.geolocation",
+          "name": "Geolocation",
+          "displayName": "Geolocation",
+          "index": 2,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.crashCount.osAndVersion",
+      "displayName": "Crash count (by OS, app version) [mobile, custom]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "Version",
+          "name": "Version",
+          "displayName": "Version",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.crashFreeUsersRate.os",
+      "displayName": "User rate - estimated crash free users (by OS) [mobile, custom]",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620514220905,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.keyUserActions.apdexValue.os",
+      "displayName": "Apdex (by key user action, OS) [mobile, custom]",
+      "description": "",
+      "unit": "NotApplicable",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1619217309035,
+      "entityType": [
+        "DEVICE_APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application_method",
+          "name": "Application method",
+          "displayName": "Mobile app key user action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.keyUserActions.count.osAndApdex",
+      "displayName": "Action count (by key user action, OS, Apdex category) [mobile, custom]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1619217309035,
+      "entityType": [
+        "DEVICE_APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application_method",
+          "name": "Application method",
+          "displayName": "Mobile app key user action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "Apdex category",
+          "name": "Apdex category",
+          "displayName": "Apdex category",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.keyUserActions.duration.os",
+      "displayName": "Action duration (by key user action, OS) [mobile, custom]",
+      "description": "",
+      "unit": "MicroSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1619217309035,
+      "entityType": [
+        "DEVICE_APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application_method",
+          "name": "Application method",
+          "displayName": "Mobile app key user action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.keyUserActions.reportedErrorCount.os",
+      "displayName": "Reported error count (by key user action, OS) [mobile, custom]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1619217309035,
+      "entityType": [
+        "DEVICE_APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application_method",
+          "name": "Application method",
+          "displayName": "Mobile app key user action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.keyUserActions.requestCount.os",
+      "displayName": "Request count (by key user action, OS) [mobile, custom]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1619217309035,
+      "entityType": [
+        "DEVICE_APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application_method",
+          "name": "Application method",
+          "displayName": "Mobile app key user action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.keyUserActions.requestDuration.os",
+      "displayName": "Request duration (by key user action, OS) [mobile, custom]",
+      "description": "",
+      "unit": "MicroSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1619217309035,
+      "entityType": [
+        "DEVICE_APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application_method",
+          "name": "Application method",
+          "displayName": "Mobile app key user action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.keyUserActions.requestErrorCount.os",
+      "displayName": "Request error count (by key user action, OS) [mobile, custom]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1619217309035,
+      "entityType": [
+        "DEVICE_APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application_method",
+          "name": "Application method",
+          "displayName": "Mobile app key user action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.keyUserActions.requestErrorRate.os",
+      "displayName": "Request error rate (by key user action, OS) [mobile, custom]",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1619217309035,
+      "entityType": [
+        "DEVICE_APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application_method",
+          "name": "Application method",
+          "displayName": "Mobile app key user action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.newUsers.os",
+      "displayName": "New user count (by OS) [mobile, custom]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620514220905,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.requestCount.osAndProvider",
+      "displayName": "Request count (by OS, provider) [mobile, custom]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1619477418774,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "Provider Type",
+          "name": "Provider Type",
+          "displayName": "Provider Type",
+          "index": 2,
+          "type": "STRING"
+        },
+        {
+          "key": "Provider",
+          "name": "Provider",
+          "displayName": "Provider",
+          "index": 3,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.requestCount.osAndVersion",
+      "displayName": "Request count (by OS, app version) [mobile, custom]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620514220905,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "App Version",
+          "name": "App Version",
+          "displayName": "App Version",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.requestErrorCount.osAndProvider",
+      "displayName": "Request error count (by OS, provider) [mobile, custom]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1619477418774,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "Provider Type",
+          "name": "Provider Type",
+          "displayName": "Provider Type",
+          "index": 2,
+          "type": "STRING"
+        },
+        {
+          "key": "Provider",
+          "name": "Provider",
+          "displayName": "Provider",
+          "index": 3,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.requestErrorCount.osAndVersion",
+      "displayName": "Request error count (by OS, app version) [mobile, custom]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620514220905,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "App Version",
+          "name": "App Version",
+          "displayName": "App Version",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.requestErrorRate.osAndProvider",
+      "displayName": "Request error rate (by OS, provider) [mobile, custom]",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1619477418774,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "Provider Type",
+          "name": "Provider Type",
+          "displayName": "Provider Type",
+          "index": 2,
+          "type": "STRING"
+        },
+        {
+          "key": "Provider",
+          "name": "Provider",
+          "displayName": "Provider",
+          "index": 3,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.requestErrorRate.osAndVersion",
+      "displayName": "Request error rate (by OS, app version) [mobile, custom]",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620514220905,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "App Version",
+          "name": "App Version",
+          "displayName": "App Version",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.requestTimes.osAndProvider",
+      "displayName": "Request duration (by OS, provider) [mobile, custom]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1619477418774,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "Provider Type",
+          "name": "Provider Type",
+          "displayName": "Provider Type",
+          "index": 2,
+          "type": "STRING"
+        },
+        {
+          "key": "Provider",
+          "name": "Provider",
+          "displayName": "Provider",
+          "index": 3,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.requestTimes.osAndVersion",
+      "displayName": "Request duration (by OS, app version) [mobile, custom]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620514220905,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "App Version",
+          "name": "App Version",
+          "displayName": "App Version",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.sessionCount.agentVersionAndOs",
+      "displayName": "Session count (by agent version, OS) [mobile, custom]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620514220905,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "Agent Version",
+          "name": "Agent Version",
+          "displayName": "Agent Version",
+          "index": 1,
+          "type": "STRING"
+        },
+        {
+          "key": "Operating System",
+          "name": "Operating System",
+          "displayName": "Operating System",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.sessionCount.osAndCrashReportingLevel",
+      "displayName": "Session count (by OS, crash reporting level) [mobile, custom]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620514220905,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "Crash reporting level",
+          "name": "Crash reporting level",
+          "displayName": "Crash reporting level",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.sessionCount.osAndDataCollectionLevel",
+      "displayName": "Session count (by OS, data collection level) [mobile, custom]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620514220905,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "Data collection level",
+          "name": "Data collection level",
+          "displayName": "Data collection level",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.sessionCount.osAndGeo",
+      "displayName": "Session count - estimated (by OS, geolocation) [mobile, custom]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620514220905,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.geolocation",
+          "name": "Geolocation",
+          "displayName": "Geolocation",
+          "index": 2,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.uaCount.geoAndApdex",
+      "displayName": "Action count (by geolocation, Apdex category) [mobile, custom]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620514220905,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.geolocation",
+          "name": "Geolocation",
+          "displayName": "Geolocation",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "Apdex category",
+          "name": "Apdex category",
+          "displayName": "Apdex category",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.uaCount.osAndApdex",
+      "displayName": "Action count (by OS, Apdex category) [mobile, custom]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620514220905,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "Apdex category",
+          "name": "Apdex category",
+          "displayName": "Apdex category",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.uaCount.osAndVersion",
+      "displayName": "Action count (by OS, app version) [mobile, custom]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620514220905,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "App Version",
+          "name": "App Version",
+          "displayName": "App Version",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.uaDuration.osAndVersion",
+      "displayName": "Action duration (by OS, app version) [mobile, custom]",
+      "description": "",
+      "unit": "MicroSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620514220905,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "App Version",
+          "name": "App Version",
+          "displayName": "App Version",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.other.userCount.osAndGeo",
+      "displayName": "User count - estimated (by OS, geolocation) [mobile, custom]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620514220905,
+      "entityType": [
+        "CUSTOM_APPLICATION",
+        "MOBILE_APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.device_application",
+          "name": "Application",
+          "displayName": "Mobile or custom application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.os",
+          "name": "Operating system",
+          "displayName": "OS",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.geolocation",
+          "name": "Geolocation",
+          "displayName": "Geolocation",
+          "index": 2,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.affectedUas",
+      "displayName": "User action rate - affected by JavaScript errors (by key user action, user type) [web]",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 1,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.apdex",
+      "displayName": "Apdex (by key user action) [web]",
+      "description": "",
+      "unit": "NotApplicable",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 1,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.count.custom.browser",
+      "displayName": "Action count - custom action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.count.load.browser",
+      "displayName": "Action count - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.count.xhr.browser",
+      "displayName": "Action count - XHR action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.cumulativeLayoutShift.load.userType",
+      "displayName": "Cumulative Layout Shift - load action (by key user action, user type) [web]",
+      "description": "",
+      "unit": "NotApplicable",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 1,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.cumulativeLayoutShift.load.userType.geo",
+      "displayName": "Cumulative Layout Shift - load action (by key user action, geolocation, user type) [web]",
+      "description": "",
+      "unit": "NotApplicable",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.geolocation",
+          "name": "Geolocation",
+          "displayName": "Geolocation",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.cumulativeLayoutShift.load.browser",
+      "displayName": "Cumulative Layout Shift - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "NotApplicable",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.domInteractive.load.browser",
+      "displayName": "DOM interactive - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.duration.custom.browser",
+      "displayName": "Action duration - custom action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.duration.load.browser",
+      "displayName": "Action duration - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.duration.xhr.browser",
+      "displayName": "Action duration - XHR action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.firstByte.load.browser",
+      "displayName": "Time to first byte - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.firstByte.xhr.browser",
+      "displayName": "Time to first byte - XHR action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.firstInputDelay.load.userType",
+      "displayName": "First Input Delay - load action (by key user action, user type) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 1,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.firstInputDelay.load.userType.geo",
+      "displayName": "First Input Delay - load action (by key user action, geolocation, user type) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.geolocation",
+          "name": "Geolocation",
+          "displayName": "Geolocation",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.firstInputDelay.load.browser",
+      "displayName": "First Input Delay - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.largestContentfulPaint.load.userType",
+      "displayName": "Largest Contentful Paint - load action (by key user action, user type) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 1,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.largestContentfulPaint.load.userType.geo",
+      "displayName": "Largest Contentful Paint - load action (by key user action, geolocation, user type) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.geolocation",
+          "name": "Geolocation",
+          "displayName": "Geolocation",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.largestContentfulPaint.load.browser",
+      "displayName": "Largest Contentful Paint - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.loadEventEnd.load.browser",
+      "displayName": "Load event end - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.loadEventStart.load.browser",
+      "displayName": "Load event start - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.networkContribution.load",
+      "displayName": "Network contribution - load action (by key user action, user type) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 1,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.networkContribution.xhr",
+      "displayName": "Network contribution - XHR action (by key user action, user type) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 1,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.responseEnd.load.browser",
+      "displayName": "Response end - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.responseEnd.xhr.browser",
+      "displayName": "Response end - XHR action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.serverContribution.load",
+      "displayName": "Server contribution - load action (by key user action, user type) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 1,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.serverContribution.xhr",
+      "displayName": "Server contribution - XHR action (by key user action, user type) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 1,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.speedIndex.load.browser",
+      "displayName": "Speed index - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.visuallyComplete.load.browser",
+      "displayName": "Visually complete - load action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.visuallyComplete.xhr.browser",
+      "displayName": "Visually complete - XHR action (by key user action, browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.countOfErrors",
+      "displayName": "Error count (by key user action, user type, error type, error origin) [web]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 1,
+          "type": "STRING"
+        },
+        {
+          "key": "Error type",
+          "name": "Error type",
+          "displayName": "Error type",
+          "index": 2,
+          "type": "STRING"
+        },
+        {
+          "key": "Error origin",
+          "name": "Error origin",
+          "displayName": "Error origin",
+          "index": 3,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.countOfUserActionsWithErrors",
+      "displayName": "User action count with errors (by key user action, user type) [web]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 1,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.jsErrorsDuringUa",
+      "displayName": "JavaScript errors count during user actions (by key user action, user type) [web]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 1,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.jsErrorsWithoutUa",
+      "displayName": "JavaScript error count without user actions (by key user action, user type) [web]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 1,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.action.percentageOfUserActionsAffectedByErrors",
+      "displayName": "User action rate - affected by errors (by user type) [web]",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION_METHOD"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application_method",
+          "name": "Application method",
+          "displayName": "User Action",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 1,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.actionCount.custom.browser",
+      "displayName": "Action count - custom action (by browser) [web]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.actionCount.load.browser",
+      "displayName": "Action count - load action (by browser) [web]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1615817679399,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.actionCount.xhr.browser",
+      "displayName": "Action count - XHR action (by browser) [web]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1615817739399,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.actionCount.category",
+      "displayName": "Action count (by Apdex category) [web]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1615817739399,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "Apdex category",
+          "name": "Apdex category",
+          "displayName": "Apdex category",
+          "index": 1,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.actionCount.summary",
+      "displayName": "Action count (by action type, geolocation) [web]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1615817739399,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.geolocation",
+          "name": "Geolocation",
+          "displayName": "Geolocation",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 2,
+          "type": "STRING"
+        },
+        {
+          "key": "Action type",
+          "name": "Action type",
+          "displayName": "Action type",
+          "index": 3,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.actionDuration.custom.browser",
+      "displayName": "Action duration - custom action (by browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.actionDuration.load.browser",
+      "displayName": "Action duration - load action (by browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1615817679399,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.actionDuration.xhr.browser",
+      "displayName": "Action duration - XHR action (by browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1615817739399,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.actionsPerSession",
+      "displayName": "Actions per session average (by users, user type) [web]",
+      "description": "",
+      "unit": "NotApplicable",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1615819746684,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "Users",
+          "name": "Users",
+          "displayName": "Users",
+          "index": 1,
+          "type": "STRING"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.activeSessions",
+      "displayName": "Session count - estimated active sessions (by users, user type) [web]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1615817766684,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "Users",
+          "name": "Users",
+          "displayName": "Users",
+          "index": 1,
+          "type": "STRING"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.activeUsersEst",
+      "displayName": "User count - estimated active users (by users, user type) [web]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1615817766684,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "Users",
+          "name": "Users",
+          "displayName": "Users",
+          "index": 1,
+          "type": "STRING"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.affectedUas",
+      "displayName": "User action rate - affected by JavaScript errors (by user type) [web]",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1615817739399,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 1,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.apdex.userType",
+      "displayName": "Apdex (by user type) [web]",
+      "description": "",
+      "unit": "NotApplicable",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1615817739399,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 1,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.apdex.userType.geoBig",
+      "displayName": "Apdex (by geolocation, user type) [web]",
+      "description": "",
+      "unit": "NotApplicable",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1615817739399,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.geolocation",
+          "name": "Geolocation",
+          "displayName": "Geolocation",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.bouncedSessionRatio",
+      "displayName": "Bounce rate (by users, user type) [web]",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1615819746684,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "Users",
+          "name": "Users",
+          "displayName": "Users",
+          "index": 1,
+          "type": "STRING"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.conversionRate",
+      "displayName": "Conversion rate - sessions (by users, user type) [web]",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "Users",
+          "name": "Users",
+          "displayName": "Users",
+          "index": 1,
+          "type": "STRING"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.converted",
+      "displayName": "Session count - converted sessions (by users, user type) [web]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "Users",
+          "name": "Users",
+          "displayName": "Users",
+          "index": 1,
+          "type": "STRING"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.cumulativeLayoutShift.load.userType",
+      "displayName": "Cumulative Layout Shift - load action (by user type) [web]",
+      "description": "",
+      "unit": "NotApplicable",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 1,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.cumulativeLayoutShift.load.userType.geo",
+      "displayName": "Cumulative Layout Shift - load action (by geolocation, user type) [web]",
+      "description": "",
+      "unit": "NotApplicable",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.geolocation",
+          "name": "Geolocation",
+          "displayName": "Geolocation",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.cumulativeLayoutShift.load.browser",
+      "displayName": "Cumulative Layout Shift - load action (by browser) [web]",
+      "description": "",
+      "unit": "NotApplicable",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.domInteractive.load.browser",
+      "displayName": "DOM interactive - load action (by browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1615817679399,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.endedSessions",
+      "displayName": "Session count - estimated ended sessions (by users, user type) [web]",
+      "description": "",
+      "unit": "Count",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1615819746684,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "value"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "rate",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "value"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "Users",
+          "name": "Users",
+          "displayName": "Users",
+          "index": 1,
+          "type": "STRING"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.firstByte.load.browser",
+      "displayName": "Time to first byte - load action (by browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1615817679399,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.firstByte.xhr.browser",
+      "displayName": "Time to first byte - XHR action (by browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1615817739399,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.firstInputDelay.load.userType",
+      "displayName": "First Input Delay - load action (by user type) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1615817379399,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 1,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.firstInputDelay.load.userType.geo",
+      "displayName": "First Input Delay - load action (by geolocation, user type) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.geolocation",
+          "name": "Geolocation",
+          "displayName": "Geolocation",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.firstInputDelay.load.browser",
+      "displayName": "First Input Delay - load action (by browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1615817379399,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.largestContentfulPaint.load.userType",
+      "displayName": "Largest Contentful Paint - load action (by user type) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 1,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.largestContentfulPaint.load.userType.geo",
+      "displayName": "Largest Contentful Paint - load action (by geolocation, user type) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.geolocation",
+          "name": "Geolocation",
+          "displayName": "Geolocation",
+          "index": 1,
+          "type": "ENTITY"
+        },
+        {
+          "key": "User type",
+          "name": "User type",
+          "displayName": "User type",
+          "index": 2,
+          "type": "STRING"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.largestContentfulPaint.load.browser",
+      "displayName": "Largest Contentful Paint - load action (by browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": null,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:apps.web.loadEventEnd.load.browser",
+      "displayName": "Load event end - load action (by browser) [web]",
+      "description": "",
+      "unit": "MilliSecond",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1615817679399,
+      "entityType": [
+        "APPLICATION"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "count",
+        "max",
+        "median",
+        "min",
+        "percentile",
+        "sum"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.application",
+          "name": "Application",
+          "displayName": "Web application",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.browser",
+          "name": "Browser",
+          "displayName": "Browser",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    }
+  ]
+}

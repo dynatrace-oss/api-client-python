@@ -1,7 +1,16 @@
 from datetime import datetime
 
 from dynatrace import Dynatrace
-from dynatrace.configuration_v1.extensions import ExtensionDto, ExtensionType, Extension, ExtensionProperty, GlobalExtensionConfiguration, ExtensionState, ExtensionStateEnum, ExtensionConfigurationDto
+from dynatrace.configuration_v1.extensions import (
+    ExtensionDto,
+    ExtensionType,
+    Extension,
+    ExtensionProperty,
+    GlobalExtensionConfiguration,
+    ExtensionState,
+    ExtensionStateEnum,
+    ExtensionConfigurationDto,
+)
 from dynatrace.environment_v2.monitored_entities import EntityShortRepresentation
 from dynatrace.pagination import PaginatedList
 

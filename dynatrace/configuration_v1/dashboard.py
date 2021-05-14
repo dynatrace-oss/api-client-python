@@ -41,7 +41,9 @@ class DashboardFilter(DynatraceObject):
         if raw_element is None:
             raw_element = {}
         self.timeframe: str = raw_element.get("timeframe")
-        self.management_zone: Optional[EntityShortRepresentation] = EntityShortRepresentation(self._http_client, None, raw_element.get("managementZone")) if raw_element.get("managementZone") else None
+        self.management_zone: Optional[EntityShortRepresentation] = (
+            EntityShortRepresentation(self._http_client, None, raw_element.get("managementZone")) if raw_element.get("managementZone") else None
+        )
 
 
 class DashboardMetadata(DynatraceObject):

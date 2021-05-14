@@ -1,3 +1,4 @@
+import hashlib
 import os
 from pathlib import Path
 from typing import Optional, Dict
@@ -22,7 +23,14 @@ class MockResponse:
 
 
 def local_make_request(self, path: str, params: Optional[Dict] = None, headers: Optional[Dict] = None, method="GET", data=None) -> MockResponse:
-    file_name = f'{method}{path.replace("/", "_")}.json'
+
+    if params is None:
+        params = ""
+    if params:
+        encoded = f"{params}".encode()
+        params = f"_{hashlib.sha256(encoded).hexdigest()}"[:16]
+
+    file_name = f'{method}{path.replace("/", "_")}{params}.json'
     file_path = Path(current_file_path, "mock_data", file_name)
     with open(file_path) as f:
         json_data = json.load(f)

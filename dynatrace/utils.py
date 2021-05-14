@@ -28,3 +28,9 @@ def iso8601_to_datetime(timestamp: Optional[str]) -> Optional[datetime]:
     if isinstance(timestamp, str):
         return datetime.strptime(timestamp, ISO_8601)
     return timestamp
+
+
+def int64_to_datetime(timestamp: Optional[int]) -> Optional[datetime]:
+    if timestamp is None or not timestamp:
+        return None
+    return datetime.utcfromtimestamp(timestamp / 1000)

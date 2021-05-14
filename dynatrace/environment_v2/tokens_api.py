@@ -95,7 +95,9 @@ class TokenService:
     def delete(self, token_id: str) -> Response:
         return self.__http_client.make_request(f"/api/v2/apiTokens/{token_id}", method="DELETE")
 
-    def create(self, name: str, scopes: List[str], personal_access_token: Optional[bool] = None, expiration_date: Optional[Union[datetime, str]] = None) -> "ApiTokenCreated":
+    def create(
+        self, name: str, scopes: List[str], personal_access_token: Optional[bool] = None, expiration_date: Optional[Union[datetime, str]] = None
+    ) -> "ApiTokenCreated":
 
         body = {"personalAccessToken": personal_access_token, "expirationDate": expiration_date, "name": name, "scopes": scopes}
 

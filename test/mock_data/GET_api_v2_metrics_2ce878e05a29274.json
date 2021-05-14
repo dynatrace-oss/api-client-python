@@ -1,0 +1,708 @@
+{
+  "totalCount": 15,
+  "nextPageKey": null,
+  "metrics": [
+    {
+      "metricId": "builtin:host.cpu.idle",
+      "displayName": "CPU idle",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1621030025348,
+      "entityType": [
+        "HOST"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "max",
+        "min"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.host",
+          "name": "Host",
+          "displayName": "Host",
+          "index": 0,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:host.cpu.iowait",
+      "displayName": "CPU I/O wait",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1621030025348,
+      "entityType": [
+        "HOST"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "max",
+        "min"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.host",
+          "name": "Host",
+          "displayName": "Host",
+          "index": 0,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:host.cpu.other",
+      "displayName": "CPU other",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1621030025348,
+      "entityType": [
+        "HOST"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "max",
+        "min"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.host",
+          "name": "Host",
+          "displayName": "Host",
+          "index": 0,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:host.cpu.steal",
+      "displayName": "CPU steal",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1621030025348,
+      "entityType": [
+        "HOST"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "max",
+        "min"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.host",
+          "name": "Host",
+          "displayName": "Host",
+          "index": 0,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:host.cpu.system",
+      "displayName": "CPU system",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1621030025348,
+      "entityType": [
+        "HOST"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "max",
+        "min"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.host",
+          "name": "Host",
+          "displayName": "Host",
+          "index": 0,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:host.cpu.usage",
+      "displayName": "CPU usage %",
+      "description": "Percentage of CPU time currently utilized.",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1621030025348,
+      "entityType": [
+        "HOST"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "max",
+        "min"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.host",
+          "name": "Host",
+          "displayName": "Host",
+          "index": 0,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:host.cpu.user",
+      "displayName": "CPU user",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1621030025348,
+      "entityType": [
+        "HOST"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "max",
+        "min"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.host",
+          "name": "Host",
+          "displayName": "Host",
+          "index": 0,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:host.disk.free",
+      "displayName": "Disk available %",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1621030025348,
+      "entityType": [
+        "HOST"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "max",
+        "min"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.host",
+          "name": "Host",
+          "displayName": "Host",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.disk",
+          "name": "Disk",
+          "displayName": "Disk",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:host.disk.inodesAvail",
+      "displayName": "Inodes available %",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1621030025348,
+      "entityType": [
+        "HOST"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "max",
+        "min"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.host",
+          "name": "Host",
+          "displayName": "Host",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.disk",
+          "name": "Disk",
+          "displayName": "Disk",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:host.disk.usedPct",
+      "displayName": "Disk used %",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1621030025348,
+      "entityType": [
+        "HOST"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "max",
+        "min"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.host",
+          "name": "Host",
+          "displayName": "Host",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.disk",
+          "name": "Disk",
+          "displayName": "Disk",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:host.disk.utilTime",
+      "displayName": "Disk utilization time ",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1621030025348,
+      "entityType": [
+        "HOST"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "max",
+        "min"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.host",
+          "name": "Host",
+          "displayName": "Host",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.disk",
+          "name": "Disk",
+          "displayName": "Disk",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:host.mem.avail.pct",
+      "displayName": "Memory available %",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1621030025348,
+      "entityType": [
+        "HOST"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "max",
+        "min"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.host",
+          "name": "Host",
+          "displayName": "Host",
+          "index": 0,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:host.mem.usage",
+      "displayName": "Memory used %",
+      "description": "Percentage of memory currently used. Note: Calculated by taking 100% - \"Memory available %\".",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1621030025348,
+      "entityType": [
+        "HOST"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "max",
+        "min"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.host",
+          "name": "Host",
+          "displayName": "Host",
+          "index": 0,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:host.net.nic.linkUtilRx",
+      "displayName": "Network interface receive link utilization on host",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620074641064,
+      "entityType": [
+        "HOST"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "max",
+        "min"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.host",
+          "name": "Host",
+          "displayName": "Host",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.network_interface",
+          "name": "Network interface",
+          "displayName": "Network Interface",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "metricId": "builtin:host.net.nic.linkUtilTx",
+      "displayName": "Network interface transmit link utilization on host",
+      "description": "",
+      "unit": "Percent",
+      "dduBillable": false,
+      "created": 0,
+      "lastWritten": 1620074641064,
+      "entityType": [
+        "HOST"
+      ],
+      "aggregationTypes": [
+        "auto",
+        "avg",
+        "max",
+        "min"
+      ],
+      "transformations": [
+        "filter",
+        "fold",
+        "limit",
+        "merge",
+        "names",
+        "parents",
+        "timeshift",
+        "sort",
+        "last",
+        "splitBy",
+        "default"
+      ],
+      "defaultAggregation": {
+        "type": "avg"
+      },
+      "dimensionDefinitions": [
+        {
+          "key": "dt.entity.host",
+          "name": "Host",
+          "displayName": "Host",
+          "index": 0,
+          "type": "ENTITY"
+        },
+        {
+          "key": "dt.entity.network_interface",
+          "name": "Network interface",
+          "displayName": "Network Interface",
+          "index": 1,
+          "type": "ENTITY"
+        }
+      ],
+      "tags": []
+    }
+  ]
+}

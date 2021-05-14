@@ -87,7 +87,7 @@ ActiveGates - Auto-update configuration  |  :heavy_check_mark:  |  `dt.activegat
 ActiveGates - Auto-update jobs           |  :heavy_check_mark:  |  `dt.activegates_autoupdate_jobs`           |
 Audit Logs                               |  :heavy_check_mark:  |  `dt.audit_logs`                            |
 Extensions 2.0                           |  :x:                 |                                             |
-Metrics                                  |  :warning:           |  `dt.metrics`                               |
+Metrics                                  |  :heavy_check_mark:  |  `dt.metrics`                               |
 Monitored entities                       |  :warning:           |  `dt.entities`                              |
 Monitored entities - Custom tags         |  :x:                 |                                             |
 Network zones                            |  :x:                 |                                             |

@@ -1,0 +1,47 @@
+{
+  "metricId": "builtin:host.cpu.idle",
+  "displayName": "CPU idle",
+  "description": "",
+  "unit": "Percent",
+  "dduBillable": false,
+  "created": 0,
+  "lastWritten": 1621030565348,
+  "entityType": [
+    "HOST"
+  ],
+  "aggregationTypes": [
+    "auto",
+    "avg",
+    "max",
+    "min"
+  ],
+  "transformations": [
+    "filter",
+    "fold",
+    "limit",
+    "merge",
+    "names",
+    "parents",
+    "timeshift",
+    "sort",
+    "last",
+    "splitBy",
+    "default"
+  ],
+  "defaultAggregation": {
+    "type": "avg"
+  },
+  "dimensionDefinitions": [
+    {
+      "key": "dt.entity.host",
+      "name": "Host",
+      "displayName": "Host",
+      "index": 0,
+      "type": "ENTITY"
+    }
+  ],
+  "tags": [],
+  "metricValueType": {
+    "type": "score"
+  }
+}

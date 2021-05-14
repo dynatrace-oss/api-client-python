@@ -15,10 +15,16 @@ class AuditLogsService:
         self.__http_client = http_client
 
     def list(
-        self, log_filter: Optional[str] = None, time_from: Optional[Union[datetime, str]] = None, time_to: Optional[Union[datetime, str]] = None, sort: Optional[str] = None
+        self,
+        log_filter: Optional[str] = None,
+        time_from: Optional[Union[datetime, str]] = None,
+        time_to: Optional[Union[datetime, str]] = None,
+        sort: Optional[str] = None,
     ) -> PaginatedList["AuditLogEntry"]:
         params = {"filter": log_filter, "from": timestamp_to_string(time_from), "to": timestamp_to_string(time_to), "sort": sort}
-        return PaginatedList(target_class=AuditLogEntry, http_client=self.__http_client, target_url="/api/v2/auditlogs", target_params=params, list_item="auditLogs")
+        return PaginatedList(
+            target_class=AuditLogEntry, http_client=self.__http_client, target_url="/api/v2/auditlogs", target_params=params, list_item="auditLogs"
+        )
 
     def get(self, log_id: str) -> "AuditLogEntry":
         response = self.__http_client.make_request(f"/api/v2/auditlogs/{log_id}").json()

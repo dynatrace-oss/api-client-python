@@ -75,7 +75,7 @@ class HttpClient:
 
         if headers is None:
             headers = {}
-        if files is None:
+        if files is None and "content-type" not in [key.lower() for key in headers.keys()]:
             headers.update({"content-type": "application/json"})
         headers.update(self.auth_header)
 
