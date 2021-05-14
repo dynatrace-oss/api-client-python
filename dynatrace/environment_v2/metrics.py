@@ -18,25 +18,16 @@ class MetricService:
         self,
         metric_selector: str,
         resolution: str = None,
-        time_from=None,
-        time_to=None,
-        entity_selector=None,
+        time_from: Optional[Union[datetime, str]] = None,
+        time_to: Optional[Union[datetime, str]] = None,
+        entity_selector: Optional[str] = None,
     ) -> PaginatedList["MetricSeriesCollection"]:
-        """
-
-        :param metric_selector: The metric selector: https://www.dynatrace.com/support/help/shortlink/api-metrics-v2-selector
-        :param resolution:
-        :param time_from:
-        :param time_to:
-        :param entity_selector:
-        :return:
-        """
 
         params = {
             "metricSelector": metric_selector,
             "resolution": resolution,
-            "from": time_from,
-            "to": time_to,
+            "from": timestamp_to_string(time_from),
+            "to": timestamp_to_string(time_to),
             "entitySelector": entity_selector,
         }
         return PaginatedList(MetricSeriesCollection, self.__http_client, "/api/v2/metrics/query", params, list_item="result")
@@ -76,15 +67,17 @@ class MetricService:
 
 class MetricSeries(DynatraceObject):
     def _create_from_raw_data(self, raw_element):
-        self.timestamps: List[datetime] = [datetime.utcfromtimestamp(timestamp / 1000) for timestamp in raw_element.get("timestamps", [])]
+        self.timestamps: List[datetime] = [int64_to_datetime(timestamp) for timestamp in raw_element.get("timestamps", [])]
         self.dimensions: List[str] = raw_element.get("dimensions", [])
         self.values: List[float] = raw_element.get("values", [])
+        self.dimension_map: Optional[Dict[str, Any]] = raw_element.get("dimensionMap", [])
 
 
 class MetricSeriesCollection(DynatraceObject):
     def _create_from_raw_data(self, raw_element: dict):
         self.metric_id: str = raw_element.get("metricId")
         self.data: List[MetricSeries] = [MetricSeries(self._http_client, self._headers, metric_serie) for metric_serie in raw_element.get("data", [])]
+        self.warnings: Optional[List[str]] = raw_element.get("warnings")
 
 
 class MetricDefaultAggregation(DynatraceObject):

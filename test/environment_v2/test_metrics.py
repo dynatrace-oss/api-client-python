@@ -1,6 +1,6 @@
 from dynatrace import Dynatrace
 
-from dynatrace.environment_v2.metrics import MetricDescriptor, Unit, AggregationType, Transformation, ValueType
+from dynatrace.environment_v2.metrics import MetricDescriptor, Unit, AggregationType, Transformation, ValueType, MetricSeriesCollection
 from dynatrace.pagination import PaginatedList
 from dynatrace.utils import int64_to_datetime
 
@@ -84,3 +84,25 @@ def test_get(dt: Dynatrace):
     assert metric.tags == []
     assert metric.dimension_definitions[0].key == "dt.entity.host"
     assert metric.metric_value_type.type == ValueType.SCORE
+
+
+def test_query(dt: Dynatrace):
+    time_from = int64_to_datetime(1621020000000)
+    time_to = int64_to_datetime(1621025000000)
+
+    results = dt.metrics.query("builtin:host.cpu.idle", time_from=time_from, time_to=time_to)
+    assert isinstance(results, PaginatedList)
+
+    first = list(results)[0]
+
+    assert isinstance(first, MetricSeriesCollection)
+    assert first.metric_id == "builtin:host.cpu.idle"
+    assert len(first.data) == 1
+
+    first_data = first.data[0]
+    assert first_data.dimension_map == {"dt.entity.host": "HOST-82F576674F19AC16"}
+    assert first_data.dimensions == ["HOST-82F576674F19AC16"]
+    assert len(first_data.timestamps) == 84
+    assert len(first_data.timestamps) == len(first_data.values)
+    assert first_data.timestamps[0] == int64_to_datetime(1621020060000)
+    assert first_data.values[0] == 89.91581217447917
