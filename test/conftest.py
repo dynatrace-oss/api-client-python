@@ -9,6 +9,7 @@ import pytest
 
 from dynatrace import Dynatrace
 from dynatrace.http_client import HttpClient
+from dynatrace.utils import slugify
 
 current_file_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -30,7 +31,8 @@ def local_make_request(self, path: str, params: Optional[Dict] = None, headers: 
         encoded = f"{params}".encode()
         params = f"_{hashlib.sha256(encoded).hexdigest()}"[:16]
 
-    file_name = f'{method}{path.replace("/", "_")}{params}.json'
+    path = slugify(path)
+    file_name = f"{method}{path}{params}.json"
     file_path = Path(current_file_path, "mock_data", file_name)
     with open(file_path) as f:
         json_data = json.load(f)

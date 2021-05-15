@@ -2,8 +2,19 @@ import warnings
 import functools
 from datetime import datetime
 from typing import Union, Optional
+import unicodedata
+import re
+
 
 ISO_8601 = "%Y-%m-%dT%H:%M:%S.%fZ"
+
+
+def slugify(value):
+    value = str(value)
+    value = unicodedata.normalize("NFKC", value)
+    value = re.sub(r"[:.-/\s]+", "_", value)
+    value = re.sub(r"[^\w\s-]", "", value)
+    return value
 
 
 def deprecated(reason=""):
