@@ -1,10 +1,12 @@
-from typing import List, Optional
+from datetime import datetime
+from typing import List, Optional, Union, Dict, Any
 
-from dynatrace.environment_v2.schemas import EntityType
+from dynatrace.environment_v2.schemas import EntityType, ManagementZone
 from dynatrace.http_client import HttpClient
 from dynatrace.configuration_v1.metag import METag
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.pagination import PaginatedList
+from dynatrace.utils import int64_to_datetime
 
 
 class EntityService:
@@ -14,10 +16,11 @@ class EntityService:
     def list(
         self,
         entity_selector: str,
-        time_from: str = "now-2h",
-        time_to: str = "now",
+        time_from: Optional[Union[datetime, str]] = None,
+        time_to: Optional[Union[datetime, str]] = None,
         fields: Optional[str] = None,
-        page_size=50,
+        sort: Optional[str] = None,
+        page_size: Optional[int] = None,
     ) -> PaginatedList["Entity"]:
         """
         :return: A list of monitored entities along with their properties.
@@ -39,16 +42,39 @@ class EntityService:
 
 
 class Entity(DynatraceObject):
-    def _create_from_raw_data(self, raw_element: dict):
-        # TODO - Implement rest of properties
-        self.display_name = raw_element.get("displayName")
-        self.entity_id = raw_element.get("entityId")
-        self.properties = raw_element.get("properties", {})
-        self.tags: List[METag] = [METag(raw_element=tag) for tag in raw_element.get("tags", {})]
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        self.last_seen: Optional[datetime] = int64_to_datetime(raw_element.get("lastSeenTms", 0))
+        self.first_seen: Optional[datetime] = int64_to_datetime(raw_element.get("firstSeenTms", 0))
+
+        self.from_relationships: Dict[str, List["EntityId"]] = {
+            key: [EntityId(raw_element=entity) for entity in entities] for key, entities in raw_element.get("fromRelationships", {}).items()
+        }
+        self.to_relationships: Dict[str, List["EntityId"]] = {
+            key: [EntityId(raw_element=entity) for entity in entities] for key, entities in raw_element.get("toRelationships", {}).items()
+        }
+        self.management_zones: List[ManagementZone] = [ManagementZone(m) for m in raw_element.get("managementZones", [])]
+        self.icon: Optional[EntityIcon] = EntityIcon(raw_element=raw_element.get("icon")) if raw_element.get("icon") else None
+        self.display_name: str = raw_element.get("displayName")
+        self.entity_id: str = raw_element.get("entityId")
+        self.properties: Optional[Dict[str, Any]] = raw_element.get("properties", {})
+        self.tags: List[METag] = [METag(raw_element=tag) for tag in raw_element.get("tags", [])]
 
 
 class EntityShortRepresentation(DynatraceObject):
-    def _create_from_raw_data(self, raw_element):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.id = raw_element.get("id")
         self.name = raw_element.get("name")
         self.description = raw_element.get("description")
+
+
+class EntityId(DynatraceObject):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        self.id: str = raw_element.get("id")
+        self.type: str = raw_element.get("type")
+
+
+class EntityIcon(DynatraceObject):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        self.primary_icon_type = raw_element.get("primaryIconType")
+        self.secondary_icon_type = raw_element.get("secondaryIconType")
+        self.custom_icon_path = raw_element.get("customIconPath")

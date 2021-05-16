@@ -1,0 +1,379 @@
+{
+  "totalCount": 1,
+  "pageSize": 50,
+  "entities": [
+    {
+      "entityId": "HOST-82F576674F19AC16",
+      "displayName": "arch-david",
+      "firstSeenTms": 1620821456242,
+      "lastSeenTms": 1621176473248,
+      "properties": {
+        "bitness": "64",
+        "detectedName": "arch-david",
+        "installerTrackedDownload": false,
+        "oneAgentCustomHostName": "",
+        "monitoringMode": "FULL_STACK",
+        "installerVersion": "1.217.120.20210514-110509",
+        "ipAddress": [
+          "192.168.15.101",
+          "2804:431:c7f5:5683:a165:43dc:2569:656d"
+        ],
+        "osArchitecture": "X86",
+        "networkZone": "default",
+        "standaloneSpecialAgentsOnly": false,
+        "logicalCpuCores": 12,
+        "isMonitoringCandidate": false,
+        "osVersion": "Arch Linux (kernel 5.11.16-arch1-1)",
+        "cpuCores": 6,
+        "installerPotentialProblem": false,
+        "memoryTotal": 33269612544,
+        "osType": "LINUX",
+        "state": "RUNNING",
+        "installerSupportAlert": false
+      },
+      "tags": [
+        {
+          "context": "CONTEXTLESS",
+          "key": "citrix-prod",
+          "stringRepresentation": "citrix-prod"
+        }
+      ],
+      "managementZones": [],
+      "icon": {
+        "primaryIconType": "linux"
+      },
+      "fromRelationships": {
+        "isHostOfContainer": [
+          {
+            "id": "DOCKER_CONTAINER_GROUP_INSTANCE-8E2ED6F4E2AFDD89",
+            "type": "DOCKER_CONTAINER_GROUP_INSTANCE"
+          },
+          {
+            "id": "DOCKER_CONTAINER_GROUP_INSTANCE-64898565938E73BD",
+            "type": "DOCKER_CONTAINER_GROUP_INSTANCE"
+          },
+          {
+            "id": "DOCKER_CONTAINER_GROUP_INSTANCE-F754F66445B5FB15",
+            "type": "DOCKER_CONTAINER_GROUP_INSTANCE"
+          },
+          {
+            "id": "DOCKER_CONTAINER_GROUP_INSTANCE-F37B239C9A493A37",
+            "type": "DOCKER_CONTAINER_GROUP_INSTANCE"
+          },
+          {
+            "id": "DOCKER_CONTAINER_GROUP_INSTANCE-3E4D32D38BFD5C7A",
+            "type": "DOCKER_CONTAINER_GROUP_INSTANCE"
+          },
+          {
+            "id": "DOCKER_CONTAINER_GROUP_INSTANCE-0FF0C7F88D103BA1",
+            "type": "DOCKER_CONTAINER_GROUP_INSTANCE"
+          }
+        ],
+        "isNetworkClientOfHost": [
+          {
+            "id": "HOST-82F576674F19AC16",
+            "type": "HOST"
+          }
+        ]
+      },
+      "toRelationships": {
+        "runsOn": [
+          {
+            "id": "PROCESS_GROUP-3AD9FB79C914520C",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-EF1E81586EB8EDD6",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-B27330900F0E858D",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-9A22F2840415BA57",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-F72AD809B6E589CF",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-0652377D194EA58A",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-3F39DDE433976382",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-5A22F6D7F2447FBB",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-019591F766455D40",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-97159D550A94E2D8",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-A44C5A04D70F628B",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-918B12ABB0339123",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-FF7C497428CEEFCA",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-C845FF249A0EE4BE",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-7F1704C4453F57AA",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-ECE82357AF59AF52",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-5C5C23F580864AAB",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-423D6B90119F41AC",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-F2E1560572B42BA0",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-9DA2F9D5CF3AA476",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-2F1F4120E4065583",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-B067F94E7D46E535",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-159E5FE5D7BF6D5E",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-D319A5EAB816D403",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-8A0DF0F9C446635C",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-E84C09702A8E5458",
+            "type": "PROCESS_GROUP"
+          },
+          {
+            "id": "PROCESS_GROUP-7B399AFACF5C29BF",
+            "type": "PROCESS_GROUP"
+          }
+        ],
+        "isCgiOfHost": [
+          {
+            "id": "CONTAINER_GROUP_INSTANCE-8F22BECAD5D0AE11",
+            "type": "CONTAINER_GROUP_INSTANCE"
+          },
+          {
+            "id": "CONTAINER_GROUP_INSTANCE-A0CE6FB900C238DD",
+            "type": "CONTAINER_GROUP_INSTANCE"
+          },
+          {
+            "id": "CONTAINER_GROUP_INSTANCE-378006A452B59D21",
+            "type": "CONTAINER_GROUP_INSTANCE"
+          },
+          {
+            "id": "CONTAINER_GROUP_INSTANCE-74E207554D4764E7",
+            "type": "CONTAINER_GROUP_INSTANCE"
+          },
+          {
+            "id": "CONTAINER_GROUP_INSTANCE-0991848D235DECF4",
+            "type": "CONTAINER_GROUP_INSTANCE"
+          },
+          {
+            "id": "CONTAINER_GROUP_INSTANCE-DAA317F1F4E73C63",
+            "type": "CONTAINER_GROUP_INSTANCE"
+          },
+          {
+            "id": "CONTAINER_GROUP_INSTANCE-0CD162A5D073B22D",
+            "type": "CONTAINER_GROUP_INSTANCE"
+          }
+        ],
+        "isDiskOf": [
+          {
+            "id": "DISK-31FEE393BCB443EB",
+            "type": "DISK"
+          },
+          {
+            "id": "DISK-03167CB3F5A12392",
+            "type": "DISK"
+          },
+          {
+            "id": "DISK-693C5DECAADCE7E0",
+            "type": "DISK"
+          }
+        ],
+        "runsOnHost": [
+          {
+            "id": "SERVICE-AFDE3F4C45608C02",
+            "type": "SERVICE"
+          },
+          {
+            "id": "SERVICE_INSTANCE-D8EEE0FB51C65059",
+            "type": "SERVICE_INSTANCE"
+          }
+        ],
+        "isProcessOf": [
+          {
+            "id": "PROCESS_GROUP_INSTANCE-701407341F73BE85",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-CE8C737A30AAD34B",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-1EF70E23075C62DB",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-66E1D9EB7A0C4A9A",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-19126FD0DCF60D29",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-DEBB82B531883EB0",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-84A7411A5657099C",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-7C6335FB5CC81F17",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-1B7F7F4173E309DE",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-0D6B5CF5D82786DD",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-DEA2176B9B149118",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-9DD859329EEC68C7",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-6118D04A42CE4188",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-2CE11CC01B82AF0E",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-C169F089AC541A22",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-6AB97F176597F84E",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-AEBAD941543DAA2C",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-95D2357C890581F6",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-A7408C36315761FE",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-349688C12255A5B5",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-1F578FB280230860",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-976B298298A6C148",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-0A8F0D18A78B5225",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-4AB08943D51748A8",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-B0428415E922D3B0",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-3FD31105193CC5DA",
+            "type": "PROCESS_GROUP_INSTANCE"
+          },
+          {
+            "id": "PROCESS_GROUP_INSTANCE-3DAC646B97ABA66F",
+            "type": "PROCESS_GROUP_INSTANCE"
+          }
+        ],
+        "isNetworkClientOfHost": [
+          {
+            "id": "HOST-82F576674F19AC16",
+            "type": "HOST"
+          }
+        ],
+        "isNetworkInterfaceOf": [
+          {
+            "id": "NETWORK_INTERFACE-82F53E96304EA4B3",
+            "type": "NETWORK_INTERFACE"
+          }
+        ],
+        "isSiteOf": [
+          {
+            "id": "AWS_AVAILABILITY_ZONE-41B70BF3061AE9F8",
+            "type": "AWS_AVAILABILITY_ZONE"
+          },
+          {
+            "id": "GEOLOC_SITE-018CC0A4E9180C05",
+            "type": "GEOLOC_SITE"
+          }
+        ]
+      }
+    }
+  ]
+}
