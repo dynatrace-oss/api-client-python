@@ -6,7 +6,7 @@
       "entityId": "HOST-82F576674F19AC16",
       "displayName": "arch-david",
       "firstSeenTms": 1620821456242,
-      "lastSeenTms": 1621176473248,
+      "lastSeenTms": 1621177614119,
       "properties": {
         "bitness": "64",
         "detectedName": "arch-david",
@@ -77,6 +77,72 @@
         ]
       },
       "toRelationships": {
+        "isNetworkInterfaceOf": [
+          {
+            "id": "NETWORK_INTERFACE-82F53E96304EA4B3",
+            "type": "NETWORK_INTERFACE"
+          }
+        ],
+        "isSiteOf": [
+          {
+            "id": "AWS_AVAILABILITY_ZONE-41B70BF3061AE9F8",
+            "type": "AWS_AVAILABILITY_ZONE"
+          },
+          {
+            "id": "GEOLOC_SITE-018CC0A4E9180C05",
+            "type": "GEOLOC_SITE"
+          }
+        ],
+        "isDiskOf": [
+          {
+            "id": "DISK-31FEE393BCB443EB",
+            "type": "DISK"
+          },
+          {
+            "id": "DISK-03167CB3F5A12392",
+            "type": "DISK"
+          },
+          {
+            "id": "DISK-693C5DECAADCE7E0",
+            "type": "DISK"
+          }
+        ],
+        "isCgiOfHost": [
+          {
+            "id": "CONTAINER_GROUP_INSTANCE-8F22BECAD5D0AE11",
+            "type": "CONTAINER_GROUP_INSTANCE"
+          },
+          {
+            "id": "CONTAINER_GROUP_INSTANCE-A0CE6FB900C238DD",
+            "type": "CONTAINER_GROUP_INSTANCE"
+          },
+          {
+            "id": "CONTAINER_GROUP_INSTANCE-378006A452B59D21",
+            "type": "CONTAINER_GROUP_INSTANCE"
+          },
+          {
+            "id": "CONTAINER_GROUP_INSTANCE-0991848D235DECF4",
+            "type": "CONTAINER_GROUP_INSTANCE"
+          },
+          {
+            "id": "CONTAINER_GROUP_INSTANCE-74E207554D4764E7",
+            "type": "CONTAINER_GROUP_INSTANCE"
+          },
+          {
+            "id": "CONTAINER_GROUP_INSTANCE-DAA317F1F4E73C63",
+            "type": "CONTAINER_GROUP_INSTANCE"
+          },
+          {
+            "id": "CONTAINER_GROUP_INSTANCE-0CD162A5D073B22D",
+            "type": "CONTAINER_GROUP_INSTANCE"
+          }
+        ],
+        "isNetworkClientOfHost": [
+          {
+            "id": "HOST-82F576674F19AC16",
+            "type": "HOST"
+          }
+        ],
         "runsOn": [
           {
             "id": "PROCESS_GROUP-3AD9FB79C914520C",
@@ -159,15 +225,15 @@
             "type": "PROCESS_GROUP"
           },
           {
+            "id": "PROCESS_GROUP-159E5FE5D7BF6D5E",
+            "type": "PROCESS_GROUP"
+          },
+          {
             "id": "PROCESS_GROUP-2F1F4120E4065583",
             "type": "PROCESS_GROUP"
           },
           {
             "id": "PROCESS_GROUP-B067F94E7D46E535",
-            "type": "PROCESS_GROUP"
-          },
-          {
-            "id": "PROCESS_GROUP-159E5FE5D7BF6D5E",
             "type": "PROCESS_GROUP"
           },
           {
@@ -185,50 +251,6 @@
           {
             "id": "PROCESS_GROUP-7B399AFACF5C29BF",
             "type": "PROCESS_GROUP"
-          }
-        ],
-        "isCgiOfHost": [
-          {
-            "id": "CONTAINER_GROUP_INSTANCE-8F22BECAD5D0AE11",
-            "type": "CONTAINER_GROUP_INSTANCE"
-          },
-          {
-            "id": "CONTAINER_GROUP_INSTANCE-A0CE6FB900C238DD",
-            "type": "CONTAINER_GROUP_INSTANCE"
-          },
-          {
-            "id": "CONTAINER_GROUP_INSTANCE-378006A452B59D21",
-            "type": "CONTAINER_GROUP_INSTANCE"
-          },
-          {
-            "id": "CONTAINER_GROUP_INSTANCE-74E207554D4764E7",
-            "type": "CONTAINER_GROUP_INSTANCE"
-          },
-          {
-            "id": "CONTAINER_GROUP_INSTANCE-0991848D235DECF4",
-            "type": "CONTAINER_GROUP_INSTANCE"
-          },
-          {
-            "id": "CONTAINER_GROUP_INSTANCE-DAA317F1F4E73C63",
-            "type": "CONTAINER_GROUP_INSTANCE"
-          },
-          {
-            "id": "CONTAINER_GROUP_INSTANCE-0CD162A5D073B22D",
-            "type": "CONTAINER_GROUP_INSTANCE"
-          }
-        ],
-        "isDiskOf": [
-          {
-            "id": "DISK-31FEE393BCB443EB",
-            "type": "DISK"
-          },
-          {
-            "id": "DISK-03167CB3F5A12392",
-            "type": "DISK"
-          },
-          {
-            "id": "DISK-693C5DECAADCE7E0",
-            "type": "DISK"
           }
         ],
         "runsOnHost": [
@@ -349,28 +371,6 @@
           {
             "id": "PROCESS_GROUP_INSTANCE-3DAC646B97ABA66F",
             "type": "PROCESS_GROUP_INSTANCE"
-          }
-        ],
-        "isNetworkClientOfHost": [
-          {
-            "id": "HOST-82F576674F19AC16",
-            "type": "HOST"
-          }
-        ],
-        "isNetworkInterfaceOf": [
-          {
-            "id": "NETWORK_INTERFACE-82F53E96304EA4B3",
-            "type": "NETWORK_INTERFACE"
-          }
-        ],
-        "isSiteOf": [
-          {
-            "id": "AWS_AVAILABILITY_ZONE-41B70BF3061AE9F8",
-            "type": "AWS_AVAILABILITY_ZONE"
-          },
-          {
-            "id": "GEOLOC_SITE-018CC0A4E9180C05",
-            "type": "GEOLOC_SITE"
           }
         ]
       }

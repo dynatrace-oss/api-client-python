@@ -35,6 +35,13 @@ class EntityService:
         }
         return PaginatedList(Entity, self.__http_client, "/api/v2/entities", params, list_item="entities")
 
+    def get(
+        self, entity_id: str, time_from: Optional[Union[datetime, str]] = None, time_to: Optional[Union[datetime, str]] = None, fields: Optional[str] = None
+    ) -> "Entity":
+        params = {"from": timestamp_to_string(time_from), "to": timestamp_to_string(time_to), "fields": fields}
+        response = self.__http_client.make_request(f"/api/v2/entities/{entity_id}", params=params).json()
+        return Entity(raw_element=response)
+
     def list_types(self, page_size=50) -> PaginatedList[EntityType]:
         """
         Gets a list of properties for all entity types
