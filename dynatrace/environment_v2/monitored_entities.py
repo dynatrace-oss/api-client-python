@@ -6,7 +6,7 @@ from dynatrace.http_client import HttpClient
 from dynatrace.configuration_v1.metag import METag
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.pagination import PaginatedList
-from dynatrace.utils import int64_to_datetime
+from dynatrace.utils import int64_to_datetime, timestamp_to_string
 
 
 class EntityService:
@@ -25,7 +25,14 @@ class EntityService:
         """
         :return: A list of monitored entities along with their properties.
         """
-        params = {"pageSize": page_size, "entitySelector": entity_selector, "from": time_from, "to": time_to, "fields": fields}
+        params = {
+            "pageSize": page_size,
+            "entitySelector": entity_selector,
+            "from": timestamp_to_string(time_from),
+            "to": timestamp_to_string(time_to),
+            "fields": fields,
+            "sort": sort,
+        }
         return PaginatedList(Entity, self.__http_client, "/api/v2/entities", params, list_item="entities")
 
     def list_types(self, page_size=50) -> PaginatedList[EntityType]:
