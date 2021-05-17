@@ -19,6 +19,10 @@ class TagSource(Enum):
     RULE_BASED = "RULE_BASED"
     USER = "USER"
 
+class CreatedFrom(Enum):
+    API = "API"
+    GUI = "GUI"
+
 class TagContext(Enum):
     AWS = "AWS"
     AWS_GENERIC = "AWS_GENERIC"
@@ -84,7 +88,7 @@ class SyntheticMonitor(DynatraceObject):
         self.frequency_min: int = raw_element.get("frequencyMin")
         self.enabled: bool = raw_element.get("enabled")
         self.type: MonitorType = MonitorType(raw_element.get("type"))
-        self.created_from: str = raw_element.get("createdFrom")
+        self.created_from: CreatedFrom = CreatedFrom(raw_element.get("createdFrom"))
         self.script: dict = raw_element.get("script")
         self.locations: List[str] = raw_element.get("locations")
         self.anomaly_detection: AnomalyDetection  = AnomalyDetection(raw_element=raw_element.get("anomalyDetection"))
@@ -101,11 +105,13 @@ class SyntheticMonitorsService:
         """
         Lists all synthetic monitors in the environment.
         """
-        params = {}
         if monitor_type is not None:
             monitor_type = MonitorType(monitor_type)
-            params.update({"type": monitor_type.value})
-        return PaginatedList(MonitorCollectionElement, self.__http_client, f"/api/v1/synthetic/monitors",target_params=params, list_item="monitors")
+            params = {"type": monitor_type.value}
+            list_of_monitors = PaginatedList(MonitorCollectionElement, self.__http_client, f"/api/v1/synthetic/monitors",target_params=params, list_item="monitors")
+        else:
+            list_of_monitors = PaginatedList(MonitorCollectionElement, self.__http_client, f"/api/v1/synthetic/monitors", list_item="monitors")
+        return list_of_monitors
 
     def get_full_monitor_configuration(self, monitor_id: str) -> SyntheticMonitor:
         """
