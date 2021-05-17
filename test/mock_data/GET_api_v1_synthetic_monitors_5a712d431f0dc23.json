@@ -1,1 +1,58 @@
-{"monitors": [{"name": "angular easytravel bounce", "entityId": "SYNTHETIC_TEST-7639A3AED66940FA", "type": "BROWSER", "enabled": true}, {"name": "www.angular.easytravel.com", "entityId": "SYNTHETIC_TEST-30C72F9255ED128D", "type": "BROWSER", "enabled": true}, {"name": "Google Hipster Shop", "entityId": "SYNTHETIC_TEST-10E43FE0212A5C82", "type": "BROWSER", "enabled": true}, {"name": "angular easytravel abandon", "entityId": "SYNTHETIC_TEST-59ADE6AB7BCCF957", "type": "BROWSER", "enabled": true}, {"name": "CNN", "entityId": "SYNTHETIC_TEST-03A56B42FD5BC08F", "type": "BROWSER", "enabled": true}, {"name": "www.weather.easytravel.com", "entityId": "SYNTHETIC_TEST-0000000000005724", "type": "BROWSER", "enabled": true}, {"name": "perfwear-shop", "entityId": "SYNTHETIC_TEST-1A2CC381A76FDE68", "type": "BROWSER", "enabled": true}, {"name": "easyTravel booking", "entityId": "SYNTHETIC_TEST-0000000000005721", "type": "BROWSER", "enabled": true}, {"name": "angular easytravel booking", "entityId": "SYNTHETIC_TEST-212D2C9601E54CED", "type": "BROWSER", "enabled": true}]}
+{
+    "monitors":[
+       {
+          "name":"angular easytravel bounce",
+          "entityId":"SYNTHETIC_TEST-7639A3AED66940FA",
+          "type":"BROWSER",
+          "enabled":true
+       },
+       {
+          "name":"www.angular.easytravel.com",
+          "entityId":"SYNTHETIC_TEST-30C72F9255ED128D",
+          "type":"BROWSER",
+          "enabled":true
+       },
+       {
+          "name":"Google Hipster Shop",
+          "entityId":"SYNTHETIC_TEST-10E43FE0212A5C82",
+          "type":"BROWSER",
+          "enabled":true
+       },
+       {
+          "name":"angular easytravel abandon",
+          "entityId":"SYNTHETIC_TEST-59ADE6AB7BCCF957",
+          "type":"BROWSER",
+          "enabled":true
+       },
+       {
+          "name":"CNN",
+          "entityId":"SYNTHETIC_TEST-03A56B42FD5BC08F",
+          "type":"BROWSER",
+          "enabled":true
+       },
+       {
+          "name":"www.weather.easytravel.com",
+          "entityId":"SYNTHETIC_TEST-0000000000005724",
+          "type":"BROWSER",
+          "enabled":true
+       },
+       {
+          "name":"perfwear-shop",
+          "entityId":"SYNTHETIC_TEST-1A2CC381A76FDE68",
+          "type":"BROWSER",
+          "enabled":true
+       },
+       {
+          "name":"easyTravel booking",
+          "entityId":"SYNTHETIC_TEST-0000000000005721",
+          "type":"BROWSER",
+          "enabled":true
+       },
+       {
+          "name":"angular easytravel booking",
+          "entityId":"SYNTHETIC_TEST-212D2C9601E54CED",
+          "type":"BROWSER",
+          "enabled":true
+       }
+    ]
+ }
