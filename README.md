@@ -112,7 +112,7 @@ Maintenance window                     |  :x:                 |                 
 OneAgent on a host                     |  :x:                 |                                     |
 Problem                                |  :x:                 |                                     |
 Synthetic - Locations and nodes        |  :x:                 |                                     |
-Synthetic - Monitors                   |  :x:                 |                                     |
+Synthetic - Monitors                   |  :warning:           |  `dt.synthetic_monitors`                                  |
 Synthetic - Third party                |  :heavy_check_mark:  |  `dt.third_part_synthetic_tests`    |
 Threshold                              |  :x:                 |                                     |
 Timeseries                             |  :warning:           |  `dt.timeseries`                    |

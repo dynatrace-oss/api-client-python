@@ -4,7 +4,7 @@ setup(
     name="dtapi",
     version="1.1.23",
     packages=find_packages(),
-    install_requires=["requests>=2.21"],
+    install_requires=["requests>=2.22"],
     tests_require=["pytest", "mock", "tox"],
     python_requires=">=3.6",
     author="David Lopes",
