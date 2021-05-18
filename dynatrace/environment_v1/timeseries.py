@@ -1,63 +1,66 @@
-from typing import Optional, List
+from enum import Enum
+from typing import Optional, List, Union
 
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.http_client import HttpClient
 
-UNIT_BIT = "Bit(bit)"
-UNIT_BITPERHOUR = "BitPerHour(bit/h)"
-UNIT_BITPERMINUTE = "BitPerMinute(bit/min)"
-UNIT_BITPERSECOND = "BitPerSecond(bit/s)"
-UNIT_BYTE = "Byte(B)"
-UNIT_BYTEPERHOUR = "BytePerHour(B/h)"
-UNIT_BYTEPERMINUTE = "BytePerMinute(B/min)"
-UNIT_BYTEPERSECOND = "BytePerSecond(B/s)"
-UNIT_CORES = "Cores"
-UNIT_COUNT = "Count(count)"
-UNIT_DAY = "Day(ds)"
-UNIT_DECIBELMILLIWATT = "DecibelMilliWatt(dBm)"
-UNIT_G = "G"
-UNIT_GIBIBYTE = "GibiByte(GiB)"
-UNIT_GIGABYTE = "GigaByte(GB)"
-UNIT_HOUR = "Hour(hs)"
-UNIT_KIBIBYTE = "KibiByte(KiB)"
-UNIT_KIBIBYTEPERHOUR = "KibiBytePerHour(KiB/h)"
-UNIT_KIBIBYTEPERMINUTE = "KibiBytePerMinute(KiB/min)"
-UNIT_KIBIBYTEPERSECOND = "KibiBytePerSecond(KiB/s)"
-UNIT_KILOBYTE = "KiloByte(kB)"
-UNIT_KILOBYTEPERHOUR = "KiloBytePerHour(kB/h)"
-UNIT_KILOBYTEPERMINUTE = "KiloBytePerMinute(kB/min)"
-UNIT_KILOBYTEPERSECOND = "KiloBytePerSecond(kB/s)"
-UNIT_M = "M"
-UNIT_MEBIBYTE = "MebiByte(MiB)"
-UNIT_MEBIBYTEPERHOUR = "MebiBytePerHour(MiB/h)"
-UNIT_MEBIBYTEPERMINUTE = "MebiBytePerMinute(MiB/min)"
-UNIT_MEBIBYTEPERSECOND = "MebiBytePerSecond(MiB/s)"
-UNIT_MEGABYTE = "MegaByte(MB)"
-UNIT_MEGABYTEPERHOUR = "MegaBytePerHour(MB/h)"
-UNIT_MEGABYTEPERMINUTE = "MegaBytePerMinute(MB/min)"
-UNIT_MEGABYTEPERSECOND = "MegaBytePerSecond(MB/s)"
-UNIT_MICROSECOND = "MicroSecond(µs)"
-UNIT_MILLISECOND = "MilliSecond(ms)"
-UNIT_MILLISECONDPERMINUTE = "MilliSecondPerMinute(ms/min)"
-UNIT_MINUTE = "Minute(mins)"
-UNIT_MONTH = "Month(mos)"
-UNIT_NOT_APPLICABLE = "N/A"
-UNIT_NANOSECOND = "NanoSecond(ns)"
-UNIT_NANOSECONDPERMINUTE = "NanoSecondPerMinute(ns/min)"
-UNIT_PERHOUR = "PerHour(count/h)"
-UNIT_PERMINUTE = "PerMinute(count/min)"
-UNIT_PERSECOND = "PerSecond(count/s)"
-UNIT_PERCENT = "Percent(%)"
-UNIT_PIXEL = "Pixel(px)"
-UNIT_PROMILLE = "Promille(‰)"
-UNIT_RATIO = "Ratio"
-UNIT_SECOND = "Second(s)"
-UNIT_STATE = "State"
-UNIT_UNSPECIFIED = "Unspecified"
-UNIT_WEEK = "Week(ws)"
-UNIT_YEAR = "Year(ys)"
-UNIT_K = "k"
-UNIT_M_CORES = "mCores"
+
+class Unit(Enum):
+    BIT = "Bit(bit)"
+    BITPERHOUR = "BitPerHour(bit/h)"
+    BITPERMINUTE = "BitPerMinute(bit/min)"
+    BITPERSECOND = "BitPerSecond(bit/s)"
+    BYTE = "Byte(B)"
+    BYTEPERHOUR = "BytePerHour(B/h)"
+    BYTEPERMINUTE = "BytePerMinute(B/min)"
+    BYTEPERSECOND = "BytePerSecond(B/s)"
+    CORES = "Cores"
+    COUNT = "Count(count)"
+    DAY = "Day(ds)"
+    DECIBELMILLIWATT = "DecibelMilliWatt(dBm)"
+    G = "G"
+    GIBIBYTE = "GibiByte(GiB)"
+    GIGABYTE = "GigaByte(GB)"
+    HOUR = "Hour(hs)"
+    KIBIBYTE = "KibiByte(KiB)"
+    KIBIBYTEPERHOUR = "KibiBytePerHour(KiB/h)"
+    KIBIBYTEPERMINUTE = "KibiBytePerMinute(KiB/min)"
+    KIBIBYTEPERSECOND = "KibiBytePerSecond(KiB/s)"
+    KILOBYTE = "KiloByte(kB)"
+    KILOBYTEPERHOUR = "KiloBytePerHour(kB/h)"
+    KILOBYTEPERMINUTE = "KiloBytePerMinute(kB/min)"
+    KILOBYTEPERSECOND = "KiloBytePerSecond(kB/s)"
+    M = "M"
+    MEBIBYTE = "MebiByte(MiB)"
+    MEBIBYTEPERHOUR = "MebiBytePerHour(MiB/h)"
+    MEBIBYTEPERMINUTE = "MebiBytePerMinute(MiB/min)"
+    MEBIBYTEPERSECOND = "MebiBytePerSecond(MiB/s)"
+    MEGABYTE = "MegaByte(MB)"
+    MEGABYTEPERHOUR = "MegaBytePerHour(MB/h)"
+    MEGABYTEPERMINUTE = "MegaBytePerMinute(MB/min)"
+    MEGABYTEPERSECOND = "MegaBytePerSecond(MB/s)"
+    MICROSECOND = "MicroSecond(µs)"
+    MILLISECOND = "MilliSecond(ms)"
+    MILLISECONDPERMINUTE = "MilliSecondPerMinute(ms/min)"
+    MINUTE = "Minute(mins)"
+    MONTH = "Month(mos)"
+    NOT_APPLICABLE = "N/A"
+    NANOSECOND = "NanoSecond(ns)"
+    NANOSECONDPERMINUTE = "NanoSecondPerMinute(ns/min)"
+    PERHOUR = "PerHour(count/h)"
+    PERMINUTE = "PerMinute(count/min)"
+    PERSECOND = "PerSecond(count/s)"
+    PERCENT = "Percent(%)"
+    PIXEL = "Pixel(px)"
+    PROMILLE = "Promille(‰)"
+    RATIO = "Ratio"
+    SECOND = "Second(s)"
+    STATE = "State"
+    UNSPECIFIED = "Unspecified"
+    WEEK = "Week(ws)"
+    YEAR = "Year(ys)"
+    K = "k"
+    M_CORES = "mCores"
 
 
 class TimeSerieService:
@@ -68,16 +71,17 @@ class TimeSerieService:
         self,
         metric_id: str,
         display_name: Optional[str],
-        unit: Optional[str] = None,
+        unit: Optional[Union[Unit, str]] = None,
         dimensions: Optional[List[str]] = None,
         technologies: Optional[List[str]] = None,
     ) -> "TimeseriesRegistrationMessage":
 
+        unit: Unit = Unit(unit)
         return TimeseriesRegistrationMessage(
             self.__http_client,
             metric_id=metric_id,
             display_name=display_name,
-            unit=unit,
+            unit=unit.value,
             dimensions=dimensions,
             technologies=technologies,
         )

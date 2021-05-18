@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import List
+from typing import List, Dict, Any
 from dynatrace.dynatrace_object import DynatraceObject
 
 # Schemas that don't belong to a specific api tag
@@ -25,3 +25,9 @@ class VersionCompareType(Enum):
     GREATER_EQUAL: str = "GREATER_EQUAL"
     LOWER: str = "LOWER"
     LOWER_EQUAL: str = "LOWER_EQUAL"
+
+
+class ManagementZone(DynatraceObject):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        self.name: str = raw_element.get("name")
+        self.id: str = raw_element.get("id")

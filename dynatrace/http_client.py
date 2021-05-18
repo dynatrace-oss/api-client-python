@@ -52,13 +52,23 @@ class HttpClient:
 
         self.too_many_requests_strategy = too_many_requests_strategy
         retry_delay_s = retry_delay_ms / 1000
-        self.retries = DynatraceRetry(
-            total=retries,
-            backoff_factor=retry_delay_s,
-            status_forcelist=[400, 401, 403, 413, 429, 500, 502, 503, 504],
-            allowed_methods=["TRACE", "PUT", "DELETE", "OPTIONS", "HEAD", "GET", "POST"],
-            raise_on_status=False,
-        )
+
+        try:
+            self.retries = DynatraceRetry(
+                total=retries,
+                backoff_factor=retry_delay_s,
+                status_forcelist=[400, 401, 403, 413, 429, 500, 502, 503, 504],
+                allowed_methods=["TRACE", "PUT", "DELETE", "OPTIONS", "HEAD", "GET", "POST"],
+                raise_on_status=False,
+            )
+        except TypeError:  # Older version of urllib3?
+            self.retries = DynatraceRetry(
+                total=retries,
+                backoff_factor=retry_delay_s,
+                status_forcelist=[400, 401, 403, 413, 429, 500, 502, 503, 504],
+                method_whitelist=["TRACE", "PUT", "DELETE", "OPTIONS", "HEAD", "GET", "POST"],
+                raise_on_status=False,
+            )
 
         # This is for internal dynatrace usage
         self.mc_jsession_id = mc_jsession_id
