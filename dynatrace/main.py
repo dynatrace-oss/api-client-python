@@ -13,6 +13,7 @@ from dynatrace.environment_v1.cluster_time import ClusterTimeService
 from dynatrace.environment_v1.custom_device import CustomDeviceService
 from dynatrace.environment_v1.event import EventService
 from dynatrace.environment_v1.synthetic_third_party import ThirdPartySyntheticTestsService
+from dynatrace.environment_v1.timeseries import TimeSerieService
 from dynatrace.environment_v2.activegates import ActiveGateService
 from dynatrace.environment_v2.activegates_autoupdate_configuration import ActiveGateAutoUpdateConfigurationService
 from dynatrace.environment_v2.activegates_autoupdate_jobs import ActiveGateAutoUpdateJobsService
@@ -71,3 +72,4 @@ class Dynatrace:
         self.tenant_tokens = TenantTokenService(self.__http_client)
         self.third_part_synthetic_tests: ThirdPartySyntheticTestsService = ThirdPartySyntheticTestsService(self.__http_client)
         self.tokens: TokenService = TokenService(self.__http_client)
+        self.timeseries: TimeSerieService = TimeSerieService(self.__http_client)

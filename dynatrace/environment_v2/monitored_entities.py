@@ -33,7 +33,7 @@ class EntityService:
             "fields": fields,
             "sort": sort,
         }
-        return PaginatedList(Entity, self.__http_client, "/api/v2/entities", params, list_item="entities")
+        return PaginatedList(Entity, self.__http_client, "/api/v2/entities", target_params=params, list_item="entities")
 
     def get(
         self, entity_id: str, time_from: Optional[Union[datetime, str]] = None, time_to: Optional[Union[datetime, str]] = None, fields: Optional[str] = None
@@ -41,6 +41,10 @@ class EntityService:
         params = {"from": timestamp_to_string(time_from), "to": timestamp_to_string(time_to), "fields": fields}
         response = self.__http_client.make_request(f"/api/v2/entities/{entity_id}", params=params).json()
         return Entity(raw_element=response)
+
+    def post_custom_device(self, device: "CustomDeviceCreation"):
+        # TODO - Implement
+        pass
 
     def list_types(self, page_size=50) -> PaginatedList[EntityType]:
         """
@@ -92,3 +96,7 @@ class EntityIcon(DynatraceObject):
         self.primary_icon_type = raw_element.get("primaryIconType")
         self.secondary_icon_type = raw_element.get("secondaryIconType")
         self.custom_icon_path = raw_element.get("customIconPath")
+
+
+class CustomDeviceCreation:
+    pass
