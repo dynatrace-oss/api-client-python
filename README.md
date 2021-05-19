@@ -119,7 +119,7 @@ Timeseries                             |  :warning:           |  `dt.timeseries`
 Tokens                                 |  :x:                 |                                     |
 Topology & Smartscape - Application    |  :x:                 |                                     |
 Topology & Smartscape - Custom device  |  :warning:           |  `dt.custom_devices`                |
-Topology & Smartscape - Host           |  :x:                 |                                     |
+Topology & Smartscape - Host           |  :warning:           |                                     |
 Topology & Smartscape - Process        |  :x:                 |                                     |
 Topology & Smartscape - Process group  |  :x:                 |                                     |
 Topology & Smartscape - Service        |  :x:                 |                                     |
