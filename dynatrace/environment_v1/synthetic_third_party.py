@@ -28,7 +28,6 @@ SYNTHETIC_EVENT_TYPE_SLOWDOWN = "testSlowdown"
 class ThirdPartySyntheticTestsService:
     def __init__(self, http_client: HttpClient):
         self.__http_client = http_client
-        self.__open_third_party_events: Dict[str, int] = defaultdict(int)
 
     def report_simple_thirdparty_synthetic_test(
         self,
@@ -88,17 +87,11 @@ class ThirdPartySyntheticTestsService:
     ):
         opened_events: List[ThirdPartyEventOpenNotification] = []
         resolved_events = []
+        event_id = f"{test_id}_event"
         if state == "open":
-            self.__open_third_party_events[test_id] += 1
-            event_id = f"{test_id}_{self.__open_third_party_events[test_id]}"
-
             opened_events.append(ThirdPartyEventOpenNotification(self.__http_client, test_id, event_id, name, event_type, reason, timestamp, [location_id]))
         else:
-            if test_id in self.__open_third_party_events:
-                event_ids = [f"{test_id}_{i + 1}" for i in range(self.__open_third_party_events[test_id])]
-                for event_id in event_ids:
-                    resolved_events.append(ThirdPartyEventResolvedNotification(self.__http_client, test_id, event_id, timestamp))
-                del self.__open_third_party_events[test_id]
+            resolved_events.append(ThirdPartyEventResolvedNotification(self.__http_client, test_id, event_id, timestamp))
 
         if opened_events or resolved_events:
             events = ThirdPartySyntheticEvents(self.__http_client, engine_name, opened_events, resolved_events)
