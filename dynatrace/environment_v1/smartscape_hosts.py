@@ -51,9 +51,9 @@ class MonitoringMode(Enum):
 
 class TagInfo(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.context = raw_element.get("context")
-        self.key = raw_element.get("key")
-        self.value = raw_element.get("value")
+        self.context: str = raw_element.get("context")
+        self.key: str = raw_element.get("key")
+        self.value: str = raw_element.get("value")
 
 class AgentVersion(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
@@ -93,7 +93,7 @@ class SmartScapeHostsService:
 
     def list(self, relative_time: Optional[Union[RelativeTime, str]] = RelativeTime.THREE_DAYS, page_size: int = 200, management_zone: Optional[int] = None, host_group_name: Optional[str] = None) -> HeaderPaginatedList[Host]:
         """
-        List all monitored hosts
+        List gall monitored hosts
 
         :param management_zone: Filter hosts by a management zone ID
             Default value : None
