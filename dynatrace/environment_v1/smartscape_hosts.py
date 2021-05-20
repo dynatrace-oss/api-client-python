@@ -78,7 +78,7 @@ class Host(DynatraceObject):
         self.last_seen_timestamp: int = raw_element.get("lastSeenTimestamp")
         self.tags: List[TagInfo] = [TagInfo(raw_element=tag) for tag in raw_element.get("tags")]
         self.os_type: str = raw_element.get("osType")
-        self.consumed_host_units: str = raw_element.get("consumedHostUnits")
+        self.consumed_host_units: float = raw_element.get("consumedHostUnits")
         self.agent_version: AgentVersion = AgentVersion(raw_element=raw_element.get("agentVersion"))
         self.monitoring_mode: Union[MonitoringMode, None] = MonitoringMode(raw_element.get("monitoringMode"))
         self.network_zone_id: str = raw_element.get("networkZoneId")
