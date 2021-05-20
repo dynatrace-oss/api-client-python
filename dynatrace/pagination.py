@@ -98,7 +98,6 @@ class HeaderPaginatedList(Generic[T]):
         response = self.__http_client.make_request(self.__target_url, params=self.__target_params, headers=self.__headers)
         json_response = response.json()
         headers = response.headers
-        data = []
         if "next-page-key" in headers:
             self._has_next_page = True
             self.__target_params = {"nextPageKey": headers["next-page-key"]}
@@ -106,7 +105,6 @@ class HeaderPaginatedList(Generic[T]):
             self._has_next_page = False
 
         elements = json_response
-        self.__total_count = headers["total-count"] or len(elements)
-
+        self.__total_count = headers.get("total-count") or len(elements)
         data = [self.__target_class(self.__http_client, response.headers, element) for element in elements]
         return data
