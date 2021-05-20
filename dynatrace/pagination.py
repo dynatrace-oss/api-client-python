@@ -66,3 +66,45 @@ class PaginatedList(Generic[T]):
 
             data = [self.__target_class(self.__http_client, response.headers, element) for element in elements]
         return data
+
+class HeaderPaginatedList(Generic[T]):
+    def __init__(self, target_class, http_client, target_url, target_params=None, headers=None):
+        self.__elements = list()
+        self.__target_class = target_class
+        self.__http_client: HttpClient = http_client
+        self.__target_url = target_url
+        self.__target_params = target_params
+        self.__headers = headers
+        self._has_next_page = True
+        self.__total_count = None
+        self.__page_size = None
+
+    def __getitem__(self, index):
+        pass
+
+    def __iter__(self) -> Iterator[T]:
+        for element in self.__elements:
+            yield element
+
+        while self._has_next_page:
+            new_elements = self._get_next_page()
+            for element in new_elements:
+                yield element
+    
+    def __len__(self):
+        return self.__total_count or len(self.__elements)
+
+    def _get_next_page(self):
+        response = self.__http_client.make_request(self.__target_url, params=self.__target_params, headers=self.__headers)
+        json_response = response.json()
+        headers = response.headers
+        if "next-page-key" in headers:
+            self._has_next_page = True
+            self.__target_params = {"nextPageKey": headers["next-page-key"]}
+        else:
+            self._has_next_page = False
+
+        elements = json_response
+        self.__total_count = headers.get("total-count") or len(elements)
+        data = [self.__target_class(self.__http_client, response.headers, element) for element in elements]
+        return data
