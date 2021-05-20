@@ -100,20 +100,10 @@ class ExtensionService:
         return self.__http_client.make_request(f"/api/config/v1/extensions/{extension_id}/binary").content
 
     def list_states(self, extension_id: str) -> PaginatedList["ExtensionState"]:
-        return PaginatedList(
-            ExtensionState,
-            self.__http_client,
-            f"/api/config/v1/extensions/{extension_id}/states",
-            list_item="states",
-        )
+        return PaginatedList(ExtensionState, self.__http_client, f"/api/config/v1/extensions/{extension_id}/states", list_item="states",)
 
     def list_activegate_extension_modules(self) -> PaginatedList[EntityShortRepresentation]:
-        return PaginatedList(
-            EntityShortRepresentation,
-            self.__http_client,
-            f"/api/config/v1/extensions/activeGateExtensionModules",
-            list_item="values",
-        )
+        return PaginatedList(EntityShortRepresentation, self.__http_client, f"/api/config/v1/extensions/activeGateExtensionModules", list_item="values",)
 
     def create_instance(
         self,

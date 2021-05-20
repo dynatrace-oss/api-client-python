@@ -67,6 +67,7 @@ class PaginatedList(Generic[T]):
             data = [self.__target_class(self.__http_client, response.headers, element) for element in elements]
         return data
 
+
 class HeaderPaginatedList(Generic[T]):
     def __init__(self, target_class, http_client, target_url, target_params=None, headers=None):
         self.__elements = list()
@@ -90,7 +91,7 @@ class HeaderPaginatedList(Generic[T]):
             new_elements = self._get_next_page()
             for element in new_elements:
                 yield element
-    
+
     def __len__(self):
         return self.__total_count or len(self.__elements)
 

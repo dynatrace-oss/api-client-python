@@ -20,6 +20,7 @@ from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import HeaderPaginatedList
 
+
 class RelativeTime(Enum):
     MIN = "min"
     FIVE_MINS = "5mins"
@@ -32,6 +33,7 @@ class RelativeTime(Enum):
     DAY = "day"
     THREE_DAYS = "3days"
 
+
 class OSArchitecture(Enum):
     ARM = "ARM"
     IA_SIXTY_FOUR = "IA64"
@@ -43,17 +45,20 @@ class OSArchitecture(Enum):
     X_EIGHTY_SIX = "X86"
     ZOS = "ZOS"
 
+
 class MonitoringMode(Enum):
     FULL_STACK = "FULL_STACK"
     INFRASTRUCTURE = "INFRASTRUCTURE"
     OFF = "OFF"
     NONE = None
 
+
 class TagInfo(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.context: str = raw_element.get("context")
         self.key: str = raw_element.get("key")
         self.value: str = raw_element.get("value")
+
 
 class AgentVersion(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
@@ -63,10 +68,12 @@ class AgentVersion(DynatraceObject):
         self.timestamp: str = raw_element.get("timestamp")
         self.source_revision: str = raw_element.get("sourceRevision")
 
+
 class HostGroup(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.me_id: str = raw_element.get("meId")
         self.name: str = raw_element.get("name")
+
 
 class Host(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
@@ -87,13 +94,20 @@ class Host(DynatraceObject):
         self.cpu_cores: int = raw_element.get("cpuCores")
         self.os_version: str = raw_element.get("osVersion")
 
+
 class SmartScapeHostsService:
     def __init__(self, http_client: HttpClient):
         self.__http_client = http_client
 
-    def list(self, relative_time: Optional[Union[RelativeTime, str]] = RelativeTime.THREE_DAYS, page_size: int = 200, management_zone: Optional[int] = None, host_group_name: Optional[str] = None) -> HeaderPaginatedList[Host]:
+    def list(
+        self,
+        relative_time: Optional[Union[RelativeTime, str]] = RelativeTime.THREE_DAYS,
+        page_size: int = 200,
+        management_zone: Optional[int] = None,
+        host_group_name: Optional[str] = None,
+    ) -> HeaderPaginatedList[Host]:
         """
-        List gall monitored hosts
+        List all monitored hosts
 
         :param management_zone: Filter hosts by a management zone ID
             Default value : None
@@ -102,6 +116,10 @@ class SmartScapeHostsService:
         :param relative_time: Relative time ranger to check for (72 hours if not set)
             Default value : RelativeTime.THREE_DAYS
         """
-        params = {"pageSize": page_size, "relativeTime": RelativeTime(relative_time).value, 
-                    "managementZone": management_zone if management_zone else None, "hostGroupName": host_group_name if host_group_name else None}
+        params = {
+            "pageSize": page_size,
+            "relativeTime": RelativeTime(relative_time).value,
+            "managementZone": management_zone if management_zone else None,
+            "hostGroupName": host_group_name if host_group_name else None,
+        }
         return HeaderPaginatedList(Host, self.__http_client, f"/api/v1/entity/infrastructure/hosts", params)

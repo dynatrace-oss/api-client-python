@@ -53,13 +53,7 @@ class ThirdPartySyntheticTestsService:
             detailed_steps = [SyntheticTestStep(self.__http_client, 1, step_title)]
 
         monitor = ThirdPartySyntheticMonitor(
-            self.__http_client,
-            test_id,
-            test_title,
-            [synthetic_location],
-            schedule_interval,
-            steps=detailed_steps,
-            edit_link=edit_link,
+            self.__http_client, test_id, test_title, [synthetic_location], schedule_interval, steps=detailed_steps, edit_link=edit_link,
         )
         if detailed_step_results is None:
             detailed_step_results = [SyntheticMonitorStepResult(self.__http_client, 1, timestamp, response_time_millis=response_time)]
@@ -75,15 +69,7 @@ class ThirdPartySyntheticTestsService:
         return SyntheticTestStep(self.__http_client, step_id, step_title)
 
     def report_simple_thirdparty_synthetic_test_event(
-        self,
-        test_id: str,
-        name: str,
-        location_id: str,
-        timestamp: datetime,
-        state: str,
-        event_type: str,
-        reason: str,
-        engine_name: str,
+        self, test_id: str, name: str, location_id: str, timestamp: datetime, state: str, event_type: str, reason: str, engine_name: str,
     ):
         opened_events: List[ThirdPartyEventOpenNotification] = []
         resolved_events = []
@@ -226,12 +212,7 @@ class ThirdPartySyntheticLocationTestResult(DynatraceObject):
 
 class SyntheticMonitorStepResult(DynatraceObject):
     def __init__(
-        self,
-        http_client,
-        step_id: int,
-        start_timestamp: datetime,
-        response_time_millis: Optional[int] = None,
-        error: Optional["SyntheticMonitorError"] = None,
+        self, http_client, step_id: int, start_timestamp: datetime, response_time_millis: Optional[int] = None, error: Optional["SyntheticMonitorError"] = None,
     ):
 
         raw_element = {
@@ -272,15 +253,7 @@ class ThirdPartySyntheticEvents(DynatraceObject):
 
 class ThirdPartyEventOpenNotification(DynatraceObject):
     def __init__(
-        self,
-        http_client,
-        test_id: str,
-        event_id: str,
-        name: str,
-        event_type: str,
-        reason: str,
-        start_timestamp: datetime,
-        location_ids: List[str],
+        self, http_client, test_id: str, event_id: str, name: str, event_type: str, reason: str, start_timestamp: datetime, location_ids: List[str],
     ):
 
         raw_element = {

@@ -94,12 +94,7 @@ class TimeSerieService:
 
         unit: Unit = Unit(unit)
         return TimeseriesRegistrationMessage(
-            self.__http_client,
-            metric_id=metric_id,
-            display_name=display_name,
-            unit=unit.value,
-            dimensions=dimensions,
-            technologies=technologies,
+            self.__http_client, metric_id=metric_id, display_name=display_name, unit=unit.value, dimensions=dimensions, technologies=technologies,
         )
 
 
