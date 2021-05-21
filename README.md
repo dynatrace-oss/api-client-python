@@ -1,6 +1,6 @@
-# dt-api
+# dt - Dynatrace Python API Client
 
-**dtapi** is a Python client for the [Dynatrace Rest API].   
+**dt** is a Python client for the [Dynatrace Rest API].   
 It focuses on ease of use and nice type hints, perfect to explore the API and create quick scripts
 
 [Dynatrace Rest API]: https://www.dynatrace.com/support/help/dynatrace-api
@@ -8,7 +8,7 @@ It focuses on ease of use and nice type hints, perfect to explore the API and cr
 ## Install
 
 ```bash
-$ pip install dtapi
+$ pip install dt
 ```
 ## Simple Demo
 
