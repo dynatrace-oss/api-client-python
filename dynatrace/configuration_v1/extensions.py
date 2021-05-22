@@ -100,10 +100,20 @@ class ExtensionService:
         return self.__http_client.make_request(f"/api/config/v1/extensions/{extension_id}/binary").content
 
     def list_states(self, extension_id: str) -> PaginatedList["ExtensionState"]:
-        return PaginatedList(ExtensionState, self.__http_client, f"/api/config/v1/extensions/{extension_id}/states", list_item="states",)
+        return PaginatedList(
+            ExtensionState,
+            self.__http_client,
+            f"/api/config/v1/extensions/{extension_id}/states",
+            list_item="states",
+        )
 
     def list_activegate_extension_modules(self) -> PaginatedList[EntityShortRepresentation]:
-        return PaginatedList(EntityShortRepresentation, self.__http_client, f"/api/config/v1/extensions/activeGateExtensionModules", list_item="values",)
+        return PaginatedList(
+            EntityShortRepresentation,
+            self.__http_client,
+            f"/api/config/v1/extensions/activeGateExtensionModules",
+            list_item="values",
+        )
 
     def create_instance(
         self,
@@ -141,15 +151,28 @@ class ExtensionProperty(DynatraceObject):
 
 class ExtensionConfigurationDto(DynatraceObject):
     def post(self):
-        return self._http_client.make_request(f"/api/config/v1/extensions/{self.extension_id}/instances", params=self._raw_element, method="POST")
+
+        return self._http_client.make_request(f"/api/config/v1/extensions/{self.extension_id}/instances", params=self.to_json(), method="POST")
 
     def validate(self):
-        return self._http_client.make_request(f"/api/config/v1/extensions/{self.extension_id}/instances/validator", params=self._raw_element, method="POST")
+        return self._http_client.make_request(f"/api/config/v1/extensions/{self.extension_id}/instances/validator", params=self.to_json(), method="POST")
+
+    def to_json(self) -> Dict[str, Any]:
+        return {
+            "extensionId": self.extension_id,
+            "enabled": self.enabled,
+            "useGlobal": self.use_global,
+            "properties": self.properties,
+            "hostId": self.host_id,
+            "activeGate": self.active_gate.to_json(),
+            "endpointId": self.endpoint_id,
+            "endpointName": self.endpoint_name,
+        }
 
     def _create_from_raw_data(self, raw_element):
         self.extension_id: str = raw_element.get("extensionId")
         self.enabled: bool = raw_element.get("enabled")
-        self.use_global: bool = raw_element.get("useGlobal")
+        self.use_global: bool = raw_element.get("useGlobal", True)
         self.properties: Dict[str, Any] = raw_element.get("properties")
         self.host_id: str = raw_element.get("hostId")
         self.active_gate: EntityShortRepresentation = EntityShortRepresentation(self._http_client, None, raw_element.get("activeGate"))

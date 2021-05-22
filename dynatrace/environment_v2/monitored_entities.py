@@ -100,6 +100,9 @@ class EntityShortRepresentation(DynatraceObject):
         self.name = raw_element.get("name")
         self.description = raw_element.get("description")
 
+    def to_json(self) -> Dict[str, Any]:
+        return {"id": self.id, "name": self.name, "description": self.description}
+
 
 class EntityId(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
