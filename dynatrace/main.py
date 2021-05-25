@@ -28,7 +28,7 @@ from dynatrace.configuration_v1.plugins import PluginService
 from dynatrace.environment_v1.cluster_time import ClusterTimeService
 from dynatrace.environment_v1.custom_device import CustomDeviceService
 from dynatrace.environment_v1.event import EventService
-from dynatrace.environment_v1.oneagent import OneAgentonaHostService
+from dynatrace.environment_v1.oneagents import OneAgentOnAHostService
 from dynatrace.environment_v1.smartscape_hosts import SmartScapeHostsService
 from dynatrace.environment_v1.synthetic_monitors import SyntheticMonitorsService
 from dynatrace.environment_v1.synthetic_third_party import ThirdPartySyntheticTestsService
@@ -78,7 +78,7 @@ class Dynatrace:
         self.maintenance_windows = MaintenanceWindowService(self.__http_client)
         self.metrics: MetricService = MetricService(self.__http_client)
         self.notifications: NotificationService = NotificationService(self.__http_client)
-        self.oneagents: OneAgentonaHostService = OneAgentonaHostService(self.__http_client)
+        self.oneagents: OneAgentOnAHostService = OneAgentOnAHostService(self.__http_client)
         self.plugins: PluginService = PluginService(self.__http_client)
         self.smartscape_hosts: SmartScapeHostsService = SmartScapeHostsService(self.__http_client)
         self.synthetic_monitors: SyntheticMonitorsService = SyntheticMonitorsService(self.__http_client)
