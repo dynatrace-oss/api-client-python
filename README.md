@@ -140,7 +140,7 @@ Anomaly detection - Metric events                    |  :x:                 |   
 Anomaly detection - Process groups                   |  :x:                 |                        |
 Anomaly detection - Services                         |  :x:                 |                        |
 Anomaly detection - VMware                           |  :x:                 |                        |
-Automatically applied tags                           |  :x:                 |                        |
+Automatically applied tags                           |  :warning:           |                        |
 AWS credentials configuration                        |  :x:                 |                        |
 AWS PrivateLink                                      |  :x:                 |                        |
 Azure credentials configuration                      |  :x:                 |                        |
