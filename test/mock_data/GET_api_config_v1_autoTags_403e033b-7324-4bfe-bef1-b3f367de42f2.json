@@ -1,0 +1,34 @@
+{
+    "metadata":{
+       "configurationVersions":[
+          7
+       ],
+       "clusterVersion":"1.214.112.20210409-064503"
+    },
+    "id":"403e033b-7324-4bfe-bef1-b3f367de42f2",
+    "name":"frontend",
+    "rules":[
+       {
+          "type":"SERVICE",
+          "enabled":true,
+          "valueFormat":"",
+          "propagationTypes":[
+             
+          ],
+          "conditions":[
+             {
+                "key":{
+                   "attribute":"PROCESS_GROUP_NAME"
+                },
+                "comparisonInfo":{
+                   "type":"STRING",
+                   "operator":"CONTAINS",
+                   "value":"frontend",
+                   "negate":false,
+                   "caseSensitive":false
+                }
+             }
+          ]
+       }
+    ]
+ }
