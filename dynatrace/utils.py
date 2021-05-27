@@ -61,3 +61,9 @@ def int64_to_datetime(timestamp: Optional[int]) -> Optional[datetime]:
     if timestamp is None or not timestamp:
         return None
     return datetime.utcfromtimestamp(timestamp / 1000)
+
+
+def datetime_to_int64(timestamp: Optional[datetime]) -> Optional[int]:
+    if not isinstance(timestamp, datetime):
+        return timestamp
+    return timestamp.timestamp() * 1000
