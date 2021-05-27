@@ -32,7 +32,6 @@ class AutoTagService:
 
     def __init__(self, http_client: HttpClient):
         self.__http_client = http_client
-        pass
 
     def list(self, page_size: int = 200) -> PaginatedList["AutoTagShortRepresentation"]:
         """

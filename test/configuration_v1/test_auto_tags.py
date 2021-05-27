@@ -34,7 +34,6 @@ def test_get(dt: Dynatrace):
             assert rule.propagation_types == []
             assert isinstance(rule.conditions, List)
             for condition in rule.conditions:
-                print(condition)
                 assert isinstance(condition, EntityRuleEngineCondition)
                 assert isinstance(condition.key, ConditionKey)
                 assert condition.key.attribute == ConditionKeyAttribute.PROCESS_GROUP_NAME
