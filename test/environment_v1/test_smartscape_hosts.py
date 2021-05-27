@@ -3,6 +3,7 @@ from dynatrace.environment_v1.smartscape_hosts import Host, MonitoringMode, OSAr
 from dynatrace.pagination import HeaderPaginatedList
 from dynatrace.environment_v1.smartscape_hosts import Host
 
+
 def test_list(dt: Dynatrace):
     hosts = dt.smartscape_hosts.list(page_size=20)
     assert isinstance(hosts, HeaderPaginatedList)

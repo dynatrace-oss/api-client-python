@@ -1,8 +1,19 @@
 from typing import List
 from dynatrace import Dynatrace
-from dynatrace.configuration_v1.auto_tags import AutoTag, AutoTagRule, AutoTagRuleType, AutoTagShortRepresentation, ComparisonBasic, ComparisonBasicType, ConditionKey, ConditionKeyAttribute, EntityRuleEngineCondition
+from dynatrace.configuration_v1.auto_tags import (
+    AutoTag,
+    AutoTagRule,
+    AutoTagRuleType,
+    AutoTagShortRepresentation,
+    ComparisonBasic,
+    ComparisonBasicType,
+    ConditionKey,
+    ConditionKeyAttribute,
+    EntityRuleEngineCondition,
+)
 from dynatrace.environment_v2.schemas import ConfigurationMetadata
 from dynatrace.pagination import PaginatedList
+
 
 def test_list(dt: Dynatrace):
     tags = dt.auto_tags.list()
@@ -13,6 +24,7 @@ def test_list(dt: Dynatrace):
         assert tag.id == "403e033b-7324-4bfe-bef1-b3f367de42f2"
         assert tag.name == "frontend"
         break
+
 
 def test_get(dt: Dynatrace):
     tags = dt.auto_tags.list()
@@ -46,4 +58,3 @@ def test_get(dt: Dynatrace):
                 break
             break
         break
-

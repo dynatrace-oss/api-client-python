@@ -60,7 +60,16 @@ class Dynatrace:
         mc_sso_csrf_cookie: Optional[str] = None,
     ):
         self.__http_client = HttpClient(
-            base_url, token, log, proxies, too_many_requests_strategy, retries, retry_delay_ms, mc_jsession_id, mc_b925d32c, mc_sso_csrf_cookie,
+            base_url,
+            token,
+            log,
+            proxies,
+            too_many_requests_strategy,
+            retries,
+            retry_delay_ms,
+            mc_jsession_id,
+            mc_b925d32c,
+            mc_sso_csrf_cookie,
         )
 
         self.activegates: ActiveGateService = ActiveGateService(self.__http_client)

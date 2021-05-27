@@ -67,7 +67,13 @@ class PluginShortRepresentation(EntityShortRepresentation):
 
     @property
     def endpoints(self) -> PaginatedList[EndpointShortRepresentation]:
-        return PaginatedList(EndpointShortRepresentation, self._http_client, f"/api/config/v1/plugins/{self.id}/endpoints", None, list_item="values",)
+        return PaginatedList(
+            EndpointShortRepresentation,
+            self._http_client,
+            f"/api/config/v1/plugins/{self.id}/endpoints",
+            None,
+            list_item="values",
+        )
 
     @property
     def states(self) -> PaginatedList[PluginState]:

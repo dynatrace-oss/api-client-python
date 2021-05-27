@@ -28,8 +28,8 @@ from dynatrace.environment_v2.monitored_entities import EntityShortRepresentatio
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
 
-class AutoTagService:
 
+class AutoTagService:
     def __init__(self, http_client: HttpClient):
         self.__http_client = http_client
 
@@ -43,6 +43,7 @@ class AutoTagService:
         params = {"pageSize": page_size}
         return PaginatedList(AutoTagShortRepresentation, self.__http_client, f"/api/config/v1/autoTags", params, list_item="values")
 
+
 class PropagationType(Enum):
     SERVICE_TO_PROCESS_GROUP_LIKE = "SERVICE_TO_PROCESS_GROUP_LIKE"
     SERVICE_TO_HOST_LIKE = "SERVICE_TO_HOST_LIKE"
@@ -52,6 +53,7 @@ class PropagationType(Enum):
     AZURE_TO_PG = "AZURE_TO_PG"
     AZURE_TO_SERVICE = "AZURE_TO_SERVICE"
     NONE = None
+
 
 class ConditionKeyAttribute(Enum):
     APPMON_SERVER_NAME = "APPMON_SERVER_NAME"
@@ -251,6 +253,7 @@ class ConditionKeyAttribute(Enum):
     WEB_APPLICATION_TYPE = "WEB_APPLICATION_TYPE"
     NONE = None
 
+
 class ConditionKeyType(Enum):
     PROCESS_CUSTOM_METADATA_KEY = "PROCESS_CUSTOM_METADATA_KEY"
     HOST_CUSTOM_METADATA_KEY = "HOST_CUSTOM_METADATA_KEY"
@@ -258,6 +261,7 @@ class ConditionKeyType(Enum):
     STRING = "STRING"
     STATIC = "STATIC"
     NONE = None
+
 
 class ComparisonBasicType(Enum):
     APPLICATION_TYPE = "APPLICATION_TYPE"
@@ -288,6 +292,7 @@ class ComparisonBasicType(Enum):
     TAG = "TAG"
     NONE = None
 
+
 class AutoTagRuleType(Enum):
     APPLICATION = "APPLICATION"
     AWS_APPLICATION_LOAD_BALANCER = "AWS_APPLICATION_LOAD_BALANCER"
@@ -308,6 +313,7 @@ class AutoTagRuleType(Enum):
     SYNTHETIC_TEST = "SYNTHETIC_TEST"
     NONE = None
 
+
 class ComparisonBasic(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.operator: str = raw_element.get("operator")
@@ -316,15 +322,18 @@ class ComparisonBasic(DynatraceObject):
         self.type: ComparisonBasicType = ComparisonBasicType(raw_element.get("type"))
         self.case_sensitive: bool = raw_element.get("caseSensitive")
 
+
 class ConditionKey(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.attribute: ConditionKeyAttribute = ConditionKeyAttribute(raw_element.get("attribute"))
         self.type: ConditionKeyType = ConditionKeyType(raw_element.get("type"))
 
+
 class EntityRuleEngineCondition(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.key: ConditionKey = ConditionKey(raw_element=raw_element.get("key"))
         self.comparison_info: ComparisonBasic = ComparisonBasic(raw_element=raw_element.get("comparisonInfo"))
+
 
 class EntitySelectorBasedAutoTagRule(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
@@ -332,13 +341,17 @@ class EntitySelectorBasedAutoTagRule(DynatraceObject):
         self.entity_selector: str = raw_element.get("entitySelector")
         self.value_format: str = raw_element.get("valueFormat")
 
+
 class AutoTagRule(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.type: AutoTagRuleType = AutoTagRuleType(raw_element.get("type"))
         self.enabled: bool = raw_element.get("enabled")
         self.value_format: str = raw_element.get("valueFormat")
-        self.propagation_types: List[PropagationType] =  [PropagationType(prop_type) for prop_type in (raw_element.get("propagationTypes") or [])]
-        self.conditions: List[EntityRuleEngineCondition] = [EntityRuleEngineCondition(raw_element=condition) for condition in (raw_element.get("conditions") or [])]
+        self.propagation_types: List[PropagationType] = [PropagationType(prop_type) for prop_type in (raw_element.get("propagationTypes") or [])]
+        self.conditions: List[EntityRuleEngineCondition] = [
+            EntityRuleEngineCondition(raw_element=condition) for condition in (raw_element.get("conditions") or [])
+        ]
+
 
 class AutoTag(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
@@ -347,7 +360,10 @@ class AutoTag(DynatraceObject):
         self.name: str = raw_element.get("name")
         self.description: str = raw_element.get("description")
         self.rules: List[AutoTagRule] = [AutoTagRule(raw_element=rule) for rule in raw_element.get("rules")]
-        self.entity_selector_based_rules: List[EntitySelectorBasedAutoTagRule] = [EntitySelectorBasedAutoTagRule(raw_element=rule) for rule in (raw_element.get("entitySelectorBasedRules") or [])]
+        self.entity_selector_based_rules: List[EntitySelectorBasedAutoTagRule] = [
+            EntitySelectorBasedAutoTagRule(raw_element=rule) for rule in (raw_element.get("entitySelectorBasedRules") or [])
+        ]
+
 
 class AutoTagShortRepresentation(EntityShortRepresentation):
     def get_full_configuration(self):
