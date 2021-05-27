@@ -70,15 +70,14 @@ class OsType(Enum):
     SOLARIS = "SOLARIS"
     ZOS = "ZOS"
 
-    
+
 class OneAgentOnAHostService:
     def __init__(self, http_client: HttpClient):
         self.__http_client = http_client
 
-
     def list(
-        self, 
-        include_details: Optional[bool] = None, 
+        self,
+        include_details: Optional[bool] = None,
         start_timestamp: Optional[Union[datetime, int]] = None,
         end_timestamp: Optional[Union[datetime, int]] = None,
         relative_time: Optional[str] = None,
@@ -86,14 +85,13 @@ class OneAgentOnAHostService:
         entity: Optional[List[str]] = None,
         mz_id: Optional[str] = None,
         management_zone: Optional[str] = None,
-        network_zone_id:  Optional[str] = None,
-        host_group_id:  Optional[str] = None,
-        host_group_name:  Optional[str] = None,
+        network_zone_id: Optional[str] = None,
+        host_group_id: Optional[str] = None,
+        host_group_name: Optional[str] = None,
         os_type: Optional[Union[OsType, str]] = None,
         availability_state: Optional[Union[AvailabilityState, str]] = None,
         monitoring_type: Optional[Union[MonitoringType, str]] = None,
         auto_update: Optional[Union[AutoUpdate, str]] = None,
-        next_page_key: Optional[str] = None,
     ) -> PaginatedList["HostAgentInfo"]:
         """
         Lists OneAgents on a Host. Older API - timestamps are of type integer and therefore require conversion
@@ -110,14 +108,12 @@ class OneAgentOnAHostService:
             "networkZoneId": network_zone_id,
             "hostGroupId": host_group_id,
             "hostGroupName": host_group_name,
-            "osType": OsType(os_type) if os_type else None,
-            "availabilityState": AvailabilityState(availability_state) if availability_state else None,
-            "monitoringType": MonitoringType(monitoring_type) if monitoring_type else None,
-            "autoUpdateSetting": AutoUpdate(auto_update) if auto_update else None,
-            "nextPageKey": next_page_key
+            "osType": OsType(os_type).value if os_type else None,
+            "availabilityState": AvailabilityState(availability_state).value if availability_state else None,
+            "monitoringType": MonitoringType(monitoring_type).value if monitoring_type else None,
+            "autoUpdateSetting": AutoUpdate(auto_update).value if auto_update else None,
         }
         return PaginatedList(HostAgentInfo, self.__http_client, "/api/v1/oneagents", params, list_item="hosts")
-
 
 
 # todo - create class objects for ModuleInfo[] and PluginInfo[]
@@ -152,8 +148,8 @@ class HostInfo(DynatraceObject):
 
 class HostGroup(DynatraceObject):
     def _create_from_raw_data(self, raw_element):
-        self.me_id : str = raw_element.get("meId")
-        self.name : str = raw_element.get("name")
+        self.me_id: str = raw_element.get("meId")
+        self.name: str = raw_element.get("name")
 
 
 class TagInfo(DynatraceObject):
@@ -162,5 +158,3 @@ class TagInfo(DynatraceObject):
         self.context: str = raw_element.get("context")
         self.key: str = raw_element.get("key")
         self.value: str = raw_element.get("value")
-
-    
