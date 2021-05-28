@@ -1,8 +1,6 @@
 # Contributing
 
-To contribute, [fork] this repository and clone it.  
-[fork]: https://www.dynatrace.com/support/help/dynatrace-api
-
+To contribute, [fork](https://www.dynatrace.com/support/help/dynatrace-api) this repository and clone it.  
 
 ### Setting up your environment 
 
