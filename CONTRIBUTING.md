@@ -2,8 +2,17 @@
 
 To contribute, [fork](https://www.dynatrace.com/support/help/dynatrace-api) this repository and clone it.  
 
-### Setting up your environment 
+[Setup](#setup)  
+[Developing](#developing)  
+[Tests](#tests)  
+[Code formatting](#code-formatting)  
 
+
+<a name="setup"/>
+
+## Setup
+
+### Setting up your environment 
 
 ```shell
 git clone git@github.com:<your_username>/api-client-python.git
@@ -31,6 +40,10 @@ Make sure tests pass:
 ```shell
 pytest -v 
 ```
+
+<a name="developing"/>
+
+## Developing
 
 ### Adding new endpoints
 
@@ -77,6 +90,10 @@ So that you can easily access them during development, copy classes names, etc, 
   
 You can take a look at the activegate implementation mentioned above for how to implement types.
 
+<a name="tests"/>
+
+## Tests
+
 ### Generating test data
 
 While developing, you can copy the `dev_helper.py` script to locally test your code.  
@@ -116,5 +133,19 @@ def test_list(dt: Dynatrace):
 Write tests for all methods you have implemented, be sure to test all possible variations of the parameters you accept, example if you accept a `datetime` or a `str` for a parameter, test both.
 
 When it is done, you can create a pull request with your changes, we will review it, maybe ask for changes and approve it!
+
+Always make sure your tests pass before pushing, with `pytest -v`
+
+<a name="code-formatting"/>
+
+## Code formatting
+
+We use `black`, install it with `pip install black`, and use the option `--line-length 160`
+
+You can setup your IDE to run this automatically as you save your files (recommended), or you can code as you please, and run:
+
+`black --line-length 160 .`
+
+On the root folder, before commiting. We are looking into automating this as a github action.
 
 ### Thanks for contributing!
