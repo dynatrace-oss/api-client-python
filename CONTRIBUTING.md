@@ -16,7 +16,7 @@ To contribute, [fork](https://www.dynatrace.com/support/help/dynatrace-api) this
 
 ```shell
 git clone git@github.com:<your_username>/api-client-python.git
-cd api-client-python.git
+cd api-client-python
 ```
 
 After that, create a python virtual environment, this project needs at minimum `python 3.6`.  
