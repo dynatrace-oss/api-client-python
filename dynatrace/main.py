@@ -38,6 +38,7 @@ from dynatrace.environment_v2.activegates import ActiveGateService
 from dynatrace.environment_v2.activegates_autoupdate_configuration import ActiveGateAutoUpdateConfigurationService
 from dynatrace.environment_v2.activegates_autoupdate_jobs import ActiveGateAutoUpdateJobsService
 from dynatrace.environment_v2.audit_logs import AuditLogsService
+from dynatrace.environment_v2.problems import ProblemsServiceV2
 from dynatrace.environment_v2.monitored_entities import EntityService
 from dynatrace.environment_v2.metrics import MetricService
 from dynatrace.environment_v2.tokens_api import TokenService
@@ -90,6 +91,7 @@ class Dynatrace:
         self.metrics: MetricService = MetricService(self.__http_client)
         self.notifications: NotificationService = NotificationService(self.__http_client)
         self.oneagents: OneAgentOnAHostService = OneAgentOnAHostService(self.__http_client)
+        self.problems: ProblemsServiceV2 = ProblemsServiceV2(self.__http_client)
         self.plugins: PluginService = PluginService(self.__http_client)
         self.smartscape_hosts: SmartScapeHostsService = SmartScapeHostsService(self.__http_client)
         self.synthetic_monitors: SyntheticMonitorsService = SyntheticMonitorsService(self.__http_client)
