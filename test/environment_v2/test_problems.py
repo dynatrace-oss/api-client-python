@@ -72,7 +72,9 @@ def test_get(dt: Dynatrace):
     assert problem.start_time == int64_to_datetime(1622807640000)
     assert problem.end_time == int64_to_datetime(1622807820000)
     assert problem.evidence_details.total_count == 4
+    assert len(problem.evidence_details.details) == 4
     assert problem.recent_comments.total_count == 2
+    assert len(problem.recent_comments.comments) == 2
 
 
 def test_close(dt: Dynatrace):
