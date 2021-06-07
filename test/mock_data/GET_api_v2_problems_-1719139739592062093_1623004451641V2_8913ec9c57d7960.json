@@ -1,0 +1,63 @@
+{
+    "problemId": "-1719139739592062093_1623004451641V2",
+    "displayId": "P-210620",
+    "title": "custom host disconnected error",
+    "impactLevel": "INFRASTRUCTURE",
+    "severityLevel": "AVAILABILITY",
+    "status": "OPEN",
+    "affectedEntities": [
+    {
+        "entityId": {
+        "id": "HOST-44DD554D0DA01178",
+        "type": "HOST"
+        },
+        "name": "TAG009444549397"
+    }
+    ],
+    "impactedEntities": [
+    {
+        "entityId": {
+        "id": "HOST-44DD554D0DA01178",
+        "type": "HOST"
+        },
+        "name": "TAG009444549397"
+    }
+    ],
+    "rootCauseEntity": null,
+    "managementZones": [
+    {
+        "id": "8692695975020499402",
+        "name": "Operations Team"
+    }
+    ],
+    "entityTags": [
+    {
+        "context": "CONTEXTLESS",
+        "key": "Application",
+        "value": "EasyTravel",
+        "stringRepresentation": "Application:EasyTravel"
+    },
+    {
+        "context": "CONTEXTLESS",
+        "key": "Environment",
+        "value": "UAT",
+        "stringRepresentation": "Environment:UAT"
+    }
+    ],
+    "problemFilters": [
+    {
+        "id": "c21f969b-5f03-333d-83e0-4f8f136e7682",
+        "name": "Default"
+    },
+    {
+        "id": "c48a68f0-7cab-4c00-8822-9486b98c5e4d",
+        "name": "Keptn"
+    },
+    {
+        "id": "8bc2041d-9282-4c1d-9b21-4ae775cf00ae",
+        "name": "123"
+    }
+    ],
+    "startTime": 1623004451641,
+    "endTime": -1
+}
