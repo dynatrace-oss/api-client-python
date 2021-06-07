@@ -114,7 +114,7 @@ class ProblemService:
         :return: HTTP Response
         """
         params = {"message": message, "context": context}
-        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{problem_id}", param=params, method="POST")
+        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{problem_id}/comments", params=params, method="POST")
 
     def update_comment(self, problem_id: str, comment_id: str, message: str, context: Optional[str] = None) -> Response:
         """Updates the specified Comment on a Problem.
@@ -148,19 +148,19 @@ class Problem(DynatraceObject):
         self.severity_level: str = SeverityLevel(raw_element.get("severityLevel"))
         self.impact_level: str = ImpactLevel(raw_element.get("impactLevel"))
         self.start_time: datetime = int64_to_datetime(raw_element.get("startTime"))
-        self.end_time: datetime = int64_to_datetime(raw_element.get("endTime"))
+        self.end_time: datetime = int64_to_datetime(raw_element.get("endTime")) if raw_element.get("endTime") != -1 else None
 
         # optional
-        self.management_zones: Optional[List[ManagementZone]] = [ManagementZone(m) for m in raw_element.get("managementZones", [])]
-        self.affected_entities: Optional[List[EntityStub]] = [EntityStub(e) for e in raw_element.get("affectedEntities", [])]
-        self.recent_comments: Optional[CommentList] = CommentList(raw_element.get("recentComments"))
-        self.impacted_entities: Optional[List[EntityStub]] = [EntityStub(e) for e in raw_element.get("impactedEntities", [])]
-        self.linked_problem_info: Optional[LinkedProblem] = LinkedProblem(raw_element.get("linkedProblemInfo"))
-        self.root_cause_entity: Optional[EntityStub] = EntityStub(raw_element.get("rootCauseEntity"))
-        self.problemFilters: Optional[List[AlertingProfileStub]] = [AlertingProfileStub(a) for a in raw_element.get("problemFilters", [])]
-        self.evidence_details: Optional[EvidenceDetails] = EvidenceDetails(raw_element.get("evidenceDetails"))
-        self.impactAnalysis: Optional[List[Impact]] = [Impact(i) for i in raw_element.get("impactAnalysis", [])]
-        self.entity_tags: Optional[List[METag]] = [METag(t) for t in raw_element.get("entityTags", [])]
+        self.management_zones: Optional[List[ManagementZone]] = [ManagementZone(raw_element=m) for m in raw_element.get("managementZones", [])]
+        self.affected_entities: Optional[List[EntityStub]] = [EntityStub(raw_element=e) for e in raw_element.get("affectedEntities", [])]
+        self.recent_comments: Optional[CommentList] = CommentList(raw_element=raw_element.get("recentComments"))
+        self.impacted_entities: Optional[List[EntityStub]] = [EntityStub(raw_element=e) for e in raw_element.get("impactedEntities", [])]
+        self.linked_problem_info: Optional[LinkedProblem] = LinkedProblem(raw_element=raw_element.get("linkedProblemInfo"))
+        self.root_cause_entity: Optional[EntityStub] = EntityStub(raw_element=raw_element.get("rootCauseEntity"))
+        self.problem_filters: Optional[List[AlertingProfileStub]] = [AlertingProfileStub(raw_element=a) for a in raw_element.get("problemFilters", [])]
+        self.evidence_details: Optional[EvidenceDetails] = EvidenceDetails(raw_element=raw_element.get("evidenceDetails"))
+        self.impact_analysis: Optional[ImpactAnalysis] = ImpactAnalysis(raw_element=raw_element.get("impactAnalysis"))
+        self.entity_tags: Optional[List[METag]] = [METag(raw_element=t) for t in raw_element.get("entityTags", [])]
 
 
 class ProblemCloseResult(DynatraceObject):
@@ -168,7 +168,7 @@ class ProblemCloseResult(DynatraceObject):
         self.problem_id: str = raw_element.get("problemId")
         self.closing: bool = raw_element.get("closing")
         self.close_timestamp: datetime = int64_to_datetime(raw_element.get("closeTimestamp"))
-        self.comment: Optional[Comment] = Comment(raw_element.get("comment"))
+        self.comment: Optional[Comment] = Comment(raw_element=raw_element.get("comment"))
 
 
 class LinkedProblem(DynatraceObject):
@@ -180,7 +180,7 @@ class LinkedProblem(DynatraceObject):
 class CommentList(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.total_count: int = raw_element.get("totalCount")
-        self.comments: Optional[List[Comment]] = [Comment(c) for c in raw_element.get("comments", [])]
+        self.comments: Optional[List[Comment]] = [Comment(raw_element=c) for c in raw_element.get("comments", [])]
 
 
 class Comment(DynatraceObject):
@@ -196,22 +196,22 @@ class EvidenceDetails(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.total_count: int = raw_element.get("totalCount")
         self.details: Optional[List[Evidence]] = (
-            [EventEvidence(e) for e in raw_element.get("details", []) if e.get("evidenceType") == EvidenceType.EVENT]
-            + [MetricEvidence(e) for e in raw_element.get("details", []) if e.get("evidenceType") == EvidenceType.METRIC]
-            + [TransactionalEvidence(e) for e in raw_element.get("details", []) if e.get("evidenceType") == EvidenceType.TRANSACTIONAL]
-            + [MaintenanceWindowEvidence(e) for e in raw_element.get("details", []) if e.get("evidenceType") == EvidenceType.MAINTENANCE_WINDOW]
-            + [AvailabilityEvidence(e) for e in raw_element.get("details", []) if e.get("evidenceType") == EvidenceType.AVAILABILITY]
+            [EventEvidence(raw_element=e) for e in raw_element.get("details", []) if e.get("evidenceType") == EvidenceType.EVENT]
+            + [MetricEvidence(raw_element=e) for e in raw_element.get("details", []) if e.get("evidenceType") == EvidenceType.METRIC]
+            + [TransactionalEvidence(raw_element=e) for e in raw_element.get("details", []) if e.get("evidenceType") == EvidenceType.TRANSACTIONAL]
+            + [MaintenanceWindowEvidence(raw_element=e) for e in raw_element.get("details", []) if e.get("evidenceType") == EvidenceType.MAINTENANCE_WINDOW]
+            + [AvailabilityEvidence(raw_element=e) for e in raw_element.get("details", []) if e.get("evidenceType") == EvidenceType.AVAILABILITY]
         )
 
 
 class Evidence(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.evidence_type: EvidenceType = EvidenceType(raw_element.get("evidenceType"))
+        self.evidence_type: EvidenceType = EvidenceType(raw_element=raw_element.get("evidenceType"))
         self.display_name: str = raw_element.get("displayName")
-        self.entity: EntityStub = EntityStub(raw_element.get("entity"))
+        self.entity: EntityStub = EntityStub(raw_element=raw_element.get("entity"))
         self.root_cause_relevant: bool = raw_element.get("rootCauseRelevant")
         self.start_time: datetime = int64_to_datetime(raw_element.get("startTime"))
-        self.grouping_entity: Optional[EntityStub] = EntityStub(raw_element.get("groupingEntity"))
+        self.grouping_entity: Optional[EntityStub] = EntityStub(raw_element=raw_element.get("groupingEntity"))
 
 
 class EventEvidence(Evidence):
@@ -227,7 +227,7 @@ class TransactionalEvidence(Evidence):
         self.value_before_change_point: Optional[float] = raw_element.get("valueBeforeChangePoint")
         self.value_after_change_point: Optional[float] = raw_element.get("valueAfterChangePoint")
         self.end_time: Optional[datetime] = int64_to_datetime(raw_element.get("endTime"))
-        self.unit: Optional[Unit] = Unit(raw_element.get("unit"))
+        self.unit: Optional[Unit] = Unit(raw_element=raw_element.get("unit"))
 
 
 class MetricEvidence(Evidence):
@@ -236,7 +236,7 @@ class MetricEvidence(Evidence):
         self.value_before_change_point: Optional[float] = raw_element.get("valueBeforeChangePoint")
         self.value_after_change_point: Optional[float] = raw_element.get("valueAfterChangePoint")
         self.end_time: Optional[datetime] = int64_to_datetime(raw_element.get("endTime"))
-        self.unit: Optional[Unit] = Unit(raw_element.get("unit"))
+        self.unit: Optional[Unit] = Unit(raw_element=raw_element.get("unit"))
         self.metric_id: Optional[str] = raw_element.get("metricId")
 
 
@@ -253,10 +253,15 @@ class MaintenanceWindowEvidence(Evidence):
         self.end_time: Optional[datetime] = int64_to_datetime(raw_element.get("endTime"))
 
 
+class ImpactAnalysis(DynatraceObject):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        self.impacts: List[Impact] = [Impact(raw_element=i) for i in raw_element.get("impacts", [])]
+
+
 class Impact(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.impact_type: ImpactType = ImpactType(raw_element.get("impactType"))
-        self.impacted_entity: EntityStub = EntityStub(raw_element.get("impactedEntity"))
+        self.impact_type: ImpactType = ImpactType(raw_element=raw_element.get("impactType"))
+        self.impacted_entity: EntityStub = EntityStub(raw_element=raw_element.get("impactedEntity"))
         self.estimated_affected_users: int = raw_element.get("estimatedAffectedUsers")
 
 
