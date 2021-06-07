@@ -1,63 +1,188 @@
 {
     "problemId": "-1719139739592062093_1623004451641V2",
-    "displayId": "P-210620",
-    "title": "custom host disconnected error",
+    "displayId": "P-210617",
+    "title": "Multiple infrastructure problems",
     "impactLevel": "INFRASTRUCTURE",
-    "severityLevel": "AVAILABILITY",
-    "status": "OPEN",
+    "severityLevel": "RESOURCE_CONTENTION",
+    "status": "CLOSED",
     "affectedEntities": [
-    {
+      {
         "entityId": {
-        "id": "HOST-44DD554D0DA01178",
-        "type": "HOST"
+          "id": "PROCESS_GROUP_INSTANCE-8092E71D6FBB914E",
+          "type": "PROCESS_GROUP_INSTANCE"
         },
-        "name": "TAG009444549397"
-    }
+        "name": "easytravel.customer.frontend"
+      }
     ],
     "impactedEntities": [
-    {
+      {
         "entityId": {
-        "id": "HOST-44DD554D0DA01178",
-        "type": "HOST"
+          "id": "PROCESS_GROUP_INSTANCE-8092E71D6FBB914E",
+          "type": "PROCESS_GROUP_INSTANCE"
         },
-        "name": "TAG009444549397"
-    }
+        "name": "easytravel.customer.frontend"
+      }
     ],
-    "rootCauseEntity": null,
+    "rootCauseEntity": {
+      "entityId": {
+        "id": "PROCESS_GROUP-C44FB250621B8036",
+        "type": "PROCESS_GROUP"
+      },
+      "name": "easytravel.customer.frontend"
+    },
     "managementZones": [
-    {
+      {
         "id": "8692695975020499402",
         "name": "Operations Team"
-    }
+      }
     ],
     "entityTags": [
-    {
+      {
         "context": "CONTEXTLESS",
         "key": "Application",
         "value": "EasyTravel",
         "stringRepresentation": "Application:EasyTravel"
-    },
-    {
+      },
+      {
         "context": "CONTEXTLESS",
         "key": "Environment",
         "value": "UAT",
         "stringRepresentation": "Environment:UAT"
-    }
+      }
     ],
     "problemFilters": [
-    {
-        "id": "c21f969b-5f03-333d-83e0-4f8f136e7682",
-        "name": "Default"
-    },
-    {
+      {
         "id": "c48a68f0-7cab-4c00-8822-9486b98c5e4d",
         "name": "Keptn"
-    },
-    {
-        "id": "8bc2041d-9282-4c1d-9b21-4ae775cf00ae",
-        "name": "123"
-    }
+      }
     ],
-    "startTime": 1623004451641,
-    "endTime": -1
-}
+    "startTime": 1622807640000,
+    "endTime": 1622807820000,
+    "evidenceDetails": {
+      "totalCount": 4,
+      "details": [
+        {
+          "evidenceType": "EVENT",
+          "displayName": "Memory resources exhausted",
+          "entity": {
+            "entityId": {
+              "id": "PROCESS_GROUP_INSTANCE-8092E71D6FBB914E",
+              "type": "PROCESS_GROUP_INSTANCE"
+            },
+            "name": "easytravel.customer.frontend"
+          },
+          "groupingEntity": {
+            "entityId": {
+              "id": "PROCESS_GROUP-C44FB250621B8036",
+              "type": "PROCESS_GROUP"
+            },
+            "name": "easytravel.customer.frontend"
+          },
+          "rootCauseRelevant": true,
+          "eventId": "9131945073144134871_1622807580000",
+          "eventType": "MEMORY_RESOURCES_EXHAUSTED",
+          "startTime": 1622807580000
+        },
+        {
+          "evidenceType": "METRIC",
+          "displayName": "Garbage collection suspension time",
+          "entity": {
+            "entityId": {
+              "id": "PROCESS_GROUP_INSTANCE-8092E71D6FBB914E",
+              "type": "PROCESS_GROUP_INSTANCE"
+            },
+            "name": "easytravel.customer.frontend"
+          },
+          "groupingEntity": {
+            "entityId": {
+              "id": "PROCESS_GROUP-C44FB250621B8036",
+              "type": "PROCESS_GROUP"
+            },
+            "name": "easytravel.customer.frontend"
+          },
+          "rootCauseRelevant": true,
+          "metricId": "builtin:tech.jvm.memory.gc.suspensionTime",
+          "unit": "Percent",
+          "aggregationType": {
+            "type": "avg"
+          },
+          "valueBeforeChangePoint": 2.5907254,
+          "valueAfterChangePoint": 97.52383,
+          "startTime": 1622806500000,
+          "endTime": 1622807940000
+        },
+        {
+          "evidenceType": "EVENT",
+          "displayName": "Long garbage-collection time",
+          "entity": {
+            "entityId": {
+              "id": "PROCESS_GROUP_INSTANCE-8092E71D6FBB914E",
+              "type": "PROCESS_GROUP_INSTANCE"
+            },
+            "name": "easytravel.customer.frontend"
+          },
+          "groupingEntity": {
+            "entityId": {
+              "id": "PROCESS_GROUP-C44FB250621B8036",
+              "type": "PROCESS_GROUP"
+            },
+            "name": "easytravel.customer.frontend"
+          },
+          "rootCauseRelevant": true,
+          "eventId": "-1547467374264153513_1622807400000",
+          "eventType": "HIGH_GC_ACTIVITY",
+          "startTime": 1622807400000
+        },
+        {
+          "evidenceType": "METRIC",
+          "displayName": "JVM runtime free memory",
+          "entity": {
+            "entityId": {
+              "id": "PROCESS_GROUP_INSTANCE-8092E71D6FBB914E",
+              "type": "PROCESS_GROUP_INSTANCE"
+            },
+            "name": "easytravel.customer.frontend"
+          },
+          "groupingEntity": {
+            "entityId": {
+              "id": "PROCESS_GROUP-C44FB250621B8036",
+              "type": "PROCESS_GROUP"
+            },
+            "name": "easytravel.customer.frontend"
+          },
+          "rootCauseRelevant": true,
+          "metricId": "builtin:tech.jvm.memory.runtime.free",
+          "unit": "Byte",
+          "aggregationType": {
+            "type": "min"
+          },
+          "valueBeforeChangePoint": 41255904,
+          "valueAfterChangePoint": 7197008,
+          "startTime": 1622806680000,
+          "endTime": 1622807880000
+        }
+      ]
+    },
+    "recentComments": {
+      "totalCount": 2,
+      "comments": [
+        {
+          "id": "-4881105958745872836_1622807580000",
+          "createdAtTimestamp": 1623004905887,
+          "content": "New comment 123",
+          "authorName": "radu.stefan@dynatrace.com",
+          "context": "python client"
+        },
+        {
+          "id": "3111744627633009891_1622807580000",
+          "createdAtTimestamp": 1623004383143,
+          "content": "New comment 123",
+          "authorName": "radu.stefan@dynatrace.com",
+          "context": "python client"
+        }
+      ]
+    },
+    "impactAnalysis": {
+      "impacts": []
+    }
+  }
