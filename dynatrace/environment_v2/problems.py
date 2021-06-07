@@ -66,7 +66,7 @@ class ProblemService:
         """Gets a Problem by specifying its id.
 
         :param problem_id: the ID of the Problem
-        :return: a Problem along with its dteails
+        :return: a Problem along with its details
         """
         params = {"fields": fields}
         response = self.__http_client.make_request(path=f"{self.ENDPOINT}/{problem_id}", params=params).json()
