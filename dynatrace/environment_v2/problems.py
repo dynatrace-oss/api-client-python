@@ -194,19 +194,20 @@ class Comment(DynatraceObject):
 
 class EvidenceDetails(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        raw_details = raw_element.get("details", [])
         self.total_count: int = raw_element.get("totalCount")
         self.details: Optional[List[Evidence]] = (
-            [EventEvidence(raw_element=e) for e in raw_element.get("details", []) if e.get("evidenceType") == EvidenceType.EVENT]
-            + [MetricEvidence(raw_element=e) for e in raw_element.get("details", []) if e.get("evidenceType") == EvidenceType.METRIC]
-            + [TransactionalEvidence(raw_element=e) for e in raw_element.get("details", []) if e.get("evidenceType") == EvidenceType.TRANSACTIONAL]
-            + [MaintenanceWindowEvidence(raw_element=e) for e in raw_element.get("details", []) if e.get("evidenceType") == EvidenceType.MAINTENANCE_WINDOW]
-            + [AvailabilityEvidence(raw_element=e) for e in raw_element.get("details", []) if e.get("evidenceType") == EvidenceType.AVAILABILITY]
+            [EventEvidence(raw_element=e) for e in raw_details if e.get("evidenceType") == EvidenceType.EVENT.value]
+            + [MetricEvidence(raw_element=e) for e in raw_details if e.get("evidenceType") == EvidenceType.METRIC.value]
+            + [TransactionalEvidence(raw_element=e) for e in raw_details if e.get("evidenceType") == EvidenceType.TRANSACTIONAL.value]
+            + [MaintenanceWindowEvidence(raw_element=e) for e in raw_details if e.get("evidenceType") == EvidenceType.MAINTENANCE_WINDOW.value]
+            + [AvailabilityEvidence(raw_element=e) for e in raw_details if e.get("evidenceType") == EvidenceType.AVAILABILITY.value]
         )
 
 
 class Evidence(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.evidence_type: EvidenceType = EvidenceType(raw_element=raw_element.get("evidenceType"))
+        self.evidence_type: EvidenceType = EvidenceType(raw_element.get("evidenceType"))
         self.display_name: str = raw_element.get("displayName")
         self.entity: EntityStub = EntityStub(raw_element=raw_element.get("entity"))
         self.root_cause_relevant: bool = raw_element.get("rootCauseRelevant")
@@ -227,7 +228,7 @@ class TransactionalEvidence(Evidence):
         self.value_before_change_point: Optional[float] = raw_element.get("valueBeforeChangePoint")
         self.value_after_change_point: Optional[float] = raw_element.get("valueAfterChangePoint")
         self.end_time: Optional[datetime] = int64_to_datetime(raw_element.get("endTime"))
-        self.unit: Optional[Unit] = Unit(raw_element=raw_element.get("unit"))
+        self.unit: Optional[Unit] = Unit(raw_element.get("unit"))
 
 
 class MetricEvidence(Evidence):
@@ -236,7 +237,7 @@ class MetricEvidence(Evidence):
         self.value_before_change_point: Optional[float] = raw_element.get("valueBeforeChangePoint")
         self.value_after_change_point: Optional[float] = raw_element.get("valueAfterChangePoint")
         self.end_time: Optional[datetime] = int64_to_datetime(raw_element.get("endTime"))
-        self.unit: Optional[Unit] = Unit(raw_element=raw_element.get("unit"))
+        self.unit: Optional[Unit] = Unit(raw_element.get("unit"))
         self.metric_id: Optional[str] = raw_element.get("metricId")
 
 
@@ -260,7 +261,7 @@ class ImpactAnalysis(DynatraceObject):
 
 class Impact(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.impact_type: ImpactType = ImpactType(raw_element=raw_element.get("impactType"))
+        self.impact_type: ImpactType = ImpactType(raw_element.get("impactType"))
         self.impacted_entity: EntityStub = EntityStub(raw_element=raw_element.get("impactedEntity"))
         self.estimated_affected_users: int = raw_element.get("estimatedAffectedUsers")
 
