@@ -1,0 +1,19 @@
+{
+    "totalCount": 2,
+    "pageSize": 20,
+    "comments": [
+      {
+        "id": "-8516688511120418342_1623004451641",
+        "createdAtTimestamp": 1623047802052,
+        "content": "yet another comment",
+        "authorName": "radu.stefan@dynatrace.com"
+      },
+      {
+        "id": "-7228967546616810529_1623004451641",
+        "createdAtTimestamp": 1623047022173,
+        "content": "Closing this. 1234",
+        "authorName": "radu.stefan@dynatrace.com",
+        "context": "dynatrace-problem-close"
+      }
+    ]
+  }

@@ -42,6 +42,7 @@ from dynatrace.environment_v2.monitored_entities import EntityService
 from dynatrace.environment_v2.metrics import MetricService
 from dynatrace.environment_v2.tokens_api import TokenService
 from dynatrace.environment_v2.tokens_tenant import TenantTokenService
+from dynatrace.environment_v2.problems import ProblemService
 from dynatrace.http_client import HttpClient
 
 
@@ -97,3 +98,4 @@ class Dynatrace:
         self.third_part_synthetic_tests: ThirdPartySyntheticTestsService = ThirdPartySyntheticTestsService(self.__http_client)
         self.tokens: TokenService = TokenService(self.__http_client)
         self.timeseries: TimeSerieService = TimeSerieService(self.__http_client)
+        self.problems: ProblemService = ProblemService(self.__http_client)
