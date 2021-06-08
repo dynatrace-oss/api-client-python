@@ -66,7 +66,7 @@ class SloService:
             "demo": demo,
             "evaluate": evaluate,
         }
-        return PaginatedList(target_class=Slo, http_client=self.__http_client, target_params=params, target_url=f"{self.ENDPOINT}")
+        return PaginatedList(target_class=Slo, http_client=self.__http_client, target_params=params, target_url=f"{self.ENDPOINT}", list_item="slo")
 
     def get(self, slo_id: str, time_from: Optional[str] = "now-2w", time_to: Optional[str] = None) -> "Slo":
         """Gets parameters and the calculated value of an SLO
@@ -198,6 +198,7 @@ class Slo(DynatraceObject):
         self.name: str = raw_element.get("name")
         self.id: str = raw_element.get("id")
         self.target: float = raw_element.get("target")
+        self.warning: float = raw_element.get("warning")
         self.timeframe: str = raw_element.get("timeframe")
         self.status: SloStatus = SloStatus(raw_element.get("status"))
         self.evaluation_type: SloEvaluationType = SloEvaluationType(raw_element.get("evaluationType"))
@@ -215,7 +216,7 @@ class Slo(DynatraceObject):
         self.filter: Optional[str] = raw_element.get("filter")
         self.enabled: Optional[bool] = raw_element.get("enabled", False)
         self.description: Optional[str] = raw_element.get("description")
-        self.error: Optional[SloError] = raw_element.get("error", SloError.NONE)
+        self.error: Optional[SloError] = SloError(raw_element.get("error", SloError.NONE))
 
 
 class SloEvaluationType(Enum):
