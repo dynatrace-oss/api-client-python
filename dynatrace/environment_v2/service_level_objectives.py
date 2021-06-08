@@ -166,21 +166,16 @@ class SloService:
 
         :returns Response: HTTP response for the request
         """
-        params = {
-            "name": name,
-            "target": target,
-            "warning": warning,
-            "timeframe": timeframe,
-            "useRateMetric": use_rate_metric,
-            "metricRate": metric_rate,
-            "metricNumerator": metric_numerator,
-            "metricDenominator": metric_denominator,
-            "evaluationType": evaluation_type,
-            "filter": entity_filter,
-            "customDescription": custom_description,
-            "enabled": enabled,
-        }
-        return self.__http_client.make_request(path=f"{self.ENDPOINT}/slo/{slo_id}", method="PUT", params=params)
+        slo = self.get(slo_id=slo_id)
+        params = slo._to_json()
+
+        for key, val in locals().items():
+            if key in ["self", "slo_id", "slo", "params"]:
+                continue
+            if val is not None:
+                params[key] = val if isinstance(val, (str, int, float, bool)) else str(val)
+
+        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{slo_id}", method="PUT", params=params)
 
     def delete(self, slo_id: str) -> "Response":
         """Deletes an SLO
@@ -189,7 +184,7 @@ class SloService:
 
         :returns Response: HTTP response for the request
         """
-        return self.__http_client.make_request(path=f"{self.ENDPOINT}/slo/{slo_id}", method="DELETE")
+        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{slo_id}", method="DELETE")
 
 
 class Slo(DynatraceObject):
@@ -218,15 +213,38 @@ class Slo(DynatraceObject):
         self.description: Optional[str] = raw_element.get("description")
         self.error: Optional[SloError] = SloError(raw_element.get("error", SloError.NONE))
 
+    def _to_json(self) -> Dict[str, Any]:
+        """Utility function to support type hints and optional params during updates"""
+
+        slo_json = {}
+        slo_json["name"] = self.name
+        slo_json["target"] = self.target
+        slo_json["warning"] = self.warning
+        slo_json["timeframe"] = self.timeframe
+        slo_json["evaluationType"] = str(self.evaluation_type)
+        slo_json["enabled"] = self.enabled
+        slo_json["useRateMetric"] = self.use_rate_metric
+        slo_json["metricRate"] = self.metric_rate
+        slo_json["metricNumerator"] = self.metric_numerator
+        slo_json["metricDenominator"] = self.metric_denominator
+
+        return slo_json
+
 
 class SloEvaluationType(Enum):
     AGGREGATE = "AGGREGATE"
+
+    def __str__(self):
+        return self.value
 
 
 class SloStatus(Enum):
     FAILURE = "FAILURE"
     SUCCESS = "SUCCESS"
     WARNING = "WARNING"
+
+    def __str__(self):
+        return self.value
 
 
 class SloError(Enum):
@@ -257,3 +275,6 @@ class SloError(Enum):
     METRIC_RATE_NO_DATA_POINTS = "METRIC_RATE_NO_DATA_POINTS"
     METRIC_TOO_MANY_RESULTS = "METRIC_TOO_MANY_RESULTS"
     NONE = "NONE"
+
+    def __str__(self):
+        return self.value
