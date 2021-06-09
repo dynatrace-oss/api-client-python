@@ -18,10 +18,4 @@ def test_get(dt: Dynatrace):
 
     # type checks
     assert isinstance(network_zone, nz.NetworkZone)
-    assert isinstance(network_zone.id, str)
-    assert isinstance(network_zone.description, str)
-    assert isinstance(network_zone.num_configured_activegates, int)
-    assert isinstance(network_zone.num_oneagents_configured, int)
-    assert isinstance(network_zone.num_oneagents_using, int)
-    assert isinstance(network_zone.num_oneagents_from_other_zones, int)
     assert isinstance(network_zone.alternative_zones, list)
