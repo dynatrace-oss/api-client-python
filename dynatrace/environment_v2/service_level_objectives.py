@@ -18,6 +18,7 @@ from enum import Enum
 from requests import Response
 from typing import Dict, Any, Optional
 
+from dynatrace.utils import arg_to_camelcase
 from dynatrace.http_client import HttpClient
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.pagination import PaginatedList
@@ -95,7 +96,7 @@ class SloService:
         metric_numerator: Optional[str] = None,
         metric_denominator: Optional[str] = None,
         evaluation_type: Optional[str] = "AGGREGATE",
-        entity_filter: Optional[str] = None,
+        filter_: Optional[str] = None,
         custom_description: Optional[str] = None,
         enabled: Optional[bool] = False,
     ) -> "Response":
@@ -110,7 +111,7 @@ class SloService:
         :param metric_numerator: The metric for the count of successes (the numerator in rate calculation).Required when the useRateMetric is set to false.
         :param metric_denominator: The total count metric (the denominator in rate calculation). Required when the useRateMetric is set to false.
         :param evaluation_type: The evaluation type of the SLO.
-        :param entity_filter: The entity filter for the SLO evaluation. Use the syntax of entity selector.
+        :param filter_: The entity filter for the SLO evaluation. Use the syntax of entity selector.
         :param custom_description: The custom description of the SLO.
         :param enabled: The SLO is enabled (true) or disabled (false).
 
@@ -126,7 +127,7 @@ class SloService:
             "metricNumerator": metric_numerator,
             "metricDenominator": metric_denominator,
             "evaluationType": evaluation_type,
-            "filter": entity_filter,
+            "filter": filter_,
             "customDescription": custom_description,
             "enabled": enabled,
         }
@@ -144,7 +145,7 @@ class SloService:
         metric_numerator: Optional[str] = None,
         metric_denominator: Optional[str] = None,
         evaluation_type: Optional[str] = None,
-        entity_filter: Optional[str] = None,
+        filter_: Optional[str] = None,
         custom_description: Optional[str] = None,
         enabled: Optional[bool] = None,
     ) -> "Response":
@@ -160,7 +161,7 @@ class SloService:
         :param metric_numerator: The metric for the count of successes (the numerator in rate calculation).Required when the useRateMetric is set to false.
         :param metric_denominator: The total count metric (the denominator in rate calculation). Required when the useRateMetric is set to false.
         :param evaluation_type: The evaluation type of the SLO.
-        :param entity_filter: The entity filter for the SLO evaluation. Use the syntax of entity selector.
+        :param filter_: The entity filter for the SLO evaluation. Use the syntax of entity selector.
         :param custom_description: The custom description of the SLO.
         :param enabled: The SLO is enabled (true) or disabled (false).
 
@@ -173,6 +174,7 @@ class SloService:
             if key in ["self", "slo_id", "slo", "params"]:
                 continue
             if val is not None:
+                key = arg_to_camelcase(key)
                 params[key] = val if isinstance(val, (str, int, float, bool)) else str(val)
 
         return self.__http_client.make_request(path=f"{self.ENDPOINT}/{slo_id}", method="PUT", params=params)
