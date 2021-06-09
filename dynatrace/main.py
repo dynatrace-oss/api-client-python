@@ -40,6 +40,7 @@ from dynatrace.environment_v2.activegates_autoupdate_jobs import ActiveGateAutoU
 from dynatrace.environment_v2.audit_logs import AuditLogsService
 from dynatrace.environment_v2.monitored_entities import EntityService
 from dynatrace.environment_v2.metrics import MetricService
+from dynatrace.environment_v2.networkzones import NetworkZoneService
 from dynatrace.environment_v2.tokens_api import TokenService
 from dynatrace.environment_v2.tokens_tenant import TenantTokenService
 from dynatrace.http_client import HttpClient
@@ -89,6 +90,7 @@ class Dynatrace:
         self.maintenance_windows = MaintenanceWindowService(self.__http_client)
         self.metrics: MetricService = MetricService(self.__http_client)
         self.notifications: NotificationService = NotificationService(self.__http_client)
+        self.network_zones: NetworkZoneService = NetworkZoneService(self.__http_client)
         self.oneagents: OneAgentOnAHostService = OneAgentOnAHostService(self.__http_client)
         self.plugins: PluginService = PluginService(self.__http_client)
         self.smartscape_hosts: SmartScapeHostsService = SmartScapeHostsService(self.__http_client)
