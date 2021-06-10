@@ -20,7 +20,7 @@ def test_get(dt: Dynatrace):
     assert isinstance(slo, Slo)
     assert isinstance(slo.enabled, bool)
     assert isinstance(slo.name, str)
-    assert isinstance(slo.description, str)
+    assert isinstance(slo.custom_description, str)
     assert isinstance(slo.evaluated_percentage, float)
     assert isinstance(slo.error_budget, float)
     assert isinstance(slo.status, SloStatus)
@@ -42,7 +42,7 @@ def test_get(dt: Dynatrace):
     assert slo.id == SLO_ID
     assert slo.enabled == True
     assert slo.name == "MySLOService"
-    assert slo.description == "Service Errors Fivexx SuccessCount / Service RequestCount Total"
+    assert slo.custom_description == "Service Errors Fivexx SuccessCount / Service RequestCount Total"
     assert slo.evaluated_percentage == 99.92798959015639
     assert slo.error_budget == -0.022010409843616685
     assert slo.status == SloStatus.FAILURE
