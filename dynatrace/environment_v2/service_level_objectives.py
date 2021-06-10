@@ -115,6 +115,7 @@ class SloService:
         return self.__http_client.make_request(path=f"{self.ENDPOINT}/{slo_id}", method="DELETE")
 
     def create(
+        self,
         name: str,
         target: float,
         warning: float,
