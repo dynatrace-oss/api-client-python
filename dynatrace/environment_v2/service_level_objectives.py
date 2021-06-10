@@ -15,10 +15,11 @@ limitations under the License.
 """
 
 from enum import Enum
+from datetime import datetime
 from requests import Response
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, Union
 
-from dynatrace.utils import arg_to_camelcase
+from dynatrace.utils import timestamp_to_string
 from dynatrace.http_client import HttpClient
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.pagination import PaginatedList
@@ -33,8 +34,8 @@ class SloService:
     def list(
         self,
         page_size: Optional[int] = 10,
-        time_from: Optional[str] = "now-2w",
-        time_to: Optional[str] = None,
+        time_from: Optional[Union[datetime, str]] = "now-2w",
+        time_to: Optional[Union[datetime, str]] = None,
         slo_selector: Optional[str] = None,
         sort: Optional[str] = "name",
         time_frame: Optional[str] = "CURRENT",
@@ -58,8 +59,8 @@ class SloService:
         """
         params = {
             "pageSize": page_size,
-            "from": time_from,
-            "to": time_to,
+            "from": timestamp_to_string(time_from),
+            "to": timestamp_to_string(time_to),
             "sloSelector": slo_selector,
             "sort": sort,
             "timeFrame": time_frame,
@@ -69,7 +70,7 @@ class SloService:
         }
         return PaginatedList(target_class=Slo, http_client=self.__http_client, target_params=params, target_url=f"{self.ENDPOINT}", list_item="slo")
 
-    def get(self, slo_id: str, time_from: Optional[str] = "now-2w", time_to: Optional[str] = None) -> "Slo":
+    def get(self, slo_id: str, time_from: Optional[Union[datetime, str]] = "now-2w", time_to: Optional[Union[datetime, str]] = None) -> "Slo":
         """Gets parameters and the calculated value of an SLO
 
         :param slo_id: The ID of the required SLO.
@@ -79,105 +80,30 @@ class SloService:
         :returns Slo: the requested SLO
         """
         params = {
-            "from": time_from,
-            "to": time_to,
+            "from": timestamp_to_string(time_from),
+            "to": timestamp_to_string(time_to),
         }
         response = self.__http_client.make_request(path=f"{self.ENDPOINT}/{slo_id}", params=params).json()
         return Slo(raw_element=response)
 
-    def create(
-        self,
-        name: str,
-        target: float,
-        warning: float,
-        timeframe: str,
-        use_rate_metric: Optional[bool] = False,
-        metric_rate: Optional[str] = None,
-        metric_numerator: Optional[str] = None,
-        metric_denominator: Optional[str] = None,
-        evaluation_type: Optional[str] = "AGGREGATE",
-        filter_: Optional[str] = None,
-        custom_description: Optional[str] = None,
-        enabled: Optional[bool] = False,
-    ) -> "Response":
-        """Creates a new SLO.
+    def post(self, slo: "Slo") -> "Response":
+        """Creates a new SLO in Dynatrace.
 
-        :param name: The name of the SLO.
-        :param target: The target value of the SLO.
-        :param warning: The warning value of the SLO. At warning state the SLO is still fulfilled but is getting close to failure.
-        :param timeframe: The timeframe for the SLO evaluation. Use the syntax of the global timeframe selector.
-        :param use_rate_metric: The type of the metric to use for SLO calculation - an existing percentage-based metric (true) or a ratio of two metrics (false)
-        :param metric_rate: The percentage-based metric for the calculation of the SLO. Required when the useRateMetric is set to true.
-        :param metric_numerator: The metric for the count of successes (the numerator in rate calculation).Required when the useRateMetric is set to false.
-        :param metric_denominator: The total count metric (the denominator in rate calculation). Required when the useRateMetric is set to false.
-        :param evaluation_type: The evaluation type of the SLO.
-        :param filter_: The entity filter for the SLO evaluation. Use the syntax of entity selector.
-        :param custom_description: The custom description of the SLO.
-        :param enabled: The SLO is enabled (true) or disabled (false).
+        :param slo: the Slo that should be created.
 
         :returns Response: HTTP response for the request
         """
-        params = {
-            "name": name,
-            "target": target,
-            "warning": warning,
-            "timeframe": timeframe,
-            "useRateMetric": use_rate_metric,
-            "metricRate": metric_rate,
-            "metricNumerator": metric_numerator,
-            "metricDenominator": metric_denominator,
-            "evaluationType": evaluation_type,
-            "filter": filter_,
-            "customDescription": custom_description,
-            "enabled": enabled,
-        }
-        return self.__http_client.make_request(path=self.ENDPOINT, method="POST", params=params)
+        return self.__http_client.make_request(path=self.ENDPOINT, method="POST", params=slo.to_json())
 
-    def update(
-        self,
-        slo_id: str,
-        name: Optional[str] = None,
-        target: Optional[float] = None,
-        warning: Optional[float] = None,
-        timeframe: Optional[str] = None,
-        use_rate_metric: Optional[bool] = None,
-        metric_rate: Optional[str] = None,
-        metric_numerator: Optional[str] = None,
-        metric_denominator: Optional[str] = None,
-        evaluation_type: Optional[str] = None,
-        filter_: Optional[str] = None,
-        custom_description: Optional[str] = None,
-        enabled: Optional[bool] = None,
-    ) -> "Response":
-        """Creates a new SLO.
+    def put(self, slo_id: str, slo: "Slo") -> "Response":
+        """Updates an existing SLO in Dynatrace.
 
-        :param slo_id: The ID of the existing SLO.
-        :param name: The name of the SLO.
-        :param target: The target value of the SLO.
-        :param warning: The warning value of the SLO. At warning state the SLO is still fulfilled but is getting close to failure.
-        :param timeframe: The timeframe for the SLO evaluation. Use the syntax of the global timeframe selector.
-        :param use_rate_metric: The type of the metric to use for SLO calculation - an existing percentage-based metric (true) or a ratio of two metrics (false)
-        :param metric_rate: The percentage-based metric for the calculation of the SLO. Required when the useRateMetric is set to true.
-        :param metric_numerator: The metric for the count of successes (the numerator in rate calculation).Required when the useRateMetric is set to false.
-        :param metric_denominator: The total count metric (the denominator in rate calculation). Required when the useRateMetric is set to false.
-        :param evaluation_type: The evaluation type of the SLO.
-        :param filter_: The entity filter for the SLO evaluation. Use the syntax of entity selector.
-        :param custom_description: The custom description of the SLO.
-        :param enabled: The SLO is enabled (true) or disabled (false).
+        :param slo_id: the ID of the SLO that needs updating
+        :param slo: the Slo with udpated details
 
         :returns Response: HTTP response for the request
         """
-        slo = self.get(slo_id=slo_id)
-        params = slo._to_json()
-
-        for key, val in locals().items():
-            if key in ["self", "slo_id", "slo", "params"]:
-                continue
-            if val is not None:
-                key = arg_to_camelcase(key)
-                params[key] = val if isinstance(val, (str, int, float, bool)) else str(val)
-
-        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{slo_id}", method="PUT", params=params)
+        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{slo_id}", method="PUT", params=slo.to_json())
 
     def delete(self, slo_id: str) -> "Response":
         """Deletes an SLO
@@ -187,6 +113,53 @@ class SloService:
         :returns Response: HTTP response for the request
         """
         return self.__http_client.make_request(path=f"{self.ENDPOINT}/{slo_id}", method="DELETE")
+
+    def create(
+        name: str,
+        target: float,
+        warning: float,
+        timeframe: str,
+        use_rate_metric: bool,
+        metric_rate: Optional[str] = None,
+        metric_numerator: Optional[str] = None,
+        metric_denominator: Optional[str] = None,
+        filter_: Optional[str] = None,
+        evaluation_type: Optional[str] = "AGGREGATE",
+        custom_description: Optional[str] = None,
+        enabled: Optional[bool] = False,
+    ) -> "Slo":
+        """Creates an Slo object from scratch.
+
+        :param name: The name of the SLO.
+        :param target: The target value of the SLO.
+        :param warning: The warning value of the SLO. At warning state the SLO is still fulfilled but is getting close to failure.
+        :param timeframe: The timeframe for the SLO evaluation. Use the syntax of the global timeframe selector.
+        :param use_rate_metric: The type of the metric to use for SLO calculation - an existing percentage-based metric (true) or a ratio of two metrics (false)
+        :param metric_rate: The percentage-based metric for the calculation of the SLO. Required when the useRateMetric is set to true.
+        :param metric_numerator: The metric for the count of successes (the numerator in rate calculation).Required when the useRateMetric is set to false.
+        :param metric_denominator: The total count metric (the denominator in rate calculation). Required when the useRateMetric is set to false.
+        :param evaluation_type: The evaluation type of the SLO.
+        :param filter_: The entity filter for the SLO evaluation. Use the syntax of entity selector.
+        :param custom_description: The custom description of the SLO.
+        :param enabled: The SLO is enabled (true) or disabled (false).
+
+        :returns Slo: the resulting Slo. This can now be used in POST and PUT calls
+        """
+        raw_slo = {
+            "name": name,
+            "target": target,
+            "warning": warning,
+            "timeframe": timeframe,
+            "useRateMetric": use_rate_metric,
+            "metricRate": metric_rate if use_rate_metric else "",
+            "metricNumerator": metric_numerator if not use_rate_metric else "",
+            "metricDenominator": metric_denominator if not use_rate_metric else "",
+            "filter": filter_,
+            "evaluationType": evaluation_type,
+            "customDescription": custom_description,
+            "enabled": enabled,
+        }
+        return Slo(raw_element=raw_slo)
 
 
 class Slo(DynatraceObject):
@@ -202,9 +175,9 @@ class Slo(DynatraceObject):
         self.use_rate_metric: bool = raw_element.get("useRateMetric")
 
         # optional
-        self.metric_rate: str = raw_element.get("metricRate")
-        self.metric_numerator: str = raw_element.get("metricNumerator")
-        self.metric_denominator: str = raw_element.get("metricDenominator")
+        self.metric_rate: Optional[str] = raw_element.get("metricRate")
+        self.metric_numerator: Optional[str] = raw_element.get("metricNumerator")
+        self.metric_denominator: Optional[str] = raw_element.get("metricDenominator")
         self.error_budget: Optional[float] = raw_element.get("errorBudget", 0)
         self.numerator_value: Optional[float] = raw_element.get("numeratorValue", 0)
         self.denominator_value: Optional[float] = raw_element.get("denominatorValue", 0)
@@ -215,22 +188,33 @@ class Slo(DynatraceObject):
         self.description: Optional[str] = raw_element.get("description")
         self.error: Optional[SloError] = SloError(raw_element.get("error", SloError.NONE))
 
-    def _to_json(self) -> Dict[str, Any]:
-        """Utility function to support type hints and optional params during updates"""
+    def to_json(self) -> Dict[str, Any]:
+        """Translates an Slo to a JSON dict."""
+        return {
+            "name": self.name,
+            "target": self.target,
+            "warning": self.warning,
+            "timeframe": self.timeframe,
+            "evaluationType": str(self.evaluation_type),
+            "enabled": self.enabled,
+            "useRateMetric": self.use_rate_metric,
+            "metricRate": self.metric_rate,
+            "metricNumerator": self.metric_numerator,
+            "metricDenominator": self.metric_denominator,
+        }
 
-        slo_json = {}
-        slo_json["name"] = self.name
-        slo_json["target"] = self.target
-        slo_json["warning"] = self.warning
-        slo_json["timeframe"] = self.timeframe
-        slo_json["evaluationType"] = str(self.evaluation_type)
-        slo_json["enabled"] = self.enabled
-        slo_json["useRateMetric"] = self.use_rate_metric
-        slo_json["metricRate"] = self.metric_rate
-        slo_json["metricNumerator"] = self.metric_numerator
-        slo_json["metricDenominator"] = self.metric_denominator
+    def post(self) -> "Response":
+        """Creates this object as a new SLO in Dynatrace"""
+        response = self.__http_client.make_request(path=SloService.ENDPOINT, method="POST", params=self.to_json())
+        if response.status_code == 201:
+            location = response.headers.get("location")
+            self.id = location[location.rfind("/") + 1 :].strip()
 
-        return slo_json
+        return response
+
+    def put(self) -> "Response":
+        """Updates an existing SLO in Dynatrace based on this object's details"""
+        return self.__http_client.make_request(path=f"{SloService.ENDPOINT}/{self.id}", method="PUT", params=self.to_json())
 
 
 class SloEvaluationType(Enum):
