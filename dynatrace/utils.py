@@ -67,10 +67,3 @@ def datetime_to_int64(timestamp: Optional[datetime]) -> Optional[int]:
     if not isinstance(timestamp, datetime):
         return timestamp
     return timestamp.timestamp() * 1000
-
-
-def arg_to_camelcase(arg: str) -> str:
-    if "_" not in arg:
-        return arg
-    parts = arg.split("_")
-    return parts[0] + "".join(p.title() for p in parts[1:])
