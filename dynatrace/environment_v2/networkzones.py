@@ -47,7 +47,7 @@ class NetworkZoneService:
         :param networkzone_id: the ID of the network zone
         :return: a Network Zone + details
         """
-        response = self.__http_client.make_request(f"{self.ENDPOINT}{networkzone_id}").json()
+        response = self.__http_client.make_request(f"{self.ENDPOINT}/{networkzone_id}").json()
         return NetworkZone(raw_element=response)
     
 
@@ -60,7 +60,7 @@ class NetworkZoneService:
         :return: HTTP response
         """
         params = {"alternativeZones": alternate_zones, "description": description}
-        return self.__http_client.make_request(path=f"{self.ENDPOINT}{networkzone_id}", params=params, method="PUT")
+        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{networkzone_id}", params=params, method="PUT")
     
 
     def delete(self, networkzone_id: str):
@@ -69,7 +69,7 @@ class NetworkZoneService:
         :param networkzone_id: the ID of the network zone
         :return: HTTP response
         """
-        return self.__http_client.make_request(path=f"{self.ENDPOINT}{networkzone_id}", method="DELETE")
+        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{networkzone_id}", method="DELETE")
 
     
     def getGlobalConfig(self):
