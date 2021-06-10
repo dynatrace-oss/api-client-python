@@ -91,7 +91,7 @@ Metrics                                  |  :heavy_check_mark:  |  `dt.metrics` 
 Monitored entities                       |  :warning:           |  `dt.entities`                              |
 Monitored entities - Custom tags         |  :x:                 |                                             |
 Network zones                            |  :x:                 |                                             |
-Problems                                 |  :x:                 |                                             |
+Problems                                 |  :heavy_check_mark:  |  `dt.problems`                              |
 Security problems                        |  :x:                 |                                             |
 Service-level objectives                 |  :x:                 |                                             
 

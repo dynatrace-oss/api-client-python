@@ -1,0 +1,22 @@
+{
+    "id": "d4adc421-245e-3bc5-a683-df2ed030997c",
+    "enabled": true,
+    "name": "MySLOService",
+    "description": "Service Errors Fivexx SuccessCount / Service RequestCount Total",
+    "evaluatedPercentage": 99.92798959015639,
+    "errorBudget": -0.022010409843616685,
+    "status": "FAILURE",
+    "error": "NONE",
+    "useRateMetric": false,
+    "metricRate": "",
+    "metricNumerator": "builtin:service.errors.fivexx.successCount:splitBy()",
+    "numeratorValue": 1704081,
+    "metricDenominator": "builtin:service.requestCount.total:splitBy()",
+    "denominatorValue": 1705309,
+    "target": 99.95,
+    "warning": 99.97,
+    "evaluationType": "AGGREGATE",
+    "timeframe": "-2h",
+    "filter": "type(SERVICE),entityId(SERVICE-D89AF859A68D9072)",
+    "relatedOpenProblems": 0
+}

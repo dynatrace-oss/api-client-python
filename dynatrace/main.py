@@ -43,6 +43,7 @@ from dynatrace.environment_v2.metrics import MetricService
 from dynatrace.environment_v2.tokens_api import TokenService
 from dynatrace.environment_v2.tokens_tenant import TenantTokenService
 from dynatrace.environment_v2.problems import ProblemService
+from dynatrace.environment_v2.service_level_objectives import SloService
 from dynatrace.http_client import HttpClient
 
 
@@ -99,3 +100,4 @@ class Dynatrace:
         self.tokens: TokenService = TokenService(self.__http_client)
         self.timeseries: TimeSerieService = TimeSerieService(self.__http_client)
         self.problems: ProblemService = ProblemService(self.__http_client)
+        self.slos: SloService = SloService(self.__http_client)
