@@ -93,17 +93,16 @@ class SloService:
 
         :returns Response: HTTP response for the request
         """
-        return self.__http_client.make_request(path=self.ENDPOINT, method="POST", params=slo.to_json())
+        return slo.post()
 
-    def put(self, slo_id: str, slo: "Slo") -> "Response":
+    def put(self, slo: "Slo") -> "Response":
         """Updates an existing SLO in Dynatrace.
 
-        :param slo_id: the ID of the SLO that needs updating
         :param slo: the Slo with udpated details
 
         :returns Response: HTTP response for the request
         """
-        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{slo_id}", method="PUT", params=slo.to_json())
+        return slo.put()
 
     def delete(self, slo_id: str) -> "Response":
         """Deletes an SLO
