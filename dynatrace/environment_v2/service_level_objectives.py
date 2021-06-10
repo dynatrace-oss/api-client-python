@@ -157,7 +157,7 @@ class SloService:
             "metricDenominator": metric_denominator if not use_rate_metric else "",
             "filter": filter_,
             "evaluationType": evaluation_type,
-            "customDescription": custom_description,
+            "description": custom_description,
             "enabled": enabled,
         }
         return Slo(raw_element=raw_slo, http_client=self.__http_client)
@@ -186,7 +186,7 @@ class Slo(DynatraceObject):
         self.evaluated_percentage: Optional[float] = raw_element.get("evaluatedPercentage", 0)
         self.filter: Optional[str] = raw_element.get("filter")
         self.enabled: Optional[bool] = raw_element.get("enabled", False)
-        self.custom_description: Optional[str] = raw_element.get("customDescription", "")
+        self.custom_description: Optional[str] = raw_element.get("description", "")
         self.error: Optional[SloError] = SloError(raw_element.get("error", SloError.NONE))
 
     def to_json(self) -> Dict[str, Any]:
