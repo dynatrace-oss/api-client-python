@@ -160,22 +160,22 @@ class SloService:
             "customDescription": custom_description,
             "enabled": enabled,
         }
-        return Slo(raw_element=raw_slo)
+        return Slo(raw_element=raw_slo, http_client=self.__http_client)
 
 
 class Slo(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         # required
         self.name: str = raw_element.get("name")
-        self.id: str = raw_element.get("id")
+        self.id: str = raw_element.get("id", "")
         self.target: float = raw_element.get("target")
         self.warning: float = raw_element.get("warning")
         self.timeframe: str = raw_element.get("timeframe")
-        self.status: SloStatus = SloStatus(raw_element.get("status"))
         self.evaluation_type: SloEvaluationType = SloEvaluationType(raw_element.get("evaluationType"))
         self.use_rate_metric: bool = raw_element.get("useRateMetric")
 
         # optional
+        self.status: Optional[SloStatus] = SloStatus(raw_element.get("status")) if raw_element.get("status") else None
         self.metric_rate: Optional[str] = raw_element.get("metricRate")
         self.metric_numerator: Optional[str] = raw_element.get("metricNumerator")
         self.metric_denominator: Optional[str] = raw_element.get("metricDenominator")
@@ -186,7 +186,7 @@ class Slo(DynatraceObject):
         self.evaluated_percentage: Optional[float] = raw_element.get("evaluatedPercentage", 0)
         self.filter: Optional[str] = raw_element.get("filter")
         self.enabled: Optional[bool] = raw_element.get("enabled", False)
-        self.description: Optional[str] = raw_element.get("description")
+        self.custom_description: Optional[str] = raw_element.get("customDescription", "")
         self.error: Optional[SloError] = SloError(raw_element.get("error", SloError.NONE))
 
     def to_json(self) -> Dict[str, Any]:
@@ -202,11 +202,13 @@ class Slo(DynatraceObject):
             "metricRate": self.metric_rate,
             "metricNumerator": self.metric_numerator,
             "metricDenominator": self.metric_denominator,
+            "filter": self.filter,
+            "customDescription": self.custom_description,
         }
 
     def post(self) -> "Response":
         """Creates this object as a new SLO in Dynatrace"""
-        response = self.__http_client.make_request(path=SloService.ENDPOINT, method="POST", params=self.to_json())
+        response = self._http_client.make_request(path=SloService.ENDPOINT, method="POST", params=self.to_json())
         if response.status_code == 201:
             location = response.headers.get("location")
             self.id = location[location.rfind("/") + 1 :].strip()
@@ -215,7 +217,7 @@ class Slo(DynatraceObject):
 
     def put(self) -> "Response":
         """Updates an existing SLO in Dynatrace based on this object's details"""
-        return self.__http_client.make_request(path=f"{SloService.ENDPOINT}/{self.id}", method="PUT", params=self.to_json())
+        return self._http_client.make_request(path=f"{SloService.ENDPOINT}/{self.id}", method="PUT", params=self.to_json())
 
 
 class SloEvaluationType(Enum):
