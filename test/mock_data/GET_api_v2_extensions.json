@@ -1,0 +1,12 @@
+{
+    "extensions": [
+      {
+        "extensionName": "ibmmq",
+        "version": "1.2.3"
+      },
+      {
+          "extensionName": "citrix",
+          "version": "12.1.4"
+      }
+    ]
+  }

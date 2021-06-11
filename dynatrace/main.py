@@ -38,6 +38,7 @@ from dynatrace.environment_v2.activegates import ActiveGateService
 from dynatrace.environment_v2.activegates_autoupdate_configuration import ActiveGateAutoUpdateConfigurationService
 from dynatrace.environment_v2.activegates_autoupdate_jobs import ActiveGateAutoUpdateJobsService
 from dynatrace.environment_v2.audit_logs import AuditLogsService
+from dynatrace.environment_v2.extensions import ExtensionsServiceV2
 from dynatrace.environment_v2.monitored_entities import EntityService
 from dynatrace.environment_v2.metrics import MetricService
 from dynatrace.environment_v2.networkzones import NetworkZoneService
@@ -89,6 +90,7 @@ class Dynatrace:
         self.entities: EntityService = EntityService(self.__http_client)
         self.events: EventService = EventService(self.__http_client)
         self.extensions: ExtensionService = ExtensionService(self.__http_client)
+        self.extensionsv2: ExtensionsServiceV2 = ExtensionsServiceV2(self.__http_client)
         self.maintenance_windows = MaintenanceWindowService(self.__http_client)
         self.metrics: MetricService = MetricService(self.__http_client)
         self.notifications: NotificationService = NotificationService(self.__http_client)
