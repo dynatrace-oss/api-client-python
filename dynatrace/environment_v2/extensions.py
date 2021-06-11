@@ -35,20 +35,41 @@ class ExtensionsServiceV2:
     def list(self) -> PaginatedList["MinimalExtension"]:
         """ Lists all the extensions 2.0 available in your environment
 
-        :return: a list of extensions with minimal details
+        :return: a list of MinimalExtension objects
         """
         return PaginatedList(MinimalExtension, self.__http_client, target_url=self.ENDPOINT, list_item="extensions")
 
 
-    def listAllByName(self, extension_name: str) -> PaginatedList["MinimalExtension"]:
+    def listByName(self, extension_name: str) -> PaginatedList["MinimalExtension"]:
         """ Lists all the extensions 2.0 by specified name in your environment
 
-        :param extension_name: the name of the requested extension 2.0
+        :param extension_name: the name of the extension 2.0
 
-        :return: a list of all versions of named extension 2.0 with minimal details 
+        :return: a list of MinimalExtension objects
         """
         return PaginatedList(MinimalExtension, self.__http_client, target_url=f"{self.ENDPOINT}/{extension_name}", list_item="extensions")
 
+
+    def listEvents(self, extension_name: str) -> PaginatedList["ExtensionEventDTO"]:
+        """ List of the latest extension environment configuration events
+
+        :param extension_name: the name of the extension 2.0
+
+        :return: a list of ExtensionEventDTO object
+        """
+        return PaginatedList(ExtensionEventDTO, self.__http_client, target_url=f"{self.ENDPOINT}/{extension_name}/environmentConfiguration/events", list_item="extensionEvents")
+
+
+    def listEventsByConfigId(self, extension_name: str, config_id: str) -> PaginatedList["ExtensionEventDTO"]:
+        """ Gets the list of the events linked to specific monitoring configuration
+
+        :param extension_name: the name of the extension 2.0
+        :param config_id: The ID of the requested monitoring configuration.
+
+        :return: a list of ExtensionEventDTO object
+        """
+        return PaginatedList(ExtensionEventDTO, self.__http_client, target_url=f"{self.ENDPOINT}/{extension_name}/monitoringConfigurations/{config_id}/events", list_item="extensionEvents")
+        
 
     def get(self, extension_name: str, extension_version: str) -> "Extension":
         """ Gets details of specified version of the extension 2.0
@@ -71,7 +92,39 @@ class ExtensionsServiceV2:
         :return: HTTP response
         """
         return self.__http_client.make_request(path=f"{self.ENDPOINT}/{extension_name}/{extension_version}", method="DELETE")
+    
 
+    def getConfigVersion(self, extension_name: str) -> "ExtensionEnvironmentConfigurationVersion":
+        """ Gets the active environment configuration version of the specified extension 2.0
+
+        :param extension_name: the name of the requested extension 2.0
+
+        :return: ExtensionEnvironmentConfigurationVersion object
+        """
+        response = self.__http_client.make_request(f"{self.ENDPOINT}/{extension_name}/environmentConfiguration").json()
+        return ExtensionEnvironmentConfigurationVersion(raw_element=response)
+
+
+    def updateConfigVersion(self, extension_name: str, _version: str):
+        """ Updates the active environment configuration version of the extension 2.0
+
+        :param extension_name: the name of the requested extension 2.0
+        :param _version: the change to be put in place and activated
+
+        :return: HTTP response
+        """
+        params = {"version": _version}
+        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{extension_name}/environmentConfiguration", method="PUT")
+    
+    
+    def deactivateExtension(self, extension_name: str):
+        """ Deactivates the environment configuration of the specified extension 2.0
+
+        :param extension_name: the name of the requested extension 2.0 to deactivate
+
+        :return: HTTP response
+        """
+        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{extension_name}/environmentConfiguration", method="DELETE")
 
 
 class Extension(DynatraceObject):
@@ -89,6 +142,18 @@ class Extension(DynatraceObject):
 class AuthorDTO(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.name: str = raw_element.get("name")
+
+
+class ExtensionEventDTO(DynatraceObject):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        self.timestamp: str = raw_element.get("timestamp")
+        self.severity: str = raw_element.get("severity")
+        self.message: str = raw_element.get("message")
+
+
+class ExtensionEnvironmentConfigurationVersion(DynatraceObject):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        self.version: str = raw_element.get("version")
 
 
 class MinimalExtension(DynatraceObject):
