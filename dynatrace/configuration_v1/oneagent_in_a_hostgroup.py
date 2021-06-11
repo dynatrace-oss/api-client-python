@@ -38,7 +38,7 @@ class OneAgentInAHostGroupService:
         :returns OneAgentHostGroupConfig: the full OneAgent configuration in this host group
         """
         response = self.__http_client.make_request(path=f"{self.ENDPOINT}/{hostgroup_id}").json()
-        return OneAgentHostGroupConfig(response)
+        return OneAgentHostGroupConfig(raw_element=response, http_client=self.__http_client)
 
     def get_autoupdate(self, hostgroup_id: str) -> "HostGroupAutoUpdateConfig":
         """Gets the configuration of OneAgent auto-update in the specified host group
@@ -48,7 +48,7 @@ class OneAgentInAHostGroupService:
         :returns HostGroupAutoUpdateConfig: The The auto-update configuration details in this host group
         """
         response = self.__http_client.make_request(path=f"{self.ENDPOINT}/{hostgroup_id}/autoupdate").json()
-        return HostGroupAutoUpdateConfig(response)
+        return HostGroupAutoUpdateConfig(raw_element=response, http_client=self.__http_client)
 
     def put_autoupdate(self, hostgroup_id: str, config: "HostGroupAutoUpdateConfig") -> "Response":
         """Updates the configuration of OneAgent auto-update in the specified host group
@@ -82,21 +82,26 @@ class OneAgentInAHostGroupService:
 
 class OneAgentHostGroupConfig(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.id: str = raw_element.get("id")
-        self.auto_update_config: HostGroupAutoUpdateConfig = HostGroupAutoUpdateConfig(raw_element=raw_element.get("autoUpdateConfig"))
+        self.id: Optional[str] = raw_element.get("id")
+        self.auto_update_config: HostGroupAutoUpdateConfig = HostGroupAutoUpdateConfig(
+            raw_element=raw_element.get("autoUpdateConfig"), http_client=self._http_client
+        )
 
 
 class HostGroupAutoUpdateConfig(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.metadata: ConfigurationMetadata = ConfigurationMetadata(raw_element=raw_element.get("configurationMetadata"))
-        self.id: str = raw_element.get("id")
+        self.id: str = raw_element.get("id", "")
         self.setting: AutoUpdateSetting = AutoUpdateSetting(raw_element.get("setting"))
-        self.version: Optional[Union[str, None]] = raw_element.get("version")
-        self.update_windows: UpdateWindowsConfig = UpdateWindowsConfig(raw_element.get("updateWindows"))
-        self.effective_setting: Optional[Union[EffectiveSetting, None]] = (
-            EffectiveSetting(raw_element.get("effectiveSetting")) if raw_element.get("effectiveSetting") else None
-        )
-        self.effective_version: Optional[Union[str, None]] = raw_element.get("effectiveVersion")
+        self.update_windows: Optional[UpdateWindowsConfig] = None
+        self.effective_setting: Optional[EffectiveSetting] = None
+        self.version: Optional[str] = raw_element.get("version")
+        self.effective_version: Optional[str] = raw_element.get("effectiveVersion")
+
+        if raw_element.get("updateWindows"):
+            self.update_windows = UpdateWindowsConfig(raw_element.get("updateWindows"))
+        if raw_element.get("effectiveSetting"):
+            self.effective_setting = EffectiveSetting(raw_element.get("effectiveSetting"))
 
     def to_json(self) -> Dict[str, Any]:
         return {
@@ -106,3 +111,6 @@ class HostGroupAutoUpdateConfig(DynatraceObject):
             "effectiveSetting": str(self.effective_setting) if self.effective_setting else None,
             "effectiveVersion": self.effective_version,
         }
+
+    def post(self) -> "Response":
+        return self._http_client.make_request(path=f"{OneAgentInAHostGroupService.ENDPOINT}/{self.id}/autoupdate", method="PUT", params=self.to_json())
