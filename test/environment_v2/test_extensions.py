@@ -1,7 +1,7 @@
 from dynatrace import Dynatrace
 from dynatrace.pagination import PaginatedList
 
-import dynatrace.environment_v2.extensions as extensions
+import dynatrace.environment_v2.extensions as extensionsv2
 
 def test_list(dt: Dynatrace):
     extensions_list = dt.extensionsv2.list()
@@ -24,8 +24,8 @@ def test_get(dt: Dynatrace):
     extension = dt.extensionsv2.get(e_name, e_version)
 
     # type checks
-    assert isinstance(extension, extensions.Extension)
-    assert isinstance(extension.author, extensions.AuthorDTO)
+    assert isinstance(extension, extensionsv2.Extension)
+    assert isinstance(extension.author, extensionsv2.AuthorDTO)
     assert isinstance(extension.data_sources, list)
     assert isinstance(extension.feature_sets, list)
     assert isinstance(extension.variables, list)
@@ -35,3 +35,15 @@ def test_get(dt: Dynatrace):
     assert extension.author.name == "Bilal Hashmi"
     assert extension.version == "2.1.3"
     assert extension.feature_sets[0] == "coolFeatures"
+
+
+def test_get_active_extension_version(dt: Dynatrace):
+    e_name = "ibmmq"
+
+    elt = dt.extensionsv2.getActiveExtensionVersion(e_name)
+
+    # type checks
+    assert isinstance(elt, extensionsv2.ExtensionEnvironmentConfigurationVersion)
+
+    # value checks
+    assert elt.version == "1.2.3"

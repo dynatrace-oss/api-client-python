@@ -94,7 +94,7 @@ class ExtensionsServiceV2:
         return self.__http_client.make_request(path=f"{self.ENDPOINT}/{extension_name}/{extension_version}", method="DELETE")
     
 
-    def getConfigVersion(self, extension_name: str) -> "ExtensionEnvironmentConfigurationVersion":
+    def getActiveExtensionVersion(self, extension_name: str) -> "ExtensionEnvironmentConfigurationVersion":
         """ Gets the active environment configuration version of the specified extension 2.0
 
         :param extension_name: the name of the requested extension 2.0
@@ -105,7 +105,7 @@ class ExtensionsServiceV2:
         return ExtensionEnvironmentConfigurationVersion(raw_element=response)
 
 
-    def updateConfigVersion(self, extension_name: str, _version: str):
+    def updateActiveExtensionVersion(self, extension_name: str, _version: str):
         """ Updates the active environment configuration version of the extension 2.0
 
         :param extension_name: the name of the requested extension 2.0
@@ -114,7 +114,7 @@ class ExtensionsServiceV2:
         :return: HTTP response
         """
         params = {"version": _version}
-        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{extension_name}/environmentConfiguration", method="PUT")
+        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{extension_name}/environmentConfiguration", params=params, method="PUT")
     
     
     def deactivateExtension(self, extension_name: str):
