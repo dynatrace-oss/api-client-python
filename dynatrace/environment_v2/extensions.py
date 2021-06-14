@@ -40,7 +40,7 @@ class ExtensionsServiceV2:
         return PaginatedList(MinimalExtension, self.__http_client, target_url=self.ENDPOINT, list_item="extensions")
 
 
-    def listByName(self, extension_name: str) -> PaginatedList["MinimalExtension"]:
+    def list_versions(self, extension_name: str) -> PaginatedList["MinimalExtension"]:
         """ Lists all the extensions 2.0 by specified name in your environment
 
         :param extension_name: the name of the extension 2.0
@@ -50,7 +50,7 @@ class ExtensionsServiceV2:
         return PaginatedList(MinimalExtension, self.__http_client, target_url=f"{self.ENDPOINT}/{extension_name}", list_item="extensions")
 
 
-    def listEvents(self, extension_name: str) -> PaginatedList["ExtensionEventDTO"]:
+    def list_environment_config_events(self, extension_name: str) -> PaginatedList["ExtensionEventDTO"]:
         """ List of the latest extension environment configuration events
 
         :param extension_name: the name of the extension 2.0
@@ -60,7 +60,7 @@ class ExtensionsServiceV2:
         return PaginatedList(ExtensionEventDTO, self.__http_client, target_url=f"{self.ENDPOINT}/{extension_name}/environmentConfiguration/events", list_item="extensionEvents")
 
 
-    def listEventsByConfigId(self, extension_name: str, config_id: str) -> PaginatedList["ExtensionEventDTO"]:
+    def list_monitoring_config_events(self, extension_name: str, config_id: str) -> PaginatedList["ExtensionEventDTO"]:
         """ Gets the list of the events linked to specific monitoring configuration
 
         :param extension_name: the name of the extension 2.0
@@ -94,7 +94,7 @@ class ExtensionsServiceV2:
         return self.__http_client.make_request(path=f"{self.ENDPOINT}/{extension_name}/{extension_version}", method="DELETE")
     
 
-    def getActiveExtensionVersion(self, extension_name: str) -> "ExtensionEnvironmentConfigurationVersion":
+    def get_environment_config(self, extension_name: str) -> "ExtensionEnvironmentConfigurationVersion":
         """ Gets the active environment configuration version of the specified extension 2.0
 
         :param extension_name: the name of the requested extension 2.0
@@ -105,7 +105,7 @@ class ExtensionsServiceV2:
         return ExtensionEnvironmentConfigurationVersion(raw_element=response)
 
 
-    def updateActiveExtensionVersion(self, extension_name: str, _version: str):
+    def put_environment_config(self, extension_name: str, _version: str):
         """ Updates the active environment configuration version of the extension 2.0
 
         :param extension_name: the name of the requested extension 2.0
@@ -117,7 +117,7 @@ class ExtensionsServiceV2:
         return self.__http_client.make_request(path=f"{self.ENDPOINT}/{extension_name}/environmentConfiguration", params=params, method="PUT")
     
     
-    def deactivateExtension(self, extension_name: str):
+    def delete_environment_config(self, extension_name: str):
         """ Deactivates the environment configuration of the specified extension 2.0
 
         :param extension_name: the name of the requested extension 2.0 to deactivate
@@ -160,3 +160,6 @@ class MinimalExtension(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.version: str = raw_element.get("version")
         self.extension_name: str = raw_element.get("extensionName")
+    
+    def list_versions(self):
+        return self.version

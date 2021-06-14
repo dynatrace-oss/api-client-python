@@ -90,7 +90,7 @@ class Dynatrace:
         self.entities: EntityService = EntityService(self.__http_client)
         self.events: EventService = EventService(self.__http_client)
         self.extensions: ExtensionService = ExtensionService(self.__http_client)
-        self.extensionsv2: ExtensionsServiceV2 = ExtensionsServiceV2(self.__http_client)
+        self.extensions_v2: ExtensionsServiceV2 = ExtensionsServiceV2(self.__http_client)
         self.maintenance_windows = MaintenanceWindowService(self.__http_client)
         self.metrics: MetricService = MetricService(self.__http_client)
         self.notifications: NotificationService = NotificationService(self.__http_client)
