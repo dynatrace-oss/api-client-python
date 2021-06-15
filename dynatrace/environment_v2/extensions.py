@@ -105,16 +105,16 @@ class ExtensionsServiceV2:
         return ExtensionEnvironmentConfigurationVersion(raw_element=response)
 
 
-    def put_environment_config(self, extension_name: str, _version: str):
-        """ Updates the active environment configuration version of the extension 2.0
+    def put_environment_config(self, extension_environment_config_version: "ExtensionEnvironmentConfigurationVersion", extension_name: str):
+        """ Updates an existing active environment configuration version of the extension 2.0
 
-        :param extension_name: the name of the requested extension 2.0
-        :param _version: the change to be put in place and activated
+        :param extension_environment_config_version: class object with details
+        :param extension_name: name of the EECV object to be modified (REQUIRED for http request)
 
         :return: HTTP response
         """
-        params = {"version": _version}
-        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{extension_name}/environmentConfiguration", params=params, method="PUT")
+        return extension_environment_config_version.put(extension_name)
+    
     
     
     def delete_environment_config(self, extension_name: str):
@@ -156,10 +156,24 @@ class ExtensionEnvironmentConfigurationVersion(DynatraceObject):
         self.version: str = raw_element.get("version")
 
 
+    def to_json(self) -> Dict[str, Any]:
+        """Translates an ExtensionEnvironmentConfigurationVersion to a JSON dict."""
+        return {"version": self.version}
+
+
+    def put(self, extension_name: str):
+        """Updates an existing extension environment config's version in Dynatrace
+    
+        :param extension_name: the name of the extension required for making the API call
+        """
+        return self._http_client.make_request(path=f"{ExtensionsServiceV2.ENDPOINT}/{extension_name}/environmentConfiguration", params=self.to_json(), method="PUT")
+
+
 class MinimalExtension(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.version: str = raw_element.get("version")
         self.extension_name: str = raw_element.get("extensionName")
     
-    def list_versions(self):
+    """ Class method for obtaining extension2.0 version """
+    def list_version(self) -> str:
         return self.version
