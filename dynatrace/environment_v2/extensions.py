@@ -173,7 +173,35 @@ class MinimalExtension(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.version: str = raw_element.get("version")
         self.extension_name: str = raw_element.get("extensionName")
-    
-    """ Class method for obtaining extension2.0 version """
+
+
     def list_version(self) -> str:
+        """ Class method for obtaining extension2.0 version """
         return self.version
+    
+
+    def get_environment_config(self) -> PaginatedList["ExtensionEnvironmentConfigurationVersion"]:
+        """ Gets the active environment configuration version of the specified extension 2.0
+
+        :return: ExtensionEnvironmentConfigurationVersion object
+        """
+        response = self._http_client.make_request(f"{ExtensionsServiceV2.ENDPOINT}/{self.extension_name}/environmentConfiguration").json()
+        return ExtensionEnvironmentConfigurationVersion(raw_element=response)
+
+
+    def list_environment_config_events(self) -> PaginatedList["ExtensionEventDTO"]:
+        """ List of the latest extension environment configuration events
+
+        :return: a list of ExtensionEventDTO object
+        """
+        return PaginatedList(ExtensionEventDTO, self._http_client, target_url=f"{ExtensionsServiceV2.ENDPOINT}/{self.extension_name}/environmentConfiguration/events", list_item="extensionEvents")
+
+
+    def list_monitoring_config_events(self, config_id) -> PaginatedList["ExtensionEventDTO"]:
+        """ Gets the list of the events linked to specific monitoring configuration
+
+        :param config_id: The ID of the requested monitoring configuration.
+
+        :return: a list of ExtensionEventDTO object
+        """
+        return PaginatedList(ExtensionEventDTO, self._http_client, target_url=f"{ExtensionsServiceV2.ENDPOINT}/{self.extension_name}/monitoringConfigurations/{config_id}/events", list_item="extensionEvents")
