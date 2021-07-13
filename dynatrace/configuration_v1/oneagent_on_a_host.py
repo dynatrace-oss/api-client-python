@@ -159,13 +159,11 @@ class HostAutoUpdateConfig(DynatraceObject):
         self.id: str = raw_element.get("id", "")
         self.setting: AutoUpdateSetting = AutoUpdateSetting(raw_element.get("setting"))
         self.version: Optional[str] = raw_element.get("version")
-        self.update_windows: Optional[UpdateWindowsConfig] = None
+        self.update_windows: UpdateWindowsConfig = UpdateWindowsConfig(raw_element=raw_element.get("updateWindows"))
         self.effective_setting: Optional[EffectiveSetting] = None
         self.effective_version: Optional[str] = raw_element.get("effectiveVersion")
         self.metadata: ConfigurationMetadata = ConfigurationMetadata(raw_element=raw_element.get("metadata"))
 
-        if raw_element.get("updateWindows"):
-            self.update_windows = UpdateWindowsConfig(raw_element=raw_element.get("updateWindows"))
         if raw_element.get("effectiveSetting"):
             self.effective_setting = EffectiveSetting(raw_element.get("effectiveSetting"))
 

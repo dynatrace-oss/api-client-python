@@ -79,10 +79,7 @@ class EnvironmentAutoUpdateConfig(DynatraceObject):
         self.metadata: ConfigurationMetadata = ConfigurationMetadata(raw_element=raw_element.get("metadata"))
         self.setting: AutoUpdateSetting = AutoUpdateSetting(raw_element.get("setting"))
         self.version: Optional[str] = raw_element.get("version")
-        self.update_windows: Optional[UpdateWindowsConfig] = None
-
-        if raw_element.get("updateWindows"):
-            self.update_windows = UpdateWindowsConfig(raw_element=raw_element.get("updateWindows"))
+        self.update_windows: UpdateWindowsConfig = UpdateWindowsConfig(raw_element=raw_element.get("updateWindows"))
 
     def to_json(self) -> Dict[str, Any]:
         return {
