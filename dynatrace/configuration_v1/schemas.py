@@ -28,7 +28,10 @@ class UpdateWindowsConfig(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.windows: List[UpdateWindow] = [UpdateWindow(raw_element=uw) for uw in raw_element.get("windows", [])]
 
-    def to_json(self) -> Dict[str, Any]:
+    def to_json(self) -> Optional[Dict[str, Any]]:
+        if not self.windows:
+            return None
+
         return {"windows": [w.to_json for w in self.windows]}
 
 

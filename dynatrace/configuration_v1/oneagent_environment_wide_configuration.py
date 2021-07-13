@@ -66,7 +66,7 @@ class OneAgentEnvironmentWideConfigService:
         :returns bool: True if valid, false otherwise.
         """
         try:
-            self.__http_client.make_request(path=self.ENDPOINT, method="POST", params=config.to_json())
+            self.__http_client.make_request(path=f"{self.ENDPOINT}/validator", method="POST", params=config.to_json())
         except Exception as e:
             print(e.args)
             return False
@@ -85,7 +85,7 @@ class EnvironmentAutoUpdateConfig(DynatraceObject):
         return {
             "setting": str(self.setting),
             "version": self.version,
-            "updateWindows": self.update_windows,
+            "updateWindows": self.update_windows.to_json(),
         }
 
     def put(self) -> "Response":

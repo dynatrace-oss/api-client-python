@@ -72,7 +72,7 @@ class OneAgentInAHostGroupService:
         :returns bool: True if valid, False otherwise
         """
         try:
-            self.__http_client.make_request(path=f"{self.ENDPOINT}/{hostgroup_id}/autoupdate", method="POST", params=config.to_json())
+            self.__http_client.make_request(path=f"{self.ENDPOINT}/{hostgroup_id}/autoupdate/validator", method="POST", params=config.to_json())
         except Exception as e:
             print(e.args)
             return False
@@ -106,9 +106,8 @@ class HostGroupAutoUpdateConfig(DynatraceObject):
             "setting": str(self.setting),
             "version": self.version,
             "updateWindows": self.update_windows.to_json(),
-            "effectiveSetting": str(self.effective_setting) if self.effective_setting else None,
             "effectiveVersion": self.effective_version,
         }
 
-    def post(self) -> "Response":
+    def put(self) -> "Response":
         return self._http_client.make_request(path=f"{OneAgentInAHostGroupService.ENDPOINT}/{self.id}/autoupdate", method="PUT", params=self.to_json())

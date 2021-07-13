@@ -172,7 +172,6 @@ class HostAutoUpdateConfig(DynatraceObject):
             "setting": str(self.setting),
             "version": self.version,
             "updateWindows": self.update_windows.to_json(),
-            "effectiveSetting": str(self.effective_setting) if self.effective_setting else None,
             "effectiveVersion": self.effective_version,
         }
 
