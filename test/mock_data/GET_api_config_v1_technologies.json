@@ -1,0 +1,29 @@
+{
+    "metadata": {
+        "configurationVersions": [
+            89
+        ],
+        "clusterVersion": "1.222.47.20210712-162143"
+    },
+    "technologies": [{
+            "type": "DOT_NET",
+            "monitoringEnabled": true,
+            "scope": "ENVIRONMENT"
+        },
+        {
+            "type": "GO",
+            "monitoringEnabled": true,
+            "scope": "ENVIRONMENT"
+        },
+        {
+            "type": "PHP_CGI",
+            "monitoringEnabled": false,
+            "scope": "ENVIRONMENT"
+        },
+        {
+            "type": "DOCKER_WIN",
+            "monitoringEnabled": true,
+            "scope": "ENVIRONMENT"
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "metadata": {
+        "configurationVersions": [
+            0
+        ],
+        "clusterVersion": "1.222.47.20210712-162143"
+    },
+    "id": "HOST-abcd123457",
+    "setting": "DISABLED",
+    "version": null,
+    "updateWindows": {
+        "windows": []
+    },
+    "effectiveSetting": "DISABLED",
+    "effectiveVersion": null
+}

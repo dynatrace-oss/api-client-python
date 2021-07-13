@@ -1,0 +1,30 @@
+{
+    "metadata": {
+        "configurationVersions": [
+            89,
+            9
+        ],
+        "clusterVersion": "1.222.47.20210712-162143"
+    },
+    "technologies": [{
+            "type": "LOG_ANALYTICS",
+            "monitoringEnabled": true,
+            "scope": "ENVIRONMENT"
+        },
+        {
+            "type": "RUBY",
+            "monitoringEnabled": false,
+            "scope": "ENVIRONMENT"
+        },
+        {
+            "type": "OPENTRACINGNATIVE",
+            "monitoringEnabled": false,
+            "scope": "ENVIRONMENT"
+        },
+        {
+            "type": "DOT_NET",
+            "monitoringEnabled": true,
+            "scope": "ENVIRONMENT"
+        }
+    ]
+}
