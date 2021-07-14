@@ -241,11 +241,11 @@ class CustomDeviceCreation(DynatraceObject):
             "configUrl": self.config_url,
             "properties": self.properties,
             "dnsNames": self.dns_names,
-            "messageType": self.message_type,
+            "messageType": str(self.message_type),
         }
 
     def post(self) -> "Response":
-        return self._http_client.make_request(path=f"{EntityService.ENDPOINT_ENTITIES}/custom", method="POST", data=self.to_json())
+        return self._http_client.make_request(path=f"{EntityService.ENDPOINT_ENTITIES}/custom", method="POST", params=self.to_json())
 
 
 class EntityType(DynatraceObject):
