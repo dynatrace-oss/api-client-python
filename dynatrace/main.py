@@ -34,6 +34,7 @@ from dynatrace.environment_v1.smartscape_hosts import SmartScapeHostsService
 from dynatrace.environment_v1.synthetic_monitors import SyntheticMonitorsService
 from dynatrace.environment_v1.synthetic_third_party import ThirdPartySyntheticTestsService
 from dynatrace.environment_v1.timeseries import TimeSerieService
+from dynatrace.environment_v1.deployment import DeploymentService
 from dynatrace.environment_v2.activegates import ActiveGateService
 from dynatrace.environment_v2.activegates_autoupdate_configuration import ActiveGateAutoUpdateConfigurationService
 from dynatrace.environment_v2.activegates_autoupdate_jobs import ActiveGateAutoUpdateJobsService
@@ -103,3 +104,4 @@ class Dynatrace:
         self.timeseries: TimeSerieService = TimeSerieService(self.__http_client)
         self.problems: ProblemService = ProblemService(self.__http_client)
         self.slos: SloService = SloService(self.__http_client)
+        self.deployment: DeploymentService = DeploymentService(self.__http_client)
