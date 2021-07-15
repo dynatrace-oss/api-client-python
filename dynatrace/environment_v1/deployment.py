@@ -32,7 +32,7 @@ class DeploymentService:
 
     def get_agent_installer_latest_metainfo(
         self, os_type: str, installer_type: str, flavor: Optional[str] = None, arch: Optional[str] = None, bitness: Optional[str] = None
-    ) -> "InstallerMetaInfo":
+    ) -> "InstallerMetaInfoDto":
         """Returns the OneAgent version of the installer of the specified type.
         Non-required parameters are only applicable to the paas and paas-sh installer types.
 
@@ -61,7 +61,7 @@ class DeploymentService:
         """
         params = {"flavor": flavor, "arch": arch, "bitness": bitness}
         response = self.__http_client.make_request(path=f"{self.ENDPOINT_INSTALLER_AGENT}/{os_type}/{installer_type}/latest/metainfo", params=params)
-        return InstallerMetaInfo(raw_element=response.json())
+        return InstallerMetaInfoDto(raw_element=response.json())
 
     def get_agent_installer(
         self,
@@ -143,7 +143,7 @@ class DeploymentService:
 
         :returns str: ActiveGate Endpoints separated by semicolons
         """
-        params = {"netowrkZone": network_zone}
+        params = {"networkZone": network_zone}
         return self.__http_client.make_request(path=f"{self.ENDPOINT_INSTALLER_AGENT}/connectioninfo/endpoints", params=params).text
 
     def list_agent_installer_versions(
@@ -312,7 +312,7 @@ class ConnectionInfo(DynatraceObject):
         self.formatted_communication_endpoints: str = raw_element["formattedCommunicationEndpoints"]
 
 
-class InstallerMetaInfo(DynatraceObject):
+class InstallerMetaInfoDto(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.latest_agent_version: str = raw_element["latestAgentVersion"]
 
