@@ -26,6 +26,7 @@ from dynatrace.configuration_v1.maintenance_windows import MaintenanceWindowServ
 from dynatrace.configuration_v1.metric_events import MetricEventService
 from dynatrace.configuration_v1.notifications import NotificationService
 from dynatrace.configuration_v1.plugins import PluginService
+from dynatrace.configuration_v1.management_zones import ManagementZoneService
 from dynatrace.environment_v1.cluster_time import ClusterTimeService
 from dynatrace.environment_v1.custom_device import CustomDeviceService
 from dynatrace.environment_v1.event import EventService
@@ -103,3 +104,4 @@ class Dynatrace:
         self.timeseries: TimeSerieService = TimeSerieService(self.__http_client)
         self.problems: ProblemService = ProblemService(self.__http_client)
         self.slos: SloService = SloService(self.__http_client)
+        self.management_zones: ManagementZoneService = ManagementZoneService(self.__http_client)
