@@ -16,7 +16,8 @@ limitations under the License.
 
 from datetime import datetime
 from dynatrace.dynatrace_object import DynatraceObject
-from typing import List, Optional, Union, Dict, Any
+from pathlib import Path
+from typing import List, Dict, Any, Optional
 
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
@@ -82,6 +83,21 @@ class ExtensionsServiceV2:
         response = self.__http_client.make_request(f"{self.ENDPOINT}/{extension_name}/{extension_version}").json()
         return Extension(raw_element=response)
     
+
+    def post(self, zip_file_path: str, validate_only: Optional[bool] = False):
+        """ Post the specified version of the extension 2.0
+
+        :param zip_file_path: path to zipped extension 2.0
+        :param validate_only: optionally run validation but do not persist the extension even if validation was successful
+
+        :return: newly created Extension class object
+        """
+        params = {"validateOnly": validate_only}
+        file = Path(zip_file_path)
+        with open(file, "rb") as f:
+            response = self.__http_client.make_request(path=f"{self.ENDPOINT}", params=params, method="POST", files={"file": f})
+            return Extension(raw_element=response)
+
 
     def delete(self, extension_name: str, extension_version: str):
         """ Deletes the specified version of the extension 2.0
