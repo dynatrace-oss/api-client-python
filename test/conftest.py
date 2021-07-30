@@ -23,10 +23,13 @@ class MockResponse:
         return self.json_data
 
 
-def local_make_request(self, path: str, params: Optional[Dict] = None, headers: Optional[Dict] = None, method="GET", data=None) -> MockResponse:
+def local_make_request(
+    self, path: str, params: Optional[Dict] = None, headers: Optional[Dict] = None, method="GET", data=None, query_params=None
+) -> MockResponse:
 
-    if params is None:
-        params = ""
+    params = f"{params}" if params else ""
+    if query_params:
+        params += f"{query_params}"
     if params:
         encoded = f"{params}".encode()
         params = f"_{hashlib.sha256(encoded).hexdigest()}"[:16]

@@ -43,6 +43,11 @@ def dump_to_json(wrapped, instance, args, kwargs):
     r = wrapped(*args, **kwargs)
     method = kwargs.get("method", "GET")
     params = kwargs.get("params", "")
+    query_params = kwargs.get("query_params", "")
+
+    params = f"{params}"
+    if query_params:
+        params += f"{query_params}"
     if params:
         encoded = f"{params}".encode()
         params = f"_{hashlib.sha256(encoded).hexdigest()}"[:16]
