@@ -28,33 +28,24 @@ from dynatrace.utils import timestamp_to_string
 class CustomTagService:
     ENDPOINT = "/api/v2/tags"
 
-
     def __init__(self, http_client: HttpClient) -> None:
         self.__http_client = http_client
-    
 
-    def list(self, entity_selector: str, time_from: Optional[Union[datetime, str]] = None, time_to: Optional[Union[datetime, str]] = None) -> PaginatedList["METag"]:
-        """ 
+    def list(
+        self, entity_selector: str, time_from: Optional[Union[datetime, str]] = None, time_to: Optional[Union[datetime, str]] = None
+    ) -> PaginatedList["METag"]:
+        """
         Returns a list of custom tags
         :param entitySelector: specifies entities where you want to read tags
 
-        :return: a list of METag objects 
+        :return: a list of METag objects
         """
-        params = {
-            "entitySelector": entity_selector,
-            "from": timestamp_to_string(time_from),
-            "to": timestamp_to_string(time_to)
-        }
+        params = {"entitySelector": entity_selector, "from": timestamp_to_string(time_from), "to": timestamp_to_string(time_to)}
 
         return PaginatedList(METag, self.__http_client, target_url=self.ENDPOINT, target_params=params, list_item="tags")
 
-
     def post(
-        self,
-        entity_selector: str,
-        tags: List[Dict[str, Any]],
-        time_from: Optional[Union[datetime, str]] = None,
-        time_to: Optional[Union[datetime, str]] = None
+        self, entity_selector: str, tags: List[Dict[str, Any]], time_from: Optional[Union[datetime, str]] = None, time_to: Optional[Union[datetime, str]] = None
     ) -> None:
         """
         Adds custom tags to the specified entities
@@ -63,15 +54,8 @@ class CustomTagService:
 
         :return: HTTP Response
         """
-        params = {
-            "entitySelector": entity_selector,
-            "body": {"tags": tags},
-            "from": timestamp_to_string(time_from),
-            "to": timestamp_to_string(time_to)
-        }
+        params = {"entitySelector": entity_selector, "body": {"tags": tags}, "from": timestamp_to_string(time_from), "to": timestamp_to_string(time_to)}
         return self.__http_client.make_request(path=f"{self.ENDPOINT}", params=params, method="POST")
-    
-
 
     def delete(
         self,
@@ -80,7 +64,7 @@ class CustomTagService:
         value: Optional[str] = None,
         delete_all_with_key: Optional[bool] = None,
         time_from: Optional[Union[datetime, str]] = None,
-        time_to: Optional[Union[datetime, str]] = None
+        time_to: Optional[Union[datetime, str]] = None,
     ) -> Response:
         """
         Deletes the specified tag from the specified entities
@@ -92,10 +76,5 @@ class CustomTagService:
 
         :return: HTTP response
         """
-        params = {
-            "key": key,
-            "entitySelector": entity_selector,
-            "deleteAllWithKey": delete_all_with_key,
-            "value": value
-        }
+        params = {"key": key, "entitySelector": entity_selector, "deleteAllWithKey": delete_all_with_key, "value": value}
         return self.__http_client.make_request(path=f"{self.ENDPOINT}", params=params, method="DELETE")

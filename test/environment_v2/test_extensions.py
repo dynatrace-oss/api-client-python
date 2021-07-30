@@ -3,20 +3,22 @@ from dynatrace.pagination import PaginatedList
 
 import dynatrace.environment_v2.extensions as extensions_v2
 
+
 def test_list(dt: Dynatrace):
     extensions_list = dt.extensions_v2.list()
     e_list = list(extensions_list)
 
-    # type checks 
+    # type checks
     assert isinstance(extensions_list, PaginatedList)
     assert len(e_list) == 2
-    assert all(isinstance(n , extensions_v2.MinimalExtension) for n in extensions_list)
+    assert all(isinstance(n, extensions_v2.MinimalExtension) for n in extensions_list)
 
     # value checks
     for elt in e_list:
         assert elt.extension_name == "ibmmq"
         assert elt.version == "1.2.3"
         break
+
 
 def test_get(dt: Dynatrace):
     e_name = "ibmmq"

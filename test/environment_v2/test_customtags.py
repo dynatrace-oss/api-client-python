@@ -12,10 +12,10 @@ ENTITY_SELECTOR = "bilalhosts"
 def test_list(dt: Dynatrace):
     _tags = dt.custom_tags.list(entity_selector=ENTITY_SELECTOR)
 
-    # type checks 
+    # type checks
     assert isinstance(_tags, PaginatedList)
     assert len(list(_tags)) == 2
-    assert all(isinstance(n , METag) for n in _tags)
+    assert all(isinstance(n, METag) for n in _tags)
 
     # value checks
     for t in _tags:
