@@ -30,12 +30,10 @@ class ExtensionsServiceV2:
     def __init__(self, http_client: HttpClient):
         self.__http_client = http_client
 
-    def list(self) -> PaginatedList["MinimalExtension"]:
-        """Lists all the extensions 2.0 available in your environment
-
-        :return: a list of MinimalExtension objects
-        """
-        return PaginatedList(MinimalExtension, self.__http_client, target_url=self.ENDPOINT, list_item="extensions")
+    def list(self, name: Optional[str] = None) -> PaginatedList["MinimalExtension"]:
+        """Lists all the extensions 2.0 available in your environment"""
+        params = {"name": name}
+        return PaginatedList(MinimalExtension, self.__http_client, target_url=self.ENDPOINT, list_item="extensions", target_params=params)
 
     def list_versions(self, extension_name: str) -> PaginatedList["MinimalExtension"]:
         """Lists all the extensions 2.0 by specified name in your environment
