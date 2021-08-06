@@ -17,8 +17,6 @@ limitations under the License.
 from datetime import datetime
 from typing import List, Optional, Union, Dict, Any
 
-from requests.models import Response
-
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.http_client import HttpClient
 from dynatrace.configuration_v1.metag import METag
