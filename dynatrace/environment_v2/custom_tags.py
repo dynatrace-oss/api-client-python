@@ -82,25 +82,31 @@ class CustomTagService:
         delete_all_with_key: Optional[bool] = None,
         time_from: Optional[Union[datetime, str]] = None,
         time_to: Optional[Union[datetime, str]] = None,
-    ) -> Response:
+    ) -> "DeletedEntityTags":
         """
         Deletes the specified tag from the specified entities
-
-        :param key: the tag to be deleted
-        :param entity_selector: specifies entities where you want to delete tags
-        :param delete_all_with_key: boolean to delete all optional
-        :param value: optional
-
-        :return: HTTP response
         """
-        params = {"key": key, "entitySelector": entity_selector, "deleteAllWithKey": delete_all_with_key, "value": value}
-        return self.__http_client.make_request(path=f"{self.ENDPOINT}", params=params, method="DELETE")
+        params = {
+            "key": key,
+            "entitySelector": entity_selector,
+            "deleteAllWithKey": delete_all_with_key,
+            "value": value,
+            "from": timestamp_to_string(time_from),
+            "to": timestamp_to_string(time_to),
+        }
+        response = self.__http_client.make_request(self.ENDPOINT, params=params, method="DELETE")
+        return DeletedEntityTags(raw_element=response.json())
 
 
 class AddedEntityTags(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.matched_entities_count: int = raw_element.get("matchedEntitiesCount", 0)
         self.applied_tags: List[METag] = [METag(raw_element=tag) for tag in raw_element.get("appliedTags", [])]
+
+
+class DeletedEntityTags(DynatraceObject):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        self.matched_entities_count: int = raw_element.get("matchedEntitiesCount", 0)
 
 
 class AddEntityTags:

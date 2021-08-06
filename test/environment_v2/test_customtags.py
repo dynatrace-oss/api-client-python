@@ -41,3 +41,8 @@ def test_post_value(dt: Dynatrace):
         assert tag.key == "test-tag-value"
         assert tag.value == "tag-value"
         assert tag.string_representation == "test-tag-value:tag-value"
+
+
+def test_delete(dt: Dynatrace):
+    deleted_tags = dt.custom_tags.delete("test-tag-value", "entityId(CUSTOM_DEVICE-3B7788FE910B0F42)", delete_all_with_key=True)
+    assert deleted_tags.matched_entities_count == 1
