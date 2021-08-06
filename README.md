@@ -89,7 +89,7 @@ Audit Logs                               |  :heavy_check_mark:  |  `dt.audit_log
 Extensions 2.0                           |  :x:                 |                                             |
 Metrics                                  |  :heavy_check_mark:  |  `dt.metrics`                               |
 Monitored entities                       |  :warning:           |  `dt.entities`                              |
-Monitored entities - Custom tags         |  :x:                 |                                             |
+Monitored entities - Custom tags         |  :heavy_check_mark:  |  `dt.custom_tags`                           |
 Network zones                            |  :x:                 |                                             |
 Problems                                 |  :heavy_check_mark:  |  `dt.problems`                              |
 Security problems                        |  :x:                 |                                             |
