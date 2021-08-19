@@ -19,7 +19,7 @@ from typing import Dict, Any, List, Optional, Union
 
 from dynatrace.http_client import HttpClient
 from dynatrace.dynatrace_object import DynatraceObject
-from dynatrace.environment_v2.monitored_entities import EntityShortRepresentation
+from dynatrace.environment_v2.monitored_entities import EntityShortRepresentation, EntityStub
 from dynatrace.environment_v2.schemas import ConfigurationMetadata
 
 
@@ -29,14 +29,14 @@ class ManagementZoneService:
     def __init__(self, http_client: HttpClient):
         self.__http_client = http_client
 
-    def list(self) -> "List[EntityShortRepresentation]":
+    def list(self) -> "List[ManagementZoneStub]":
         """Lists all configured management zones.
         Management Zones are returned as short representations (id, name, and optional description).
 
         :returns: list of configured management zones
         """
         response = self.__http_client.make_request(path=self.ENDPOINT)
-        return [EntityShortRepresentation(raw_element=value) for value in response.json().get("values", [])]
+        return [ManagementZoneStub(raw_element=value, http_client=self.__http_client) for value in response.json().get("values", [])]
 
     def get(self, mz_id: str, include_process_group_references: bool = False) -> "ManagementZone":
         """Gets the details of the specified management zone.
@@ -55,9 +55,26 @@ class ManagementZoneService:
         return ManagementZone(raw_element=response.json(), http_client=self.__http_client)
 
     def post(self, management_zone: "ManagementZone") -> "EntityShortRepresentation":
+        """Create the given Management Zone configuration in Dynatrace (POST).
+
+        :param management_zone: the Management Zone configuration details
+
+        :returns EntityShortRepresentation: basic details of the created Management Zone
+        """
+        if not management_zone._http_client:
+            management_zone._http_client = self.__http_client
         return management_zone.post()
 
-    def put(self, management_zone: "ManagementZone") -> "Union[Response, EntityShortRepresentation]":
+    def put(self, management_zone: "ManagementZone") -> "Response":
+        """Update the specified Management Zone in Dynatrace (PUT).
+        If the ID does not exist in Dynatrace, a new Management Zone is created with the given ID.
+
+        :param management_zone: the Management Zone configuration details
+
+        :returns Response: HTTP Response to the request. Will contain basic details in JSON body if configuration is created.
+        """
+        if not management_zone._http_client:
+            management_zone._http_client = self.__http_client
         return management_zone.put()
 
     def delete(self, mz_id: str) -> "Response":
@@ -68,6 +85,20 @@ class ManagementZoneService:
         :returns Response: HTTP Response for the request.
         """
         return self.__http_client.make_request(path=f"{self.ENDPOINT}/{mz_id}", method="DELETE")
+
+
+class ManagementZoneStub(EntityShortRepresentation):
+    def get_details(self) -> "ManagementZone":
+        """Gets the full details of this Management Zone configuration.
+
+        :returns Management Zone: the Management Zone configuration
+
+        :throws ValueError: operation cannot be executed due to missing HTTP Client
+        """
+        if not self._http_client:
+            raise ValueError("Object does not have an HTTP Client implemented.")
+        response = self._http_client.make_request(path=f"{ManagementZoneService.ENDPOINT}/{self.id}")
+        return ManagementZone(raw_element=response.json(), http_client=self._http_client)
 
 
 class ManagementZone(DynatraceObject):
@@ -83,26 +114,47 @@ class ManagementZone(DynatraceObject):
         ]
 
     def to_json(self) -> Dict[str, Any]:
-        return {
-            "name": self.name,
-            "description": self.description,
-            "rules": [rule.to_json() for rule in self.rules] if self.rules else None,
-            "dimensionalRules": [rule.to_json() for rule in self.dimensional_rules] if self.dimensional_rules else None,
-            "entitySelectorBasedRules": [rule.to_json() for rule in self.entity_selector_based_rules] if self.entity_selector_based_rules else None,
-        }
+        """Converts Management Zone details to JSON dictionary.
+
+        :returns Dict[str, Any]: dictionary representing the Management Zone
+        """
+        details = {"name": self.name, "description": self.description}
+        if self.rules:
+            details["rules"] = [rule.to_json() for rule in self.rules]
+        if self.dimensional_rules:
+            details["dimensionalRules"] = [rule.to_json() for rule in self.dimensional_rules]
+        if self.entity_selector_based_rules:
+            details["entitySelectorBasedRules"] = [rule.to_json() for rule in self.entity_selector_based_rules]
+
+        return details
 
     def post(self) -> "EntityShortRepresentation":
+        """Creates this Management Zone in Dynatrace (POST).
+
+        :returns EntityShortRepresentation: basic detail of the created Management Zone
+
+        :throws ValueError: if operation cannot be executed due to missing HTTP Client
+        """
+        if not self._http_client:
+            raise ValueError("Object does not have HTTP Client. Use management_zones.post() instead.")
         response = self._http_client.make_request(path=ManagementZoneService.ENDPOINT, params=self.to_json(), method="POST")
         self.id = response.json().get("id")
 
         return EntityShortRepresentation(raw_element=response.json())
 
-    def put(self) -> "Union[Response, EntityShortRepresentation]":
-        response = self._http_client.make_request(path=f"{ManagementZoneService.ENDPOINT}/{self.id}", params=self.to_json(), method="PUT")
-        if response.json():
-            self.id = response.json().get("id")
+    def put(self) -> "Response":
+        """Updates this Management Zone in Dynatrace (PUT).
+        If the ID does not exist in Dynatrace, a new Management Zone is created with the given ID.
 
-            return EntityShortRepresentation(raw_element=response.json())
+        :returns Response: HTTP Response to the request. Will contain basic details in JSON body if configuration is created.
+
+        :throws ValueError: if operation cannot be executed due to missing HTTP Client
+        """
+        if not self._http_client:
+            raise ValueError("Object does not have HTTP Client. Use management_zones.put() instead.")
+        response = self._http_client.make_request(path=f"{ManagementZoneService.ENDPOINT}/{self.id}", params=self.to_json(), method="PUT")
+        if response.status_code == 201:
+            self.id = response.json().get("id")
 
         return response
 
@@ -1251,38 +1303,75 @@ class EqualsComparisonOperator(Enum):
         return self.value
 
 
-class TagComparisonOperator(EqualsComparisonOperator):
+class TagComparisonOperator(Enum):
     TAG_KEY_EQUALS = "TAG_KEY_EQUALS"
+    EQUALS = "EQUALS"
+
+    def __str__(self) -> str:
+        return self.value
 
 
-class IndexedTagComparisonOperator(TagComparisonOperator):
+class IndexedTagComparisonOperator(Enum):
     EXISTS = "EXISTS"
+    TAG_KEY_EQUALS = "TAG_KEY_EQUALS"
+    EQUALS = "EQUALS"
+
+    def __str__(self) -> str:
+        return self.value
 
 
-class BasicComparisonOperator(EqualsComparisonOperator):
+class BasicComparisonOperator(Enum):
     EXISTS = "EXISTS"
+    EQUALS = "EQUALS"
+
+    def __str__(self) -> str:
+        return self.value
 
 
-class StringComparisonOperator(BasicComparisonOperator):
+class StringComparisonOperator(Enum):
     BEGINS_WITH = "BEGINS_WITH"
     CONTAINS = "CONTAINS"
     ENDS_WITH = "ENDS_WITH"
     REGEX_MATCHES = "REGEX_MATCHES"
+    EXISTS = "EXISTS"
+    EQUALS = "EQUALS"
+
+    def __str__(self) -> str:
+        return self.value
 
 
-class IpAddressComparisonOperator(StringComparisonOperator):
+class IpAddressComparisonOperator(Enum):
     IS_IP_IN_RANGE = "IS_IP_IN_RANGE"
-
-
-class IndexedNameComparisonOperator(BasicComparisonOperator):
+    BEGINS_WITH = "BEGINS_WITH"
     CONTAINS = "CONTAINS"
+    ENDS_WITH = "ENDS_WITH"
+    REGEX_MATCHES = "REGEX_MATCHES"
+    EXISTS = "EXISTS"
+    EQUALS = "EQUALS"
+
+    def __str__(self) -> str:
+        return self.value
 
 
-class IntegerComparisonOperator(BasicComparisonOperator):
+class IndexedNameComparisonOperator(Enum):
+    CONTAINS = "CONTAINS"
+    EXISTS = "EXISTS"
+    EQUALS = "EQUALS"
+
+    def __str__(self) -> str:
+        return self.value
+
+
+class IntegerComparisonOperator(Enum):
     GREATER_THAN = "GREATER_THAN"
     GREATER_THAN_OR_EQUAL = "GREATER_THAN_OR_EQUAL"
     LOWER_THAN = "LOWER_THAN"
     LOWER_THAN_OR_EQUAL = "LOWER_THAN_OR_EQUAL"
+    EXISTS = "EXISTS"
+    EQUALS = "EQUALS"
+
+    def __str__(self) -> str:
+        return self.value
 
 
 ### COMPARISON VALUE ENUMS ###
