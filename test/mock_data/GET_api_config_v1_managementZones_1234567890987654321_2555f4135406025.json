@@ -1,0 +1,112 @@
+{
+    "metadata": {
+        "configurationVersions": [
+            0
+        ],
+        "clusterVersion": "1.225.22.20210818-111518"
+    },
+    "id": "1234567890987654321",
+    "name": "Test-Management-Zone",
+    "description": "All sorts of rules for testing",
+    "rules": [{
+            "type": "SERVICE",
+            "enabled": true,
+            "propagationTypes": [],
+            "conditions": [{
+                "key": {
+                    "attribute": "SERVICE_TYPE",
+                    "type": "STATIC"
+                },
+                "comparisonInfo": {
+                    "type": "SERVICE_TYPE",
+                    "operator": "EQUALS",
+                    "value": "CUSTOM_SERVICE",
+                    "negate": false
+                }
+            }]
+        },
+        {
+            "type": "HOST",
+            "enabled": true,
+            "propagationTypes": [
+                "HOST_TO_PROCESS_GROUP_INSTANCE"
+            ],
+            "conditions": [{
+                "key": {
+                    "attribute": "AZURE_REGION_NAME",
+                    "type": "STATIC"
+                },
+                "comparisonInfo": {
+                    "type": "STRING",
+                    "operator": "BEGINS_WITH",
+                    "value": "This",
+                    "negate": false,
+                    "caseSensitive": true
+                }
+            }]
+        },
+        {
+            "type": "SERVICE",
+            "enabled": true,
+            "propagationTypes": [
+                "SERVICE_TO_HOST_LIKE",
+                "SERVICE_TO_PROCESS_GROUP_LIKE"
+            ],
+            "conditions": [{
+                    "key": {
+                        "attribute": "SERVICE_TOPOLOGY",
+                        "type": "STATIC"
+                    },
+                    "comparisonInfo": {
+                        "type": "SERVICE_TOPOLOGY",
+                        "operator": "EQUALS",
+                        "value": "FULLY_MONITORED",
+                        "negate": false
+                    }
+                },
+                {
+                    "key": {
+                        "attribute": "PROCESS_GROUP_PREDEFINED_METADATA",
+                        "dynamicKey": "EQUINOX_CONFIG_PATH",
+                        "type": "PROCESS_PREDEFINED_METADATA_KEY"
+                    },
+                    "comparisonInfo": {
+                        "type": "STRING",
+                        "operator": "CONTAINS",
+                        "value": "something",
+                        "negate": true,
+                        "caseSensitive": true
+                    }
+                }
+            ]
+        },
+        {
+            "type": "APPMON_SERVER",
+            "enabled": true,
+            "propagationTypes": [],
+            "conditions": [{
+                "key": {
+                    "attribute": "APPMON_SERVER_NAME",
+                    "type": "STATIC"
+                },
+                "comparisonInfo": {
+                    "type": "STRING",
+                    "operator": "BEGINS_WITH",
+                    "value": "appmon",
+                    "negate": false,
+                    "caseSensitive": true
+                }
+            }]
+        }
+    ],
+    "dimensionalRules": [],
+    "entitySelectorBasedRules": [{
+            "enabled": true,
+            "entitySelector": "type(f5:instance)"
+        },
+        {
+            "enabled": true,
+            "entitySelector": "type(f5:pool)"
+        }
+    ]
+}

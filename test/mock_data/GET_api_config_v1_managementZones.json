@@ -1,18 +1,15 @@
 {
-    "name": "radu",
-    "id": "123",
-    "rules": [{
-        "type": "sometype",
-        "enabled": true,
-        "conditions": [{
-            "key": {
-                "attribute": "APPMON_SERVER_NAME",
-                "type": "STRING",
-                "dynamicKey": "whatever"
-            },
-            "comparisonInfo": {
-
-            }
-        }]
-    }]
+    "values": [{
+            "id": "1234567890987654321",
+            "name": "Test-Management-Zone"
+        },
+        {
+            "id": "1834586930727334425",
+            "name": "MGMT_ZONE_TWO"
+        },
+        {
+            "id": "9214927556619132506",
+            "name": "Third management zone"
+        }
+    ]
 }
