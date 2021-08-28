@@ -18,7 +18,6 @@ from datetime import datetime
 from dynatrace.dynatrace_object import DynatraceObject
 from typing import List, Optional, Union, Dict, Any
 
-from dynatrace.environment_v2.schemas import EntityType, ManagementZone
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
 
