@@ -1,0 +1,22 @@
+{
+    "networkZones": [
+      {
+        "id": "default",
+        "description": "The default network zone. This is the network zone for OneAgents or ActiveGates that do not have any network zone configured.",
+        "alternativeZones": [],
+        "numOfOneAgentsUsing": 141,
+        "numOfConfiguredOneAgents": 141,
+        "numOfOneAgentsFromOtherZones": 0,
+        "numOfConfiguredActiveGates": 0
+      },
+      {
+        "id": "us-east1",
+        "description": "The us east a networkzone",
+        "alternativeZones": ["us-east2, us-east3"],
+        "numOfOneAgentsUsing": 90,
+        "numOfConfiguredOneAgents": 90,
+        "numOfOneAgentsFromOtherZones": 0,
+        "numOfConfiguredActiveGates": 12
+      }
+    ]
+  }

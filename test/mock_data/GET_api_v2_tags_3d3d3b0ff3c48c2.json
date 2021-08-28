@@ -1,0 +1,14 @@
+{
+    "tags": [
+    {
+      "context": "CONTEXTLESS",
+      "key": "mainApp",
+      "stringRepresentation": "mainApp"
+    },
+    {
+      "context": "CONTEXTLESS",
+      "key": "bookings",
+      "stringRepresentation": "bookings"
+    }
+  ]
+}

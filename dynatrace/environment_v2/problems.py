@@ -156,7 +156,7 @@ class Problem(DynatraceObject):
         self.recent_comments: Optional[CommentList] = CommentList(raw_element=raw_element.get("recentComments"))
         self.impacted_entities: Optional[List[EntityStub]] = [EntityStub(raw_element=e) for e in raw_element.get("impactedEntities", [])]
         self.linked_problem_info: Optional[LinkedProblem] = LinkedProblem(raw_element=raw_element.get("linkedProblemInfo"))
-        self.root_cause_entity: Optional[EntityStub] = EntityStub(raw_element=raw_element.get("rootCauseEntity"))
+        self.root_cause_entity: Optional[EntityStub] = EntityStub(raw_element=raw_element["rootCauseEntity"]) if raw_element.get("rootCauseEntity") else None
         self.problem_filters: Optional[List[AlertingProfileStub]] = [AlertingProfileStub(raw_element=a) for a in raw_element.get("problemFilters", [])]
         self.evidence_details: Optional[EvidenceDetails] = EvidenceDetails(raw_element=raw_element.get("evidenceDetails"))
         self.impact_analysis: Optional[ImpactAnalysis] = ImpactAnalysis(raw_element=raw_element.get("impactAnalysis"))

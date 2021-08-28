@@ -37,12 +37,16 @@ from dynatrace.environment_v1.smartscape_hosts import SmartScapeHostsService
 from dynatrace.environment_v1.synthetic_monitors import SyntheticMonitorsService
 from dynatrace.environment_v1.synthetic_third_party import ThirdPartySyntheticTestsService
 from dynatrace.environment_v1.timeseries import TimeSerieService
+from dynatrace.environment_v1.deployment import DeploymentService
 from dynatrace.environment_v2.activegates import ActiveGateService
 from dynatrace.environment_v2.activegates_autoupdate_configuration import ActiveGateAutoUpdateConfigurationService
 from dynatrace.environment_v2.activegates_autoupdate_jobs import ActiveGateAutoUpdateJobsService
 from dynatrace.environment_v2.audit_logs import AuditLogsService
+from dynatrace.environment_v2.extensions import ExtensionsServiceV2
 from dynatrace.environment_v2.monitored_entities import EntityService
+from dynatrace.environment_v2.custom_tags import CustomTagService
 from dynatrace.environment_v2.metrics import MetricService
+from dynatrace.environment_v2.networkzones import NetworkZoneService
 from dynatrace.environment_v2.tokens_api import TokenService
 from dynatrace.environment_v2.tokens_tenant import TenantTokenService
 from dynatrace.environment_v2.problems import ProblemService
@@ -87,13 +91,16 @@ class Dynatrace:
         self.auto_tags: AutoTagService = AutoTagService(self.__http_client)
         self.cluster_time: ClusterTimeService = ClusterTimeService(self.__http_client)
         self.custom_devices: CustomDeviceService = CustomDeviceService(self.__http_client)
+        self.custom_tags: CustomTagService = CustomTagService(self.__http_client)
         self.dashboards: DashboardService = DashboardService(self.__http_client)
         self.entities: EntityService = EntityService(self.__http_client)
         self.events: EventService = EventService(self.__http_client)
         self.extensions: ExtensionService = ExtensionService(self.__http_client)
+        self.extensions_v2: ExtensionsServiceV2 = ExtensionsServiceV2(self.__http_client)
         self.maintenance_windows = MaintenanceWindowService(self.__http_client)
         self.metrics: MetricService = MetricService(self.__http_client)
         self.notifications: NotificationService = NotificationService(self.__http_client)
+        self.network_zones: NetworkZoneService = NetworkZoneService(self.__http_client)
         self.oneagents: OneAgentOnAHostService = OneAgentOnAHostService(self.__http_client)
         self.plugins: PluginService = PluginService(self.__http_client)
         self.smartscape_hosts: SmartScapeHostsService = SmartScapeHostsService(self.__http_client)
@@ -107,3 +114,4 @@ class Dynatrace:
         self.oneagents_config_host: OneAgentOnAHostConfigService = OneAgentOnAHostConfigService(self.__http_client)
         self.oneagents_config_hostgroup: OneAgentInAHostGroupService = OneAgentInAHostGroupService(self.__http_client)
         self.oneagents_config_environment: OneAgentEnvironmentWideConfigService = OneAgentEnvironmentWideConfigService(self.__http_client)
+        self.deployment: DeploymentService = DeploymentService(self.__http_client)

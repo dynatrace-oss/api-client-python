@@ -15,7 +15,7 @@ limitations under the License.
 """
 
 from enum import Enum
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 from dynatrace.dynatrace_object import DynatraceObject
 
 # Schemas that don't belong to a specific api tag
@@ -28,22 +28,21 @@ class ConfigurationMetadata(DynatraceObject):
         self.current_configuration_versions: List[str] = raw_element.get("currentConfigurationVersions")
 
 
-class EntityType(DynatraceObject):
-    def _create_from_raw_data(self, raw_element: dict):
-        # TODO - Implement other properties
-        self.entity_type = raw_element.get("type")
-        self.properties = raw_element.get("properties", [])
-
-
 class VersionCompareType(Enum):
-    EQUAL: str = "EQUAL"
-    GREATER: str = "GREATER"
-    GREATER_EQUAL: str = "GREATER_EQUAL"
-    LOWER: str = "LOWER"
-    LOWER_EQUAL: str = "LOWER_EQUAL"
+    EQUAL = "EQUAL"
+    GREATER = "GREATER"
+    GREATER_EQUAL = "GREATER_EQUAL"
+    LOWER = "LOWER"
+    LOWER_EQUAL = "LOWER_EQUAL"
+
+    def __repr__(self) -> str:
+        return self.value
+
+    def __str__(self) -> str:
+        return self.value
 
 
 class ManagementZone(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.name: str = raw_element.get("name")
-        self.id: str = raw_element.get("id")
+        self.name: str = raw_element["name"]
+        self.id: str = raw_element["id"]

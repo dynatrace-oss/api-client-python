@@ -1,0 +1,152 @@
+{
+    "totalCount": 2,
+    "pageSize": 2,
+    "types": [{
+            "type": "APM_SECURITY_GATEWAY",
+            "displayName": "ActiveGate",
+            "dimensionKey": "dt.entity.apm_security_gateway",
+            "entityLimitExceeded": false,
+            "properties": [{
+                    "id": "awsNameTag",
+                    "type": "String",
+                    "displayName": "awsNameTag"
+                },
+                {
+                    "id": "boshName",
+                    "type": "String",
+                    "displayName": "boshName"
+                },
+                {
+                    "id": "conditionalName",
+                    "type": "String",
+                    "displayName": "conditionalName"
+                },
+                {
+                    "id": "customizedName",
+                    "type": "String",
+                    "displayName": "customizedName"
+                },
+                {
+                    "id": "detectedName",
+                    "type": "String",
+                    "displayName": "detectedName"
+                },
+                {
+                    "id": "gcpZone",
+                    "type": "String",
+                    "displayName": "gcpZone"
+                },
+                {
+                    "id": "isContainerDeployment",
+                    "type": "Boolean",
+                    "displayName": "isContainerDeployment"
+                },
+                {
+                    "id": "oneAgentCustomHostName",
+                    "type": "String",
+                    "displayName": "oneAgentCustomHostName"
+                }
+            ],
+            "tags": "List",
+            "managementZones": "List",
+            "fromRelationships": [{
+                "id": "isLocatedIn",
+                "toTypes": [
+                    "SYNTHETIC_LOCATION"
+                ]
+            }],
+            "toRelationships": []
+        },
+        {
+            "type": "APPLICATION",
+            "displayName": "Web application",
+            "dimensionKey": "dt.entity.application",
+            "entityLimitExceeded": false,
+            "properties": [{
+                    "id": "applicationMatchTarget",
+                    "type": "Enum",
+                    "displayName": "applicationMatchTarget"
+                },
+                {
+                    "id": "applicationType",
+                    "type": "Enum",
+                    "displayName": "applicationType"
+                },
+                {
+                    "id": "awsNameTag",
+                    "type": "String",
+                    "displayName": "awsNameTag"
+                },
+                {
+                    "id": "boshName",
+                    "type": "String",
+                    "displayName": "boshName"
+                },
+                {
+                    "id": "conditionalName",
+                    "type": "String",
+                    "displayName": "conditionalName"
+                },
+                {
+                    "id": "customizedName",
+                    "type": "String",
+                    "displayName": "customizedName"
+                },
+                {
+                    "id": "detectedName",
+                    "type": "String",
+                    "displayName": "detectedName"
+                },
+                {
+                    "id": "gcpZone",
+                    "type": "String",
+                    "displayName": "gcpZone"
+                },
+                {
+                    "id": "oneAgentCustomHostName",
+                    "type": "String",
+                    "displayName": "oneAgentCustomHostName"
+                },
+                {
+                    "id": "ruleAppliedMatchType",
+                    "type": "Enum",
+                    "displayName": "ruleAppliedMatchType"
+                },
+                {
+                    "id": "ruleAppliedPattern",
+                    "type": "String",
+                    "displayName": "ruleAppliedPattern"
+                }
+            ],
+            "tags": "List",
+            "managementZones": "List",
+            "fromRelationships": [{
+                    "id": "calls",
+                    "toTypes": [
+                        "SERVICE"
+                    ]
+                },
+                {
+                    "id": "isApplicationOfSyntheticTest",
+                    "toTypes": [
+                        "HTTP_CHECK",
+                        "SYNTHETIC_TEST"
+                    ]
+                }
+            ],
+            "toRelationships": [{
+                    "id": "isApplicationMethodOf",
+                    "fromTypes": [
+                        "APPLICATION_METHOD"
+                    ]
+                },
+                {
+                    "id": "isGroupOf",
+                    "fromTypes": [
+                        "APPLICATION_METHOD_GROUP"
+                    ]
+                }
+            ]
+        }
+    ]
+}
