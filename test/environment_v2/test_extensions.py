@@ -66,17 +66,3 @@ def test_get_active_extension_version(dt: Dynatrace):
 
     # value checks
     assert environemnt_config.version == "1.2.3"
-
-
-def test_post(dt: Dynatrace):
-    extension = dt.extensions_v2.post("/tmp/palo-alto-generic-0.1.12.zip")
-
-    # type checks
-    assert isinstance(extension, extensions_v2.Extension)
-    assert isinstance(extension.author, extensions_v2.AuthorDTO)
-    assert isinstance(extension.data_sources, list)
-    assert isinstance(extension.feature_sets, list)
-    assert isinstance(extension.variables, list)
-
-    # value checks
-    assert extension.extension_name == "com.dynatrace.extension.palo-alto.generic"
