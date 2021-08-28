@@ -1,0 +1,11 @@
+{
+    "tenantUUID": "abc12345",
+    "tenantToken": "4BcD3fGh1JkLmN0p",
+    "communicationEndpoints": [
+        "https://host.docker.internal:9999/communication",
+        "https://some.activegate.domain:9999/communication",
+        "https://192.168.0.0:9999/communication",
+        "https://abc12345.live.dynatrace.com:443"
+    ],
+    "formattedCommunicationEndpoints": "{https://host.docker.internal:9999/communication;https://some.activegate.domain:9999/communication;https://192.168.0.0:9999/communication;https://abc12345.live.dynatrace.com:443}"
+}

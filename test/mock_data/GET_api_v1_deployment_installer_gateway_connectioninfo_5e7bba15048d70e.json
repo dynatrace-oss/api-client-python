@@ -1,0 +1,5 @@
+{
+    "tenantUUID": "abc12345",
+    "tenantToken": "4BcD3fGh1JkLmN0p",
+    "communicationEndpoints": "https://sg-eu-west-1234.domain.com/communication,https://sg-eu-west-1234.domain.com/communication,https://abc12345.live.dynatrace.com:443/communication"
+}
