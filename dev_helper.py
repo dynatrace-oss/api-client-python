@@ -15,29 +15,6 @@ from dynatrace import Dynatrace
 from dynatrace.utils import slugify
 
 
-def setup_log():
-    log = logging.getLogger(__name__)
-    log.setLevel(logging.DEBUG)
-    st = logging.StreamHandler()
-    fmt = logging.Formatter("%(asctime)s - %(levelname)s - %(name)s - %(thread)d - %(filename)s:%(lineno)d - %(message)s")
-    st.setFormatter(fmt)
-    log.addHandler(st)
-    return log
-
-
-def main():
-    dt = Dynatrace(os.getenv("DYNATRACE_TENANT_URL"), os.getenv("DYNATRACE_API_TOKEN"), log=setup_log())
-
-    # TODO - Code here as you add new endpoints, during development
-    # Any requests are going to be recorded in the `test/mock` folder and can later be used to write tests.
-    for m in dt.metrics.list(page_size=500):
-        print(m.metric_id)
-
-
-if __name__ == "__main__":
-    main()
-
-
 @wrapt.patch_function_wrapper("dynatrace.http_client", "HttpClient.make_request")
 def dump_to_json(wrapped, instance, args, kwargs):
     r = wrapped(*args, **kwargs)
@@ -61,3 +38,26 @@ def dump_to_json(wrapped, instance, args, kwargs):
                 print(f"Dumping response to '{file_name}'")
                 json.dump(r.json(), f)
     return r
+
+
+def setup_log():
+    log = logging.getLogger(__name__)
+    log.setLevel(logging.DEBUG)
+    st = logging.StreamHandler()
+    fmt = logging.Formatter("%(asctime)s - %(levelname)s - %(name)s - %(thread)d - %(filename)s:%(lineno)d - %(message)s")
+    st.setFormatter(fmt)
+    log.addHandler(st)
+    return log
+
+
+def main():
+    dt = Dynatrace(os.getenv("DYNATRACE_TENANT_URL"), os.getenv("DYNATRACE_API_TOKEN"), log=setup_log())
+
+    # TODO - Code here as you add new endpoints, during development
+    # Any requests are going to be recorded in the `test/mock` folder and can later be used to write tests.
+    for m in dt.metrics.list(page_size=500):
+        print(m.metric_id)
+
+
+if __name__ == "__main__":
+    main()
