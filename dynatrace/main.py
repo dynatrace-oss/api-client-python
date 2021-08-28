@@ -26,6 +26,9 @@ from dynatrace.configuration_v1.maintenance_windows import MaintenanceWindowServ
 from dynatrace.configuration_v1.metric_events import MetricEventService
 from dynatrace.configuration_v1.notifications import NotificationService
 from dynatrace.configuration_v1.plugins import PluginService
+from dynatrace.configuration_v1.oneagent_on_a_host import OneAgentOnAHostService as OneAgentOnAHostConfigService
+from dynatrace.configuration_v1.oneagent_in_a_hostgroup import OneAgentInAHostGroupService
+from dynatrace.configuration_v1.oneagent_environment_wide_configuration import OneAgentEnvironmentWideConfigService
 from dynatrace.environment_v1.cluster_time import ClusterTimeService
 from dynatrace.environment_v1.custom_device import CustomDeviceService
 from dynatrace.environment_v1.event import EventService
@@ -108,4 +111,7 @@ class Dynatrace:
         self.timeseries: TimeSerieService = TimeSerieService(self.__http_client)
         self.problems: ProblemService = ProblemService(self.__http_client)
         self.slos: SloService = SloService(self.__http_client)
+        self.oneagents_config_host: OneAgentOnAHostConfigService = OneAgentOnAHostConfigService(self.__http_client)
+        self.oneagents_config_hostgroup: OneAgentInAHostGroupService = OneAgentInAHostGroupService(self.__http_client)
+        self.oneagents_config_environment: OneAgentEnvironmentWideConfigService = OneAgentEnvironmentWideConfigService(self.__http_client)
         self.deployment: DeploymentService = DeploymentService(self.__http_client)
