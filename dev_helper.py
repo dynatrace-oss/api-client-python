@@ -15,6 +15,31 @@ from dynatrace import Dynatrace
 from dynatrace.utils import slugify
 
 
+@wrapt.patch_function_wrapper("dynatrace.http_client", "HttpClient.make_request")
+def dump_to_json(wrapped, instance, args, kwargs):
+    r = wrapped(*args, **kwargs)
+    method = kwargs.get("method", "GET")
+    params = kwargs.get("params", "")
+    query_params = kwargs.get("query_params", "")
+
+    params = f"{params}" if params else ""
+    if query_params:
+        params += f"{query_params}"
+    if params:
+        encoded = f"{params}".encode()
+        params = f"_{hashlib.sha256(encoded).hexdigest()}"[:16]
+
+    path = slugify(args[0])
+    file_name = f"{method}{path}{params}.json"
+    file_path = f"test/mock_data/{file_name}"
+    if not Path(file_path).exists():
+        with open(file_path, "w") as f:
+            if r.text:
+                print(f"Dumping response to '{file_name}'")
+                json.dump(r.json(), f)
+    return r
+
+
 def setup_log():
     log = logging.getLogger(__name__)
     log.setLevel(logging.DEBUG)
@@ -36,23 +61,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-@wrapt.patch_function_wrapper("dynatrace.http_client", "HttpClient.make_request")
-def dump_to_json(wrapped, instance, args, kwargs):
-    r = wrapped(*args, **kwargs)
-    method = kwargs.get("method", "GET")
-    params = kwargs.get("params", "")
-    if params:
-        encoded = f"{params}".encode()
-        params = f"_{hashlib.sha256(encoded).hexdigest()}"[:16]
-
-    path = slugify(args[0])
-    file_name = f"{method}{path}{params}.json"
-    file_path = f"test/mock_data/{file_name}"
-    if not Path(file_path).exists():
-        with open(file_path, "w") as f:
-            if r.text:
-                print(f"Dumping response to '{file_name}'")
-                json.dump(r.json(), f)
-    return r

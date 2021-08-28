@@ -91,13 +91,15 @@ class HttpClient:
         self.mc_b925d32c = mc_b925d32c
         self.mc_sso_csrf_cookie = mc_sso_csrf_cookie
 
-    def make_request(self, path: str, params: Optional[Dict] = None, headers: Optional[Dict] = None, method="GET", data=None, files=None) -> requests.Response:
+    def make_request(
+        self, path: str, params: Optional[Dict] = None, headers: Optional[Dict] = None, method="GET", data=None, files=None, query_params=None
+    ) -> requests.Response:
         url = f"{self.base_url}{path}"
 
         body = None
         if method in ["POST", "PUT"]:
             body = params
-            params = None
+            params = query_params
 
         if headers is None:
             headers = {}

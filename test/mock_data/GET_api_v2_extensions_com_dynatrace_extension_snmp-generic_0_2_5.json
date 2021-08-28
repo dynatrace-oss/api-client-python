@@ -1,0 +1,1 @@
+{"extensionName": "com.dynatrace.extension.snmp-generic", "version": "0.2.5", "author": {"name": "Dynatrace"}, "dataSources": ["snmp"], "variables": ["ext.activationtag"], "featureSets": [], "minDynatraceVersion": "1.218.0", "fileHash": "c6216b9b1ce837383cc84a825795a4708a0b4744dc71a76791527eefa754c3e4"}
