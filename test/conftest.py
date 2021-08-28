@@ -24,7 +24,7 @@ class MockResponse:
 
 
 def local_make_request(
-    self, path: str, params: Optional[Dict] = None, headers: Optional[Dict] = None, method="GET", data=None, query_params=None
+    self, path: str, params: Optional[Dict] = None, headers: Optional[Dict] = None, method="GET", data=None, query_params=None, **kwargs
 ) -> MockResponse:
 
     params = f"{params}" if params else ""

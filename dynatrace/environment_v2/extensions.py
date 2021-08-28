@@ -14,10 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from datetime import datetime
 from dynatrace.dynatrace_object import DynatraceObject
 from pathlib import Path
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Union
 
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
@@ -39,8 +38,6 @@ class ExtensionsServiceV2:
         """Lists all the extensions 2.0 by specified name in your environment
 
         :param extension_name: the name of the extension 2.0
-
-        :return: a list of MinimalExtension objects
         """
         return PaginatedList(MinimalExtension, self.__http_client, target_url=f"{self.ENDPOINT}/{extension_name}", list_item="extensions")
 
@@ -81,7 +78,7 @@ class ExtensionsServiceV2:
         response = self.__http_client.make_request(f"{self.ENDPOINT}/{extension_name}/{extension_version}").json()
         return Extension(raw_element=response)
 
-    def post(self, zip_file_path: str, validate_only: Optional[bool] = False):
+    def post(self, zip_file_path: Union[str, Path], validate_only: Optional[bool] = False):
         """Post the specified version of the extension 2.0
 
         :param zip_file_path: path to zipped extension 2.0
@@ -92,7 +89,7 @@ class ExtensionsServiceV2:
         params = {"validateOnly": validate_only}
         file = Path(zip_file_path)
         with open(file, "rb") as f:
-            response = self.__http_client.make_request(path=f"{self.ENDPOINT}", params=params, method="POST", files={"file": f})
+            response = self.__http_client.make_request(f"{self.ENDPOINT}", params=params, method="POST", files={"file": f}).json()
             return Extension(raw_element=response)
 
     def delete(self, extension_name: str, extension_version: str):
@@ -103,7 +100,7 @@ class ExtensionsServiceV2:
 
         :return: HTTP response
         """
-        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{extension_name}/{extension_version}", method="DELETE")
+        return self.__http_client.make_request(f"{self.ENDPOINT}/{extension_name}/{extension_version}", method="DELETE")
 
     def get_environment_config(self, extension_name: str) -> "ExtensionEnvironmentConfigurationVersion":
         """Gets the active environment configuration version of the specified extension 2.0
@@ -132,7 +129,7 @@ class ExtensionsServiceV2:
 
         :return: HTTP response
         """
-        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{extension_name}/environmentConfiguration", method="DELETE")
+        return self.__http_client.make_request(f"{self.ENDPOINT}/{extension_name}/environmentConfiguration", method="DELETE")
 
 
 class Extension(DynatraceObject):
@@ -172,9 +169,7 @@ class ExtensionEnvironmentConfigurationVersion(DynatraceObject):
 
         :param extension_name: the name of the extension required for making the API call
         """
-        return self._http_client.make_request(
-            path=f"{ExtensionsServiceV2.ENDPOINT}/{extension_name}/environmentConfiguration", params=self.to_json(), method="PUT"
-        )
+        return self._http_client.make_request(f"{ExtensionsServiceV2.ENDPOINT}/{extension_name}/environmentConfiguration", params=self.to_json(), method="PUT")
 
 
 class MinimalExtension(DynatraceObject):
