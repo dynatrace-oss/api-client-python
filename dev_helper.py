@@ -22,7 +22,7 @@ def dump_to_json(wrapped, instance, args, kwargs):
     params = kwargs.get("params", "")
     query_params = kwargs.get("query_params", "")
 
-    params = f"{params}"
+    params = f"{params}" if params else ""
     if query_params:
         params += f"{query_params}"
     if params:
