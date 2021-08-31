@@ -1,5 +1,4 @@
 from dynatrace import Dynatrace
-from dynatrace.environment_v2.schemas import ConfigurationMetadata
 from dynatrace.configuration_v1.management_zones import (
     ManagementZoneStub,
     MzRule,
@@ -8,9 +7,11 @@ from dynatrace.configuration_v1.management_zones import (
     PropagationType,
     MzDimensionalRule,
     ConditionKey,
-    ComparisonBasic,
     MzConditionAttribute,
     MzConditionType,
+)
+from dynatrace.configuration_v1.schemas import (
+    ConfigurationMetadata,
     ComparisonBasic,
     ComparisonBasicType,
     ServiceTypeComparison,
