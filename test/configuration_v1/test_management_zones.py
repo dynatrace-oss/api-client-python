@@ -1,5 +1,6 @@
 from dynatrace import Dynatrace
 from dynatrace.configuration_v1.management_zones import (
+    ManagementZone,
     ManagementZoneStub,
     MzRule,
     EntitySelectorBasedMzRule,
@@ -12,6 +13,7 @@ from dynatrace.configuration_v1.management_zones import (
 )
 from dynatrace.configuration_v1.schemas import (
     ConfigurationMetadata,
+    EntityShortRepresentation,
     ComparisonBasic,
     ComparisonBasicType,
     ServiceTypeComparison,
@@ -106,3 +108,34 @@ def test_get(dt: Dynatrace):
     assert condition.comparison_info.value == "something"
     assert condition.comparison_info.negate == True
     assert condition.comparison_info.case_sensitive == True
+
+
+def test_post(dt: Dynatrace):
+    mz = ManagementZone(
+        raw_element={
+            "name": NAME,
+            "rules": [
+                {
+                    "type": "SERVICE",
+                    "enabled": True,
+                    "conditions": [
+                        {
+                            "key": {"attribute": "SERVICE_TYPE", "type": "STATIC"},
+                            "comparisonInfo": {"type": "SERVICE_TYPE", "operator": "EQUALS", "value": "CUSTOM_SERVICE", "negate": False},
+                        }
+                    ],
+                }
+            ],
+        }
+    )
+
+    response = dt.management_zones.post(mz)
+
+    # type checks
+    assert isinstance(response, EntityShortRepresentation)
+    assert isinstance(response.id, str)
+    assert isinstance(response.name, str)
+
+    # value checks
+    assert response.id == ID
+    assert response.name == NAME
