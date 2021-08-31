@@ -1,0 +1,56 @@
+{
+    "type": "DISK",
+    "displayName": "Disk",
+    "dimensionKey": "dt.entity.disk",
+    "entityLimitExceeded": false,
+    "properties": [{
+            "id": "awsNameTag",
+            "type": "String",
+            "displayName": "awsNameTag"
+        },
+        {
+            "id": "boshName",
+            "type": "String",
+            "displayName": "boshName"
+        },
+        {
+            "id": "conditionalName",
+            "type": "String",
+            "displayName": "conditionalName"
+        },
+        {
+            "id": "customizedName",
+            "type": "String",
+            "displayName": "customizedName"
+        },
+        {
+            "id": "detectedName",
+            "type": "String",
+            "displayName": "detectedName"
+        },
+        {
+            "id": "gcpZone",
+            "type": "String",
+            "displayName": "gcpZone"
+        },
+        {
+            "id": "oneAgentCustomHostName",
+            "type": "String",
+            "displayName": "oneAgentCustomHostName"
+        }
+    ],
+    "tags": "List",
+    "managementZones": "List",
+    "fromRelationships": [{
+        "id": "isDiskOf",
+        "toTypes": [
+            "HOST"
+        ]
+    }],
+    "toRelationships": [{
+        "id": "isEbsVolumeOf",
+        "fromTypes": [
+            "EBS_VOLUME"
+        ]
+    }]
+}

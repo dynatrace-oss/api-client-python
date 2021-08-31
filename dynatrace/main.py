@@ -26,7 +26,9 @@ from dynatrace.configuration_v1.maintenance_windows import MaintenanceWindowServ
 from dynatrace.configuration_v1.metric_events import MetricEventService
 from dynatrace.configuration_v1.notifications import NotificationService
 from dynatrace.configuration_v1.plugins import PluginService
-from dynatrace.configuration_v1.management_zones import ManagementZoneService
+from dynatrace.configuration_v1.oneagent_on_a_host import OneAgentOnAHostService as OneAgentOnAHostConfigService
+from dynatrace.configuration_v1.oneagent_in_a_hostgroup import OneAgentInAHostGroupService
+from dynatrace.configuration_v1.oneagent_environment_wide_configuration import OneAgentEnvironmentWideConfigService
 from dynatrace.environment_v1.cluster_time import ClusterTimeService
 from dynatrace.environment_v1.custom_device import CustomDeviceService
 from dynatrace.environment_v1.event import EventService
@@ -35,11 +37,14 @@ from dynatrace.environment_v1.smartscape_hosts import SmartScapeHostsService
 from dynatrace.environment_v1.synthetic_monitors import SyntheticMonitorsService
 from dynatrace.environment_v1.synthetic_third_party import ThirdPartySyntheticTestsService
 from dynatrace.environment_v1.timeseries import TimeSerieService
+from dynatrace.environment_v1.deployment import DeploymentService
 from dynatrace.environment_v2.activegates import ActiveGateService
 from dynatrace.environment_v2.activegates_autoupdate_configuration import ActiveGateAutoUpdateConfigurationService
 from dynatrace.environment_v2.activegates_autoupdate_jobs import ActiveGateAutoUpdateJobsService
 from dynatrace.environment_v2.audit_logs import AuditLogsService
+from dynatrace.environment_v2.extensions import ExtensionsServiceV2
 from dynatrace.environment_v2.monitored_entities import EntityService
+from dynatrace.environment_v2.custom_tags import CustomTagService
 from dynatrace.environment_v2.metrics import MetricService
 from dynatrace.environment_v2.networkzones import NetworkZoneService
 from dynatrace.environment_v2.tokens_api import TokenService
@@ -81,27 +86,32 @@ class Dynatrace:
         self.activegates_autoupdate_jobs = ActiveGateAutoUpdateJobsService(self.__http_client)
         self.alerting_profiles: AlertingProfileService = AlertingProfileService(self.__http_client)
         self.anomaly_detection_metric_events = MetricEventService(self.__http_client)
-        self.audit_logs: AuditLogsService = AuditLogsService(self.__http_client)
         self.anomaly_detection_process_groups = AnomalyDetectionPGService(self.__http_client)
+        self.audit_logs: AuditLogsService = AuditLogsService(self.__http_client)
         self.auto_tags: AutoTagService = AutoTagService(self.__http_client)
         self.cluster_time: ClusterTimeService = ClusterTimeService(self.__http_client)
         self.custom_devices: CustomDeviceService = CustomDeviceService(self.__http_client)
+        self.custom_tags: CustomTagService = CustomTagService(self.__http_client)
         self.dashboards: DashboardService = DashboardService(self.__http_client)
+        self.deployment: DeploymentService = DeploymentService(self.__http_client)
         self.entities: EntityService = EntityService(self.__http_client)
         self.events: EventService = EventService(self.__http_client)
         self.extensions: ExtensionService = ExtensionService(self.__http_client)
+        self.extensions_v2: ExtensionsServiceV2 = ExtensionsServiceV2(self.__http_client)
         self.maintenance_windows = MaintenanceWindowService(self.__http_client)
         self.metrics: MetricService = MetricService(self.__http_client)
-        self.notifications: NotificationService = NotificationService(self.__http_client)
         self.network_zones: NetworkZoneService = NetworkZoneService(self.__http_client)
+        self.notifications: NotificationService = NotificationService(self.__http_client)
         self.oneagents: OneAgentOnAHostService = OneAgentOnAHostService(self.__http_client)
+        self.oneagents_config_environment: OneAgentEnvironmentWideConfigService = OneAgentEnvironmentWideConfigService(self.__http_client)
+        self.oneagents_config_host: OneAgentOnAHostConfigService = OneAgentOnAHostConfigService(self.__http_client)
+        self.oneagents_config_hostgroup: OneAgentInAHostGroupService = OneAgentInAHostGroupService(self.__http_client)
         self.plugins: PluginService = PluginService(self.__http_client)
+        self.problems: ProblemService = ProblemService(self.__http_client)
+        self.slos: SloService = SloService(self.__http_client)
         self.smartscape_hosts: SmartScapeHostsService = SmartScapeHostsService(self.__http_client)
         self.synthetic_monitors: SyntheticMonitorsService = SyntheticMonitorsService(self.__http_client)
         self.tenant_tokens = TenantTokenService(self.__http_client)
         self.third_part_synthetic_tests: ThirdPartySyntheticTestsService = ThirdPartySyntheticTestsService(self.__http_client)
-        self.tokens: TokenService = TokenService(self.__http_client)
         self.timeseries: TimeSerieService = TimeSerieService(self.__http_client)
-        self.problems: ProblemService = ProblemService(self.__http_client)
-        self.slos: SloService = SloService(self.__http_client)
-        self.management_zones: ManagementZoneService = ManagementZoneService(self.__http_client)
+        self.tokens: TokenService = TokenService(self.__http_client)

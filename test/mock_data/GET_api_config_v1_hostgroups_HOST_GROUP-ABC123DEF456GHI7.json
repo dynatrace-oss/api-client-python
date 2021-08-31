@@ -1,0 +1,19 @@
+{
+    "id": null,
+    "autoUpdateConfig": {
+        "metadata": {
+            "configurationVersions": [
+                2
+            ],
+            "clusterVersion": "1.222.47.20210712-162143"
+        },
+        "id": "HOST_GROUP-ABC123DEF456GHI7",
+        "setting": "DISABLED",
+        "version": null,
+        "updateWindows": {
+            "windows": []
+        },
+        "effectiveSetting": "DISABLED",
+        "effectiveVersion": null
+    }
+}

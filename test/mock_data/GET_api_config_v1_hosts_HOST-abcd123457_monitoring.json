@@ -1,0 +1,11 @@
+{
+    "metadata": {
+        "configurationVersions": [
+            9
+        ],
+        "clusterVersion": "1.222.47.20210712-162143"
+    },
+    "id": "HOST-abcd123457",
+    "monitoringEnabled": true,
+    "monitoringMode": "FULL_STACK"
+}
