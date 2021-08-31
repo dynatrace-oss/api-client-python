@@ -65,9 +65,9 @@ class EventType(Enum):
 class Category(Enum):
     CONFIG = "CONFIG"
     DEBUG_UI = "DEBUG_UI"
+    REST = "REST"
     TOKEN = "TOKEN"
     WEB_UI = "WEB_UI"
-    REST = "REST"
 
 
 class UserType(Enum):
