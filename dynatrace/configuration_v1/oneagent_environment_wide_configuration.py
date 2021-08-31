@@ -20,8 +20,7 @@ from typing import Dict, Any, Optional
 
 from dynatrace.http_client import HttpClient
 from dynatrace.dynatrace_object import DynatraceObject
-from dynatrace.configuration_v1.schemas import UpdateWindowsConfig, AutoUpdateSetting, TechMonitoringList
-from dynatrace.environment_v2.schemas import ConfigurationMetadata
+from dynatrace.configuration_v1.schemas import ConfigurationMetadata, UpdateWindowsConfig, AutoUpdateSetting, TechMonitoringList
 
 
 class OneAgentEnvironmentWideConfigService:
