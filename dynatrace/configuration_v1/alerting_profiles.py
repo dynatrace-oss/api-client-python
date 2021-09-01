@@ -108,10 +108,43 @@ class AlertingProfile(DynatraceObject):
             AlertingEventTypeFilter(raw_element=event_filter) for event_filter in raw_element.get("eventTypeFilters", [])
         ]
 
+    def post(self) -> EntityShortRepresentation:
+        """Creates the Alerting Profile configuration in Dynatrace (POST).
+
+        :param alerting_profile: the Alerting Profile configuration details
+
+        :returns EntityShortRepresentation: basic details of the created Alerting Profile
+
+        :throws ValueError: if operation cannot be executed due to missing HTTP Client
+        """
+        if not self._http_client:
+            raise ValueError("Object does not have an HTTP Client. Use alerting_profiles.post() instead.")
+        response = self._http_client.make_request(path=AlertingProfileService.ENDPOINT, params=self.to_json(), method="POST")
+        self.id = response.json().get("id")
+
+        return EntityShortRepresentation(raw_element=response.json())
+
+    def put(self) -> Response:
+        """Updates the Alerting Profile configuration in Dynatrace (PUT).
+        If the ID does not exist in Dynatrace, a new Alerting Profile will be created with the given ID.
+
+        :param alerting_profile: the Alerting Profile configuration details
+
+        :returns Response: HTTP Response to the request. Will contain basic details in JSON body if config is created.
+
+        :throws ValueError: if operation cannot be executed due to missing HTTP Client
+        """
+        if not self._http_client:
+            raise ValueError("Object does not have an HTTP Client. Use alerting_profiles.put() instead.")
+        response = self._http_client.make_request(path=f"{AlertingProfileService.ENDPOINT}/{self.id}", params=self.to_json(), method="PUT")
+        if response.status_code == 201:
+            self.id = response.json().get("id")
+
+        return response
+
     def to_json(self) -> Dict[str, Any]:
+        """Get a JSON (dict) representation of this config."""
         details: Dict[str, Any] = {"displayName": self.display_name}
-        if self.id:
-            details["id"] = self.id
         if self.rules:
             details["rules"] = [r.to_json() for r in self.rules]
         if self.management_zone_id:
@@ -126,6 +159,8 @@ class AlertingProfileStub(EntityShortRepresentation):
         """
         Gathers the full details of the alerting profile
         """
+        if not self._http_client:
+            raise ValueError("Object does not have an HTTP Client implemented.")
         response = self._http_client.make_request(f"{AlertingProfileService.ENDPOINT}/{self.id}").json()
         return AlertingProfile(self._http_client, None, response)
 
@@ -142,11 +177,44 @@ class AlertingProfileService:
         """
         return PaginatedList(AlertingProfileStub, self.__http_client, f"{self.ENDPOINT}", list_item="values")
 
+    def get(self, profile_id: str) -> AlertingProfile:
+        """Gets the full details of the Alerting Profile referenced by ID.
+
+        :param profile_id: ID of the alerting profile
+
+        :returns AlertingProfile: alerting profile details
+        """
+        response = self.__http_client.make_request(f"{self.ENDPOINT}/{profile_id}")
+        return AlertingProfile(http_client=self.__http_client, raw_element=response.json())
+
     def delete(self, profile_id: str) -> Response:
         """
         Delete the alerting profile with the specified id.
         """
         return self.__http_client.make_request(f"{self.ENDPOINT}/{profile_id}", method="DELETE")
+
+    def post(self, alerting_profile: AlertingProfile) -> EntityShortRepresentation:
+        """Creates the Alerting Profile configuration in Dynatrace (POST).
+
+        :param alerting_profile: the Alerting Profile configuration details
+
+        :returns EntityShortRepresentation: basic details of the created Alerting Profile
+        """
+        if not alerting_profile._http_client:
+            alerting_profile._http_client = self.__http_client
+        return alerting_profile.post()
+
+    def put(self, alerting_profile: AlertingProfile) -> Response:
+        """Updates the Alerting Profile configuration in Dynatrace (PUT).
+        If the ID does not exist in Dynatrace, a new Alerting Profile will be created with the given ID.
+
+        :param alerting_profile: the Alerting Profile configuration details
+
+        :returns Response: HTTP Response to the request. Will contain basic details in JSON body if config is created.
+        """
+        if not alerting_profile._http_client:
+            alerting_profile._http_client = self.__http_client
+        return alerting_profile.put()
 
 
 class TagFilterIncludeMode(Enum):
