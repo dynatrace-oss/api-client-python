@@ -22,14 +22,6 @@ from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.environment_v2.schemas import ConfigurationMetadata
 
 # Schemas that don't belong to a specific API tag.
-class METag(DynatraceObject):
-    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.context: TagContext = TagContext(raw_element["context"])
-        self.key: str = raw_element["key"]
-        self.value: Optional[str] = raw_element.get("value")
-
-    def to_json(self) -> Dict[str, Any]:
-        return {"context": str(self.context), "key": self.key, "value": self.value}
 
 
 class UpdateWindowsConfig(DynatraceObject):

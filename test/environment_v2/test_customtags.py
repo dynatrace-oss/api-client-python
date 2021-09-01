@@ -1,8 +1,7 @@
 from datetime import datetime
 from typing import List, Optional, Union, Dict, Any
 from dynatrace import Dynatrace
-from dynatrace.environment_v2.custom_tags import AddEntityTags
-from dynatrace.environment_v2.schemas import METag
+from dynatrace.environment_v2.custom_tags import AddEntityTags, METag
 from dynatrace.pagination import PaginatedList
 
 import dynatrace.environment_v2.custom_tags as customtags

@@ -19,7 +19,8 @@ from enum import Enum
 from requests import Response
 from typing import List, Optional, Union, Dict, Any
 
-from dynatrace.environment_v2.schemas import ManagementZone, METag
+from dynatrace.environment_v2.schemas import ManagementZone
+from dynatrace.environment_v2.custom_tags import METag
 from dynatrace.http_client import HttpClient
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.pagination import PaginatedList

@@ -22,9 +22,10 @@ from typing import Optional, Union, Dict, Any, List
 
 from dynatrace.http_client import HttpClient
 from dynatrace.dynatrace_object import DynatraceObject
-from dynatrace.environment_v2.schemas import ManagementZone, METag
+from dynatrace.environment_v2.schemas import ManagementZone
 from dynatrace.environment_v2.metrics import Unit
 from dynatrace.environment_v2.monitored_entities import EntityStub
+from dynatrace.environment_v2.custom_tags import METag
 from dynatrace.configuration_v1.alerting_profiles import AlertingProfileStub
 from dynatrace.pagination import PaginatedList
 from dynatrace.utils import int64_to_datetime

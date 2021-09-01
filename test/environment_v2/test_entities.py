@@ -11,7 +11,8 @@ from dynatrace.environment_v2.monitored_entities import (
     MessageType,
     CustomDeviceCreation,
 )
-from dynatrace.environment_v2.schemas import ManagementZone, METag
+from dynatrace.environment_v2.schemas import ManagementZone
+from dynatrace.environment_v2.custom_tags import METag
 
 from dynatrace.pagination import PaginatedList
 from dynatrace.utils import int64_to_datetime

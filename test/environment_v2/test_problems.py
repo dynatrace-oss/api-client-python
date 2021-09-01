@@ -6,7 +6,8 @@ from dynatrace.pagination import PaginatedList
 from dynatrace.utils import int64_to_datetime
 from dynatrace.configuration_v1.alerting_profiles import AlertingProfileStub
 from dynatrace.environment_v2.monitored_entities import EntityStub, EntityId
-from dynatrace.environment_v2.schemas import ManagementZone, METag
+from dynatrace.environment_v2.schemas import ManagementZone
+from dynatrace.environment_v2.custom_tags import METag
 
 PROBLEM_ID = "-1719139739592062093_1623004451641V2"
 COMMENT_ID = "-7228967546616810529_1623004451641"

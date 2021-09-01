@@ -14,12 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+from enum import Enum
 from datetime import datetime
 from typing import List, Optional, Union, Dict, Any
 
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.http_client import HttpClient
-from dynatrace.environment_v2.schemas import METag
 from dynatrace.pagination import PaginatedList
 from dynatrace.utils import timestamp_to_string
 
@@ -114,3 +114,28 @@ class AddEntityTags:
 
     def to_json(self) -> Dict[str, str]:
         return {"key": self.key, "value": self.value}
+
+
+class METag(DynatraceObject):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        self.context: TagContext = TagContext(raw_element["context"])
+        self.key: str = raw_element["key"]
+        self.value: Optional[str] = raw_element.get("value")
+        self.string_representation: Optional[str] = raw_element.get("stringRepresentation")
+
+    def to_json(self) -> Dict[str, Any]:
+        return {"context": str(self.context), "key": self.key, "value": self.value}
+
+
+class TagContext(Enum):
+    AWS = "AWS"
+    AWS_GENERIC = "AWS_GENERIC"
+    AZURE = "AZURE"
+    CLOUD_FOUNDRY = "CLOUD_FOUNDRY"
+    CONTEXTLESS = "CONTEXTLESS"
+    ENVIRONMENT = "ENVIRONMENT"
+    GOOGLE_CLOUD = "GOOGLE_CLOUD"
+    KUBERNETES = "KUBERNETES"
+
+    def __str__(self) -> str:
+        return self.value

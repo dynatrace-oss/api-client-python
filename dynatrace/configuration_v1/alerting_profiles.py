@@ -21,8 +21,9 @@ from requests import Response
 from dynatrace.pagination import PaginatedList
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.http_client import HttpClient
-from dynatrace.configuration_v1.schemas import ConfigurationMetadata, METag, StringComparisonOperator
+from dynatrace.configuration_v1.schemas import ConfigurationMetadata, StringComparisonOperator
 from dynatrace.environment_v2.monitored_entities import EntityShortRepresentation
+from dynatrace.environment_v2.custom_tags import METag
 
 
 class AlertingProfileTagFilter(DynatraceObject):
