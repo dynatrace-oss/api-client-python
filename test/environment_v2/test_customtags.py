@@ -1,8 +1,8 @@
 from datetime import datetime
 from typing import List, Optional, Union, Dict, Any
 from dynatrace import Dynatrace
-from dynatrace.configuration_v1.metag import METag
 from dynatrace.environment_v2.custom_tags import AddEntityTags
+from dynatrace.environment_v2.schemas import METag
 from dynatrace.pagination import PaginatedList
 
 import dynatrace.environment_v2.custom_tags as customtags
@@ -22,13 +22,13 @@ def test_list(dt: Dynatrace):
     for t in _tags:
         assert t.key == "mainApp"
         assert t.string_representation == "mainApp"
-        assert t.context == "CONTEXTLESS"
+        assert str(t.context) == "CONTEXTLESS"
 
 
 def test_post_no_value(dt: Dynatrace):
     tags = dt.custom_tags.post("entityId(CUSTOM_DEVICE-3B7788FE910B0F42)", [AddEntityTags("test-tag-no-value")])
     for tag in tags.applied_tags:
-        assert tag.context == "CONTEXTLESS"
+        assert str(tag.context) == "CONTEXTLESS"
         assert tag.key == "test-tag-no-value"
         assert tag.value is None
         assert tag.string_representation == "test-tag-no-value"
@@ -37,7 +37,7 @@ def test_post_no_value(dt: Dynatrace):
 def test_post_value(dt: Dynatrace):
     tags = dt.custom_tags.post("entityId(CUSTOM_DEVICE-3B7788FE910B0F42)", [AddEntityTags("test-tag-value", "tag-value")])
     for tag in tags.applied_tags:
-        assert tag.context == "CONTEXTLESS"
+        assert str(tag.context) == "CONTEXTLESS"
         assert tag.key == "test-tag-value"
         assert tag.value == "tag-value"
         assert tag.string_representation == "test-tag-value:tag-value"

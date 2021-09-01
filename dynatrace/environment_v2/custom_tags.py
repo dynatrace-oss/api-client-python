@@ -19,7 +19,7 @@ from typing import List, Optional, Union, Dict, Any
 
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.http_client import HttpClient
-from dynatrace.configuration_v1.metag import METag
+from dynatrace.environment_v2.schemas import METag
 from dynatrace.pagination import PaginatedList
 from dynatrace.utils import timestamp_to_string
 

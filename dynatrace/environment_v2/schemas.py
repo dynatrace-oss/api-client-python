@@ -28,6 +28,14 @@ class ConfigurationMetadata(DynatraceObject):
         self.current_configuration_versions: List[str] = raw_element.get("currentConfigurationVersions")
 
 
+class METag(DynatraceObject):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        self.context: TagContext = TagContext(raw_element["context"])
+        self.key: str = raw_element["key"]
+        self.value: Optional[str] = raw_element.get("value")
+        self.string_representation: Optional[str] = raw_element.get("stringRepresentation")
+
+
 class VersionCompareType(Enum):
     EQUAL = "EQUAL"
     GREATER = "GREATER"
@@ -46,3 +54,17 @@ class ManagementZone(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.name: str = raw_element["name"]
         self.id: str = raw_element["id"]
+
+
+class TagContext(Enum):
+    AWS = "AWS"
+    AWS_GENERIC = "AWS_GENERIC"
+    AZURE = "AZURE"
+    CLOUD_FOUNDRY = "CLOUD_FOUNDRY"
+    CONTEXTLESS = "CONTEXTLESS"
+    ENVIRONMENT = "ENVIRONMENT"
+    GOOGLE_CLOUD = "GOOGLE_CLOUD"
+    KUBERNETES = "KUBERNETES"
+
+    def __str__(self) -> str:
+        return self.value
