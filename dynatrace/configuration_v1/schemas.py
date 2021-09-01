@@ -22,6 +22,14 @@ from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.environment_v2.schemas import ConfigurationMetadata
 
 # Schemas that don't belong to a specific API tag.
+class METag(DynatraceObject):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        self.context: TagContext = TagContext(raw_element["context"])
+        self.key: str = raw_element["key"]
+        self.value: Optional[str] = raw_element.get("value")
+
+    def to_json(self) -> Dict[str, Any]:
+        return {"context": str(self.context), "key": self.key, "value": self.value}
 
 
 class UpdateWindowsConfig(DynatraceObject):
@@ -120,4 +128,29 @@ class EffectiveSetting(Enum):
     DISABLED = "DISABLED"
 
     def __str__(self):
+        return self.value
+
+
+class TagContext(Enum):
+    AWS = "AWS"
+    AWS_GENERIC = "AWS_GENERIC"
+    AZURE = "AZURE"
+    CLOUD_FOUNDRY = "CLOUD_FOUNDRY"
+    CONTEXTLESS = "CONTEXTLESS"
+    ENVIRONMENT = "ENVIRONMENT"
+    GOOGLE_CLOUD = "GOOGLE_CLOUD"
+    KUBERNETES = "KUBERNETES"
+
+    def __str__(self) -> str:
+        return self.value
+
+
+class StringComparisonOperator(Enum):
+    BEGINS_WITH = "BEGINS_WITH"
+    CONTAINS = "CONTAINS"
+    CONTAINS_REGEX = "CONTAINS_REGEX"
+    ENDS_WITH = "ENDS_WITH"
+    EQUALS = "EQUALS"
+
+    def __str__(self) -> str:
         return self.value
