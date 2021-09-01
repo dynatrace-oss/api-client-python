@@ -1,21 +1,24 @@
 {
   "metadata": {
     "currentConfigurationVersions": [
-      "0"
+      "7.0.2"
     ],
     "configurationVersions": [],
-    "clusterVersion": "1.214.112.20210409-064503"
+    "clusterVersion": "1.226.21.20210831-165523"
   },
   "id": "b1f379d9-98b4-4efe-be38-0289609c9295",
   "displayName": "deployment_change_autoremediation",
-  "rules": [
-    {
+  "rules": [{
       "severityLevel": "PERFORMANCE",
       "tagFilter": {
-        "includeMode": "NONE",
-        "tagFilters": []
+        "includeMode": "INCLUDE_ANY",
+        "tagFilters": [{
+          "context": "CONTEXTLESS",
+          "key": "Application",
+          "value": "Custom"
+        }]
       },
-      "delayInMinutes": 15
+      "delayInMinutes": 25
     },
     {
       "severityLevel": "AVAILABILITY",
@@ -23,10 +26,27 @@
         "includeMode": "NONE",
         "tagFilters": []
       },
-      "delayInMinutes": 10
+      "delayInMinutes": 0
     }
   ],
-  "managementZoneId": null,
-  "mzId": null,
-  "eventTypeFilters": []
+  "managementZoneId": -6238974133282121422,
+  "mzId": "-6238974133282121422",
+  "eventTypeFilters": [{
+      "customEventFilter": {
+        "customTitleFilter": {
+          "enabled": true,
+          "value": "ERROR",
+          "operator": "CONTAINS",
+          "negate": false,
+          "caseInsensitive": false
+        }
+      }
+    },
+    {
+      "predefinedEventFilter": {
+        "eventType": "OSI_HIGH_CPU",
+        "negate": false
+      }
+    }
+  ]
 }
