@@ -40,17 +40,17 @@ class AlertingProfileTagFilter(DynatraceObject):
 
 class AlertingProfileSeverityRule(DynatraceObject):
     def _create_from_raw_data(self, raw_element):
-        self.severity_level: str = raw_element["severityLevel"]
+        self.severity_level: SeverityLevel = SeverityLevel(raw_element["severityLevel"])
         self.tag_filter: AlertingProfileTagFilter = AlertingProfileTagFilter(raw_element=raw_element["tagFilter"])
         self.delay_in_minutes: int = raw_element["delayInMinutes"]
 
     def to_json(self) -> Dict[str, Any]:
-        return {"severityLevel": self.severity_level, "tagFilter": self.tag_filter.to_json(), "delayInMinutes": self.delay_in_minutes}
+        return {"severityLevel": str(self.severity_level), "tagFilter": self.tag_filter.to_json(), "delayInMinutes": self.delay_in_minutes}
 
 
 class AlertingPredefinedEventFilter(DynatraceObject):
     def _create_from_raw_data(self, raw_element):
-        self.event_type: AlertingPredenfinedEvent = AlertingPredenfinedEvent(raw_element["eventType"])
+        self.event_type: AlertingPredefinedEvent = AlertingPredefinedEvent(raw_element["eventType"])
         self.negate: bool = raw_element["negate"]
 
     def to_json(self) -> Dict[str, Any]:
@@ -71,8 +71,12 @@ class AlertingCustomTextFilter(DynatraceObject):
 
 class AlertingCustomEventFilter(DynatraceObject):
     def _create_from_raw_data(self, raw_element):
-        self.custom_title_filter: Optional[AlertingCustomTextFilter] = AlertingCustomTextFilter(raw_element=raw_element.get("customTitleFilter"))
-        self.custom_description_filter: Optional[AlertingCustomTextFilter] = AlertingCustomTextFilter(raw_element=raw_element.get("customDescriptionFilter"))
+        self.custom_title_filter: Optional[AlertingCustomTextFilter] = (
+            AlertingCustomTextFilter(raw_element=raw_element.get("customTitleFilter")) if "customTitleFilter" in raw_element.keys() else None
+        )
+        self.custom_description_filter: Optional[AlertingCustomTextFilter] = (
+            AlertingCustomTextFilter(raw_element=raw_element.get("customDescriptionFilter")) if "customDescriptionFilter" in raw_element.keys() else None
+        )
 
     def to_json(self) -> Dict[str, Any]:
         details = {}
@@ -85,8 +89,12 @@ class AlertingCustomEventFilter(DynatraceObject):
 
 class AlertingEventTypeFilter(DynatraceObject):
     def _create_from_raw_data(self, raw_element):
-        self.predefined_event_filter: AlertingPredefinedEventFilter = AlertingPredefinedEventFilter(raw_element=raw_element.get("predefinedEventFilter"))
-        self.custom_event_filter: AlertingCustomEventFilter = AlertingCustomEventFilter(raw_element=raw_element.get("customEventFilter"))
+        self.predefined_event_filter: Optional[AlertingPredefinedEventFilter] = (
+            AlertingPredefinedEventFilter(raw_element=raw_element.get("predefinedEventFilter")) if "predefinedEventFilter" in raw_element.keys() else None
+        )
+        self.custom_event_filter: Optional[AlertingCustomEventFilter] = (
+            AlertingCustomEventFilter(raw_element=raw_element.get("customEventFilter")) if "customEventFilter" in raw_element.keys() else None
+        )
 
     def to_json(self) -> Dict[str, Any]:
         details = {}
@@ -226,7 +234,7 @@ class TagFilterIncludeMode(Enum):
         return self.value
 
 
-class AlertingPredenfinedEvent(Enum):
+class AlertingPredefinedEvent(Enum):
     APPLICATION_ERROR_RATE_INCREASED = "APPLICATION_ERROR_RATE_INCREASED"
     APPLICATION_SLOWDOWN = "APPLICATION_SLOWDOWN"
     APPLICATION_UNEXPECTED_HIGH_LOAD = "APPLICATION_UNEXPECTED_HIGH_LOAD"
@@ -302,6 +310,18 @@ class AlertingPredenfinedEvent(Enum):
     SYNTHETIC_NODE_OUTAGE = "SYNTHETIC_NODE_OUTAGE"
     SYNTHETIC_PRIVATE_LOCATION_OUTAGE = "SYNTHETIC_PRIVATE_LOCATION_OUTAGE"
     SYNTHETIC_TEST_LOCATION_SLOWDOWN = "SYNTHETIC_TEST_LOCATION_SLOWDOWN"
+
+    def __str__(self) -> str:
+        return self.value
+
+
+class SeverityLevel(Enum):
+    AVAILABILITY = "AVAILABILITY"
+    CUSTOM_ALERT = "CUSTOM_ALERT"
+    ERROR = "ERROR"
+    MONITORING_UNAVAILABLE = "MONITORING_UNAVAILABLE"
+    PERFORMANCE = "PERFORMANCE"
+    RESOURCE_CONTENTION = "RESOURCE_CONTENTION"
 
     def __str__(self) -> str:
         return self.value
