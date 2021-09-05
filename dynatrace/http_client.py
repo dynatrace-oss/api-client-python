@@ -73,7 +73,7 @@ class HttpClient:
             self.retries = DynatraceRetry(
                 total=retries,
                 backoff_factor=retry_delay_s,
-                status_forcelist=[400, 401, 403, 413, 429, 500, 502, 503, 504],
+                status_forcelist=[400, 401, 403, 404, 413, 429, 500, 502, 503, 504],
                 allowed_methods=["TRACE", "PUT", "DELETE", "OPTIONS", "HEAD", "GET", "POST"],
                 raise_on_status=False,
             )
@@ -81,7 +81,7 @@ class HttpClient:
             self.retries = DynatraceRetry(
                 total=retries,
                 backoff_factor=retry_delay_s,
-                status_forcelist=[400, 401, 403, 413, 429, 500, 502, 503, 504],
+                status_forcelist=[400, 401, 403, 404, 413, 429, 500, 502, 503, 504],
                 method_whitelist=["TRACE", "PUT", "DELETE", "OPTIONS", "HEAD", "GET", "POST"],
                 raise_on_status=False,
             )
