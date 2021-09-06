@@ -115,8 +115,8 @@ class ExtensionsServiceV2:
     def put_environment_config(self, extension_name: str, extension_version: str):
         """Updates an existing active environment configuration version of the extension 2.0
 
-        :param extension_version: version
-        :param extension_name: name
+        :param extension_name: the name of the requested extension 2.0
+        :param extension_version: the version of the requested extension 2.0
 
         :return: HTTP response
         """
