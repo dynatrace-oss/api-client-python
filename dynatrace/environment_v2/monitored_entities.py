@@ -201,11 +201,17 @@ class EntityStub(DynatraceObject):
         self.entity_id: EntityId = EntityId(raw_element=raw_element["entityId"])
         self.name: str = raw_element["name"]
 
+    def to_json(self) -> Dict[str, Any]:
+        return {"entityId": self.entity_id.to_json(), "name": self.name}
+
 
 class EntityId(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.id: str = raw_element["id"]
         self.type: str = raw_element["type"]
+
+    def to_json(self) -> Dict[str, Any]:
+        return {"id": self.id, "type": self.type}
 
 
 class EntityIcon(DynatraceObject):
