@@ -136,6 +136,7 @@ class TagContext(Enum):
     ENVIRONMENT = "ENVIRONMENT"
     GOOGLE_CLOUD = "GOOGLE_CLOUD"
     KUBERNETES = "KUBERNETES"
+    GOOGLE_COMPUTE_ENGINE = "GOOGLE_COMPUTE_ENGINE"
 
     def __str__(self) -> str:
         return self.value
