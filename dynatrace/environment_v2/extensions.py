@@ -112,15 +112,16 @@ class ExtensionsServiceV2:
         response = self.__http_client.make_request(f"{self.ENDPOINT}/{extension_name}/environmentConfiguration").json()
         return ExtensionEnvironmentConfigurationVersion(raw_element=response)
 
-    def put_environment_config(self, extension_environment_config_version: "ExtensionEnvironmentConfigurationVersion", extension_name: str):
+    def put_environment_config(self, extension_name: str, extension_version: str):
         """Updates an existing active environment configuration version of the extension 2.0
 
-        :param extension_environment_config_version: class object with details
-        :param extension_name: name of the EECV object to be modified (REQUIRED for http request)
+        :param extension_name: the name of the requested extension 2.0
+        :param extension_version: the version of the requested extension 2.0
 
         :return: HTTP response
         """
-        return extension_environment_config_version.put(extension_name)
+        params = {"version": extension_version}
+        return self.__http_client.make_request(f"{self.ENDPOINT}/{extension_name}/environmentConfiguration", method="PUT", params=params)
 
     def delete_environment_config(self, extension_name: str):
         """Deactivates the environment configuration of the specified extension 2.0
@@ -130,6 +131,18 @@ class ExtensionsServiceV2:
         :return: HTTP response
         """
         return self.__http_client.make_request(f"{self.ENDPOINT}/{extension_name}/environmentConfiguration", method="DELETE")
+
+    def list_schemas(self, schema_version: str) -> "SchemaFiles":
+        response = self.__http_client.make_request(f"{self.SCHEMA_ENDPOINT}/{schema_version}")
+        return SchemaFiles(raw_element=response.json())
+
+    def get_schema_file(self, schema_version: str, file_name: str) -> Dict[str, Any]:
+        return self.__http_client.make_request(f"{self.SCHEMA_ENDPOINT}/{schema_version}/{file_name}").json()
+
+
+class SchemaFiles(DynatraceObject):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        self.files: List[str] = raw_element.get("files", [])
 
 
 class Extension(DynatraceObject):
@@ -181,7 +194,7 @@ class MinimalExtension(DynatraceObject):
         """Class method for obtaining extension2.0 version"""
         return self.version
 
-    def get_environment_config(self) -> PaginatedList["ExtensionEnvironmentConfigurationVersion"]:
+    def get_environment_config(self) -> "ExtensionEnvironmentConfigurationVersion":
         """Gets the active environment configuration version of the specified extension 2.0
 
         :return: ExtensionEnvironmentConfigurationVersion object

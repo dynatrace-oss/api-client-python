@@ -51,8 +51,12 @@ class EventType(Enum):
     CREATE = "CREATE"
     DELETE = "DELETE"
     GENERAL = "GENERAL"
+    GET = "GET"
     LOGIN = "LOGIN"
     LOGOUT = "LOGOUT"
+    PATCH = "PATCH"
+    POST = "POST"
+    PUT = "PUT"
     READ = "READ"
     REVOKE = "REVOKE"
     UPDATE = "UPDATE"
@@ -61,6 +65,7 @@ class EventType(Enum):
 class Category(Enum):
     CONFIG = "CONFIG"
     DEBUG_UI = "DEBUG_UI"
+    REST = "REST"
     TOKEN = "TOKEN"
     WEB_UI = "WEB_UI"
 
