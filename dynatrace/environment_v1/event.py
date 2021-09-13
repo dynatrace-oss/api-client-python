@@ -15,7 +15,7 @@ limitations under the License.
 """
 
 from datetime import datetime
-from typing import Optional, List
+from typing import Optional, List, Dict
 
 from requests import Response
 
@@ -50,7 +50,7 @@ class EventService:
         annotation_description: Optional[str] = None,
         description: Optional[str] = None,
         title: Optional[str] = None,
-        custom_properties: Optional[str] = None,
+        custom_properties: Optional[Dict[str, str]] = None,
         allow_davis_merge: Optional[bool] = None,
     ) -> Response:
 
