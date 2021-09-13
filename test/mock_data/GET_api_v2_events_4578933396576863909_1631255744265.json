@@ -1,0 +1,51 @@
+{
+    "eventId": "4578933396576863909_1631255744265",
+    "startTime": 1631255744265,
+    "endTime": 1631255744265,
+    "eventType": "CUSTOM_DEPLOYMENT",
+    "title": "Deployment",
+    "entityId": {
+        "entityId": {
+            "id": "SERVICE-596877472CDAA92E",
+            "type": "SERVICE"
+        },
+        "name": "[final] Simple-Node-Service"
+    },
+    "properties": [{
+            "key": "dt.event.group_label",
+            "value": "Deployment"
+        },
+        {
+            "key": "dt.event.source",
+            "value": "Radu's Python Pipeline"
+        }
+    ],
+    "status": "CLOSED",
+    "entityTags": [{
+            "context": "ENVIRONMENT",
+            "key": "Environment",
+            "value": "final",
+            "stringRepresentation": "[Environment]Environment:final"
+        },
+        {
+            "context": "ENVIRONMENT",
+            "key": "Version",
+            "value": "v2",
+            "stringRepresentation": "[Environment]Version:v2"
+        },
+        {
+            "context": "ENVIRONMENT",
+            "key": "Application",
+            "value": "simple-node",
+            "stringRepresentation": "[Environment]Application:simple-node"
+        }
+    ],
+    "managementZones": [{
+        "id": "1953014305523637885",
+        "name": "Test-Management-Zone"
+    }],
+    "underMaintenance": false,
+    "suppressAlert": false,
+    "suppressProblem": false,
+    "frequentEvent": false
+}

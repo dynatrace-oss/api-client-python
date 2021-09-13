@@ -20,8 +20,8 @@ from requests import Response
 from typing import List, Optional, Union, Dict, Any
 
 from dynatrace.environment_v2.schemas import ManagementZone
+from dynatrace.environment_v2.custom_tags import METag
 from dynatrace.http_client import HttpClient
-from dynatrace.configuration_v1.metag import METag
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.pagination import PaginatedList
 from dynatrace.utils import int64_to_datetime, timestamp_to_string
@@ -201,11 +201,17 @@ class EntityStub(DynatraceObject):
         self.entity_id: EntityId = EntityId(raw_element=raw_element["entityId"])
         self.name: str = raw_element["name"]
 
+    def to_json(self) -> Dict[str, Any]:
+        return {"entityId": self.entity_id.to_json(), "name": self.name}
+
 
 class EntityId(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.id: str = raw_element["id"]
         self.type: str = raw_element["type"]
+
+    def to_json(self) -> Dict[str, Any]:
+        return {"id": self.id, "type": self.type}
 
 
 class EntityIcon(DynatraceObject):

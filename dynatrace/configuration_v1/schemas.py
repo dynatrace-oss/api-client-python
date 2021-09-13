@@ -121,3 +121,28 @@ class EffectiveSetting(Enum):
 
     def __str__(self):
         return self.value
+
+
+class TagContext(Enum):
+    AWS = "AWS"
+    AWS_GENERIC = "AWS_GENERIC"
+    AZURE = "AZURE"
+    CLOUD_FOUNDRY = "CLOUD_FOUNDRY"
+    CONTEXTLESS = "CONTEXTLESS"
+    ENVIRONMENT = "ENVIRONMENT"
+    GOOGLE_CLOUD = "GOOGLE_CLOUD"
+    KUBERNETES = "KUBERNETES"
+
+    def __str__(self) -> str:
+        return self.value
+
+
+class StringComparisonOperator(Enum):
+    BEGINS_WITH = "BEGINS_WITH"
+    CONTAINS = "CONTAINS"
+    CONTAINS_REGEX = "CONTAINS_REGEX"
+    ENDS_WITH = "ENDS_WITH"
+    EQUALS = "EQUALS"
+
+    def __str__(self) -> str:
+        return self.value

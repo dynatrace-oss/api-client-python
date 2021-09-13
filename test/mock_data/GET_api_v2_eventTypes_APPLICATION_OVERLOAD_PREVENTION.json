@@ -1,0 +1,6 @@
+{
+    "type": "APPLICATION_OVERLOAD_PREVENTION",
+    "displayName": "Application overload prevention",
+    "severityLevel": "INFO",
+    "description": "Max user actions per minute exceeded"
+}

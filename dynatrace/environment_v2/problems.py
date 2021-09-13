@@ -25,7 +25,7 @@ from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.environment_v2.schemas import ManagementZone
 from dynatrace.environment_v2.metrics import Unit
 from dynatrace.environment_v2.monitored_entities import EntityStub
-from dynatrace.configuration_v1.metag import METag
+from dynatrace.environment_v2.custom_tags import METag
 from dynatrace.configuration_v1.alerting_profiles import AlertingProfileStub
 from dynatrace.pagination import PaginatedList
 from dynatrace.utils import int64_to_datetime
