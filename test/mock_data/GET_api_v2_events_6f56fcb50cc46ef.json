@@ -1,0 +1,123 @@
+{
+    "totalCount": 3,
+    "pageSize": 100,
+    "events": [{
+            "eventId": "4578933396576863909_1631255744265",
+            "startTime": 1631255744265,
+            "endTime": 1631255744265,
+            "eventType": "CUSTOM_DEPLOYMENT",
+            "title": "Deployment",
+            "entityId": {
+                "entityId": {
+                    "id": "SERVICE-596877472CDAA92E",
+                    "type": "SERVICE"
+                },
+                "name": "[final] Simple-Node-Service"
+            },
+            "properties": [{
+                    "key": "dt.event.group_label",
+                    "value": "Deployment"
+                },
+                {
+                    "key": "dt.event.source",
+                    "value": "Radu's Python Pipeline"
+                }
+            ],
+            "status": "CLOSED",
+            "entityTags": [{
+                    "context": "ENVIRONMENT",
+                    "key": "Environment",
+                    "value": "final",
+                    "stringRepresentation": "[Environment]Environment:final"
+                },
+                {
+                    "context": "ENVIRONMENT",
+                    "key": "Version",
+                    "value": "v2",
+                    "stringRepresentation": "[Environment]Version:v2"
+                },
+                {
+                    "context": "ENVIRONMENT",
+                    "key": "Application",
+                    "value": "simple-node",
+                    "stringRepresentation": "[Environment]Application:simple-node"
+                }
+            ],
+            "managementZones": [{
+                "id": "1953014305523637885",
+                "name": "Test-Management-Zone"
+            }],
+            "underMaintenance": false,
+            "suppressAlert": false,
+            "suppressProblem": false,
+            "frequentEvent": false
+        },
+        {
+            "eventId": "7843561214531417309_1631257730000",
+            "startTime": 1631257730000,
+            "endTime": 1631257790000,
+            "eventType": "PROCESS_RESTART",
+            "title": "Process restart",
+            "entityId": {
+                "entityId": {
+                    "id": "PROCESS_GROUP_INSTANCE-0C98DB1A2EDAA36C",
+                    "type": "PROCESS_GROUP_INSTANCE"
+                },
+                "name": "[final] Simple-Node-Service app.js (simple-node-v1-5f6446f76c-jt7gb)"
+            },
+            "properties": [{
+                "key": "dt.event.group_label",
+                "value": "Process restart"
+            }],
+            "status": "CLOSED",
+            "entityTags": [],
+            "managementZones": [],
+            "underMaintenance": false,
+            "suppressAlert": false,
+            "suppressProblem": false,
+            "frequentEvent": false
+        },
+        {
+            "eventId": "7329415670248610781_1631257200000",
+            "startTime": 1631257200000,
+            "endTime": -1,
+            "eventType": "SERVICE_ERROR_RATE_INCREASED",
+            "title": "Failure rate increase",
+            "entityId": {
+                "entityId": {
+                    "id": "SERVICE-D7B5448B608D7135",
+                    "type": "SERVICE"
+                },
+                "name": "Requests on 172.24.84.190:8080"
+            },
+            "properties": [{
+                    "key": "dt.event.baseline.service_method",
+                    "value": "SERVICE_METHOD-F9024075731F1D6C"
+                },
+                {
+                    "key": "dt.event.baseline.total_load",
+                    "value": "9.6"
+                },
+                {
+                    "key": "dt.event.group_label",
+                    "value": "Failure rate increase"
+                },
+                {
+                    "key": "dt.event.is_rootcause_relevant",
+                    "value": "true"
+                }
+            ],
+            "status": "OPEN",
+            "correlationId": "AEB8EB26ED80FE8B",
+            "entityTags": [],
+            "managementZones": [{
+                "id": "2076424126995187827",
+                "name": "random stuff"
+            }],
+            "underMaintenance": false,
+            "suppressAlert": false,
+            "suppressProblem": false,
+            "frequentEvent": false
+        }
+    ]
+}

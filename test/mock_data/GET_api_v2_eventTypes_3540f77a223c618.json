@@ -1,0 +1,33 @@
+{
+    "totalCount": 5,
+    "pageSize": 100,
+    "eventTypeInfos": [{
+            "type": "APPLICATION_ERROR_RATE_INCREASED",
+            "displayName": "JavaScript error rate increase",
+            "severityLevel": "ERROR"
+        },
+        {
+            "type": "APPLICATION_JS_FRAMEWORK_DETECTED",
+            "displayName": "JavaScript framework change",
+            "severityLevel": "INFO"
+        },
+        {
+            "type": "APPLICATION_OVERLOAD_PREVENTION",
+            "displayName": "Application overload prevention",
+            "severityLevel": "INFO",
+            "description": "Max user actions per minute exceeded"
+        },
+        {
+            "type": "APPLICATION_SLOWDOWN",
+            "displayName": "Application slowdown",
+            "severityLevel": "PERFORMANCE",
+            "description": "User action duration degradation"
+        },
+        {
+            "type": "APPLICATION_UNEXPECTED_HIGH_LOAD",
+            "displayName": "Application high traffic",
+            "severityLevel": "RESOURCE_CONTENTION",
+            "description": "Unexpected high traffic"
+        }
+    ]
+}

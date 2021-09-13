@@ -46,6 +46,22 @@ class EventServiceV2:
         event_selector: Optional[str] = None,
         entity_selector: Optional[str] = None,
     ) -> "PaginatedList[Event]":
+        """Lists events within the specified timeframe
+
+        :param page_size: The amount of events in a single response payload. The maximal allowed page size is 1000. If not set, 100 is used.
+        :param time_from: The start of the requested timeframe. If not set, the relative timeframe of two hours is used (now-2h).
+            You can use one of the following formats:
+            * Timestamp in UTC milliseconds.
+            * Human-readable format of 2021-01-25T05:57:01.123+01:00. If no time zone is specified, UTC is used.
+            * Relative timeframe, back from now. The format is now-NU/A, where N is the amount of time, U is the unit of time, and A is an alignment.
+
+        :param time_to: The end of the requested timeframe. If not set, the current timestamp is used. Same formats as above.
+        :param event_selector: Defines the event scope of the query.
+        :param entity_selector: The entity scope of the query. The length of the string is limited to 10,000 characters.
+            The number of entities that can be selected is limited to 10,000. For more information see https://dt-url.net/apientityselector
+
+        :returns PaginatedList[Event]: the list of events
+        """
         params = {
             "pageSize": page_size,
             "from": time_from if isinstance(time_from, str) else datetime_to_int64(time_from),
@@ -56,16 +72,34 @@ class EventServiceV2:
         return PaginatedList(target_class=Event, http_client=self.__http_client, target_url=self.ENDPOINT_EVENTS, list_item="events", target_params=params)
 
     def get(self, event_id: str) -> "Event":
+        """Gets the properties of an event referenced by ID.
+
+        :param event_id: The ID of the required event.
+
+        :returns Event: the requested event
+        """
         response = self.__http_client.make_request(path=f"{self.ENDPOINT_EVENTS}/{event_id}")
         return Event(raw_element=response.json(), http_client=self.__http_client)
 
     def list_types(self, page_size: Optional[int] = None) -> "PaginatedList[EventType]":
+        """Lists all event types.
+
+        :param page_size: The amount of event types in a single response payload. The maximal allowed page size is 500. If not set, 100 is used.
+
+        :returns PaginatedList[EventType]: the list of event types
+        """
         params = {"pageSize": page_size}
         return PaginatedList(
             target_class=EventType, http_client=self.__http_client, target_url=self.ENDPOINT_TYPES, list_item="eventTypeInfos", target_params=params
         )
 
     def get_type(self, event_type: str) -> "EventType":
+        """Gets the properties of a specific event type.
+
+        :param event_type: The event type you're inquiring.
+
+        :returns EventType: the event type requested
+        """
         response = self.__http_client.make_request(path=f"{self.ENDPOINT_TYPES}/{event_type}")
         return EventType(raw_element=response.json(), http_client=self.__http_client)
 
@@ -86,9 +120,9 @@ class Event(DynatraceObject):
         self.management_zones: Optional[List[ManagementZone]] = [ManagementZone(raw_element=mz) for mz in raw_element.get("managementZones", [])]
         self.properties: Optional[List[EventProperty]] = [EventProperty(raw_element=p) for p in raw_element.get("properties", [])]
         self.status: Optional[EventStatus] = EventStatus(raw_element.get("status")) if raw_element.get("status") else None
-        self.end_time: Optional[datetime] = int64_to_datetime(raw_element.get("endTime"))
         self.title: Optional[str] = raw_element.get("title")
         self.correlation_id: Optional[str] = raw_element.get("correlationId")
+        self.end_time: Optional[datetime] = int64_to_datetime(raw_element["endTime"]) if raw_element["endTime"] != -1 else None
 
     def to_json(self) -> Dict[str, Any]:
         return {
