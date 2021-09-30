@@ -44,6 +44,7 @@ from dynatrace.environment_v2.activegates_autoupdate_configuration import Active
 from dynatrace.environment_v2.activegates_autoupdate_jobs import ActiveGateAutoUpdateJobsService
 from dynatrace.environment_v2.audit_logs import AuditLogsService
 from dynatrace.environment_v2.extensions import ExtensionsServiceV2
+from dynatrace.environment_v2.events import EventServiceV2
 from dynatrace.environment_v2.monitored_entities import EntityService
 from dynatrace.environment_v2.custom_tags import CustomTagService
 from dynatrace.environment_v2.metrics import MetricService
@@ -97,6 +98,7 @@ class Dynatrace:
         self.deployment: DeploymentService = DeploymentService(self.__http_client)
         self.entities: EntityService = EntityService(self.__http_client)
         self.events: EventService = EventService(self.__http_client)
+        self.events_v2: EventServiceV2 = EventServiceV2(self.__http_client)
         self.extensions: ExtensionService = ExtensionService(self.__http_client)
         self.extensions_v2: ExtensionsServiceV2 = ExtensionsServiceV2(self.__http_client)
         self.maintenance_windows = MaintenanceWindowService(self.__http_client)

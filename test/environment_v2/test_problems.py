@@ -4,10 +4,10 @@ import dynatrace.environment_v2.problems as pb
 from dynatrace import Dynatrace
 from dynatrace.pagination import PaginatedList
 from dynatrace.utils import int64_to_datetime
-from dynatrace.configuration_v1.metag import METag
 from dynatrace.configuration_v1.alerting_profiles import AlertingProfileStub
 from dynatrace.environment_v2.monitored_entities import EntityStub, EntityId
 from dynatrace.environment_v2.schemas import ManagementZone
+from dynatrace.environment_v2.custom_tags import METag
 
 PROBLEM_ID = "-1719139739592062093_1623004451641V2"
 COMMENT_ID = "-7228967546616810529_1623004451641"
@@ -68,7 +68,7 @@ def test_get(dt: Dynatrace):
     assert problem.root_cause_entity.name == "easytravel.customer.frontend"
     assert problem.management_zones[0].id == "8692695975020499402"
     assert problem.management_zones[0].name == "Operations Team"
-    assert all(et.context == "CONTEXTLESS" for et in problem.entity_tags)
+    assert all(str(et.context) == "CONTEXTLESS" for et in problem.entity_tags)
     assert problem.start_time == int64_to_datetime(1622807640000)
     assert problem.end_time == int64_to_datetime(1622807820000)
     assert problem.evidence_details.total_count == 4

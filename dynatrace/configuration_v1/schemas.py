@@ -902,6 +902,16 @@ class BasicComparisonOperator(Enum):
     EXISTS = "EXISTS"
     EQUALS = "EQUALS"
 
+class TagContext(Enum):
+    AWS = "AWS"
+    AWS_GENERIC = "AWS_GENERIC"
+    AZURE = "AZURE"
+    CLOUD_FOUNDRY = "CLOUD_FOUNDRY"
+    CONTEXTLESS = "CONTEXTLESS"
+    ENVIRONMENT = "ENVIRONMENT"
+    GOOGLE_CLOUD = "GOOGLE_CLOUD"
+    KUBERNETES = "KUBERNETES"
+
     def __str__(self) -> str:
         return self.value
 
@@ -912,6 +922,7 @@ class StringComparisonOperator(Enum):
     ENDS_WITH = "ENDS_WITH"
     REGEX_MATCHES = "REGEX_MATCHES"
     EXISTS = "EXISTS"
+    CONTAINS_REGEX = "CONTAINS_REGEX"
     EQUALS = "EQUALS"
 
     def __str__(self) -> str:

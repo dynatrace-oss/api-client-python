@@ -16,7 +16,7 @@ limitations under the License.
 
 import warnings
 import functools
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Union, Optional
 import unicodedata
 import re
@@ -60,10 +60,10 @@ def iso8601_to_datetime(timestamp: Optional[str]) -> Optional[datetime]:
 def int64_to_datetime(timestamp: Optional[int]) -> Optional[datetime]:
     if timestamp is None or not timestamp:
         return None
-    return datetime.utcfromtimestamp(timestamp / 1000)
+    return datetime.fromtimestamp(timestamp / 1000, timezone.utc)
 
 
 def datetime_to_int64(timestamp: Optional[datetime]) -> Optional[int]:
     if not isinstance(timestamp, datetime):
         return timestamp
-    return timestamp.timestamp() * 1000
+    return int(timestamp.replace(tzinfo=timezone.utc).timestamp() * 1000)
