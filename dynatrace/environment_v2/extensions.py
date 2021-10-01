@@ -139,6 +139,11 @@ class ExtensionsServiceV2:
     def get_schema_file(self, schema_version: str, file_name: str) -> Dict[str, Any]:
         return self.__http_client.make_request(f"{self.SCHEMA_ENDPOINT}/{schema_version}/{file_name}").json()
 
+    def post_monitoring_configurations(self, extension_name: str, configurations: List["MonitoringConfigurationDto"]) -> List:
+        params = [c.to_json() for c in configurations]
+        response = self.__http_client.make_request(f"{self.ENDPOINT}/{extension_name}/monitoringConfigurations", params=params, method="POST")
+        return response.json()
+
 
 class SchemaFiles(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
@@ -227,3 +232,12 @@ class MinimalExtension(DynatraceObject):
             target_url=f"{ExtensionsServiceV2.ENDPOINT}/{self.extension_name}/monitoringConfigurations/{config_id}/events",
             list_item="extensionEvents",
         )
+
+
+class MonitoringConfigurationDto:
+    def __init__(self, scope: str, configuration: Dict[str, Any]):
+        self.scope = scope
+        self.configuration = configuration
+
+    def to_json(self):
+        return {"scope": self.scope, "value": self.configuration}

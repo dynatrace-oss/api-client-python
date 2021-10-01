@@ -15,7 +15,7 @@ limitations under the License.
 """
 
 import logging
-from typing import Dict, Optional
+from typing import Dict, Optional, Any
 import time
 
 import requests
@@ -92,7 +92,7 @@ class HttpClient:
         self.mc_sso_csrf_cookie = mc_sso_csrf_cookie
 
     def make_request(
-        self, path: str, params: Optional[Dict] = None, headers: Optional[Dict] = None, method="GET", data=None, files=None, query_params=None
+        self, path: str, params: Optional[Any] = None, headers: Optional[Dict] = None, method="GET", data=None, files=None, query_params=None
     ) -> requests.Response:
         url = f"{self.base_url}{path}"
 
