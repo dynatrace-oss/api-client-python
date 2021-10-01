@@ -1,0 +1,15 @@
+{
+    "values": [{
+            "id": "1234567890987654321",
+            "name": "Test-Management-Zone"
+        },
+        {
+            "id": "1834586930727334425",
+            "name": "MGMT_ZONE_TWO"
+        },
+        {
+            "id": "9214927556619132506",
+            "name": "Third management zone"
+        }
+    ]
+}

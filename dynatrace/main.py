@@ -23,6 +23,7 @@ from dynatrace.configuration_v1.auto_tags import AutoTagService
 from dynatrace.configuration_v1.dashboard import DashboardService
 from dynatrace.configuration_v1.extensions import ExtensionService
 from dynatrace.configuration_v1.maintenance_windows import MaintenanceWindowService
+from dynatrace.configuration_v1.management_zones import ManagementZoneService
 from dynatrace.configuration_v1.metric_events import MetricEventService
 from dynatrace.configuration_v1.notifications import NotificationService
 from dynatrace.configuration_v1.plugins import PluginService
@@ -101,6 +102,7 @@ class Dynatrace:
         self.extensions: ExtensionService = ExtensionService(self.__http_client)
         self.extensions_v2: ExtensionsServiceV2 = ExtensionsServiceV2(self.__http_client)
         self.maintenance_windows = MaintenanceWindowService(self.__http_client)
+        self.management_zones = ManagementZoneService(self.__http_client)
         self.metrics: MetricService = MetricService(self.__http_client)
         self.network_zones: NetworkZoneService = NetworkZoneService(self.__http_client)
         self.notifications: NotificationService = NotificationService(self.__http_client)
