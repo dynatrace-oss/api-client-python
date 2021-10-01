@@ -20,7 +20,8 @@ from typing import Dict, Any, Optional, Union
 
 from dynatrace.http_client import HttpClient
 from dynatrace.dynatrace_object import DynatraceObject
-from dynatrace.configuration_v1.schemas import ConfigurationMetadata, AutoUpdateSetting, UpdateWindowsConfig, EffectiveSetting
+from dynatrace.environment_v2.schemas import ConfigurationMetadata
+from dynatrace.configuration_v1.schemas import AutoUpdateSetting, UpdateWindowsConfig, EffectiveSetting
 
 
 class OneAgentInAHostGroupService:

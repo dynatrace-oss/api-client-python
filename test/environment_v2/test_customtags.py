@@ -22,6 +22,7 @@ def test_list(dt: Dynatrace):
         assert t.key == "mainApp"
         assert t.string_representation == "mainApp"
         assert str(t.context) == "CONTEXTLESS"
+        break
 
 
 def test_post_no_value(dt: Dynatrace):
