@@ -93,7 +93,7 @@ class EventCreation(DynatraceObject):
         raw_element = {
             "eventType": event_type,
             "start": int(start.timestamp()) * 1000 if start else None,
-            "end": int(end.timestamp()) * 1000 if start else None,
+            "end": int(end.timestamp()) * 1000 if end else None,
             "timeoutMinutes": timeout_minutes,
             "source": source,
             "annotationType": annotation_type,
