@@ -178,7 +178,7 @@ class Entity(DynatraceObject):
         self.to_relationships: Dict[str, List["EntityId"]] = {
             key: [EntityId(raw_element=entity) for entity in entities] for key, entities in raw_element.get("toRelationships", {}).items()
         }
-        self.management_zones: List[ManagementZone] = [ManagementZone(m) for m in raw_element.get("managementZones", [])]
+        self.management_zones: List[ManagementZone] = [ManagementZone(raw_element=m) for m in raw_element.get("managementZones", [])]
         self.icon: Optional[EntityIcon] = EntityIcon(raw_element=raw_element.get("icon")) if raw_element.get("icon") else None
         self.display_name: str = raw_element["displayName"]
         self.entity_id: str = raw_element["entityId"]
