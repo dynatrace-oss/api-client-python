@@ -199,7 +199,7 @@ class EntityShortRepresentation(DynatraceObject):
 class EntityStub(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.entity_id: EntityId = EntityId(raw_element=raw_element["entityId"])
-        self.name: str = raw_element["name"]
+        self.name: Optional[str] = raw_element.get("name")
 
     def to_json(self) -> Dict[str, Any]:
         return {"entityId": self.entity_id.to_json(), "name": self.name}
