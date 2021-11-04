@@ -75,7 +75,7 @@ class MetricService:
         return self.__http_client.make_request(f"/api/v2/metrics/{metric_id}", method="DELETE")
 
     def ingest(self, lines: List[str]):
-        lines = "\n".join(lines)
+        lines = "\n".join(lines).encode("utf-8")
         return self.__http_client.make_request(
             f"/api/v2/metrics/ingest", method="POST", data=lines, headers={"Content-Type": "text/plain; charset=utf-8"}
         ).json()

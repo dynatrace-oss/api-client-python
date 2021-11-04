@@ -63,7 +63,8 @@ def test_get(dt: Dynatrace):
     assert entity.properties["bitness"] == "64"
     assert len(entity.tags) == 1
     assert entity.tags[0].key == "citrix-prod"
-    assert len(entity.management_zones) == 0
+    assert len(entity.management_zones) == 1
+    assert entity.management_zones[0].id == "MANAGEMENT-ZONE-8E2ED64F4F19AC15"
     assert entity.icon.primary_icon_type == "linux"
     assert entity.from_relationships["isHostOfContainer"][0].id == "DOCKER_CONTAINER_GROUP_INSTANCE-8E2ED6F4E2AFDD89"
     assert entity.to_relationships["runsOn"][0].id == "PROCESS_GROUP-3AD9FB79C914520C"

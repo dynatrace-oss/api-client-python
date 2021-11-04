@@ -34,7 +34,13 @@
       "stringRepresentation": "citrix-prod"
     }
   ],
-  "managementZones": [],
+  "managementZones": [
+    {
+      "id": "MANAGEMENT-ZONE-8E2ED64F4F19AC15",
+      "name": "ZONE 1",
+      "description": "My first management zone"
+    }
+  ],
   "icon": {
     "primaryIconType": "linux"
   },
