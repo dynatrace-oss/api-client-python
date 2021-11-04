@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="dt",
-    version="1.1.40",
+    version="1.1.41",
     packages=find_packages(),
     install_requires=["requests>=2.22"],
     tests_require=["pytest", "mock", "tox"],
