@@ -52,6 +52,7 @@ from dynatrace.environment_v2.tokens_api import TokenService
 from dynatrace.environment_v2.tokens_tenant import TenantTokenService
 from dynatrace.environment_v2.problems import ProblemService
 from dynatrace.environment_v2.service_level_objectives import SloService
+from dynatrace.environment_v2.logs import LogService
 from dynatrace.http_client import HttpClient
 
 
@@ -70,16 +71,7 @@ class Dynatrace:
         mc_sso_csrf_cookie: Optional[str] = None,
     ):
         self.__http_client = HttpClient(
-            base_url,
-            token,
-            log,
-            proxies,
-            too_many_requests_strategy,
-            retries,
-            retry_delay_ms,
-            mc_jsession_id,
-            mc_b925d32c,
-            mc_sso_csrf_cookie,
+            base_url, token, log, proxies, too_many_requests_strategy, retries, retry_delay_ms, mc_jsession_id, mc_b925d32c, mc_sso_csrf_cookie,
         )
 
         self.activegates: ActiveGateService = ActiveGateService(self.__http_client)
@@ -100,6 +92,7 @@ class Dynatrace:
         self.events_v2: EventServiceV2 = EventServiceV2(self.__http_client)
         self.extensions: ExtensionService = ExtensionService(self.__http_client)
         self.extensions_v2: ExtensionsServiceV2 = ExtensionsServiceV2(self.__http_client)
+        self.logs: LogService = LogService(self.__http_client)
         self.maintenance_windows = MaintenanceWindowService(self.__http_client)
         self.metrics: MetricService = MetricService(self.__http_client)
         self.network_zones: NetworkZoneService = NetworkZoneService(self.__http_client)
