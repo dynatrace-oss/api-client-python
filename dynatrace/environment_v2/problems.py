@@ -212,7 +212,7 @@ class Evidence(DynatraceObject):
         self.entity: EntityStub = EntityStub(raw_element=raw_element.get("entity"))
         self.root_cause_relevant: bool = raw_element.get("rootCauseRelevant")
         self.start_time: datetime = int64_to_datetime(raw_element.get("startTime"))
-        self.grouping_entity: Optional[EntityStub] = EntityStub(raw_element=raw_element.get("groupingEntity"))
+        self.grouping_entity: Optional[EntityStub] = EntityStub(raw_element=raw_element.get("groupingEntity")) if raw_element.get("groupingEntity") else None
 
 
 class EventEvidence(Evidence):
