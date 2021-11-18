@@ -132,6 +132,10 @@ class ExtensionsServiceV2:
         """
         return self.__http_client.make_request(f"{self.ENDPOINT}/{extension_name}/environmentConfiguration", method="DELETE")
 
+    def list_schemas_versions(self) -> List[str]:
+        response = self.__http_client.make_request(f"{self.SCHEMA_ENDPOINT}").json()
+        return response.get("versions", [])
+
     def list_schemas(self, schema_version: str) -> "SchemaFiles":
         response = self.__http_client.make_request(f"{self.SCHEMA_ENDPOINT}/{schema_version}")
         return SchemaFiles(raw_element=response.json())
