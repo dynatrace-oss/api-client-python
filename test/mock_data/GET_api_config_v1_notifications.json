@@ -1,0 +1,24 @@
+{
+    "values":[
+       {
+          "id":"0d06c889-4cea-4b45-aefa-a277790e784d",
+          "name":"Service Now Example",
+          "type":"SERVICE_NOW"
+       },
+       {
+          "id":"3e921ece-3e52-4392-a5f5-7d089d6a80d1",
+          "name":"keptn remediation",
+          "type":"WEBHOOK"
+       },
+       {
+          "id":"aaf00e30-6b5a-47c6-a760-ecc01d8c61fa",
+          "name":"Email-2",
+          "type":"EMAIL"
+       },
+       {
+          "id":"d748eb3d-0bc7-3741-ac9f-e30df03b12ee",
+          "name":"Test",
+          "type":"EMAIL"
+       }
+    ]
+ }
