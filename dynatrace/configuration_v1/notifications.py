@@ -15,34 +15,45 @@ limitations under the License.
 """
 
 from typing import List
+from enum import Enum
 from requests import Response
 
 from dynatrace.pagination import PaginatedList
 from dynatrace.dynatrace_object import DynatraceObject
-from dynatrace.configuration_v1.alerting_profiles import AlertingProfile
 from dynatrace.http_client import HttpClient
+
+
+class NotificationType(Enum):
+    EMAIL = "EMAIL"
+    PAGER_DUTY = "PAGER_DUTY"
+    WEBHOOK = "WEBHOOK"
+    SLACK = "SLACK"
+    HIPCHAT = "HIPCHAT"
+    VICTOROPS = "VICTOROPS"
+    SERVICE_NOW = "SERVICE_NOW"
+    XMATTERS = "XMATTERS"
+    ANSIBLETOWER = "ANSIBLETOWER"
+    OPS_GENIE = "OPS_GENIE"
+    JIRA = "JIRA"
+    TRELLO = "TRELLO"
 
 
 class Notification(DynatraceObject):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
         self.name: str = raw_element.get("name")
-        self.notification_type: str = raw_element.get("type")
-        self.alerting_profile: AlertingProfile = AlertingProfile(
-            raw_element=self._http_client.make_request(f"/api/config/v1/alertingProfiles/{raw_element.get('alertingProfile')}").json()
-        )
+        self.alerting_profile: str = raw_element.get("alertingProfile")
         self.active: bool = raw_element.get("active")
+        self.type: NotificationType = NotificationType(raw_element.get("type"))
 
 
 class AnsibleTowerNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
         self.name: str = raw_element.get("name")
-        self.notification_type: str = raw_element.get("type")
-        self.alerting_profile: AlertingProfile = AlertingProfile(
-            raw_element=self._http_client.make_request(f"/api/config/v1/alertingProfiles/{raw_element.get('alertingProfile')}").json()
-        )
+        self.alerting_profile: str = raw_element.get("alertingProfile")
         self.active: bool = raw_element.get("active")
+        self.type: NotificationType = NotificationType(raw_element.get("type"))
         self.job_template_url: str = raw_element.get("jobTemplateURL")
         self.accept_any_certificate: bool = raw_element.get("acceptAnyCertificate")
         self.username: str = raw_element.get("username")
@@ -55,11 +66,9 @@ class EmailNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
         self.name: str = raw_element.get("name")
-        self.notification_type: str = raw_element.get("type")
-        self.alerting_profile: AlertingProfile = AlertingProfile(
-            raw_element=self._http_client.make_request(f"/api/config/v1/alertingProfiles/{raw_element.get('alertingProfile')}").json()
-        )
+        self.alerting_profile: str = raw_element.get("alertingProfile")
         self.active: bool = raw_element.get("active")
+        self.type: NotificationType = NotificationType(raw_element.get("type"))
         self.subject: str = raw_element.get("subject")
         self.body: str = raw_element.get("body")
         self.receivers: List[str] = raw_element.get("receivers")
@@ -71,11 +80,9 @@ class HipChatNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
         self.name: str = raw_element.get("name")
-        self.notification_type: str = raw_element.get("type")
-        self.alerting_profile: AlertingProfile = AlertingProfile(
-            raw_element=self._http_client.make_request(f"/api/config/v1/alertingProfiles/{raw_element.get('alertingProfile')}").json()
-        )
+        self.alerting_profile: str = raw_element.get("alertingProfile")
         self.active: bool = raw_element.get("active")
+        self.type: NotificationType = NotificationType(raw_element.get("type"))
         self.url: str = raw_element.get("url")
         self.message: str = raw_element.get("message")
 
@@ -84,11 +91,9 @@ class JiraNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
         self.name: str = raw_element.get("name")
-        self.notification_type: str = raw_element.get("type")
-        self.alerting_profile: AlertingProfile = AlertingProfile(
-            raw_element=self._http_client.make_request(f"/api/config/v1/alertingProfiles/{raw_element.get('alertingProfile')}").json()
-        )
+        self.alerting_profile: str = raw_element.get("alertingProfile")
         self.active: bool = raw_element.get("active")
+        self.type: NotificationType = NotificationType(raw_element.get("type"))
         self.username: str = raw_element.get("username")
         self.password: str = raw_element.get("password")
         self.url: str = raw_element.get("url")
@@ -102,11 +107,9 @@ class OpsGenieNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
         self.name: str = raw_element.get("name")
-        self.notification_type: str = raw_element.get("type")
-        self.alerting_profile: AlertingProfile = AlertingProfile(
-            raw_element=self._http_client.make_request(f"/api/config/v1/alertingProfiles/{raw_element.get('alertingProfile')}").json()
-        )
+        self.alerting_profile: str = raw_element.get("alertingProfile")
         self.active: bool = raw_element.get("active")
+        self.type: NotificationType = NotificationType(raw_element.get("type"))
         self.api_key: str = raw_element.get("apiKey")
         self.domain: str = raw_element.get("domain")
         self.message: str = raw_element.get("message")
@@ -116,11 +119,9 @@ class PagerDutyNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
         self.name: str = raw_element.get("name")
-        self.notification_type: str = raw_element.get("type")
-        self.alerting_profile: AlertingProfile = AlertingProfile(
-            raw_element=self._http_client.make_request(f"/api/config/v1/alertingProfiles/{raw_element.get('alertingProfile')}").json()
-        )
+        self.alerting_profile: str = raw_element.get("alertingProfile")
         self.active: bool = raw_element.get("active")
+        self.type: NotificationType = NotificationType(raw_element.get("type"))
         self.account: str = raw_element.get("account")
         self.service_api_key: str = raw_element.get("serviceApiKey")
         self.service_name: str = raw_element.get("serviceName")
@@ -130,11 +131,9 @@ class ServiceNowNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
         self.name: str = raw_element.get("name")
-        self.notification_type: str = raw_element.get("type")
-        self.alerting_profile: AlertingProfile = AlertingProfile(
-            raw_element=self._http_client.make_request(f"/api/config/v1/alertingProfiles/{raw_element.get('alertingProfile')}").json()
-        )
+        self.alerting_profile: str = raw_element.get("alertingProfile")
         self.active: bool = raw_element.get("active")
+        self.type: NotificationType = NotificationType(raw_element.get("type"))
         self.instance_name: str = raw_element.get("instanceName")
         self.url: str = raw_element.get("url")
         self.username: str = raw_element.get("username")
@@ -148,11 +147,9 @@ class SlackNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
         self.name: str = raw_element.get("name")
-        self.notification_type: str = raw_element.get("type")
-        self.alerting_profile: AlertingProfile = AlertingProfile(
-            raw_element=self._http_client.make_request(f"/api/config/v1/alertingProfiles/{raw_element.get('alertingProfile')}").json()
-        )
+        self.alerting_profile: str = raw_element.get("alertingProfile")
         self.active: bool = raw_element.get("active")
+        self.type: NotificationType = NotificationType(raw_element.get("type"))
         self.url: str = raw_element.get("url")
         self.channel: str = raw_element.get("channel")
         self.title: str = raw_element.get("title")
@@ -162,11 +159,9 @@ class TrelloNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
         self.name: str = raw_element.get("name")
-        self.notification_type: str = raw_element.get("type")
-        self.alerting_profile: AlertingProfile = AlertingProfile(
-            raw_element=self._http_client.make_request(f"/api/config/v1/alertingProfiles/{raw_element.get('alertingProfile')}").json()
-        )
+        self.alerting_profile: str = raw_element.get("alertingProfile")
         self.active: bool = raw_element.get("active")
+        self.type: NotificationType = NotificationType(raw_element.get("type"))
         self.application_key: str = raw_element.get("applicationKey")
         self.authorization_token: str = raw_element.get("authorizationToken")
         self.board_id: str = raw_element.get("boardId")
@@ -180,11 +175,9 @@ class VictorOpsNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
         self.name: str = raw_element.get("name")
-        self.notification_type: str = raw_element.get("type")
-        self.alerting_profile: AlertingProfile = AlertingProfile(
-            raw_element=self._http_client.make_request(f"/api/config/v1/alertingProfiles/{raw_element.get('alertingProfile')}").json()
-        )
+        self.alerting_profile: str = raw_element.get("alertingProfile")
         self.active: bool = raw_element.get("active")
+        self.type: NotificationType = NotificationType(raw_element.get("type"))
         self.api_key: str = raw_element.get("apiKey")
         self.routing_key: str = raw_element.get("routingKey")
         self.message: str = raw_element.get("message")
@@ -200,11 +193,9 @@ class WebHookNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
         self.name: str = raw_element.get("name")
-        self.notification_type: str = raw_element.get("type")
-        self.alerting_profile: AlertingProfile = AlertingProfile(
-            raw_element=self._http_client.make_request(f"/api/config/v1/alertingProfiles/{raw_element.get('alertingProfile')}").json()
-        )
+        self.alerting_profile: str = raw_element.get("alertingProfile")
         self.active: bool = raw_element.get("active")
+        self.type: NotificationType = NotificationType(raw_element.get("type"))
         self.url: str = raw_element.get("url")
         self.accept_any_certificate: bool = raw_element.get("acceptAnyCertificate")
         self.payload: str = raw_element.get("payload")
@@ -216,11 +207,9 @@ class XMattersNotificationConfig(Notification):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
         self.name: str = raw_element.get("name")
-        self.notification_type: str = raw_element.get("type")
-        self.alerting_profile: AlertingProfile = AlertingProfile(
-            raw_element=self._http_client.make_request(f"/api/config/v1/alertingProfiles/{raw_element.get('alertingProfile')}").json()
-        )
+        self.alerting_profile: str = raw_element.get("alertingProfile")
         self.active: bool = raw_element.get("active")
+        self.type: NotificationType = NotificationType(raw_element.get("type"))
         self.url: str = raw_element.get("url")
         self.accept_any_certificate: bool = raw_element.get("acceptAnyCertificate")
         self.headers: List[HttpHeader] = [HttpHeader(raw_element=header) for header in raw_element.get("headers", {})]
@@ -233,29 +222,29 @@ class NotificationConfigStub(DynatraceObject):
         Gets the full notification configuration for this stub.
         """
         response = self._http_client.make_request(f"/api/config/v1/notifications/{self.id}").json()
-        if self.notification_type == "ANSIBLETOWER":
+        if self.type == NotificationType.ANSIBLETOWER:
             notification = AnsibleTowerNotificationConfig(self._http_client, None, response)
-        elif self.notification_type == "EMAIL":
+        elif self.type == NotificationType.EMAIL:
             notification = EmailNotificationConfig(self._http_client, None, response)
-        elif self.notification_type == "HIPCHAT":
+        elif self.type == NotificationType.HIPCHAT:
             notification = HipChatNotificationConfig(self._http_client, None, response)
-        elif self.notification_type == "JIRA":
+        elif self.type == NotificationType.JIRA:
             notification = JiraNotificationConfig(self._http_client, None, response)
-        elif self.notification_type == "OPS_GENIE":
+        elif self.type == NotificationType.OPS_GENIE:
             notification = OpsGenieNotificationConfig(self._http_client, None, response)
-        elif self.notification_type == "PAGER_DUTY":
+        elif self.type == NotificationType.PAGER_DUTY:
             notification = PagerDutyNotificationConfig(self._http_client, None, response)
-        elif self.notification_type == "SERVICE_NOW":
+        elif self.type == NotificationType.SERVICE_NOW:
             notification = ServiceNowNotificationConfig(self._http_client, None, response)
-        elif self.notification_type == "SLACK":
+        elif self.type == NotificationType.SLACK:
             notification = SlackNotificationConfig(self._http_client, None, response)
-        elif self.notification_type == "TRELLO":
+        elif self.type == NotificationType.TRELLO:
             notification = TrelloNotificationConfig(self._http_client, None, response)
-        elif self.notification_type == "VICTOROPS":
+        elif self.type == NotificationType.VICTOROPS:
             notification = VictorOpsNotificationConfig(self._http_client, None, response)
-        elif self.notification_type == "WEBHOOK":
+        elif self.type == NotificationType.WEBHOOK:
             notification = WebHookNotificationConfig(self._http_client, None, response)
-        elif self.notification_type == "XMATTERS":
+        elif self.type == NotificationType.XMATTERS:
             notification = XMattersNotificationConfig(self._http_client, None, response)
         else:
             notification = Notification(self._http_client, None, response)
@@ -268,10 +257,9 @@ class NotificationConfigStub(DynatraceObject):
         return self._http_client.make_request(f"/api/config/v1/notifications/{self.id}", method="DELETE")
 
     def _create_from_raw_data(self, raw_element):
-        self.id = raw_element.get("id")
-        self.name = raw_element.get("name")
-        self.description = raw_element.get("description")
-        self.notification_type = raw_element.get("type")
+        self.id: str = raw_element.get("id")
+        self.name: str = raw_element.get("name")
+        self.type: NotificationType = NotificationType(raw_element.get("type"))
 
 
 class NotificationService:
