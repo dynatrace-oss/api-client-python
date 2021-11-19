@@ -259,6 +259,7 @@ class NotificationConfigStub(DynatraceObject):
     def _create_from_raw_data(self, raw_element):
         self.id: str = raw_element.get("id")
         self.name: str = raw_element.get("name")
+        self.description: str = raw_element.get("description")
         self.type: NotificationType = NotificationType(raw_element.get("type"))
 
 
