@@ -1,0 +1,14 @@
+{
+    "type":"SERVICE_NOW",
+    "id":"0d06c889-4cea-4b45-aefa-a277790e784d",
+    "name":"Service Now Example",
+    "alertingProfile":"7693d108-fda9-3529-8ca3-55e9269b6097",
+    "active":true,
+    "instanceName":"dev63549",
+    "url":null,
+    "username":"admin",
+    "password":null,
+    "message":"{State} {ProblemID} {ProblemImpact} {ProblemSeverity}",
+    "sendIncidents":true,
+    "sendEvents":false
+ }
