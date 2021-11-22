@@ -14,7 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any, Union
+from enum import Enum
 from requests import Response
 
 from dynatrace.environment_v2.schemas import ConfigurationMetadata
@@ -22,6 +23,75 @@ from dynatrace.environment_v2.monitored_entities import EntityShortRepresentatio
 from dynatrace.pagination import PaginatedList
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.http_client import HttpClient
+
+
+class AlertCondition(Enum):
+    ABOVE = "ABOVE"
+    BELOW = "BELOW"
+
+
+class MetricEventMonitoringStrategyType(Enum):
+    STATIC_THRESHOLD = "STATIC_THRESHOLD"
+    AUTO_ADAPTIVE_BASELINE = "AUTO_ADAPTIVE_BASELINE"
+
+
+class Unit(Enum):
+    BIT = "BIT"
+    BIT_PER_HOUR = "BIT_PER_HOUR"
+    BIT_PER_MINUTE = "BIT_PER_MINUTE"
+    BIT_PER_SECOND = "BIT_PER_SECOND"
+    BYTE = "BYTE"
+    BYTE_PER_HOUR = "BYTE_PER_HOUR"
+    BYTE_PER_MINUTE = "BYTE_PER_MINUTE"
+    BYTE_PER_SECOND = "BYTE_PER_SECOND"
+    CORES = "CORES"
+    COUNT = "COUNT"
+    DAY = "DAY"
+    DECIBEL_MILLI_WATT = "DECIBEL_MILLI_WATT"
+    GIBI_BYTE = "GIBI_BYTE"
+    GIGA = "GIGA"
+    GIGA_BYTE = "GIGA_BYTE"
+    HOUR = "HOUR"
+    KIBI_BYTE = "KIBI_BYTE"
+    KIBI_BYTE_PER_HOUR = "KIBI_BYTE_PER_HOUR"
+    KIBI_BYTE_PER_MINUTE = "KIBI_BYTE_PER_MINUTE"
+    KIBI_BYTE_PER_SECOND = "KIBI_BYTE_PER_SECOND"
+    KILO = "KILO"
+    KILO_BYTE = "KILO_BYTE"
+    KILO_BYTE_PER_HOUR = "KILO_BYTE_PER_HOUR"
+    KILO_BYTE_PER_MINUTE = "KILO_BYTE_PER_MINUTE"
+    KILO_BYTE_PER_SECOND = "KILO_BYTE_PER_SECOND"
+    MEBI_BYTE = "MEBI_BYTE"
+    MEBI_BYTE_PER_HOUR = "MEBI_BYTE_PER_HOUR"
+    MEBI_BYTE_PER_MINUTE = "MEBI_BYTE_PER_MINUTE"
+    MEBI_BYTE_PER_SECOND = "MEBI_BYTE_PER_SECOND"
+    MEGA = "MEGA"
+    MEGA_BYTE = "MEGA_BYTE"
+    MEGA_BYTE_PER_HOUR = "MEGA_BYTE_PER_HOUR"
+    MEGA_BYTE_PER_MINUTE = "MEGA_BYTE_PER_MINUTE"
+    MEGA_BYTE_PER_SECOND = "MEGA_BYTE_PER_SECOND"
+    MICRO_SECOND = "MICRO_SECOND"
+    MILLI_CORES = "MILLI_CORES"
+    MILLI_SECOND = "MILLI_SECOND"
+    MILLI_SECOND_PER_MINUTE = "MILLI_SECOND_PER_MINUTE"
+    MINUTE = "MINUTE"
+    MONTH = "MONTH"
+    MSU = "MSU"
+    NANO_SECOND = "NANO_SECOND"
+    NANO_SECOND_PER_MINUTE = "NANO_SECOND_PER_MINUTE"
+    NOT_APPLICABLE = "NOT_APPLICABLE"
+    PERCENT = "PERCENT"
+    PER_HOUR = "PER_HOUR"
+    PER_MINUTE = "PER_MINUTE"
+    PER_SECOND = "PER_SECOND"
+    PIXEL = "PIXEL"
+    PROMILLE = "PROMILLE"
+    RATIO = "RATIO"
+    SECOND = "SECOND"
+    STATE = "STATE"
+    UNSPECIFIED = "UNSPECIFIED"
+    WEEK = "WEEK"
+    YEAR = "YEAR"
 
 
 class MetricEventTextFilter(DynatraceObject):
@@ -55,22 +125,32 @@ class MetricEventDimension(DynatraceObject):
         self.text_filter: MetricEventTextFilter = MetricEventTextFilter(raw_element=raw_element.get("textFilter"))
 
 
-class MetricEventStaticThresholdMonitoringStrategy(DynatraceObject):
+class MetricEventMonitoringStrategy(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.type: str = raw_element.get("type")
+        self.type: MetricEventMonitoringStrategyType = MetricEventMonitoringStrategyType(raw_element.get("type"))
+
+
+class MetricEventAutoAdaptiveBaselineMonitoringStrategy(DynatraceObject):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        self.type: MetricEventMonitoringStrategyType = MetricEventMonitoringStrategyType(raw_element.get("type"))
         self.samples: int = raw_element.get("samples")
         self.violating_samples: int = raw_element.get("violatingSamples")
         self.dealtering_samples: int = raw_element.get("dealertingSamples")
-        self.alert_condition: str = raw_element.get("alertCondition")
-        self.alerting_on_missing_data: Optional[bool] = raw_element.get("alertingOnMissingData")
+        self.alert_condition: AlertCondition = AlertCondition(raw_element.get("alertCondition"))
+        self.alerting_on_missing_data: Optional[bool] = raw_element.get("alertingOnMissingData") if raw_element.get("alertingOnMissingData") else None
         self.number_of_signal_fluctuations: int = raw_element.get("numberOfSignalFluctuations")
-        self.threshold: int = raw_element.get("threshold")
-        self.unit: str = raw_element.get("unit")
 
 
-class MetricEventMonitoringStrategy(DynatraceObject):
+class MetricEventStaticThresholdMonitoringStrategy(MetricEventMonitoringStrategy):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.type = raw_element.get("type")
+        self.type: MetricEventMonitoringStrategyType = MetricEventMonitoringStrategyType(raw_element.get("type"))
+        self.samples: int = raw_element.get("samples")
+        self.violating_samples: int = raw_element.get("violatingSamples")
+        self.dealtering_samples: int = raw_element.get("dealertingSamples")
+        self.alert_condition: AlertCondition = AlertCondition(raw_element.get("alertCondition"))
+        self.alerting_on_missing_data: Optional[bool] = raw_element.get("alertingOnMissingData") if raw_element.get("alertingOnMissingData") else None
+        self.threshold: int = raw_element.get("threshold")
+        self.unit: Optional[Unit] = Unit(raw_element.get("unit")) if raw_element.get("unit") else None
 
 
 class MetricEvent(DynatraceObject):
@@ -91,8 +171,19 @@ class MetricEvent(DynatraceObject):
         self.metric_dimensions: List[MetricEventDimension] = [
             MetricEventDimension(raw_element=raw_dimension) for raw_dimension in raw_element.get("metricDimensions", [])
         ]
-        self.monitoring_strategy: MetricEventMonitoringStrategy = MetricEventMonitoringStrategy(raw_element=raw_element.get("monitoringStrategy"))
+        self.monitoring_strategy: Union[
+            MetricEventMonitoringStrategy, MetricEventStaticThresholdMonitoringStrategy, MetricEventAutoAdaptiveBaselineMonitoringStrategy
+        ] = self._create_specific_monitoring_strategy(raw_element.get("monitoringStrategy"))
         self.primary_dimension_key: str = raw_element.get("primaryDimensionKey")
+
+    def _create_specific_monitoring_strategy(self, raw_element: Dict[str, Any]):
+        strategy_type = MetricEventMonitoringStrategyType(raw_element.get("type"))
+        if strategy_type == MetricEventMonitoringStrategyType.AUTO_ADAPTIVE_BASELINE:
+            return MetricEventAutoAdaptiveBaselineMonitoringStrategy(raw_element=raw_element)
+        elif strategy_type == MetricEventMonitoringStrategyType.STATIC_THRESHOLD:
+            return MetricEventStaticThresholdMonitoringStrategy(raw_element=raw_element)
+        else:
+            return MetricEventMonitoringStrategy(raw_element=raw_element)
 
 
 class MetricEventShortRepresentation(EntityShortRepresentation):
