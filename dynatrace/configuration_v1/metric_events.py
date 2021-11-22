@@ -109,6 +109,11 @@ class Unit(Enum):
     YEAR = "YEAR"
 
 
+class WarningReason(Enum):
+    NONE = "NONE"
+    TOO_MANY_DIMS = "TOO_MANY_DIMS"
+
+
 class MetricEventTextFilter(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.value: str = raw_element.get("value")
@@ -179,7 +184,7 @@ class MetricEvent(DynatraceObject):
         self.severity: Severity = Severity(raw_element.get("severity"))
         self.enabled: bool = raw_element.get("enabled")
         self.disabled_reason: DisabledReason = DisabledReason(raw_element.get("disabledReason"))
-        self.warning_reason: str = raw_element.get("warningReason")
+        self.warning_reason: WarningReason = WarningReason(raw_element.get("warningReason"))
         self.alerting_scope: List[MetricEventAlertingScope] = [
             MetricEventAlertingScope(raw_element=raw_scope) for raw_scope in raw_element.get("alertingScope", [])
         ]
