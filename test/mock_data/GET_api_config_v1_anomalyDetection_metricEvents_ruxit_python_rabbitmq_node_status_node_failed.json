@@ -1,0 +1,46 @@
+{
+    "metadata":{
+       "configurationVersions":[
+          6
+       ],
+       "clusterVersion":"1.232.0.20211122-125428"
+    },
+    "id":"ruxit.python.rabbitmq:node_status:node_failed",
+    "metricId":"builtin:tech.rabbitmq.node_status",
+    "name":"RabbitMQ Node failed",
+    "description":"Node {severity} for {violating_samples}.",
+    "aggregationType":"VALUE",
+    "severity":"AVAILABILITY",
+    "enabled":true,
+    "disabledReason":"NONE",
+    "warningReason":"NONE",
+    "metricDimensions":[
+       {
+          "filterType":"STRING",
+          "key":null,
+          "name":"Bucket",
+          "index":1,
+          "textFilter":{
+             "value":"failed",
+             "operator":"EQUALS"
+          }
+       }
+    ],
+    "monitoringStrategy":{
+       "type":"STATIC_THRESHOLD",
+       "samples":5,
+       "violatingSamples":3,
+       "dealertingSamples":5,
+       "alertCondition":"ABOVE",
+       "alertingOnMissingData":false,
+       "threshold":0.0,
+       "unit":"COUNT"
+    },
+    "alertCondition":"ABOVE",
+    "samples":5,
+    "violatingSamples":3,
+    "dealertingSamples":5,
+    "threshold":0.0,
+    "unit":"COUNT",
+    "eventType":"AVAILABILITY"
+ }

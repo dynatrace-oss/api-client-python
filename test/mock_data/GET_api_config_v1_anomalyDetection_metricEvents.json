@@ -1,0 +1,969 @@
+{
+    "values":[
+       {
+          "id":"ruxit.python.rabbitmq:node_status:node_failed",
+          "name":"RabbitMQ Node failed",
+          "description":"Node {severity} for {violating_samples}."
+       },
+       {
+          "id":"9bb8ad2c-b600-4a18-8520-a16211f023ee",
+          "name":"testAPM279590",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}. {missing_data_samples} out of {violating_samples} samples were missing data."
+       },
+       {
+          "id":"898acd59-544c-4ad5-b6f4-24525a8c1916",
+          "name":"APM-328534 Demo",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"e1bbaa13-9582-93d8-f2f0-d292f6374bb2",
+          "name":"Low RabbitMQ free disk space",
+          "description":"The RabbitMQ free disk space of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"a31d1c83-05a7-4f06-8bdc-3b2992b65c4d",
+          "name":"Consul - Autopilot Unhealthy",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"5d09d067-a42d-470d-226e-88b0a8e66735",
+          "name":"High RabbitMQ processes usage",
+          "description":"The RabbitMQ processes usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"29f64b13-9170-87d2-a940-c17aaed74f23",
+          "name":"High RabbitMQ memory usage",
+          "description":"The RabbitMQ memory usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"67709bf3-2554-6cdf-ea83-98e7d9293c44",
+          "name":"High RabbitMQ memory usage",
+          "description":"The RabbitMQ memory usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"ruxit.python.rabbitmq:mem_usage:mem_usage_alert_high_generic",
+          "name":"High RabbitMQ memory usage",
+          "description":"The RabbitMQ memory usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"ext:cloud.azure.microsoft_dbformariadb.servers.memory_percent_alert",
+          "name":"Azure DB for MariaDB memory percent [Azure]",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"26380e88-7480-48b1-9040-eac166373470",
+          "name":"Doc_error_pgi_event",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"f04673e8-8fc9-4698-adeb-c4d99f0b08b0",
+          "name":"alerts for SLO-alerts",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"0dd33a23-caaf-4852-8e15-681034337261",
+          "name":"Long metricselector based",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"dynatrace.jmx.kafka:kafka.server.ReplicaManager.UnderReplicatedPartitions.Value:server.ReplicaManager.UnderReplicatedPartitions",
+          "name":"Under replicated",
+          "description":"There are {severity} under replicated partitions"
+       },
+       {
+          "id":"dynatrace.jmx.wso2-api-manager:metric_wso2am_http_latency_backend_avg:alert_wso2am_http_high_backend_latency",
+          "name":"WSO2 API Manager - High http backend latency",
+          "description":"The {metricname} of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"ruxit.python.rabbitmq:messages_unacknowledged:messages_unacknowledged_alert",
+          "name":"High RabbitMQ number of unacknowledged messages",
+          "description":"The number of unacknowledged messages is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"d3baaaed-3441-4931-bf24-25c4e12e137f",
+          "name":"Mint alert for static",
+          "description":"The {metricname} value of {severity} was {alert_condition} the baseline of {baseline}."
+       },
+       {
+          "id":"4685d4ae-7485-ea42-803c-00b352caaa1f",
+          "name":"High RabbitMQ sockets usage",
+          "description":"The RabbitMQ sockets usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"740acbfc-b997-125a-c76f-fb38390a2b44",
+          "name":"Low RabbitMQ free disk space",
+          "description":"The RabbitMQ free disk space of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"015b176a-8269-4595-9f4f-00eb4a56a6d1",
+          "name":"Windows service availability (wgtest)",
+          "description":"Windows service (wgtest) isn't available."
+       },
+       {
+          "id":"2a91c7b5-a27d-7550-47df-dfb20c755ca8",
+          "name":"High RabbitMQ sockets usage",
+          "description":"The RabbitMQ sockets usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"a87a1fa8-11f8-a3a7-dd20-1d3368a3a4fc",
+          "name":"High number of ready messages",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"2b405b87-367b-4ac8-a78d-25d9a1468901",
+          "name":"Average value of dimensions",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}. Andras Margitics"
+       },
+       {
+          "id":"ruxit.python.rabbitmq:disk_free_left_to_limit:disk_free_alert_low_generic",
+          "name":"Low RabbitMQ free disk space",
+          "description":"The RabbitMQ free disk space of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"cb125d72-4eb0-488f-a62a-1d5a8fe5ad10",
+          "name":"entity dim config",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"8ef841a3-c45a-337e-ae90-6ed546fa2a20",
+          "name":"OpenShift control plane: DNS pod not ready (OpenShift 4 specific)",
+          "description":"The {metricname} value of {severity} was {alert_condition} the baseline of {baseline}."
+       },
+       {
+          "id":"fd93c5a2-769f-4e3e-bd2f-708d95ddf1dc",
+          "name":"testLama",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"7d3d4811-ecf9-48e4-9fd9-aa6bb38bc0c1",
+          "name":"Windows service availability (testttesttest)",
+          "description":"Windows service (testttesttest) isn't available."
+       },
+       {
+          "id":"13c0fac9-6488-477f-913b-265d8f93c875",
+          "name":"MetricSelectorValidValidator Test 2",
+          "description":"APM-298481: Extend validation for metric selector based configs"
+       },
+       {
+          "id":"c51c6608-2700-4d94-8c11-9b4ed506a5d4",
+          "name":"Wolfgang Test",
+          "description":"Host: {dims:dt.entity.host.name}\nDisk: {dims:dt.entity.disk.name}\n\n{dims}"
+       },
+       {
+          "id":"dynatrace.jmx.wso2-api-manager:metric_wso2am_https_latency_backend_avg:alert_wso2am_https_high_backend_latency",
+          "name":"WSO2 API Manager - High https backend latency",
+          "description":"The {metricname} of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"8b0846d3-a033-4ce6-80b3-b5f5bbd9e806",
+          "name":"ce: Host System Load",
+          "description":"The {metricname} value of {severity} was {alert_condition} the baseline of {baseline}."
+       },
+       {
+          "id":"f78c676d-2cb4-40a9-9a47-9e622b3ad248",
+          "name":"test-lantuchov",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"ext:cloud.azure.microsoft_dbforpostgresql.serversv2.memory_percent_alert",
+          "name":"Azure DB for PostgreSQL memory percent [Azure]",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"abb76a8a-1742-4c65-b4ae-0960d659cd8f",
+          "name":"Config Change Demo",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"64ab8485-3317-8b85-1588-5280a9a3e501",
+          "name":"High RabbitMQ sockets usage",
+          "description":"The RabbitMQ sockets usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"36226201-6ca4-f681-bff9-9828dcdc2aaf",
+          "name":"High RabbitMQ file descriptors usage",
+          "description":"The RabbitMQ file descriptors usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"ac4f3b6c-37fa-7859-f192-4c6e749feb58",
+          "name":"High RabbitMQ file descriptors usage",
+          "description":"The RabbitMQ file descriptors usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"9429516a-7b73-11bb-ac1f-be8030c3c3fd",
+          "name":"Istio - Large number of Galley failed validations",
+          "description":"{severity} failed Galley violations were detected which is {alert_condition} the threshold of {threshold}."
+       },
+       {
+          "id":"9110ae8d-7bef-448e-9aa9-6fa6d2fa9e7e",
+          "name":"APM-259188",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"1ac38a67-aafc-41fb-b2ea-c97042f751da",
+          "name":"Windows service availability (Remote Desktop Connections)",
+          "description":"Windows service (Remote Desktop Connections) isn't available."
+       },
+       {
+          "id":"19dd837a-85d1-416c-afa5-3d93c09e6f24",
+          "name":"test for settings 2.0",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"24e9a9e0-f2db-0301-7fe5-edca628aa7a5",
+          "name":"High RabbitMQ file descriptors usage",
+          "description":"The RabbitMQ file descriptors usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"dynatrace.python.coredns_v1:panic_count_total:panic_count_total_alert",
+          "name":"High panic count",
+          "description":"The {metricname} of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"baf9a7ec-daac-450f-83fa-a072cf012ef7",
+          "name":"selfmonitoring metric test",
+          "description":"{dims}"
+       },
+       {
+          "id":"acdf39bc-1574-42d6-b8aa-331e7bc87181",
+          "name":"failing - careers austria - staging - apply now button",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"3bb58b8d-07e8-43a8-8bc8-340faf243614",
+          "name":"test rule evaluation",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"4a5cc7b4-3bf4-451f-a0fd-16509b3cca8d",
+          "name":"myCPUIdleAlert",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"c21f7f9d-bc58-4e53-80fb-fc6997a08969",
+          "name":"careers austria - stagingtest",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"builtin:cloud.azure.appGateway.backend.settings.pool.host.unhealthy_alert",
+          "name":"Azure Application Gateway unhealthy hosts",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"54f3eb31-b8eb-40f1-a93b-1c023ec955b6",
+          "name":"Rage click alert test",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"081046d0-068f-4430-9c32-45657674e7a6",
+          "name":"Metric key based basic sample",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"ext:cloud.azure.microsoft_dbformysql.servers.serverlog_storage_percent_alert",
+          "name":"Azure DB for MySQL server log storage percent [Azure]",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"e33ce957-0b99-47b2-81b0-3b16adbb2ce9",
+          "name":"metrci selector test CH",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold} and/or {missing_data_samples} out of {violating_samples} samples were missing data."
+       },
+       {
+          "id":"dynatrace.jmx.wso2-api-manager:metric_carbon_system_response_time_avg:alert_carbon_high_system_response_time",
+          "name":"WSO2 API Manager - Carbon has exteremly high system response time",
+          "description":"The {metricname} of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"f6e882c7-124c-5db0-64da-7df1bfd0fe57",
+          "name":"Alerting Rule 2",
+          "description":"Added along with extension"
+       },
+       {
+          "id":"5eb9f6ee-7676-989a-8b32-5ebd5780ab7d",
+          "name":"High RabbitMQ file descriptors usage",
+          "description":"The RabbitMQ file descriptors usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"3e613287-9478-e7d2-1fde-f20d53267c4f",
+          "name":"OpenShift control plane: low number of master nodes (OpenShift 3 specific)",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"builtin:cloud.azure.sqlDatabase.storage.percent_high_storage_usage_alert",
+          "name":"Azure SQL Database used data space",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"ruxit.python.haproxy:be_rtime:be_rtime_alert_high_generic",
+          "name":"High HAProxy response time",
+          "description":"The average response time is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"1ea3b614-1a6d-4703-a131-073bf58acc9d",
+          "name":"SLO alert warning - lama",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"5a5c24fb-4a80-98af-ba5e-144f0f5cafc9",
+          "name":"OpenShift control plane: etcd pod not ready",
+          "description":"The {metricname} value of {severity} was {alert_condition} the baseline of {baseline}."
+       },
+       {
+          "id":"d0b826b1-dadf-4a2b-98f8-b8add2d7434b",
+          "name":"My new mobile objective - AlertScenario - warning",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"ruxit.python.rabbitmq:connections_blocked:connections_blocked",
+          "name":"High RabbitMQ number of blocked connections",
+          "description":"The number of blocked connections is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"ext:cloud.azure.microsoft_dbformariadb.servers.storage_percent_alert",
+          "name":"Azure DB for MariaDB storage percent [Azure]",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"ext:cloud.azure.microsoft_dbforpostgresql.serversv2.storage_percent_alert",
+          "name":"Azure DB for PostgreSQL storage percent [Azure]",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"fdbe7a22-a592-44e0-8cde-919f134d537c",
+          "name":"Windows service availability (fsdafsd)",
+          "description":"Windows service (fsdafsd) isn't available."
+       },
+       {
+          "id":"c225fa1a-9b10-497c-9840-f5dc920bb0e7",
+          "name":"Tefa Metric Problem",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"e6276d24-2c08-4d4b-bbb1-17535fafc978",
+          "name":"Lama SLO event",
+          "description":"This is the description for my metric event."
+       },
+       {
+          "id":"309aced2-8bc8-49ab-9649-4b97f29444a2",
+          "name":"Windows service availability (test-win-display)",
+          "description":"Windows service (test-win-display) isn't available."
+       },
+       {
+          "id":"e8f2dea5-88f0-444f-a1f7-9910360c8a5e",
+          "name":"threshold test MS2",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"c83f482d-8c9a-24e9-db0d-88a7d9d8a0be",
+          "name":"High RabbitMQ processes usage",
+          "description":"The RabbitMQ processes usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"b6de284b-a508-45e4-b4ff-aecad7b406f9",
+          "name":"AW unit error milli cores",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"0915e0ad-9d38-417d-bb84-65e9e7fa01bd",
+          "name":"AW primary dimension key (metric selector)",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"0e44dc71-bc00-0c20-cf81-2be789ff9f43",
+          "name":"High RabbitMQ file descriptors usage",
+          "description":"The RabbitMQ file descriptors usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"dffc0d2c-96be-158a-1606-5febca4e25fc",
+          "name":"High RabbitMQ sockets usage",
+          "description":"The RabbitMQ sockets usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"0218c7ba-73e4-4848-8017-78aba78b8d43",
+          "name":"testConfigCH",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold} and/or {missing_data_samples} out of {violating_samples} samples were missing data."
+       },
+       {
+          "id":"545d8f48-f075-f753-ee78-5d38735bbe7a",
+          "name":"High RabbitMQ sockets usage",
+          "description":"The RabbitMQ sockets usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"5b462151-35e2-441f-a3ca-199dac4d8e91",
+          "name":"AEvent",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold} and/or {missing_data_samples} out of {violating_samples} samples were missing data."
+       },
+       {
+          "id":"fd89d77b-d1c6-994b-bca8-4f1392d33f60",
+          "name":"High RabbitMQ memory usage",
+          "description":"The RabbitMQ memory usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"builtin:cloud.azure.sqlDatabase.cpuPercent_high_cpu_usage_alert",
+          "name":"Azure SQL Database CPU usage %",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"ext:cloud.azure.microsoft_dbformysql.servers.memory_percent_alert",
+          "name":"Azure DB for MySQL memory percent [Azure]",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"cffd86eb-c878-42a6-b318-40462571dc8b",
+          "name":"AW metric selector with rate",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"12b0ed7e-7e1d-ab4c-7494-d1e9659a87ed",
+          "name":"High RabbitMQ processes usage",
+          "description":"The RabbitMQ processes usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"094d9d86-ad4a-410f-9108-e7b1018f7121",
+          "name":"Paul's Test Event",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"8c6e2af6-8010-4f3f-a421-0ea3ef563c8a",
+          "name":"Lama SLO event",
+          "description":"This is the description for my metric event."
+       },
+       {
+          "id":"2199e22c-998a-8020-2fc1-100937c64b57",
+          "name":"High number of ready messages",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"59ebb615-607a-405c-8560-0412877006ed",
+          "name":"!ChPe_test_2",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"28286b01-9854-9f55-4cad-a99971385e29",
+          "name":"custom_demo_event",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"c523fc98-b2a8-4f1f-abff-35defbc60791",
+          "name":"Metricselector dimcheck",
+          "description":"dims: '{dims}'\nalert_condition: '{alert_condition}'\nmetricname: '{metricname}'\nseverity: '{severity}'\nthreshold: '{threshold}'\nmissing_data_samples: '{missing_data_samples}'\nentityname: '{entityname}'\nbaseline: '{baseline}'"
+       },
+       {
+          "id":"9757e1ee-2b97-fe34-ef36-d299f2f62d2b",
+          "name":"OpenShift control plane: low number of master nodes (OpenShift 4 specific)",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"b960cd53-9b44-2940-f72c-e4147602aa42",
+          "name":"OpenShift control plane: controller manager pod not ready (OpenShift 4 specific)",
+          "description":"The {metricname} value of {severity} was {alert_condition} the baseline of {baseline}."
+       },
+       {
+          "id":"c90cd291-c4c4-4cba-9688-2f486d299481",
+          "name":"Windows service availability (Windows Defender Antivirus Service)",
+          "description":"Windows service (Windows Defender Antivirus Service) isn't available."
+       },
+       {
+          "id":"52a9b036-040d-4bb6-b773-c9817b40dd96",
+          "name":"tk sparse always alerting",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"ruxit.python.rabbitmq:proc_usage:proc_usuage_alert_high_generic",
+          "name":"High RabbitMQ processes usage",
+          "description":"The RabbitMQ processes usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"5c3d7c46-8193-9d09-9756-8e66c9135a60",
+          "name":"Low RabbitMQ free disk space",
+          "description":"The RabbitMQ free disk space of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"e4a20dbd-0f7c-4629-a53f-baa3310f8e8b",
+          "name":"AW metric selector CPU usage",
+          "description":"The {metricname} value of {severity} was {alert_condition} your threshold of {threshold}\n{dims}"
+       },
+       {
+          "id":"5b1fef84-fde7-4f98-a69f-352725174a59",
+          "name":"tim's bad alert message",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}. {missing_data_samples} out of {violating_samples} samples were missing data."
+       },
+       {
+          "id":"ruxit.python.haproxy:idle:idle_alert_low_generic",
+          "name":"Low HAProxy idle time",
+          "description":"The percentage standby time is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"9944edbe-62a5-5d80-a257-7f4dd21f3f48",
+          "name":"High RabbitMQ file descriptors usage",
+          "description":"The RabbitMQ file descriptors usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"ruxit.python.redis:slave_state:unsynchronized",
+          "name":"Redis Replica unsynchronized",
+          "description":"Replica is {severity} for {violating_samples}."
+       },
+       {
+          "id":"ext:cloud.azure.microsoft_dbformysql.servers.storage_percent_alert",
+          "name":"Azure DB for MySQL storage percent [Azure]",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"149aece5-a607-d103-b751-752ead4974ad",
+          "name":"Low RabbitMQ free disk space",
+          "description":"The RabbitMQ free disk space of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"a66bc57e-6b46-bfaa-383a-615b236b5edd",
+          "name":"OpenShift control plane: cluster not ready",
+          "description":"The readyz API health endpoint reported that the cluster's API server is not ready."
+       },
+       {
+          "id":"ae87fe77-2df7-4242-9559-24847dbed515",
+          "name":"Alerting Rule 1",
+          "description":"Added along with extension"
+       },
+       {
+          "id":"9d7a7c1c-703d-7116-18da-8066f3316ebd",
+          "name":"High RabbitMQ memory usage",
+          "description":"The RabbitMQ memory usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"ruxit.python.rabbitmq:sockets_usage:sockets_usage_alert_high_generic",
+          "name":"High RabbitMQ sockets usage",
+          "description":"The RabbitMQ sockets usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"b8d780e5-7385-3020-6256-d74f6e66f49a",
+          "name":"Low RabbitMQ free disk space",
+          "description":"The RabbitMQ free disk space of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"239ab065-fd94-49d5-9a92-f0493a20624e",
+          "name":"t.another.test",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"bf15a8f5-6569-41c0-bb35-0ab3eb5983bf",
+          "name":"normal - careers austria - staging - apply now button",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"7d8ca867-71cc-35ef-fc46-c37e92c12016",
+          "name":"etcd for OpenShift: member has no leader",
+          "description":"An etcd member of the OpenShift control plane has no leader. ({metricname})"
+       },
+       {
+          "id":"7b27b929-e6d6-452a-97cf-83d7784ca60f",
+          "name":"High RabbitMQ memory usage",
+          "description":"The RabbitMQ memory usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"138f6026-084c-2c99-273b-87444ab1afd4",
+          "name":"High RabbitMQ memory usage",
+          "description":"The RabbitMQ memory usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"ruxit.python.haproxy:fe_susage:fe_usage_alert_high_generic",
+          "name":"High HAProxy frontend session usage",
+          "description":"The frontend session usage is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"b12097a5-e113-4ee1-8dcb-e3429f9731a2",
+          "name":"bytest",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"80a1172a-d513-d0e2-b66a-653c9d6f9802",
+          "name":"High number of ready messages",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"2e4c9752-e952-4425-9ceb-cbf6ba7d6e25",
+          "name":"Web HTTP error rate increase (excl. all other request errors)",
+          "description":"The {metricname} value of {severity} was {alert_condition} the baseline of {baseline}."
+       },
+       {
+          "id":"d4229a07-b45e-55a6-d32b-b912fd7258eb",
+          "name":"High RabbitMQ processes usage",
+          "description":"The RabbitMQ processes usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"6d084163-221f-4b33-bf6c-e704f2bb605e",
+          "name":"APM-321557: Using the ConstantThresholdAnomalyDetector",
+          "description":"The {metricname} value of {severity} was {alert_condition} the baseline of {baseline}."
+       },
+       {
+          "id":"ruxit.perfmon.dotnetV4:%TimeInGC:time_in_gc_alert_high_generic",
+          "name":"High GC time",
+          "description":"The .NET GC time of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"ext:cloud.azure.microsoft_dbformysql.servers.io_consumption_percent_alert",
+          "name":"Azure DB for MySQL IO percent [Azure]",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"69cf1a79-206d-a06b-75b7-521ed430a691",
+          "name":"High number of ready messages",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"85d1e897-71e9-49db-389e-4a7303918d7c",
+          "name":"High RabbitMQ sockets usage",
+          "description":"The RabbitMQ sockets usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"builtin:cloud.azure.appGateway.backend.settings.traffic.requests.failed_alert",
+          "name":"Azure Application Gateway failed requests",
+          "description":"The {metricname} value of {severity} was {alert_condition} the baseline of {baseline}."
+       },
+       {
+          "id":"361f8eeb-3285-f30e-6ba1-a7c98fd5e6cc",
+          "name":"OpenShift control plane: API server pod not ready",
+          "description":"The {metricname} value of {severity} was {alert_condition} the baseline of {baseline}."
+       },
+       {
+          "id":"31408e11-e506-d847-062f-4d2e97d5658b",
+          "name":"Alerting Rule 2",
+          "description":"Added along with extension"
+       },
+       {
+          "id":"ee4d4706-1456-44ed-ba04-a84858d16c69",
+          "name":"Cisco - udpNoPorts",
+          "description":"The {metricname} value of {severity} was {alert_condition} the baseline of {baseline}."
+       },
+       {
+          "id":"65170ef4-8fd8-a571-d736-acdadd047bd0",
+          "name":"High number of ready messages",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"37b342fd-318f-a7a3-0587-d9edd84c45ca",
+          "name":"High RabbitMQ processes usage",
+          "description":"The RabbitMQ processes usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"ext:cloud.azure.microsoft_dbformariadb.servers.serverlog_storage_percent_alert",
+          "name":"Azure DB for MariaDB server log storage percent [Azure]",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"dynatrace.jmx.wso2-api-manager:metric_carbon_number_faulty_services:alert_carbon_faulty_services",
+          "name":"WSO2 API Manager - Carbon has faulty services",
+          "description":"The {metricname} of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"ruxit.python.haproxy:be_susage:be_usage_alert_high_generic",
+          "name":"High HAProxy backend session usage",
+          "description":"The backend session usage is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"3d4c202c-57dc-4391-a410-098e7a5736cc",
+          "name":"Basic with latency",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"dynatrace.jmx.kafka:pg.kafka.controller.KafkaController.ActiveControllerCount.Value:pg.kafka.controller.KafkaController.ActiveControllerCount.ABOVE",
+          "name":"Cluster controller mismatch",
+          "description":"There are {severity} active cluster controllers"
+       },
+       {
+          "id":"57a8218f-4cbc-43e4-a8d8-86be594118c1",
+          "name":"Test empty",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"b58d9e06-a760-8cf8-a1a5-0d5a93efcb43",
+          "name":"OpenShift control plane: scheduler pod not ready (OpenShift 4 specific)",
+          "description":"The {metricname} value of {severity} was {alert_condition} the baseline of {baseline}."
+       },
+       {
+          "id":"ecfc091e-5179-4992-98ed-055f8a10a33d",
+          "name":"threshold test metric key",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"76011b4a-7a42-45b2-8724-08164150fbb5",
+          "name":"APM-266991: alerting on missing data example",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"e2f1a87a-bd13-4b1b-afe7-cc33cb748d87",
+          "name":"Rage click spike with auto-adaptive baseline",
+          "description":"The {metricname} value of {severity} was {alert_condition} the baseline of {baseline}."
+       },
+       {
+          "id":"bce1a522-b022-4018-9817-093b748053bb",
+          "name":"testSP",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"e0662003-3548-42f4-bb1e-5cefed674d00",
+          "name":"slow contact-orange.jsf",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"dynatrace.jmx.wso2-api-manager:metric_wso2am_http_latency_avg:alert_wso2am_http_high_latency",
+          "name":"WSO2 API Manager - High http latency",
+          "description":"The {metricname} of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"953df606-3581-4073-bece-6721475a8cd1",
+          "name":"Windows service availability (WG WIN TEST)",
+          "description":"Windows service (WG WIN TEST) isn't available."
+       },
+       {
+          "id":"ecc202fe-b2a2-b3af-12f3-76f85e8ab722",
+          "name":"High RabbitMQ processes usage",
+          "description":"The RabbitMQ processes usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"28c772b2-a0eb-6584-13e1-bebb72516de2",
+          "name":"High RabbitMQ sockets usage",
+          "description":"The RabbitMQ sockets usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"4fcd8c32-70a0-46ca-8302-22793ec82969",
+          "name":"Touch on search reported errors2",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"77384344-513b-a47f-8a07-21a9f911b98a",
+          "name":"High number of ready messages",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"f28cbed1-281d-8bb1-5376-3c5f950d8584",
+          "name":"High number of ready messages",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"43c1dff9-bfe0-4788-9353-7f5ab55d4286",
+          "name":"myverystrictthreshold",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"0687c86a-c32e-805b-13f5-cbc071c2d834",
+          "name":"Alerting Rule 1",
+          "description":"Added along with extension"
+       },
+       {
+          "id":"4ee1a5f1-4af9-b538-9484-1a0796311538",
+          "name":"Istio - Large number of 500 responses detected",
+          "description":"{severity} 500 responses were detected which is {alert_condition} the threshold of {threshold}."
+       },
+       {
+          "id":"builtin:cloud.azure.redis.processorTime.high_cpu_usage_alert",
+          "name":"Azure Redis CPU usage %",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"3a4043dc-c2f6-4d5b-9198-42bbd7995a85",
+          "name":"DPH test_u0G4zw",
+          "description":"Otherdim {dims:test.anotherdim}\nreported over {threshold} and {dims}"
+       },
+       {
+          "id":"487b4ef3-a384-a3b0-7c6c-197b3598f91a",
+          "name":"Low RabbitMQ free disk space",
+          "description":"The RabbitMQ free disk space of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"6843a261-55af-45cc-ae1e-2931b6f04b33",
+          "name":"UA process memory alert",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"d9f29880-9cfc-0b67-dda1-7e24eb1dbe4d",
+          "name":"High RabbitMQ processes usage",
+          "description":"The RabbitMQ processes usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"ext:cloud.azure.microsoft_dbformariadb.servers.cpu_percent_alert",
+          "name":"Azure DB for MariaDB CPU percent [Azure]",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"adc4511d-c664-4d2a-a25a-335bc8b5638a",
+          "name":"AW metric selector smooth",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"5aaad3dc-b69f-4b2c-a1ca-3ac24b7765f2",
+          "name":"test",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"18e7f682-f1f6-4132-a58f-880839644167",
+          "name":"MEvent",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"6b95d288-ebb3-4641-a74c-520c8e635688",
+          "name":"UA process cpu alert",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"ext:cloud.azure.microsoft_dbformariadb.servers.io_consumption_percent_alert",
+          "name":"Azure DB for MariaDB IO percent [Azure]",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"ruxit.python.rabbitmq:ad_queues_no_consumers:ad_queues_no_consumers_alert",
+          "name":"High RabbitMQ number of auto delete queues without consumers",
+          "description":"The number of auto delete queues without consumers is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"ext:cloud.azure.microsoft_dbforpostgresql.serversv2.cpu_percent_alert",
+          "name":"Azure DB for PostgreSQL CPU percent [Azure]",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"457c25e6-c44f-4dff-875d-55051725a890",
+          "name":"Tefa Log Event",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"5eb52306-3658-497d-a638-85b597850446",
+          "name":"tk.test",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"ruxit.python.rabbitmq:fd_usage:fd_usage_alert_high_generic",
+          "name":"High RabbitMQ file descriptors usage",
+          "description":"The RabbitMQ file descriptors usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"ruxit.python.redis:slave_state:sync_in_progress",
+          "name":"Redis Replica synchronization in progress",
+          "description":"Replica is {severity} for {violating_samples}."
+       },
+       {
+          "id":"be1a6388-f782-4762-ba88-7203919744e4",
+          "name":"AW host info alert (APM-310156)",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"dynatrace.jmx.wso2-api-manager:metric_wso2am_https_latency_avg:alert_wso2am_https_high_latency",
+          "name":"WSO2 API Manager - High https latency",
+          "description":"The {metricname} of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"aa2c8d02-25c2-41b0-8bee-438d9386df4f",
+          "name":"REST: Low test coverage-1626187946-0",
+          "description":"The {metricname} value of {severity} was {alert_condition} the baseline of {baseline}."
+       },
+       {
+          "id":"70050724-5714-db9c-2368-d5270c4fef28",
+          "name":"HostObservability CPU Usage",
+          "description":"High CPU usage"
+       },
+       {
+          "id":"f775466e-eb28-460a-a350-8eb8dff77abb",
+          "name":"APM-289376: isRemainder(dimensionKey)",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}. APM-289376: isRemainder(dimensionKey)"
+       },
+       {
+          "id":"dynatrace.jmx.kafka:pg.kafka.controller.KafkaController.OfflinePartitionsCount.Value:controller.KafkaController.OfflinePartitionsCount",
+          "name":"Offline partitions",
+          "description":"There are {severity} offline partitions"
+       },
+       {
+          "id":"0372f373-24fe-43d4-88c9-491231bbe5d4",
+          "name":"AW primary dimension key (metric key)",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"ee95d471-210b-050b-b4f0-cfcb2195d212",
+          "name":"Alerting Rule 1",
+          "description":"Added along with extension"
+       },
+       {
+          "id":"df777e34-c22c-4e79-8ab1-dfc38f84c320",
+          "name":"AW PGI filter test",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"2d430e7a-8aaf-7f9b-aa78-473e58894fa4",
+          "name":"High RabbitMQ memory usage",
+          "description":"The RabbitMQ memory usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"dynatrace.python.coredns:panic_count_total:panic_count_total_alert",
+          "name":"High panic count",
+          "description":"The {metricname} of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"ea28a6aa-2531-43b4-ab19-a741637dcd89",
+          "name":"Advanced with latency",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"f751f8c0-83be-6bd3-a062-998e3d7baa06",
+          "name":"HostObservability Disk Free Space",
+          "description":"Low disk free space"
+       },
+       {
+          "id":"ruxit.python.haproxy:be_qcur:be_queued_request_alert_high_generic",
+          "name":"High HAProxy requests queue",
+          "description":"The ammount of queued requests is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"12cca934-e083-44e2-a2f0-caaf61e77c89",
+          "name":".mint-test",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"94169e54-868e-d964-8a13-c12ab4b46a6d",
+          "name":"Low RabbitMQ free disk space",
+          "description":"The RabbitMQ free disk space of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"d44d61c8-5609-458f-aa2e-2037834897a6",
+          "name":"Hosts cpu usage >90%",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"44e2336e-5e54-4390-b07c-52689981e845",
+          "name":"Metric key based advanced sample",
+          "description":"The {metricname} value of {severity} was {alert_condition} the baseline of {baseline}."
+       },
+       {
+          "id":"e445ce27-fcbc-4e84-8a45-73251e0ae20e",
+          "name":"tim's alert",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}. {missing_data_samples} out of {violating_samples} samples were missing data. {asd"
+       },
+       {
+          "id":"dc4b66aa-e0a5-efff-c67f-abdc9b5641ac",
+          "name":"OpenShift control plane: controller pod not ready (OpenShift 3 specific)",
+          "description":"The {metricname} value of {severity} was {alert_condition} the baseline of {baseline}."
+       },
+       {
+          "id":"35052001-d869-f53e-ebfb-b1ad52c6caa3",
+          "name":"etcd for OpenShift: frequent leader changes",
+          "description":"An etcd member of the OpenShift control plane observed frequent leader changes."
+       },
+       {
+          "id":"8109daa7-316a-4c0b-846e-32ede7ff18cb",
+          "name":"Alerting Rule 2",
+          "description":"Added along with extension"
+       },
+       {
+          "id":"ext:cloud.azure.microsoft_dbformysql.servers.cpu_percent_alert",
+          "name":"Azure DB for MySQL CPU percent [Azure]",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}."
+       },
+       {
+          "id":"3a1126a0-1b9c-abcd-67a7-504e2acce972",
+          "name":"High RabbitMQ file descriptors usage",
+          "description":"The RabbitMQ file descriptors usage of {severity} is {alert_condition} the threshold of {threshold}"
+       },
+       {
+          "id":"60f3c753-4125-498f-81af-1f304dd7958e",
+          "name":"TefaMint",
+          "description":"The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}.\n\nfgfgfgf\nfgfg"
+       }
+    ]
+ }
