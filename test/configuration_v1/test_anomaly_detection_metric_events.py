@@ -12,7 +12,7 @@ from dynatrace.configuration_v1.metric_events import (
     MetricEventStaticThresholdMonitoringStrategy,
     Severity,
     WarningReason,
-    Unit
+    Unit,
 )
 from dynatrace.pagination import PaginatedList
 
@@ -86,7 +86,3 @@ def test_get_full_configuration(dt: Dynatrace):
 
         else:
             continue
-
-
-            
-

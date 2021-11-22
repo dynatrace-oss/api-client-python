@@ -59,6 +59,7 @@ class MetricEventAlertingScopeFilterType(Enum):
     PROCESS_GROUP_ID = "PROCESS_GROUP_ID"
     PROCESS_GROUP_NAME = "PROCESS_GROUP_NAME"
 
+
 class MetricEventDimensionsFilterType(Enum):
     ENTITY = "ENTITY"
     STRING = "STRING"
