@@ -156,7 +156,7 @@ class EntityService:
         params = {"pageSize": page_size}
         return PaginatedList(EntityType, self.__http_client, self.ENDPOINT_TYPES, params, list_item="types")
 
-    def get_types(self, entity_type: str) -> "EntityType":
+    def get_type(self, entity_type: str) -> "EntityType":
         """Gets the properties of a specified entity type.
 
         :param entity_type: The entity type required

@@ -83,7 +83,7 @@ def test_list_types(dt: Dynatrace):
 
 
 def test_get_types(dt: Dynatrace):
-    entity_type = dt.entities.get_types(entity_type="DISK")
+    entity_type = dt.entities.get_type(entity_type="DISK")
 
     # type checks
     assert isinstance(entity_type, EntityType)
