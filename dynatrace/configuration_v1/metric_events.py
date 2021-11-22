@@ -29,6 +29,12 @@ class AlertCondition(Enum):
     ABOVE = "ABOVE"
     BELOW = "BELOW"
 
+class DisabledReason(Enum):
+    METRIC_DEFINITION_INCONSISTENCY = "METRIC_DEFINITION_INCONSISTENCY"
+    NONE = "NONE"
+    TOO_MANY_DIMS = "TOO_MANY_DIMS"
+    TOPX_FORCIBLY_DEACTIVATED = "TOPX_FORCIBLY_DEACTIVATED"
+
 
 class MetricEventMonitoringStrategyType(Enum):
     STATIC_THRESHOLD = "STATIC_THRESHOLD"
@@ -172,7 +178,7 @@ class MetricEvent(DynatraceObject):
         self.aggregation_type: str = raw_element.get("aggregationType")
         self.severity: Severity = Severity(raw_element.get("severity"))
         self.enabled: bool = raw_element.get("enabled")
-        self.disabled_reason: str = raw_element.get("disabledReason")
+        self.disabled_reason: DisabledReason = DisabledReason(raw_element.get("disabledReason"))
         self.warning_reason: str = raw_element.get("warningReason")
         self.alerting_scope: List[MetricEventAlertingScope] = [
             MetricEventAlertingScope(raw_element=raw_scope) for raw_scope in raw_element.get("alertingScope", [])
