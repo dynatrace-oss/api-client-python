@@ -36,6 +36,18 @@ class DisabledReason(Enum):
     TOPX_FORCIBLY_DEACTIVATED = "TOPX_FORCIBLY_DEACTIVATED"
 
 
+class FilterType(Enum):
+    ENTITY_ID = "ENTITY_ID"
+    MANAGEMENT_ZONE = "MANAGEMENT_ZONE"
+    TAG = "TAG"
+    NAME = "NAME"
+    CUSTOM_DEVICE_GROUP_NAME = "CUSTOM_DEVICE_GROUP_NAME"
+    HOST_GROUP_NAME = "HOST_GROUP_NAME"
+    HOST_NAME = "HOST_NAME"
+    PROCESS_GROUP_ID = "PROCESS_GROUP_ID"
+    PROCESS_GROUP_NAME = "PROCESS_GROUP_NAME"
+
+
 class MetricEventMonitoringStrategyType(Enum):
     STATIC_THRESHOLD = "STATIC_THRESHOLD"
     AUTO_ADAPTIVE_BASELINE = "AUTO_ADAPTIVE_BASELINE"
@@ -129,7 +141,7 @@ class TagFilter(DynatraceObject):
 
 class MetricEventAlertingScope(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.filter_type: str = raw_element.get("filterType")
+        self.filter_type: FilterType = FilterType(raw_element.get("filterType"))
         self.tag_filter: TagFilter = TagFilter(raw_element=raw_element.get("tagFilter"))
         self.name_filter: MetricEventTextFilter = MetricEventTextFilter(raw_element=raw_element.get("nameFilter"))
         self.entity_id: str = raw_element.get("entityId")
