@@ -48,7 +48,7 @@ class DisabledReason(Enum):
     TOPX_FORCIBLY_DEACTIVATED = "TOPX_FORCIBLY_DEACTIVATED"
 
 
-class FilterType(Enum):
+class MetricEventAlertingScopeFilterType(Enum):
     ENTITY_ID = "ENTITY_ID"
     MANAGEMENT_ZONE = "MANAGEMENT_ZONE"
     TAG = "TAG"
@@ -58,6 +58,10 @@ class FilterType(Enum):
     HOST_NAME = "HOST_NAME"
     PROCESS_GROUP_ID = "PROCESS_GROUP_ID"
     PROCESS_GROUP_NAME = "PROCESS_GROUP_NAME"
+
+class MetricEventDimensionsFilterType(Enum):
+    ENTITY = "ENTITY"
+    STRING = "STRING"
 
 
 class MetricEventMonitoringStrategyType(Enum):
@@ -153,7 +157,7 @@ class TagFilter(DynatraceObject):
 
 class MetricEventAlertingScope(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.filter_type: FilterType = FilterType(raw_element.get("filterType"))
+        self.filter_type: MetricEventAlertingScopeFilterType = MetricEventAlertingScopeFilterType(raw_element.get("filterType"))
         self.tag_filter: TagFilter = TagFilter(raw_element=raw_element.get("tagFilter"))
         self.name_filter: MetricEventTextFilter = MetricEventTextFilter(raw_element=raw_element.get("nameFilter"))
         self.entity_id: str = raw_element.get("entityId")
@@ -163,7 +167,7 @@ class MetricEventAlertingScope(DynatraceObject):
 
 class MetricEventDimension(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.filter_type: str = raw_element.get("filterType")
+        self.filter_type: MetricEventDimensionsFilterType = MetricEventDimensionsFilterType(raw_element.get("filterType"))
         self.key: str = raw_element.get("key")
         self.name_filter: MetricEventTextFilter = MetricEventTextFilter(raw_element=raw_element.get("nameFilter"))
         self.text_filter: MetricEventTextFilter = MetricEventTextFilter(raw_element=raw_element.get("textFilter"))
