@@ -35,6 +35,15 @@ class MetricEventMonitoringStrategyType(Enum):
     AUTO_ADAPTIVE_BASELINE = "AUTO_ADAPTIVE_BASELINE"
 
 
+class Severity(Enum):
+    AVAILABILITY = "AVAILABILITY"
+    CUSTOM_ALERT = "CUSTOM_ALERT"
+    ERROR = "ERROR"
+    INFO = "INFO"
+    PERFORMANCE = "PERFORMANCE"
+    RESOURCE_CONTENTION = "RESOURCE_CONTENTION"
+
+
 class Unit(Enum):
     BIT = "BIT"
     BIT_PER_HOUR = "BIT_PER_HOUR"
@@ -161,7 +170,7 @@ class MetricEvent(DynatraceObject):
         self.name: str = raw_element.get("name")
         self.description: str = raw_element.get("description")
         self.aggregation_type: str = raw_element.get("aggregationType")
-        self.severity = raw_element.get("severity")
+        self.severity: Severity = Severity(raw_element.get("severity"))
         self.enabled: bool = raw_element.get("enabled")
         self.disabled_reason: str = raw_element.get("disabledReason")
         self.warning_reason: str = raw_element.get("warningReason")
