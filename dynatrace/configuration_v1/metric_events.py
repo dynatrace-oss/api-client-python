@@ -25,9 +25,21 @@ from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.http_client import HttpClient
 
 
+class AggregationType(Enum):
+    AVG = "AVG"
+    COUNT = "COUNT"
+    MAX = "MAX"
+    MEDIAN = "MEDIAN"
+    MIN = "MIN"
+    P90 = "P90"
+    SUM = "SUM"
+    VALUE = "VALUE"
+
+
 class AlertCondition(Enum):
     ABOVE = "ABOVE"
     BELOW = "BELOW"
+
 
 class DisabledReason(Enum):
     METRIC_DEFINITION_INCONSISTENCY = "METRIC_DEFINITION_INCONSISTENCY"
@@ -192,7 +204,7 @@ class MetricEvent(DynatraceObject):
         self.metric_id: str = raw_element.get("metricId")
         self.name: str = raw_element.get("name")
         self.description: str = raw_element.get("description")
-        self.aggregation_type: str = raw_element.get("aggregationType")
+        self.aggregation_type: Optional[AggregationType] = AggregationType(raw_element.get("aggregationType")) if raw_element.get("aggregationType") else None
         self.severity: Severity = Severity(raw_element.get("severity"))
         self.enabled: bool = raw_element.get("enabled")
         self.disabled_reason: DisabledReason = DisabledReason(raw_element.get("disabledReason"))
