@@ -1,0 +1,28 @@
+{
+    "metadata":{
+       "configurationVersions":[
+          6
+       ],
+       "clusterVersion":"1.232.0.20211122-125428"
+    },
+    "id":"d3baaaed-3441-4931-bf24-25c4e12e137f",
+    "metricId":"mint.monotonic",
+    "name":"Mint alert for static",
+    "description":"The {metricname} value of {severity} was {alert_condition} the baseline of {baseline}.",
+    "aggregationType":"AVG",
+    "severity":"ERROR",
+    "enabled":true,
+    "disabledReason":"NONE",
+    "warningReason":"NONE",
+    "monitoringStrategy":{
+       "type":"AUTO_ADAPTIVE_BASELINE",
+       "samples":5,
+       "violatingSamples":3,
+       "dealertingSamples":5,
+       "alertCondition":"ABOVE",
+       "alertingOnMissingData":false,
+       "numberOfSignalFluctuations":1.0
+    },
+    "primaryDimensionKey":"dt.entity.host",
+    "eventType":"ERROR"
+ }
