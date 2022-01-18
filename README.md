@@ -86,12 +86,13 @@ ActiveGates                              |  :heavy_check_mark:  |  `dt.activegat
 ActiveGates - Auto-update configuration  |  :heavy_check_mark:  |  `dt.activegates_autoupdate_configuration`  |
 ActiveGates - Auto-update jobs           |  :heavy_check_mark:  |  `dt.activegates_autoupdate_jobs`           |
 Audit Logs                               |  :heavy_check_mark:  |  `dt.audit_logs`                            |
+Events                                   |  :warning:           |  `dt.events_v2`                             |
 Extensions 2.0                           |  :heavy_check_mark:  |  `dt.extensions_v2`                         |
 Logs                                     |  :warning:           |  `dt.logs`                                  |
 Metrics                                  |  :heavy_check_mark:  |  `dt.metrics`                               |
 Monitored entities                       |  :warning:           |  `dt.entities`                              |
 Monitored entities - Custom tags         |  :heavy_check_mark:  |  `dt.custom_tags`                           |
-Network zones                            |  :x:                 |                                             |
+Network zones                            |  :warning:           |  `dt.network_zones`                         |
 Problems                                 |  :heavy_check_mark:  |  `dt.problems`                              |
 Security problems                        |  :x:                 |                                             |
 Service-level objectives                 |  :heavy_check_mark:  |  `dt.slos`                                  | 
@@ -101,8 +102,9 @@ Service-level objectives                 |  :heavy_check_mark:  |  `dt.slos`    
 API                                    |  Level               | Access                              |
 :-------------                         |  :-------------:     | :-----                              |
 Anonymization                          |  :x:                 |                                     |
-Cluster time                           |  :heavy_check_mark:  |  `dt.time`                          |
+Cluster time                           |  :heavy_check_mark:  |  `dt.cluster_time`                  |
 Cluster version                        |  :x:                 |                                     |
+Custom devices                         |  :heavy_check_mark:  |  `dt.custom_devices`                |
 Deployment                             |  :heavy_check_mark:  |  `dt.deployment`                    |
 Events                                 |  :warning:           |  `dt.events`                        |
 JavaScript tag management              |  :x:                 |                                     |
@@ -110,7 +112,7 @@ Log monitoring - Custom devices        |  :x:                 |                 
 Log monitoring - Hosts                 |  :x:                 |                                     |
 Log monitoring - Process groups        |  :x:                 |                                     |
 Maintenance window                     |  :x:                 |                                     |
-OneAgent on a host                     |  :x:                 |                                     |
+OneAgent on a host                     |  :warning:           |  `dt.oneagents`                     |
 Problem                                |  :x:                 |                                     |
 Synthetic - Locations and nodes        |  :x:                 |                                     |
 Synthetic - Monitors                   |  :warning:           |  `dt.synthetic_monitors`            |
@@ -120,7 +122,7 @@ Timeseries                             |  :warning:           |  `dt.timeseries`
 Tokens                                 |  :x:                 |                                     |
 Topology & Smartscape - Application    |  :x:                 |                                     |
 Topology & Smartscape - Custom device  |  :warning:           |  `dt.custom_devices`                |
-Topology & Smartscape - Host           |  :warning:           |                                     |
+Topology & Smartscape - Host           |  :warning:           |  `dt.smartscape_hosts`              |
 Topology & Smartscape - Process        |  :x:                 |                                     |
 Topology & Smartscape - Process group  |  :x:                 |                                     |
 Topology & Smartscape - Service        |  :x:                 |                                     |
@@ -131,17 +133,17 @@ User sessions                          |  :x:                 |                 
 
 API                                                  |  Level               |  Access                             |
 :-------------                                       |  :-------------:     |  :-----                             |
-Alerting Profiles                                    |  :x:                 |                                     |
+Alerting Profiles                                    |  :warning:           |  `dt.alerting_profiles`             |
 Anomaly detection - Applications                     |  :x:                 |                                     |
 Anomaly detection - AWS                              |  :x:                 |                                     |
 Anomaly detection - Database services                |  :x:                 |                                     |
 Anomaly detection - Disk events                      |  :x:                 |                                     |
 Anomaly detection - Hosts                            |  :x:                 |                                     |
-Anomaly detection - Metric events                    |  :x:                 |                                     |
-Anomaly detection - Process groups                   |  :x:                 |                                     |
+Anomaly detection - Metric events                    |  :warning:           |`dt.anomaly_detection_metric_events` |
+Anomaly detection - Process groups                   |  :warning:           |`dt.anomaly_detection_process_groups`|
 Anomaly detection - Services                         |  :x:                 |                                     |
 Anomaly detection - VMware                           |  :x:                 |                                     |
-Automatically applied tags                           |  :warning:           |                                     |
+Automatically applied tags                           |  :warning:           |  `dt.auto_tags`                     |
 AWS credentials configuration                        |  :x:                 |                                     |
 AWS PrivateLink                                      |  :x:                 |                                     |
 Azure credentials configuration                      |  :x:                 |                                     |
@@ -153,13 +155,14 @@ Calculated metrics - Web applications                |  :x:                 |   
 Cloud Foundry credentials configuration              |  :x:                 |                                     |
 Conditional naming                                   |  :x:                 |                                     |
 Credential vault                                     |  :x:                 |                                     |
+Custom tags                                          |  :heavy_check_mark:  |  `dt.custom_tags                    |
 Dashboards                                           |  :warning:           |  `dt.dashboards`                    |
 Data privacy and security                            |  :x:                 |                                     |
 Extensions                                           |  :heavy_check_mark:  |  `dt.extensions`                    |
 Frequent issue detection                             |  :x:                 |                                     |
 Kubernetes credentials configuration                 |  :x:                 |                                     |
-Maintenance windows                                  |  :x:                 |                                     |
-Management zones                                     |  :warning:           |                                     |
+Maintenance windows                                  |  :warning:           |  `dt.maintenance_windows`           |
+Management zones                                     |  :x:                 |                                     |
 Notifications                                        |  :warning:           |  `dt.notifications`                 |
 OneAgent - Environment-wide configuration            |  :heavy_check_mark:  |  `dt.oneagents_config_environment`  |
 OneAgent in a host group                             |  :heavy_check_mark:  |  `dt.oneagents_config_hostgroup`    |
