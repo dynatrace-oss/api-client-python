@@ -142,7 +142,7 @@ class HostInfo(DynatraceObject):
         self.consumed_host_units: str = raw_element.get("consumedHostUnits")
         self.os_version: str = raw_element.get("osVersion")
         self.host_group: HostGroup = HostGroup(raw_element=raw_element.get("hostGroup"))
-        self.tags: List[TagInfo] = [TagInfo(t) for t in raw_element.get("tags", [])]
+        self.tags: List[TagInfo] = [TagInfo(raw_element=t) for t in raw_element.get("tags", [])]
         self.os_type: Optional[OsType] = OsType(raw_element.get("osType")) if raw_element.get("osType") else None
 
 
