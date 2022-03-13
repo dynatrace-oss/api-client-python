@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "configurationVersions": [
+      0
+    ],
+    "clusterVersion": "1.237.130.20220311-144350"
+  },
+  "id": "6507829326603756920",
+  "name": "Frontend Services",
+  "description": null,
+  "rules": [
+    {
+      "type": "SERVICE",
+      "enabled": true,
+      "propagationTypes": [
+        "SERVICE_TO_PROCESS_GROUP_LIKE"
+      ],
+      "conditions": [
+        {
+          "key": {
+            "attribute": "PROCESS_GROUP_CUSTOM_METADATA",
+            "dynamicKey": {
+              "source": "ENVIRONMENT",
+              "key": "SERVICE_TYPE"
+            },
+            "type": "PROCESS_CUSTOM_METADATA_KEY"
+          },
+          "comparisonInfo": {
+            "type": "STRING",
+            "operator": "EQUALS",
+            "value": "FRONTEND",
+            "negate": false,
+            "caseSensitive": true
+          }
+        }
+      ]
+    }
+  ],
+  "dimensionalRules": [],
+  "entitySelectorBasedRules": []
+}

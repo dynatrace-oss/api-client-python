@@ -29,6 +29,7 @@ from dynatrace.configuration_v1.plugins import PluginService
 from dynatrace.configuration_v1.oneagent_on_a_host import OneAgentOnAHostService as OneAgentOnAHostConfigService
 from dynatrace.configuration_v1.oneagent_in_a_hostgroup import OneAgentInAHostGroupService
 from dynatrace.configuration_v1.oneagent_environment_wide_configuration import OneAgentEnvironmentWideConfigService
+from dynatrace.configuration_v1.management_zones import ManagementZoneService
 from dynatrace.environment_v1.cluster_time import ClusterTimeService
 from dynatrace.environment_v1.custom_device import CustomDeviceService
 from dynatrace.environment_v1.event import EventService
@@ -94,6 +95,7 @@ class Dynatrace:
         self.extensions_v2: ExtensionsServiceV2 = ExtensionsServiceV2(self.__http_client)
         self.logs: LogService = LogService(self.__http_client)
         self.maintenance_windows = MaintenanceWindowService(self.__http_client)
+        self.management_zones: ManagementZoneService = ManagementZoneService(self.__http_client)
         self.metrics: MetricService = MetricService(self.__http_client)
         self.network_zones: NetworkZoneService = NetworkZoneService(self.__http_client)
         self.notifications: NotificationService = NotificationService(self.__http_client)
