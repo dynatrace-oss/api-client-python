@@ -17,28 +17,28 @@ from dynatrace.pagination import PaginatedList
 
 
 def test_list(dt: Dynatrace):
-    tags = dt.management_zones.list()
-    assert isinstance(tags, PaginatedList)
+    management_zones = dt.management_zones.list()
+    assert isinstance(management_zones, PaginatedList)
 
-    for tag in tags:
-        assert isinstance(tag, ManagementZoneShortRepresentation)
-        assert tag.id == "6507829326603756920"
-        assert tag.name == "Frontend Services"
+    for management_zone in management_zones:
+        assert isinstance(management_zone, ManagementZoneShortRepresentation)
+        assert management_zone.id == "6507829326603756920"
+        assert management_zone.name == "Frontend Services"
         break
 
 
 def test_get(dt: Dynatrace):
-    tags = dt.management_zones.list()
-    for tag in tags:
-        print(tag.name)
-        full_tag = tag.get_full_configuration()
-        assert isinstance(full_tag, ManagementZone)
-        assert isinstance(full_tag.metadata, ConfigurationMetadata)
-        assert full_tag.metadata.cluster_version == "1.237.130.20220311-144350"
-        assert full_tag.id == "6507829326603756920"
-        assert full_tag.name == "Frontend Services"
-        assert isinstance(full_tag.rules, List)
-        for rule in full_tag.rules:
+    management_zones = dt.management_zones.list()
+    for management_zone in management_zones:
+        print(management_zone.name)
+        full_management_zone = management_zone.get_full_configuration()
+        assert isinstance(full_management_zone, ManagementZone)
+        assert isinstance(full_management_zone.metadata, ConfigurationMetadata)
+        assert full_management_zone.metadata.cluster_version == "1.237.130.20220311-144350"
+        assert full_management_zone.id == "6507829326603756920"
+        assert full_management_zone.name == "Frontend Services"
+        assert isinstance(full_management_zone.rules, List)
+        for rule in full_management_zone.rules:
             print(rule)
             assert isinstance(rule, ManagementZoneRule)
             assert rule.type == ManagementZoneRuleType.SERVICE

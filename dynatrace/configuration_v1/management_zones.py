@@ -37,7 +37,7 @@ class ManagementZoneService:
 
     def list(self, page_size: int = 200) -> PaginatedList["ManagementZoneShortRepresentation"]:
         """
-        List all management zones tag rules.
+        List all management zones.
 
         :param page_size: The number of results per result page. Must be between 1 and 500
             Default value : 200
@@ -390,7 +390,7 @@ class ManagementZone(DynatraceObject):
 class ManagementZoneShortRepresentation(EntityShortRepresentation):
     def get_full_configuration(self):
         """
-        Get the full configuration for this auto tag rule short representation.
+        Get the full configuration for this management zone short representation.
         """
-        response = self._http_client.make_request(f"/api/config/v1/managementZones{self.id}").json()
+        response = self._http_client.make_request(f"{ManagementZoneService.ENDPOINT}_{self.id}").json()
         return ManagementZone(http_client=self._http_client, raw_element=response)
