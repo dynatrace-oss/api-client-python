@@ -9,14 +9,11 @@ from dynatrace.configuration_v1.management_zones import (
     ConditionKey,
     ConditionKeyAttribute,
     EntityRuleEngineCondition,
-    PropagationType
+    PropagationType,
 )
 from dynatrace.environment_v2.schemas import ConfigurationMetadata
 from dynatrace.pagination import PaginatedList
-from dynatrace.configuration_v1.dt_enums import (
-    ConditionKeyAttribute,
-    RuleType
-)
+from dynatrace.configuration_v1.dt_enums import ConditionKeyAttribute, RuleType
 
 
 def test_list(dt: Dynatrace):
@@ -46,8 +43,7 @@ def test_get(dt: Dynatrace):
             assert isinstance(rule, ManagementZoneRule)
             assert rule.type == RuleType.SERVICE
             assert rule.enabled == True
-            assert rule.propagation_types == [
-                PropagationType.SERVICE_TO_PROCESS_GROUP_LIKE]
+            assert rule.propagation_types == [PropagationType.SERVICE_TO_PROCESS_GROUP_LIKE]
             assert isinstance(rule.conditions, List)
             for condition in rule.conditions:
                 assert isinstance(condition, EntityRuleEngineCondition)
