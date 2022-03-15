@@ -135,6 +135,8 @@ class Transformation(Enum):
     SORT = "sort"
     SPLITBY = "splitBy"
     TIMESHIFT = "timeshift"
+    LASTREAL = "lastReal"
+    SETUNIT = "setUnit"
 
 
 class Unit(Enum):
