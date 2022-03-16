@@ -39,6 +39,7 @@ class UpdateStatus(Enum):
     UPDATE_IN_PROGRESS = "UPDATE_IN_PROGRESS"
     UPDATE_PENDING = "UPDATE_PENDING"
     UPDATE_PROBLEM = "UPDATE_PROBLEM"
+    NONE = None
 
 
 class MonitoringType(Enum):
@@ -92,6 +93,7 @@ class OneAgentOnAHostService:
         availability_state: Optional[Union[AvailabilityState, str]] = None,
         monitoring_type: Optional[Union[MonitoringType, str]] = None,
         auto_update: Optional[Union[AutoUpdate, str]] = None,
+        update_status: Optional[Union[UpdateStatus, str]] = None,
     ) -> PaginatedList["HostAgentInfo"]:
         """
         Lists OneAgents on a Host. Older API - timestamps are of type integer and therefore require conversion
@@ -112,6 +114,7 @@ class OneAgentOnAHostService:
             "availabilityState": AvailabilityState(availability_state).value if availability_state else None,
             "monitoringType": MonitoringType(monitoring_type).value if monitoring_type else None,
             "autoUpdateSetting": AutoUpdate(auto_update).value if auto_update else None,
+            "updateStatus": UpdateStatus(update_status).value if update_status else None,
         }
         return PaginatedList(HostAgentInfo, self.__http_client, "/api/v1/oneagents", params, list_item="hosts")
 
