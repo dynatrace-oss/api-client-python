@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+from enum import Enum
+from token import OP
 from typing import Optional, Dict, Any, List
 from requests import Response
 
@@ -21,12 +23,27 @@ from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
 
+from dynatrace.environment_v2.custom_tags import METag
+
+
+class TagCombination(Enum):
+    AND = "AND"
+    OR = "OR"
+    NONE = None
+
+
+class MonitoredEntityFilter(DynatraceObject):
+    def _create_from_raw_data(self, raw_element):
+        self.type: str = raw_element.get("type")
+        self.mz_id: str = raw_element.get("mzId")
+        self.tags: Optional[List[METag]] = [METag(raw_element=tag) for tag in raw_element.get("tags", [])]
+        self.tag_combination: Optional[TagCombination] = TagCombination(raw_element.get("tagCombination"))
+
 
 class Scope(DynatraceObject):
     def _create_from_raw_data(self, raw_element):
         self.entities: List[str] = raw_element.get("entities")
-        # TODO - This needs to be List[MonitoredEntityFilter]
-        self._matches: Any = raw_element.get("matches")
+        self.matches: Optional[List[MonitoredEntityFilter]] = [MonitoredEntityFilter(raw_element=m) for m in raw_element.get("matches")]
 
 
 class Recurrence(DynatraceObject):
@@ -91,7 +108,21 @@ class Schedule(DynatraceObject):
         self.zone_id: str = raw_element.get("zoneId")
 
 
+class MaintenanceWindow(DynatraceObject):
+    def _create_from_raw_data(self, raw_element):
+        self.id: str = raw_element.get("id")
+        self.name: str = raw_element.get("name")
+        self.description: str = raw_element.get("description")
+        self.type: str = raw_element.get("type")
+        self.suppression: str = raw_element.get("suppression")
+        self.suppress_synthetic_monitors_execution: bool = raw_element.get("suppressSyntheticMonitorsExecution")
+        self.scope: Scope = Scope(raw_element=raw_element.get("scope"))
+        self.schedule: Schedule = Schedule(raw_element=raw_element.get("schedule"))
+
+
 class MaintenanceWindowService:
+    ENDPOINT = "/api/config/v1/maintenanceWindows"
+
     def __init__(self, http_client: HttpClient):
         self.__http_client = http_client
 
@@ -99,7 +130,17 @@ class MaintenanceWindowService:
         """
         Lists all maintenance windows in the environment. No configurable parameters.
         """
-        return PaginatedList(MaintenanceWindowStub, self.__http_client, f"/api/config/v1/maintenanceWindows", list_item="values")
+        return PaginatedList(MaintenanceWindowStub, self.__http_client, self.ENDPOINT, list_item="values")
+
+    def get(self, profile_id: str) -> MaintenanceWindow:
+        """Gets the full details of the Alerting Profile referenced by ID.
+
+        :param profile_id: ID of the alerting profile
+
+        :returns AlertingProfile: alerting profile details
+        """
+        response = self.__http_client.make_request(f"{self.ENDPOINT}/{profile_id}")
+        return MaintenanceWindow(http_client=self.__http_client, raw_element=response.json())
 
     def create_schedule(
         self,
@@ -166,18 +207,6 @@ class MaintenanceWindowCreated(DynatraceObject):
         self.id: str = raw_element.get("id")
         self.name: str = raw_element.get("name")
         self.description: str = raw_element.get("description")
-
-
-class MaintenanceWindow(DynatraceObject):
-    def _create_from_raw_data(self, raw_element):
-        self.id: str = raw_element.get("id")
-        self.name: str = raw_element.get("name")
-        self.description: str = raw_element.get("description")
-        self.type: str = raw_element.get("type")
-        self.suppression: str = raw_element.get("suppression")
-        self.suppress_synthetic_monitors_execution: bool = raw_element.get("suppressSyntheticMonitorsExecution")
-        self.scope: Scope = Scope(raw_element=raw_element.get("scope"))
-        self.schedule: Schedule = Schedule(raw_element=raw_element.get("schedule"))
 
 
 class MaintenanceWindowStub(DynatraceObject):
