@@ -1,5 +1,6 @@
 from dynatrace import Dynatrace
 from dynatrace.configuration_v1.maintenance_windows import (
+    MaintenanceWindowService,
     TagCombination,
     MonitoredEntityFilter,
     Scope,
@@ -10,6 +11,7 @@ from dynatrace.configuration_v1.maintenance_windows import (
 )
 from dynatrace.environment_v2.custom_tags import METag, TagContext
 from dynatrace.pagination import PaginatedList
+from dynatrace.environment_v2.monitored_entities import EntityShortRepresentation
 
 ID = "b6376a12-0b82-4069-9a41-0e55ef9a1f44"
 NAME = "Example Window"
@@ -70,3 +72,42 @@ def test_get(dt: Dynatrace):
     assert mw.schedule.start_time == "2018-08-02 00:00"
     assert mw.schedule.end_time == "2021-02-27 00:00"
     assert mw.schedule.zone_id == "Europe/Vienna"
+
+
+def test_post(dt: Dynatrace):
+    response = dt.maintenance_windows.post(
+        MaintenanceWindow(
+            raw_element={
+                "id": ID,
+                "name": NAME,
+                "description": "test_desc",
+                "type": "PLANNED",
+                "suppression": None,
+                "suppressSyntheticMonitorsExecution": False,
+                "schedule": {
+                    "end": "2031-02-27 00:00",
+                    "start": "2028-08-02 00:00",
+                    "zoneId": "Europe/Vienna",
+                    "recurrence": {"dayOfWeek": None, "dayOfMonth": None, "startTime": None, "durationMinutes": None},
+                    "recurrenceType": "ONCE",
+                },
+                "scope": {
+                    "entities": ["HOST-0000000000123456"],
+                    "matches": [
+                        {
+                            "type": "HOST",
+                            "mzId": "-5283929364044076484",
+                            "tags": [{"context": "AWS", "key": "testkey", "value": "testvalue"}],
+                            "tagCombination": "AND",
+                        }
+                    ],
+                },
+            }
+        )
+    )
+
+    # type checks
+    assert isinstance(response, EntityShortRepresentation)
+    # value checks
+    assert response.id == ID
+    assert response.name == NAME

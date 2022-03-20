@@ -15,7 +15,6 @@ limitations under the License.
 """
 
 from enum import Enum
-from token import OP
 from typing import Optional, Dict, Any, List
 from requests import Response
 
@@ -24,12 +23,16 @@ from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
 
 from dynatrace.environment_v2.custom_tags import METag
+from dynatrace.environment_v2.monitored_entities import EntityShortRepresentation
 
 
 class TagCombination(Enum):
     AND = "AND"
     OR = "OR"
     NONE = None
+
+    def __str__(self) -> str:
+        return self.value
 
 
 class MonitoredEntityFilter(DynatraceObject):
@@ -39,11 +42,17 @@ class MonitoredEntityFilter(DynatraceObject):
         self.tags: Optional[List[METag]] = [METag(raw_element=tag) for tag in raw_element.get("tags", [])]
         self.tag_combination: Optional[TagCombination] = TagCombination(raw_element.get("tagCombination"))
 
+    def to_json(self) -> Dict[str, Any]:
+        return {"type": self.type, "mzId": self.mz_id, "tags": [t.to_json() for t in self.tags], "tagCombination": str(self.tag_combination)}
+
 
 class Scope(DynatraceObject):
     def _create_from_raw_data(self, raw_element):
         self.entities: List[str] = raw_element.get("entities")
         self.matches: Optional[List[MonitoredEntityFilter]] = [MonitoredEntityFilter(raw_element=m) for m in raw_element.get("matches")]
+
+    def to_json(self) -> Dict[str, Any]:
+        return {"entities": self.entities, "matches": [m.to_json() for m in self.matches]}
 
 
 class Recurrence(DynatraceObject):
@@ -119,6 +128,36 @@ class MaintenanceWindow(DynatraceObject):
         self.scope: Scope = Scope(raw_element=raw_element.get("scope"))
         self.schedule: Schedule = Schedule(raw_element=raw_element.get("schedule"))
 
+    def post(self) -> EntityShortRepresentation:
+        """Creates the Alerting Profile configuration in Dynatrace (POST).
+
+        :param alerting_profile: the Alerting Profile configuration details
+
+        :returns EntityShortRepresentation: basic details of the created Alerting Profile
+
+        :throws ValueError: if operation cannot be executed due to missing HTTP Client
+        """
+        if not self._http_client:
+            raise ValueError("Object does not have an HTTP Client. Use alerting_profiles.post() instead.")
+        response = self._http_client.make_request(path=MaintenanceWindowService.ENDPOINT, params=self.to_json(), method="POST")
+        self.id = response.json().get("id")
+
+        return EntityShortRepresentation(raw_element=response.json())
+
+    def to_json(self) -> Dict[str, Any]:
+        """Get a JSON (dict) representation of this config."""
+        mw: Dict[str, Any] = {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "type": self.type,
+            "suppression": self.suppression,
+            "suppressSyntheticMonitorsExecution": self.suppress_synthetic_monitors_execution,
+            "schedule": self.schedule.schedule_snippet,
+            "scope": self.scope.to_json(),
+        }
+        return mw
+
 
 class MaintenanceWindowService:
     ENDPOINT = "/api/config/v1/maintenanceWindows"
@@ -141,6 +180,17 @@ class MaintenanceWindowService:
         """
         response = self.__http_client.make_request(f"{self.ENDPOINT}/{profile_id}")
         return MaintenanceWindow(http_client=self.__http_client, raw_element=response.json())
+
+    def post(self, mw: MaintenanceWindow) -> EntityShortRepresentation:
+        """Creates the Alerting Profile configuration in Dynatrace (POST).
+
+        :param alerting_profile: the Alerting Profile configuration details
+
+        :returns EntityShortRepresentation: basic details of the created Alerting Profile
+        """
+        if not mw._http_client:
+            mw._http_client = self.__http_client
+        return mw.post()
 
     def create_schedule(
         self,
@@ -174,7 +224,6 @@ class MaintenanceWindowService:
         suppress_synthetic: Optional[bool] = False,
         scope: Optional[Scope] = None,
         recurrence: Optional[Recurrence] = None,
-        scope_entities: Optional[list] = None,
     ) -> "MaintenanceWindowCreated":
         # TODO - scope and recurrence are not used here but they should
         """
@@ -189,17 +238,17 @@ class MaintenanceWindowService:
             "suppression": suppression,
             "suppressSyntheticMonitorsExecution": suppress_synthetic,
             "schedule": schedule.schedule_snippet,
-            "scope": {"entities": scope_entities, "matches": []},
+            "scope": {"entities": scope.entities, "matches": [s.to_json() for s in scope.matches]},
         }
 
-        response = self.__http_client.make_request("/api/config/v1/maintenanceWindows", method="POST", params=body).json()
+        response = self.__http_client.make_request(self.ENDPOINT, method="POST", params=body).json()
         return MaintenanceWindowCreated(raw_element=response)
 
     def delete(self, zone_id: str) -> Response:
         """
         Delete the maintenance window with the specified id
         """
-        return self.__http_client.make_request(f"/api/config/v1/maintenanceWindows/{zone_id}", method="DELETE")
+        return self.__http_client.make_request(f"{self.ENDPOINT}/{zone_id}", method="DELETE")
 
 
 class MaintenanceWindowCreated(DynatraceObject):
@@ -219,5 +268,5 @@ class MaintenanceWindowStub(DynatraceObject):
         """
         Gets the full maintenance window for this stub
         """
-        response = self._http_client.make_request(f"/api/config/v1/maintenanceWindows/{self.id}").json()
+        response = self._http_client.make_request(f"{MaintenanceWindowService.ENDPOINT}/{self.id}").json()
         return MaintenanceWindow(self._http_client, None, response)
