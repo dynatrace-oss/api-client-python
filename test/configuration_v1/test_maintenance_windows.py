@@ -32,7 +32,7 @@ def test_list(dt: Dynatrace):
 
 
 def test_get(dt: Dynatrace):
-    mw = dt.maintenance_windows.get(profile_id=ID)
+    mw = dt.maintenance_windows.get(mw_id=ID)
 
     # type checks
     assert isinstance(mw, MaintenanceWindow)

@@ -129,16 +129,16 @@ class MaintenanceWindow(DynatraceObject):
         self.schedule: Schedule = Schedule(raw_element=raw_element.get("schedule"))
 
     def post(self) -> EntityShortRepresentation:
-        """Creates the Alerting Profile configuration in Dynatrace (POST).
+        """Creates the Maintenance Window configuration in Dynatrace (POST).
 
-        :param alerting_profile: the Alerting Profile configuration details
+        :param maintenance_window: the Maintenance Window configuration details
 
-        :returns EntityShortRepresentation: basic details of the created Alerting Profile
+        :returns EntityShortRepresentation: basic details of the created Maintenance Window
 
         :throws ValueError: if operation cannot be executed due to missing HTTP Client
         """
         if not self._http_client:
-            raise ValueError("Object does not have an HTTP Client. Use alerting_profiles.post() instead.")
+            raise ValueError("Object does not have an HTTP Client. Use maintenance_window.post() instead.")
         response = self._http_client.make_request(path=MaintenanceWindowService.ENDPOINT, params=self.to_json(), method="POST")
         self.id = response.json().get("id")
 
@@ -171,22 +171,22 @@ class MaintenanceWindowService:
         """
         return PaginatedList(MaintenanceWindowStub, self.__http_client, self.ENDPOINT, list_item="values")
 
-    def get(self, profile_id: str) -> MaintenanceWindow:
-        """Gets the full details of the Alerting Profile referenced by ID.
+    def get(self, mw_id: str) -> MaintenanceWindow:
+        """Gets the full details of the Maintenance Window referenced by ID.
 
-        :param profile_id: ID of the alerting profile
+        :param mw_id: ID of the alerting profile
 
         :returns AlertingProfile: alerting profile details
         """
-        response = self.__http_client.make_request(f"{self.ENDPOINT}/{profile_id}")
+        response = self.__http_client.make_request(f"{self.ENDPOINT}/{mw_id}")
         return MaintenanceWindow(http_client=self.__http_client, raw_element=response.json())
 
     def post(self, mw: MaintenanceWindow) -> EntityShortRepresentation:
-        """Creates the Alerting Profile configuration in Dynatrace (POST).
+        """Creates the Maintenance Window configuration in Dynatrace (POST).
 
-        :param alerting_profile: the Alerting Profile configuration details
+        :param maintenace_window: the Maintenance Window configuration details
 
-        :returns EntityShortRepresentation: basic details of the created Alerting Profile
+        :returns EntityShortRepresentation: basic details of the created Maintenance Window
         """
         if not mw._http_client:
             mw._http_client = self.__http_client
