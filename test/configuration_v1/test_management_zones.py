@@ -13,7 +13,7 @@ from dynatrace.configuration_v1.management_zones import (
 )
 from dynatrace.environment_v2.schemas import ConfigurationMetadata
 from dynatrace.pagination import PaginatedList
-from dynatrace.configuration_v1.dt_enums import ConditionKeyAttribute, RuleType
+from dynatrace.configuration_v1.auto_tags import ConditionKeyAttribute, RuleType
 
 
 def test_list(dt: Dynatrace):

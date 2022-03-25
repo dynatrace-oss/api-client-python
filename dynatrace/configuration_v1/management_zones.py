@@ -14,20 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from datetime import datetime
-from enum import Enum
-from pathlib import Path
-from typing import List, Dict, Any, Optional, Union
-from dynatrace import http_client
-
-from requests import Response
+from typing import List, Dict, Any
 
 from dynatrace.environment_v2.schemas import ConfigurationMetadata
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.environment_v2.monitored_entities import EntityShortRepresentation
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
-from dynatrace.configuration_v1.dt_enums import (
+from dynatrace.configuration_v1.auto_tags import (
     ComparisonBasicType,
     ConditionKeyAttribute,
     ConditionKeyType,
