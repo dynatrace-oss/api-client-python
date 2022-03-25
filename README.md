@@ -155,14 +155,14 @@ Calculated metrics - Web applications                |  :x:                 |   
 Cloud Foundry credentials configuration              |  :x:                 |                                     |
 Conditional naming                                   |  :x:                 |                                     |
 Credential vault                                     |  :x:                 |                                     |
-Custom tags                                          |  :heavy_check_mark:  |  `dt.custom_tags                    |
+Custom tags                                          |  :heavy_check_mark:  |  `dt.custom_tags`                   |
 Dashboards                                           |  :warning:           |  `dt.dashboards`                    |
 Data privacy and security                            |  :x:                 |                                     |
 Extensions                                           |  :heavy_check_mark:  |  `dt.extensions`                    |
 Frequent issue detection                             |  :x:                 |                                     |
 Kubernetes credentials configuration                 |  :x:                 |                                     |
 Maintenance windows                                  |  :warning:           |  `dt.maintenance_windows`           |
-Management zones                                     |  :x:                 |                                     |
+Management zones                                     |  :warning:           |  `dt.management_zones`              |
 Notifications                                        |  :warning:           |  `dt.notifications`                 |
 OneAgent - Environment-wide configuration            |  :heavy_check_mark:  |  `dt.oneagents_config_environment`  |
 OneAgent in a host group                             |  :heavy_check_mark:  |  `dt.oneagents_config_hostgroup`    |

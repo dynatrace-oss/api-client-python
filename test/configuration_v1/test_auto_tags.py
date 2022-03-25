@@ -3,7 +3,6 @@ from dynatrace import Dynatrace
 from dynatrace.configuration_v1.auto_tags import (
     AutoTag,
     AutoTagRule,
-    AutoTagRuleType,
     AutoTagShortRepresentation,
     ComparisonBasic,
     ComparisonBasicType,
@@ -13,6 +12,7 @@ from dynatrace.configuration_v1.auto_tags import (
 )
 from dynatrace.environment_v2.schemas import ConfigurationMetadata
 from dynatrace.pagination import PaginatedList
+from dynatrace.configuration_v1.auto_tags import ConditionKeyAttribute, RuleType
 
 
 def test_list(dt: Dynatrace):
@@ -40,7 +40,7 @@ def test_get(dt: Dynatrace):
         for rule in full_tag.rules:
             print(rule)
             assert isinstance(rule, AutoTagRule)
-            assert rule.type == AutoTagRuleType.SERVICE
+            assert rule.type == RuleType.SERVICE
             assert rule.enabled == True
             assert rule.value_format == ""
             assert rule.propagation_types == []

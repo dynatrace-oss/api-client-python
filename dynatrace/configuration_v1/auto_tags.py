@@ -13,14 +13,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
-
-from datetime import datetime
+from typing import List, Optional, Dict, Any, Union
 from enum import Enum
-from pathlib import Path
-from typing import List, Dict, Any, Optional, Union
-from dynatrace import http_client
-
-from requests import Response
 
 from dynatrace.environment_v2.schemas import ConfigurationMetadata
 from dynatrace.dynatrace_object import DynatraceObject
@@ -29,29 +23,33 @@ from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
 
 
-class AutoTagService:
-    def __init__(self, http_client: HttpClient):
-        self.__http_client = http_client
-
-    def list(self, page_size: int = 200) -> PaginatedList["AutoTagShortRepresentation"]:
-        """
-        List all auto tag rules.
-
-        :param page_size: The number of results per result page. Must be between 1 and 500
-            Default value : 200
-        """
-        params = {"pageSize": page_size}
-        return PaginatedList(AutoTagShortRepresentation, self.__http_client, f"/api/config/v1/autoTags", params, list_item="values")
-
-
-class PropagationType(Enum):
-    SERVICE_TO_PROCESS_GROUP_LIKE = "SERVICE_TO_PROCESS_GROUP_LIKE"
-    SERVICE_TO_HOST_LIKE = "SERVICE_TO_HOST_LIKE"
-    PROCESS_GROUP_TO_HOST = "PROCESS_GROUP_TO_HOST"
-    PROCESS_GROUP_TO_SERVICE = "PROCESS_GROUP_TO_SERVICE"
-    HOST_TO_PROCESS_GROUP_INSTANCE = "HOST_TO_PROCESS_GROUP_INSTANCE"
-    AZURE_TO_PG = "AZURE_TO_PG"
-    AZURE_TO_SERVICE = "AZURE_TO_SERVICE"
+class ComparisonBasicType(Enum):
+    APPLICATION_TYPE = "APPLICATION_TYPE"
+    AZURE_COMPUTE_MODE = "AZURE_COMPUTE_MODE"
+    AZURE_SKU = "AZURE_SKU"
+    BITNESS = "BITNESS"
+    CLOUD_TYPE = "CLOUD_TYPE"
+    CUSTOM_APPLICATION_TYPE = "CUSTOM_APPLICATION_TYPE"
+    DATABASE_TOPOLOGY = "DATABASE_TOPOLOGY"
+    DCRUM_DECODER_TYPE = "DCRUM_DECODER_TYPE"
+    ENTITY_ID = "ENTITY_ID"
+    HYPERVISOR_TYPE = "HYPERVISOR_TYPE"
+    INDEXED_NAME = "INDEXED_NAME"
+    INDEXED_STRING = "INDEXED_STRING"
+    INDEXED_TAG = "INDEXED_TAG"
+    INTEGER = "INTEGER"
+    IP_ADDRESS = "IP_ADDRESS"
+    MOBILE_PLATFORM = "MOBILE_PLATFORM"
+    OS_ARCHITECTURE = "OS_ARCHITECTURE"
+    OS_TYPE = "OS_TYPE"
+    PAAS_TYPE = "PAAS_TYPE"
+    SERVICE_TOPOLOGY = "SERVICE_TOPOLOGY"
+    SERVICE_TYPE = "SERVICE_TYPE"
+    SIMPLE_HOST_TECH = "SIMPLE_HOST_TECH"
+    SIMPLE_TECH = "SIMPLE_TECH"
+    STRING = "STRING"
+    SYNTHETIC_ENGINE_TYPE = "SYNTHETIC_ENGINE_TYPE"
+    TAG = "TAG"
     NONE = None
 
 
@@ -217,6 +215,9 @@ class ConditionKeyAttribute(Enum):
     PROCESS_GROUP_TECHNOLOGY = "PROCESS_GROUP_TECHNOLOGY"
     PROCESS_GROUP_TECHNOLOGY_EDITION = "PROCESS_GROUP_TECHNOLOGY_EDITION"
     PROCESS_GROUP_TECHNOLOGY_VERSION = "PROCESS_GROUP_TECHNOLOGY_VERSION"
+    QUEUE_NAME = "QUEUE_NAME"
+    QUEUE_TECHNOLOGY = "QUEUE_TECHNOLOGY"
+    QUEUE_VENDOR = "QUEUE_VENDOR"
     SERVICE_AKKA_ACTOR_SYSTEM = "SERVICE_AKKA_ACTOR_SYSTEM"
     SERVICE_CTG_SERVICE_NAME = "SERVICE_CTG_SERVICE_NAME"
     SERVICE_DATABASE_HOST_NAME = "SERVICE_DATABASE_HOST_NAME"
@@ -263,37 +264,18 @@ class ConditionKeyType(Enum):
     NONE = None
 
 
-class ComparisonBasicType(Enum):
-    APPLICATION_TYPE = "APPLICATION_TYPE"
-    AZURE_COMPUTE_MODE = "AZURE_COMPUTE_MODE"
-    AZURE_SKU = "AZURE_SKU"
-    BITNESS = "BITNESS"
-    CLOUD_TYPE = "CLOUD_TYPE"
-    CUSTOM_APPLICATION_TYPE = "CUSTOM_APPLICATION_TYPE"
-    DATABASE_TOPOLOGY = "DATABASE_TOPOLOGY"
-    DCRUM_DECODER_TYPE = "DCRUM_DECODER_TYPE"
-    ENTITY_ID = "ENTITY_ID"
-    HYPERVISOR_TYPE = "HYPERVISOR_TYPE"
-    INDEXED_NAME = "INDEXED_NAME"
-    INDEXED_STRING = "INDEXED_STRING"
-    INDEXED_TAG = "INDEXED_TAG"
-    INTEGER = "INTEGER"
-    IP_ADDRESS = "IP_ADDRESS"
-    MOBILE_PLATFORM = "MOBILE_PLATFORM"
-    OS_ARCHITECTURE = "OS_ARCHITECTURE"
-    OS_TYPE = "OS_TYPE"
-    PAAS_TYPE = "PAAS_TYPE"
-    SERVICE_TOPOLOGY = "SERVICE_TOPOLOGY"
-    SERVICE_TYPE = "SERVICE_TYPE"
-    SIMPLE_HOST_TECH = "SIMPLE_HOST_TECH"
-    SIMPLE_TECH = "SIMPLE_TECH"
-    STRING = "STRING"
-    SYNTHETIC_ENGINE_TYPE = "SYNTHETIC_ENGINE_TYPE"
-    TAG = "TAG"
+class PropagationType(Enum):
+    SERVICE_TO_PROCESS_GROUP_LIKE = "SERVICE_TO_PROCESS_GROUP_LIKE"
+    SERVICE_TO_HOST_LIKE = "SERVICE_TO_HOST_LIKE"
+    PROCESS_GROUP_TO_HOST = "PROCESS_GROUP_TO_HOST"
+    PROCESS_GROUP_TO_SERVICE = "PROCESS_GROUP_TO_SERVICE"
+    HOST_TO_PROCESS_GROUP_INSTANCE = "HOST_TO_PROCESS_GROUP_INSTANCE"
+    AZURE_TO_PG = "AZURE_TO_PG"
+    AZURE_TO_SERVICE = "AZURE_TO_SERVICE"
     NONE = None
 
 
-class AutoTagRuleType(Enum):
+class RuleType(Enum):
     APPLICATION = "APPLICATION"
     AWS_APPLICATION_LOAD_BALANCER = "AWS_APPLICATION_LOAD_BALANCER"
     AWS_CLASSIC_LOAD_BALANCER = "AWS_CLASSIC_LOAD_BALANCER"
@@ -311,7 +293,24 @@ class AutoTagRuleType(Enum):
     PROCESS_GROUP = "PROCESS_GROUP"
     SERVICE = "SERVICE"
     SYNTHETIC_TEST = "SYNTHETIC_TEST"
+    WEB_APPLICATION = "WEB_APPLICATION"
+    WEB_APPLICATION_NAME = "WEB_APPLICATION_NAME"
     NONE = None
+
+
+class AutoTagService:
+    def __init__(self, http_client: HttpClient):
+        self.__http_client = http_client
+
+    def list(self, page_size: int = 200) -> PaginatedList["AutoTagShortRepresentation"]:
+        """
+        List all auto tag rules.
+
+        :param page_size: The number of results per result page. Must be between 1 and 500
+            Default value : 200
+        """
+        params = {"pageSize": page_size}
+        return PaginatedList(AutoTagShortRepresentation, self.__http_client, f"/api/config/v1/autoTags", params, list_item="values")
 
 
 class ComparisonBasic(DynatraceObject):
@@ -344,7 +343,7 @@ class EntitySelectorBasedAutoTagRule(DynatraceObject):
 
 class AutoTagRule(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.type: AutoTagRuleType = AutoTagRuleType(raw_element.get("type"))
+        self.type: RuleType = RuleType(raw_element.get("type"))
         self.enabled: bool = raw_element.get("enabled")
         self.value_format: str = raw_element.get("valueFormat")
         self.propagation_types: List[PropagationType] = [PropagationType(prop_type) for prop_type in (raw_element.get("propagationTypes") or [])]
