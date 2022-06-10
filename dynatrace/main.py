@@ -20,6 +20,7 @@ from typing import Dict, Optional
 from dynatrace.configuration_v1.alerting_profiles import AlertingProfileService
 from dynatrace.configuration_v1.anomaly_detection_process_groups import AnomalyDetectionPGService
 from dynatrace.configuration_v1.auto_tags import AutoTagService
+from dynatrace.configuration_v1.credential_vault import CredentialVaultService
 from dynatrace.configuration_v1.dashboard import DashboardService
 from dynatrace.configuration_v1.extensions import ExtensionService
 from dynatrace.configuration_v1.maintenance_windows import MaintenanceWindowService
@@ -121,3 +122,4 @@ class Dynatrace:
         self.third_part_synthetic_tests: ThirdPartySyntheticTestsService = ThirdPartySyntheticTestsService(self.__http_client)
         self.timeseries: TimeSerieService = TimeSerieService(self.__http_client)
         self.tokens: TokenService = TokenService(self.__http_client)
+        self.credentials = CredentialVaultService(self.__http_client)

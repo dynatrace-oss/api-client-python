@@ -1,4 +1,4 @@
-# dt - Dynatrace Python API Client
+from dynatrace.configuration_v1.credential_vault import PublicCertificateCredentials# dt - Dynatrace Python API Client
 
 **dt** is a Python client for the [Dynatrace Rest API].   
 It focuses on ease of use and nice type hints, perfect to explore the API and create quick scripts
@@ -16,6 +16,7 @@ $ pip install dt
 from dynatrace import Dynatrace
 from dynatrace import TOO_MANY_REQUESTS_WAIT
 from dynatrace.environment_v2.tokens_api import SCOPE_METRICS_READ, SCOPE_METRICS_INGEST
+from dynatrace.configuration_v1.credential_vault import PublicCertificateCredentials
 
 from datetime import datetime, timedelta
 
@@ -72,6 +73,24 @@ for token in dt.tokens.list(fields="+lastUsedDate,+scopes"):
 # Create an API Token that can read and ingest metrics
 new_token = dt.tokens.create("metrics_token", scopes=[SCOPE_METRICS_READ, SCOPE_METRICS_INGEST])
 print(new_token.token)
+
+# Upload a public PEM certificate to the Credential Vault
+with open("ca.pem", "r") as f:
+    ca_cert = f.read()
+
+my_cred = PublicCertificateCredentials(
+    name="my_cred",
+    description="my_cred description",
+    scope="EXTENSION",
+    owner_access_only=False,
+    certificate=ca_cert,
+    password="",
+    credential_type="PUBLIC_CERTIFICATE",
+    certificate_format="PEM"
+)
+
+r = dt.credentials.post(my_cred)
+print(r.id)
 ```
 
 ## Implementation Progress
