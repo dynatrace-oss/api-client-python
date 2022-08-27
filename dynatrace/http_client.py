@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
-
+import json
 import logging
 from typing import Dict, Optional, Any
 import time
@@ -47,6 +47,7 @@ class HttpClient:
         mc_jsession_id: Optional[str] = None,
         mc_b925d32c: Optional[str] = None,
         mc_sso_csrf_cookie: Optional[str] = None,
+            print_bodies: bool = False,
     ):
         while base_url.endswith("/"):
             base_url = base_url[:-1]
@@ -57,6 +58,7 @@ class HttpClient:
         self.proxies = proxies
 
         self.auth_header = {"Authorization": f"Api-Token {token}"}
+        self.print_bodies = print_bodies
         self.log = log
         if self.log is None:
             self.log = logging.getLogger(__name__)
@@ -116,6 +118,9 @@ class HttpClient:
         s.mount("https://", HTTPAdapter(max_retries=self.retries))
 
         self.log.debug(f"Making {method} request to '{url}' with params {params} and body: {body}")
+        if self.print_bodies:
+            print(url)
+            print(json.dumps(body, indent=2))
         r = s.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies, data=data, cookies=cookies, files=files)
         self.log.debug(f"Received response '{r}'")
 
