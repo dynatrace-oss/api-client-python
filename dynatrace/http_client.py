@@ -119,8 +119,9 @@ class HttpClient:
 
         self.log.debug(f"Making {method} request to '{url}' with params {params} and body: {body}")
         if self.print_bodies:
-            print(url)
-            print(json.dumps(body, indent=2))
+            print(method, url)
+            if body:
+                print(json.dumps(body, indent=2))
         r = s.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies, data=data, cookies=cookies, files=files)
         self.log.debug(f"Received response '{r}'")
 

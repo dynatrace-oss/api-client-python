@@ -19,6 +19,7 @@ from typing import Dict, Optional
 
 from dynatrace.configuration_v1.alerting_profiles import AlertingProfileService
 from dynatrace.configuration_v1.anomaly_detection_process_groups import AnomalyDetectionPGService
+from dynatrace.configuration_v1.api import ConfigurationV1
 from dynatrace.configuration_v1.auto_tags import AutoTagService
 from dynatrace.configuration_v1.credential_vault import CredentialVaultService
 from dynatrace.configuration_v1.dashboard import DashboardService
@@ -125,3 +126,6 @@ class Dynatrace:
         self.timeseries: TimeSerieService = TimeSerieService(self.__http_client)
         self.tokens: TokenService = TokenService(self.__http_client)
         self.credentials = CredentialVaultService(self.__http_client)
+
+        # New implementations should be done here, above is deprecated
+        self.config_v1: ConfigurationV1 = ConfigurationV1(self.__http_client)
