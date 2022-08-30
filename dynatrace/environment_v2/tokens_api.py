@@ -108,6 +108,10 @@ class TokenService:
         response = self.__http_client.make_request(f"/api/v2/apiTokens/{token_id}", method="GET")
         return ApiToken(raw_element=response.json())
 
+    def put(self, token_id: str, api_token: "ApiTokenUpdate"):
+        response = self.__http_client.make_request(f"/api/v2/apiTokens/{token_id}", method="PUT", params=api_token.json())
+        return response
+
     def delete(self, token_id: str) -> Response:
         return self.__http_client.make_request(f"/api/v2/apiTokens/{token_id}", method="DELETE")
 
@@ -150,3 +154,20 @@ class ApiTokenCreated(DynatraceObject):
         self.token: str = raw_element.get("token")
         self.expiration_date: Optional[datetime] = iso8601_to_datetime(raw_element.get("expirationDate"))
         self.id: str = raw_element.get("id")
+
+
+class ApiTokenUpdate:
+    def __init__(self, name: Optional[str] = None, enabled: Optional[bool] = None, scopes: Optional[List[str]] = None):
+        self.name = name
+        self.enabled = enabled
+        self.scopes = scopes
+
+    def json(self) -> dict:
+        body = {}
+        if self.name is not None:
+            body["name"] = self.name
+        if self.enabled is not None:
+            body["enabled"] = self.enabled
+        if self.scopes is not None:
+            body["scopes"] = self.scopes
+        return body
