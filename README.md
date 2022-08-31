@@ -1,4 +1,4 @@
-from dynatrace.configuration_v1.credential_vault import PublicCertificateCredentials# dt - Dynatrace Python API Client
+# dt - Dynatrace Python API Client
 
 **dt** is a Python client for the [Dynatrace Rest API].   
 It focuses on ease of use and nice type hints, perfect to explore the API and create quick scripts
