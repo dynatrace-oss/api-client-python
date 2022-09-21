@@ -14,8 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from __future__ import annotations
-
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 
@@ -174,7 +172,7 @@ class ExtensionsServiceV2:
                                        extension_name: str,
                                        version: Optional[str] = None,
                                        active: Optional[bool] = None) -> PaginatedList[
-        ExtensionMonitoringConfiguration]:
+        "ExtensionMonitoringConfiguration"]:
         params = {"extensionName": extension_name,
                   "version": version,
                   "active": active}
@@ -189,7 +187,7 @@ class ExtensionsServiceV2:
     def put_monitoring_configuration(self,
                                      extension_name: str,
                                      config_id: str,
-                                     value: Dict[str, Any]) -> MonitoringConfigurationResponse:
+                                     value: Dict[str, Any]) -> "MonitoringConfigurationResponse":
         url = f"{self.ENDPOINT}/{extension_name}/monitoringConfigurations/{config_id}"
         params = {"value": value}
         response = self.__http_client.make_request(url, method="PUT", params=params)
