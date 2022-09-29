@@ -16,13 +16,14 @@ limitations under the License.
 
 from datetime import datetime
 from enum import Enum
-from requests import Response
-from typing import List, Optional, Union, Dict, Any
+from typing import Any, Dict, List, Optional, Union
 
-from dynatrace.environment_v2.schemas import ManagementZone
-from dynatrace.environment_v2.custom_tags import METag
-from dynatrace.http_client import HttpClient
+from requests import Response
+
 from dynatrace.dynatrace_object import DynatraceObject
+from dynatrace.environment_v2.custom_tags import METag
+from dynatrace.environment_v2.schemas import ManagementZone
+from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
 from dynatrace.utils import int64_to_datetime, timestamp_to_string
 
@@ -35,13 +36,13 @@ class EntityService:
         self.__http_client = http_client
 
     def list(
-        self,
-        entity_selector: str,
-        time_from: Optional[Union[datetime, str]] = None,
-        time_to: Optional[Union[datetime, str]] = None,
-        fields: Optional[str] = None,
-        sort: Optional[str] = None,
-        page_size: Optional[int] = None,
+            self,
+            entity_selector: str,
+            time_from: Optional[Union[datetime, str]] = None,
+            time_to: Optional[Union[datetime, str]] = None,
+            fields: Optional[str] = None,
+            sort: Optional[str] = None,
+            page_size: Optional[int] = None,
     ) -> PaginatedList["Entity"]:
         """Gets the information about monitored entities.
 
@@ -72,10 +73,18 @@ class EntityService:
             "fields": fields,
             "sort": sort,
         }
-        return PaginatedList(Entity, self.__http_client, self.ENDPOINT_ENTITIES, target_params=params, list_item="entities")
+        return PaginatedList(Entity,
+                             self.__http_client,
+                             self.ENDPOINT_ENTITIES,
+                             target_params=params,
+                             list_item="entities")
 
     def get(
-        self, entity_id: str, time_from: Optional[Union[datetime, str]] = None, time_to: Optional[Union[datetime, str]] = None, fields: Optional[str] = None
+            self,
+            entity_id: str,
+            time_from: Optional[Union[datetime, str]] = None,
+            time_to: Optional[Union[datetime, str]] = None,
+            fields: Optional[str] = None
     ) -> "Entity":
         """Gets the properties of the specified monitored entity.
 
@@ -100,18 +109,18 @@ class EntityService:
         return device.post()
 
     def create_custom_device(
-        self,
-        custom_device_id: str,
-        display_name: str,
-        group: Optional[str] = None,
-        ip_addresses: Optional[List[str]] = None,
-        listen_ports: Optional[List[int]] = None,
-        device_type: Optional[str] = None,
-        favicon_url: Optional[str] = None,
-        config_url: Optional[str] = None,
-        properties: Optional[Dict[str, str]] = None,
-        dns_names: Optional[List[str]] = None,
-        message_type: Optional["MessageType"] = None,
+            self,
+            custom_device_id: str,
+            display_name: str,
+            group: Optional[str] = None,
+            ip_addresses: Optional[List[str]] = None,
+            listen_ports: Optional[List[int]] = None,
+            device_type: Optional[str] = None,
+            favicon_url: Optional[str] = None,
+            config_url: Optional[str] = None,
+            properties: Optional[Dict[str, str]] = None,
+            dns_names: Optional[List[str]] = None,
+            message_type: Optional["MessageType"] = None,
     ) -> "CustomDeviceCreation":
         """Creates a Custom Device object from scratch.
 
@@ -173,13 +182,17 @@ class Entity(DynatraceObject):
         self.first_seen: Optional[datetime] = int64_to_datetime(raw_element.get("firstSeenTms", 0))
 
         self.from_relationships: Dict[str, List["EntityId"]] = {
-            key: [EntityId(raw_element=entity) for entity in entities] for key, entities in raw_element.get("fromRelationships", {}).items()
+            key: [EntityId(raw_element=entity) for entity in entities] for key, entities in
+            raw_element.get("fromRelationships", {}).items()
         }
         self.to_relationships: Dict[str, List["EntityId"]] = {
-            key: [EntityId(raw_element=entity) for entity in entities] for key, entities in raw_element.get("toRelationships", {}).items()
+            key: [EntityId(raw_element=entity) for entity in entities] for key, entities in
+            raw_element.get("toRelationships", {}).items()
         }
-        self.management_zones: List[ManagementZone] = [ManagementZone(raw_element=m) for m in raw_element.get("managementZones", [])]
-        self.icon: Optional[EntityIcon] = EntityIcon(raw_element=raw_element.get("icon")) if raw_element.get("icon") else None
+        self.management_zones: List[ManagementZone] = [ManagementZone(raw_element=m) for m in
+                                                       raw_element.get("managementZones", [])]
+        self.icon: Optional[
+            EntityIcon] = EntityIcon(raw_element=raw_element.get("icon")) if raw_element.get("icon") else None
         self.display_name: str = raw_element["displayName"]
         self.entity_id: str = raw_element["entityId"]
         self.properties: Optional[Dict[str, Any]] = raw_element.get("properties", {})
@@ -233,25 +246,38 @@ class CustomDeviceCreation(DynatraceObject):
         self.config_url: Optional[str] = raw_element.get("configUrl")
         self.properties: Optional[Dict[str, str]] = raw_element.get("properties")
         self.dns_names: Optional[List[str]] = raw_element.get("dnsNames")
-        self.message_type: Optional[MessageType] = MessageType(raw_element.get("messageType"))
+        self.message_type: Optional[MessageType] = MessageType(raw_element.get("messageType")) if raw_element.get(
+            "messageType") else None
 
     def to_json(self):
-        return {
+        body = {
             "customDeviceId": self.custom_device_id,
-            "displayName": self.display_name,
-            "group": self.group,
-            "ipAddresses": self.ip_addresses,
-            "listenPorts": self.listen_ports,
-            "type": self.type,
-            "faviconUrl": self.favicon_url,
-            "configUrl": self.config_url,
-            "properties": self.properties,
-            "dnsNames": self.dns_names,
-            "messageType": str(self.message_type),
+            "displayName": self.display_name
         }
+        if self.group:
+            body["group"] = self.group
+        if self.ip_addresses:
+            body["ipAddresses"] = self.ip_addresses
+        if self.listen_ports:
+            body["listenPorts"] = self.listen_ports
+        if self.type:
+            body["type"] = self.type
+        if self.favicon_url:
+            body["faviconUrl"] = self.favicon_url
+        if self.config_url:
+            body["configUrl"] = self.config_url
+        if self.properties:
+            body["properties"] = self.properties
+        if self.dns_names:
+            body["dnsNames"] = self.dns_names
+        if self.message_type:
+            body["messageType"] = str(self.message_type)
+        return body
 
     def post(self) -> "Response":
-        return self._http_client.make_request(path=f"{EntityService.ENDPOINT_ENTITIES}/custom", method="POST", params=self.to_json())
+        return self._http_client.make_request(path=f"{EntityService.ENDPOINT_ENTITIES}/custom",
+                                              method="POST",
+                                              params=self.to_json())
 
 
 class EntityType(DynatraceObject):
@@ -259,9 +285,12 @@ class EntityType(DynatraceObject):
         self.type: str = raw_element["type"]
         self.display_name: str = raw_element["displayName"]
         self.entity_limit_exceeded: bool = raw_element.get("entityLimitExceeded", False)
-        self.properties: Optional[List[EntityTypePropertyDto]] = [EntityTypePropertyDto(raw_element=p) for p in raw_element.get("properties", [])]
-        self.from_relationships: Optional[List[FromPosition]] = [FromPosition(raw_element=fr) for fr in raw_element.get("fromRelationships", [])]
-        self.to_relationships: Optional[List[ToPosition]] = [ToPosition(raw_element=tr) for tr in raw_element.get("toRelationships", [])]
+        self.properties: Optional[List[EntityTypePropertyDto]] = [EntityTypePropertyDto(raw_element=p) for p in
+                                                                  raw_element.get("properties", [])]
+        self.from_relationships: Optional[List[FromPosition]] = [FromPosition(raw_element=fr) for fr in
+                                                                 raw_element.get("fromRelationships", [])]
+        self.to_relationships: Optional[List[ToPosition]] = [ToPosition(raw_element=tr) for tr in
+                                                             raw_element.get("toRelationships", [])]
         self.dimension_key: Optional[str] = raw_element.get("dimensionKey")
         self.management_zones: Optional[str] = raw_element.get("managementZones")
         self.tags: Optional[str] = raw_element.get("tags")
