@@ -86,3 +86,8 @@ def test_get_type(dt: Dynatrace):
     assert type_details.display_name == "Application overload prevention"
     assert type_details.severity_level == EventSeverity.INFO
     assert type_details.description == "Max user actions per minute exceeded"
+
+def test_ingest(dt: Dynatrace):
+    ingest = dt.events_v2.ingest("CUSTOM_ALERT", "Dt API Test", properties={"test": "test"}, entity_selector="type(HOST)")
+    assert isinstance(ingest, dict)
+    assert ingest["eventIngestResults"][0]["status"] == "OK"
