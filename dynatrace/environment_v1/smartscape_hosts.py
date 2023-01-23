@@ -15,11 +15,12 @@ limitations under the License.
 """
 from typing import Optional, Dict, Any, List, Union
 from enum import Enum
+from datetime import datetime
 
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import HeaderPaginatedList
-
+from dynatrace.utils import datetime_to_int64
 
 class RelativeTime(Enum):
     MIN = "min"
@@ -102,6 +103,8 @@ class SmartScapeHostsService:
     def list(
         self,
         relative_time: Optional[Union[RelativeTime, str]] = RelativeTime.THREE_DAYS,
+        start_timestamp: Optional[Union[datetime, str]] = None,
+        end_timestamp: Optional[Union[datetime, str]] = None,
         page_size: int = 200,
         management_zone: Optional[int] = None,
         host_group_name: Optional[str] = None,
@@ -115,10 +118,14 @@ class SmartScapeHostsService:
             Default value : None
         :param relative_time: Relative time ranger to check for (72 hours if not set)
             Default value : RelativeTime.THREE_DAYS
+        :param start_timestamp: the start timestamp of the requested timeframe, in milliseconds (UTC)
+        :param end_timestamp: the end timestamp of the requested timeframe, in milliseconds (UTC)
         """
         params = {
             "pageSize": page_size,
-            "relativeTime": RelativeTime(relative_time).value,
+            "relativeTime": RelativeTime(relative_time).value if not start_timestamp else None,
+            "startTimestamp": datetime_to_int64(start_timestamp),
+            "endTimestamp": datetime_to_int64(end_timestamp),
             "managementZone": management_zone if management_zone else None,
             "hostGroupName": host_group_name if host_group_name else None,
         }
