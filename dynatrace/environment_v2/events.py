@@ -114,6 +114,17 @@ class EventServiceV2:
         entity_selector: Optional[str] = None,
         properties: Optional[Dict[str, str]] = None
     ):
+        """
+        Ingests a custom event to Dynatrace
+
+        :param event_type: the type of event
+        :param title: the title of the event
+        :param start_time: the start time of the event
+        :param end_time: the end time of the event
+        :param timeout: the timeout of the event in minutes
+        :param entity_selector: the entity selector, defining a set of Dynatrace entities to be associated with the event
+        :param properties: a map of event properties
+        """
         
         params = {
             "eventType": event_type,
