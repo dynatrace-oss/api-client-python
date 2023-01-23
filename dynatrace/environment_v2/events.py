@@ -129,8 +129,8 @@ class EventServiceV2:
         params = {
             "eventType": event_type,
             "title": title,
-            "startTime": timestamp_to_string(start_time),
-            "endTime": timestamp_to_string(end_time),
+            "startTime": datetime_to_int64(start_time),
+            "endTime": datetime_to_int64(end_time),
             "timeout": timeout,
             "entitySelector": entity_selector,
             "properties": properties
