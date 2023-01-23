@@ -33,6 +33,7 @@ from dynatrace.environment_v2.schemas import ManagementZone
 
 class EventServiceV2:
     ENDPOINT_EVENTS = "/api/v2/events"
+    ENDPOINT_INGEST = "/api/v2/events/ingest"
     ENDPOINT_TYPES = "/api/v2/eventTypes"
 
     def __init__(self, http_client: HttpClient):
@@ -102,6 +103,40 @@ class EventServiceV2:
         """
         response = self.__http_client.make_request(path=f"{self.ENDPOINT_TYPES}/{event_type}")
         return EventType(raw_element=response.json(), http_client=self.__http_client)
+
+    def ingest(
+        self,
+        event_type: str,
+        title: str,
+        start_time: Optional[Union[datetime, str]] = None,
+        end_time: Optional[Union[datetime, str]] = None,
+        timeout: int = 15,
+        entity_selector: Optional[str] = None,
+        properties: Optional[Dict[str, str]] = None
+    ):
+        """
+        Ingests a custom event to Dynatrace
+
+        :param event_type: the type of event
+        :param title: the title of the event
+        :param start_time: the start time of the event
+        :param end_time: the end time of the event
+        :param timeout: the timeout of the event in minutes
+        :param entity_selector: the entity selector, defining a set of Dynatrace entities to be associated with the event
+        :param properties: a map of event properties
+        """
+        
+        params = {
+            "eventType": event_type,
+            "title": title,
+            "startTime": datetime_to_int64(start_time),
+            "endTime": datetime_to_int64(end_time),
+            "timeout": timeout,
+            "entitySelector": entity_selector,
+            "properties": properties
+        }
+
+        return self.__http_client.make_request(f"{self.ENDPOINT_INGEST}", method="POST", params=params).json()
 
 
 class Event(DynatraceObject):
