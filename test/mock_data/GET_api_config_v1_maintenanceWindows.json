@@ -1,0 +1,19 @@
+{
+    "values": [
+        {
+            "id": "b6376a12-0b82-4069-9a41-0e55ef9a1f44",
+            "name": "Example Window",
+            "description": "An example Maintenance window"
+        },
+        {
+            "id": "befa9c77-ade3-463f-ad3a-743d5a271880",
+            "name": "Example Window",
+            "description": "An example Maintenance window"
+        },
+        {
+            "id": "15d42c47-051c-4b4a-96b8-3af5040b8f66",
+            "name": "Example Window",
+            "description": "An example Maintenance window"
+        }
+    ]
+}

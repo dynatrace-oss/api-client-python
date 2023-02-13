@@ -1,0 +1,39 @@
+{
+    "id": "b6376a12-0b82-4069-9a41-0e55ef9a1f44",
+    "name": "Example Window",
+    "description": "test_desc",
+    "type": "PLANNED",
+    "suppression": null,
+    "suppressSyntheticMonitorsExecution": false,
+    "schedule": {
+        "end": "2031-02-27 00:00",
+        "start": "2028-08-02 00:00",
+        "zoneId": "Europe/Vienna",
+        "recurrence": {
+            "dayOfWeek": null,
+            "dayOfMonth": null,
+            "startTime": null,
+            "durationMinutes": null
+        },
+        "recurrenceType": "ONCE"
+    },
+    "scope": {
+        "entities": [
+            "HOST-0000000000123456"
+        ],
+        "matches": [
+            {
+                "type": "HOST",
+                "mzId": "-5283929364044076484",
+                "tags": [
+                    {
+                        "context": "AWS",
+                        "key": "testkey",
+                        "value": "testvalue"
+                    }
+                ],
+                "tagCombination": "AND"
+            }
+        ]
+    }
+}

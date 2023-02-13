@@ -1,0 +1,41 @@
+{
+    "metadata": {
+        "configurationVersions": [
+            0
+        ],
+        "clusterVersion": "1.238.53.20220318-123456"
+    },
+    "id": "b6376a12-0b82-4069-9a41-0e55ef9a1f44",
+    "name": "Example Window",
+    "description": "An example Maintenance window",
+    "type": "UNPLANNED",
+    "enabled": true,
+    "suppression": "DETECT_PROBLEMS_AND_ALERT",
+    "suppressSyntheticMonitorsExecution": true,
+    "scope": {
+        "entities": [
+            "HOST-0000000000123456"
+        ],
+        "matches": [
+            {
+                "type": "HOST",
+                "managementZoneId": -5283929364044076000,
+                "mzId": "-5283929364044076484",
+                "tags": [
+                    {
+                        "context": "AWS",
+                        "key": "testkey",
+                        "value": "testvalue"
+                    }
+                ],
+                "tagCombination": "AND"
+            }
+        ]
+    },
+    "schedule": {
+        "recurrenceType": "ONCE",
+        "start": "2018-08-02 00:00",
+        "end": "2021-02-27 00:00",
+        "zoneId": "Europe/Vienna"
+    }
+}
