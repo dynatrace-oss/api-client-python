@@ -50,7 +50,7 @@ class SloService:
         :param time_to: The end of the requested timeframe.
         :param slo_selector: The scope of the query. Only SLOs matching the provided criteria are included in the response.
         :param sort: The sorting of SLO entries. Default is by name in ascending order.
-        :param time_frame: The timeframe to calculate the SLO values.
+        :param time_frame: The timeframe to calculate the SLO values. CURRENT: SLO's own timeframe. GTF: timeframe specified by from and to parameters.
         :param page_idx: Only SLOs on the given page are included in the response. The first page has the index '1'.
         :param demo: Get your SLOs (false) or a set of demo SLOs (true)
         :param evaluate: Get your SLOs without them being evaluated (false) or with evaluations (true).
@@ -70,18 +70,26 @@ class SloService:
         }
         return PaginatedList(target_class=Slo, http_client=self.__http_client, target_params=params, target_url=f"{self.ENDPOINT}", list_item="slo")
 
-    def get(self, slo_id: str, time_from: Optional[Union[datetime, str]] = "now-2w", time_to: Optional[Union[datetime, str]] = None) -> "Slo":
+    def get(
+        self, 
+        slo_id: str, 
+        time_from: Optional[Union[datetime, str]] = "now-2w", 
+        time_to: Optional[Union[datetime, str]] = None, 
+        time_frame: Optional[str] = "CURRENT"
+    ) -> "Slo":
         """Gets parameters and the calculated value of an SLO
 
         :param slo_id: The ID of the required SLO.
         :param time_from: The start of the requested timeframe.
         :param time_to: The end of the requested timeframe.
+        :param time_frame: The timeframe to calculate the SLO values. CURRENT: SLO's own timeframe. GTF: timeframe specified by from and to parameters.
 
         :returns Slo: the requested SLO
         """
         params = {
             "from": timestamp_to_string(time_from),
             "to": timestamp_to_string(time_to),
+            "timeFrame": time_frame,
         }
         response = self.__http_client.make_request(path=f"{self.ENDPOINT}/{slo_id}", params=params).json()
         return Slo(raw_element=response)
