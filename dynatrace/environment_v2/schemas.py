@@ -44,7 +44,7 @@ class VersionCompareType(Enum):
 
 class ManagementZone(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.name: str = raw_element["name"]
+        self.name: str = raw_element.get("name", "")
         self.id: str = raw_element["id"]
 
     def to_json(self) -> Dict[str, Any]:
