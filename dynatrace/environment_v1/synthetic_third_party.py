@@ -45,6 +45,7 @@ class ThirdPartySyntheticTestsService:
         step_title: Optional[str] = None,
         detailed_steps: Optional[List["SyntheticTestStep"]] = None,
         detailed_step_results: Optional[List["SyntheticMonitorStepResult"]] = None,
+        timeout = None
     ):
 
         location = ThirdPartySyntheticLocation(self.__http_client, location_id, location_name)
@@ -66,7 +67,7 @@ class ThirdPartySyntheticTestsService:
         location_result = ThirdPartySyntheticLocationTestResult(self.__http_client, location_id, timestamp, success, step_results=detailed_step_results)
         test_result = ThirdPartySyntheticResult(self.__http_client, test_id, len(detailed_steps), [location_result])
         tests = ThirdPartySyntheticTests(self.__http_client, engine_name, timestamp, [location], [monitor], [test_result], synthetic_engine_icon_url=icon_url)
-        return tests.post()
+        return tests.post(timeout=timeout)
 
     def create_synthetic_test_step_result(self, step_id: int, timestamp: datetime, response_time: int) -> "SyntheticMonitorStepResult":
         return SyntheticMonitorStepResult(self.__http_client, step_id, timestamp, response_time_millis=response_time)
@@ -84,6 +85,7 @@ class ThirdPartySyntheticTestsService:
         event_type: str,
         reason: str,
         engine_name: str,
+        timeout = None
     ):
         opened_events: List[ThirdPartyEventOpenNotification] = []
         resolved_events = []
@@ -95,7 +97,7 @@ class ThirdPartySyntheticTestsService:
 
         if opened_events or resolved_events:
             events = ThirdPartySyntheticEvents(self.__http_client, engine_name, opened_events, resolved_events)
-            return events.post()
+            return events.post(timeout)
 
 
 class ThirdPartySyntheticTests(DynatraceObject):
@@ -120,8 +122,8 @@ class ThirdPartySyntheticTests(DynatraceObject):
         }
         super().__init__(http_client, None, raw_element)
 
-    def post(self):
-        return self._http_client.make_request(f"/api/v1/synthetic/ext/tests", params=self._raw_element, method="POST")
+    def post(self, timeout = None):
+        return self._http_client.make_request(f"/api/v1/synthetic/ext/tests", params=self._raw_element, method="POST", timeout=timeout)
 
 
 class ThirdPartySyntheticLocation(DynatraceObject):
@@ -266,8 +268,8 @@ class ThirdPartySyntheticEvents(DynatraceObject):
         }
         super().__init__(http_client, None, raw_element)
 
-    def post(self):
-        return self._http_client.make_request(f"/api/v1/synthetic/ext/events", params=self._raw_element, method="POST")
+    def post(self, timeout = None):
+        return self._http_client.make_request(f"/api/v1/synthetic/ext/events", params=self._raw_element, method="POST", timeout=timeout)
 
 
 class ThirdPartyEventOpenNotification(DynatraceObject):

@@ -94,7 +94,7 @@ class HttpClient:
         self.mc_sso_csrf_cookie = mc_sso_csrf_cookie
 
     def make_request(
-        self, path: str, params: Optional[Any] = None, headers: Optional[Dict] = None, method="GET", data=None, files=None, query_params=None
+        self, path: str, params: Optional[Any] = None, headers: Optional[Dict] = None, method="GET", data=None, files=None, query_params=None, timeout=None
     ) -> requests.Response:
         url = f"{self.base_url}{path}"
 
@@ -122,14 +122,14 @@ class HttpClient:
             print(method, url)
             if body:
                 print(json.dumps(body, indent=2))
-        r = s.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies, data=data, cookies=cookies, files=files)
+        r = s.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies, data=data, cookies=cookies, files=files, timeout=timeout)
         self.log.debug(f"Received response '{r}'")
 
         while r.status_code == 429 and self.too_many_requests_strategy == TOO_MANY_REQUESTS_WAIT:
             sleep_amount = int(r.headers.get("retry-after", 5))
             self.log.warning(f"Sleeping for {sleep_amount}s because we have received an HTTP 429")
             time.sleep(sleep_amount)
-            r = requests.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies)
+            r = requests.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies, timeout=timeout)
 
         if r.status_code >= 400:
             raise Exception(f"Error making request to {url}: {r}. Response: {r.text}")
