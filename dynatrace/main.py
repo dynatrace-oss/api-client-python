@@ -72,7 +72,8 @@ class Dynatrace:
         mc_jsession_id: Optional[str] = None,
         mc_b925d32c: Optional[str] = None,
         mc_sso_csrf_cookie: Optional[str] = None,
-        print_bodies = False
+        print_bodies = False,
+        timeout: Optional[int] = None
     ):
         self.__http_client = HttpClient(
             base_url,
@@ -85,7 +86,8 @@ class Dynatrace:
             mc_jsession_id,
             mc_b925d32c,
             mc_sso_csrf_cookie,
-            print_bodies
+            print_bodies,
+            timeout
         )
 
         self.activegates: ActiveGateService = ActiveGateService(self.__http_client)
