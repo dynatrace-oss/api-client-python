@@ -47,7 +47,8 @@ class HttpClient:
         mc_jsession_id: Optional[str] = None,
         mc_b925d32c: Optional[str] = None,
         mc_sso_csrf_cookie: Optional[str] = None,
-            print_bodies: bool = False,
+        print_bodies: bool = False,
+        timeout: Optional[int] = None
     ):
         while base_url.endswith("/"):
             base_url = base_url[:-1]
@@ -69,6 +70,7 @@ class HttpClient:
             self.log.addHandler(st)
 
         self.too_many_requests_strategy = too_many_requests_strategy
+        self.timeout = timeout
         retry_delay_s = retry_delay_ms / 1000
 
         try:
@@ -122,14 +124,14 @@ class HttpClient:
             print(method, url)
             if body:
                 print(json.dumps(body, indent=2))
-        r = s.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies, data=data, cookies=cookies, files=files)
+        r = s.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies, data=data, cookies=cookies, files=files, timeout=self.timeout)
         self.log.debug(f"Received response '{r}'")
 
         while r.status_code == 429 and self.too_many_requests_strategy == TOO_MANY_REQUESTS_WAIT:
             sleep_amount = int(r.headers.get("retry-after", 5))
             self.log.warning(f"Sleeping for {sleep_amount}s because we have received an HTTP 429")
             time.sleep(sleep_amount)
-            r = requests.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies)
+            r = requests.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies, timeout=self.timeout)
 
         if r.status_code >= 400:
             raise Exception(f"Error making request to {url}: {r}. Response: {r.text}")
