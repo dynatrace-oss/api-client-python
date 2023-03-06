@@ -29,6 +29,9 @@ dt = Dynatrace("environment_url", "api_token")
 # Create a client that automatically retries on errors, up to 5 times, with a 1 second delay between retries
 # dt = Dynatrace("environment_url", "api_token", retries=5, retry_delay_ms=1000 )
 
+# Create a client with a custom HTTP timeout of 10 seconds
+# dt = Dynatrace("environment_url", "api_token", timeout=10 )
+
 
 # Get all hosts and some properties
 for entity in dt.entities.list('type("HOST")', fields="properties.memoryTotal,properties.monitoringMode"):
