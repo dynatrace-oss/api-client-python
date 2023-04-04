@@ -92,7 +92,7 @@ class ProblemService:
         """
         params = {"pageSize": page_size}
         return PaginatedList(
-            target_class=Comment, http_client=self.__http_client, target_url=f"/api/v2/{problem_id}/comments", target_params=params, list_item="comments"
+            target_class=Comment, http_client=self.__http_client, target_url=f"{self.ENDPOINT}/{problem_id}/comments", target_params=params, list_item="comments"
         )
 
     def get_comment(self, problem_id: str, comment_id: str) -> "Comment":
