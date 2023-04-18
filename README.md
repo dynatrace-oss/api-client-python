@@ -10,6 +10,7 @@ It focuses on ease of use and nice type hints, perfect to explore the API and cr
 ```bash
 $ pip install dt
 ```
+
 ## Simple Demo
 
 ```python
@@ -100,113 +101,112 @@ print(r.id)
 
 ### Environment API V2
 
-API                                      |  Level               |  Access                                     |
-:-------------                           |  :-------------:     |  :-----                                     |
-Access Tokens - API tokens               |  :heavy_check_mark:  |  `dt.tokens`                                |
-Access tokens - Tenant tokens            |  :heavy_check_mark:  |  `dt.tenant_tokens`                         |
-ActiveGates                              |  :heavy_check_mark:  |  `dt.activegates`                           |
-ActiveGates - Auto-update configuration  |  :heavy_check_mark:  |  `dt.activegates_autoupdate_configuration`  |
-ActiveGates - Auto-update jobs           |  :heavy_check_mark:  |  `dt.activegates_autoupdate_jobs`           |
-Audit Logs                               |  :heavy_check_mark:  |  `dt.audit_logs`                            |
-Events                                   |  :warning:           |  `dt.events_v2`                             |
-Extensions 2.0                           |  :heavy_check_mark:  |  `dt.extensions_v2`                         |
-Logs                                     |  :warning:           |  `dt.logs`                                  |
-Metrics                                  |  :heavy_check_mark:  |  `dt.metrics`                               |
-Monitored entities                       |  :warning:           |  `dt.entities`                              |
-Monitored entities - Custom tags         |  :heavy_check_mark:  |  `dt.custom_tags`                           |
-Network zones                            |  :warning:           |  `dt.network_zones`                         |
-Problems                                 |  :heavy_check_mark:  |  `dt.problems`                              |
-Security problems                        |  :x:                 |                                             |
-Service-level objectives                 |  :heavy_check_mark:  |  `dt.slos`                                  | 
+ API                                     |       Level        | Access                                    |
+:----------------------------------------|:------------------:|:------------------------------------------|
+ Access Tokens - API tokens              | :heavy_check_mark: | `dt.tokens`                               |
+ Access tokens - Tenant tokens           | :heavy_check_mark: | `dt.tenant_tokens`                        |
+ ActiveGates                             | :heavy_check_mark: | `dt.activegates`                          |
+ ActiveGates - Auto-update configuration | :heavy_check_mark: | `dt.activegates_autoupdate_configuration` |
+ ActiveGates - Auto-update jobs          | :heavy_check_mark: | `dt.activegates_autoupdate_jobs`          |
+ Audit Logs                              | :heavy_check_mark: | `dt.audit_logs`                           |
+ Events                                  |     :warning:      | `dt.events_v2`                            |
+ Extensions 2.0                          | :heavy_check_mark: | `dt.extensions_v2`                        |
+ Logs                                    |     :warning:      | `dt.logs`                                 |
+ Metrics                                 | :heavy_check_mark: | `dt.metrics`                              |
+ Monitored entities                      |     :warning:      | `dt.entities`                             |
+ Monitored entities - Custom tags        | :heavy_check_mark: | `dt.custom_tags`                          |
+ Network zones                           |     :warning:      | `dt.network_zones`                        |
+ Problems                                | :heavy_check_mark: | `dt.problems`                             |
+ Security problems                       |        :x:         |                                           |
+ Service-level objectives                | :heavy_check_mark: | `dt.slos`                                 | 
 
 ### Environment API V1
 
-API                                    |  Level               | Access                              |
-:-------------                         |  :-------------:     | :-----                              |
-Anonymization                          |  :x:                 |                                     |
-Cluster time                           |  :heavy_check_mark:  |  `dt.cluster_time`                  |
-Cluster version                        |  :x:                 |                                     |
-Custom devices                         |  :heavy_check_mark:  |  `dt.custom_devices`                |
-Deployment                             |  :heavy_check_mark:  |  `dt.deployment`                    |
-Events                                 |  :warning:           |  `dt.events`                        |
-JavaScript tag management              |  :x:                 |                                     |
-Log monitoring - Custom devices        |  :x:                 |                                     |
-Log monitoring - Hosts                 |  :x:                 |                                     |
-Log monitoring - Process groups        |  :x:                 |                                     |
-Maintenance window                     |  :x:                 |                                     |
-OneAgent on a host                     |  :warning:           |  `dt.oneagents`                     |
-Problem                                |  :x:                 |                                     |
-Synthetic - Locations and nodes        |  :x:                 |                                     |
-Synthetic - Monitors                   |  :warning:           |  `dt.synthetic_monitors`            |
-Synthetic - Third party                |  :heavy_check_mark:  |  `dt.third_part_synthetic_tests`    |
-Threshold                              |  :x:                 |                                     |
-Timeseries                             |  :warning:           |  `dt.timeseries`                    |
-Tokens                                 |  :x:                 |                                     |
-Topology & Smartscape - Application    |  :x:                 |                                     |
-Topology & Smartscape - Custom device  |  :warning:           |  `dt.custom_devices`                |
-Topology & Smartscape - Host           |  :warning:           |  `dt.smartscape_hosts`              |
-Topology & Smartscape - Process        |  :x:                 |                                     |
-Topology & Smartscape - Process group  |  :x:                 |                                     |
-Topology & Smartscape - Service        |  :x:                 |                                     |
-User sessions                          |  :x:                 |                                     |
-
+ API                                   |       Level        | Access                          |
+:--------------------------------------|:------------------:|:--------------------------------|
+ Anonymization                         |        :x:         |                                 |
+ Cluster time                          | :heavy_check_mark: | `dt.cluster_time`               |
+ Cluster version                       |        :x:         |                                 |
+ Custom devices                        | :heavy_check_mark: | `dt.custom_devices`             |
+ Deployment                            | :heavy_check_mark: | `dt.deployment`                 |
+ Events                                |     :warning:      | `dt.events`                     |
+ JavaScript tag management             |        :x:         |                                 |
+ Log monitoring - Custom devices       |        :x:         |                                 |
+ Log monitoring - Hosts                |        :x:         |                                 |
+ Log monitoring - Process groups       |        :x:         |                                 |
+ Maintenance window                    |        :x:         |                                 |
+ OneAgent on a host                    |     :warning:      | `dt.oneagents`                  |
+ Problem                               |        :x:         |                                 |
+ Synthetic - Locations and nodes       |        :x:         |                                 |
+ Synthetic - Monitors                  |     :warning:      | `dt.synthetic_monitors`         |
+ Synthetic - Third party               | :heavy_check_mark: | `dt.third_part_synthetic_tests` |
+ Threshold                             |        :x:         |                                 |
+ Timeseries                            |     :warning:      | `dt.timeseries`                 |
+ Tokens                                |        :x:         |                                 |
+ Topology & Smartscape - Application   |        :x:         |                                 |
+ Topology & Smartscape - Custom device |     :warning:      | `dt.custom_devices`             |
+ Topology & Smartscape - Host          |     :warning:      | `dt.smartscape_hosts`           |
+ Topology & Smartscape - Process       |        :x:         |                                 |
+ Topology & Smartscape - Process group |        :x:         |                                 |
+ Topology & Smartscape - Service       |        :x:         |                                 |
+ User sessions                         |        :x:         |                                 |
 
 ### Configuration API V1
 
-API                                                  |  Level               |  Access                             |
-:-------------                                       |  :-------------:     |  :-----                             |
-Alerting Profiles                                    |  :warning:           |  `dt.alerting_profiles`             |
-Anomaly detection - Applications                     |  :x:                 |                                     |
-Anomaly detection - AWS                              |  :x:                 |                                     |
-Anomaly detection - Database services                |  :x:                 |                                     |
-Anomaly detection - Disk events                      |  :x:                 |                                     |
-Anomaly detection - Hosts                            |  :x:                 |                                     |
-Anomaly detection - Metric events                    |  :warning:           |`dt.anomaly_detection_metric_events` |
-Anomaly detection - Process groups                   |  :warning:           |`dt.anomaly_detection_process_groups`|
-Anomaly detection - Services                         |  :x:                 |                                     |
-Anomaly detection - VMware                           |  :x:                 |                                     |
-Automatically applied tags                           |  :warning:           |  `dt.auto_tags`                     |
-AWS credentials configuration                        |  :x:                 |                                     |
-AWS PrivateLink                                      |  :x:                 |                                     |
-Azure credentials configuration                      |  :x:                 |                                     |
-Calculated metrics - Log monitoring                  |  :x:                 |                                     |
-Calculated metrics - Mobile & custom applications    |  :x:                 |                                     |
-Calculated metrics - Services                        |  :x:                 |                                     |
-Calculated metrics - Synthetic                       |  :x:                 |                                     |
-Calculated metrics - Web applications                |  :x:                 |                                     |
-Cloud Foundry credentials configuration              |  :x:                 |                                     |
-Conditional naming                                   |  :x:                 |                                     |
-Credential vault                                     |  :x:                 |                                     |
-Custom tags                                          |  :heavy_check_mark:  |  `dt.custom_tags`                   |
-Dashboards                                           |  :warning:           |  `dt.dashboards`                    |
-Data privacy and security                            |  :x:                 |                                     |
-Extensions                                           |  :heavy_check_mark:  |  `dt.extensions`                    |
-Frequent issue detection                             |  :x:                 |                                     |
-Kubernetes credentials configuration                 |  :x:                 |                                     |
-Maintenance windows                                  |  :warning:           |  `dt.maintenance_windows`           |
-Management zones                                     |  :warning:           |  `dt.management_zones`              |
-Notifications                                        |  :warning:           |  `dt.notifications`                 |
-OneAgent - Environment-wide configuration            |  :heavy_check_mark:  |  `dt.oneagents_config_environment`  |
-OneAgent in a host group                             |  :heavy_check_mark:  |  `dt.oneagents_config_hostgroup`    |
-OneAgent on a host                                   |  :heavy_check_mark:  |  `dt.oneagents_config_host`         |
-Plugins                                              |  :warning:           |  `dt.plugins`                       |
-Remote environments                                  |  :x:                 |                                     |
-Reports                                              |  :x:                 |                                     |
-RUM - Allowed beacon origins for CORS                |  :x:                 |                                     |
-RUM - Application detection rules                    |  :x:                 |                                     |
-RUM - Application detection rules - Host detection   |  :x:                 |                                     |
-RUM - Content resources                              |  :x:                 |                                     |
-RUM - Geographic regions - custom client IP headers  |  :x:                 |                                     |
-RUM - Geographic regions - IP address mapping        |  :x:                 |                                     |
-RUM - Mobile and custom application configuration    |  :x:                 |                                     |
-RUM - Web application configuration                  |  :x:                 |                                     |
-Service - Custom services                            |  :x:                 |                                     |
-Service - Detection full web request                 |  :x:                 |                                     |
-Service - Detection full web service                 |  :x:                 |                                     |
-Service - Detection opaque and external web request  |  :x:                 |                                     |
-Service - Detection opaque and external web service  |  :x:                 |                                     |
-Service - Failure detection parameter sets           |  :x:                 |                                     |
-Service - Failure detection rules                    |  :x:                 |                                     |
-Service - IBM MQ tracing                             |  :x:                 |                                     |
-Service - Request attributes                         |  :x:                 |                                     |
-Service - Request naming                             |  :x:                 |                                     |
+ API                                                 |       Level        | Access                                |
+:----------------------------------------------------|:------------------:|:--------------------------------------|
+ Alerting Profiles                                   |     :warning:      | `dt.alerting_profiles`                |
+ Anomaly detection - Applications                    |        :x:         |                                       |
+ Anomaly detection - AWS                             |        :x:         |                                       |
+ Anomaly detection - Database services               |        :x:         |                                       |
+ Anomaly detection - Disk events                     |        :x:         |                                       |
+ Anomaly detection - Hosts                           |        :x:         |                                       |
+ Anomaly detection - Metric events                   |     :warning:      | `dt.anomaly_detection_metric_events`  |
+ Anomaly detection - Process groups                  |     :warning:      | `dt.anomaly_detection_process_groups` |
+ Anomaly detection - Services                        |        :x:         |                                       |
+ Anomaly detection - VMware                          |        :x:         |                                       |
+ Automatically applied tags                          |     :warning:      | `dt.auto_tags`                        |
+ AWS credentials configuration                       |        :x:         |                                       |
+ AWS PrivateLink                                     |        :x:         |                                       |
+ Azure credentials configuration                     |        :x:         |                                       |
+ Calculated metrics - Log monitoring                 |        :x:         |                                       |
+ Calculated metrics - Mobile & custom applications   |        :x:         |                                       |
+ Calculated metrics - Services                       |        :x:         |                                       |
+ Calculated metrics - Synthetic                      |        :x:         |                                       |
+ Calculated metrics - Web applications               |        :x:         |                                       |
+ Cloud Foundry credentials configuration             |        :x:         |                                       |
+ Conditional naming                                  |        :x:         |                                       |
+ Credential vault                                    |        :x:         |                                       |
+ Custom tags                                         | :heavy_check_mark: | `dt.custom_tags`                      |
+ Dashboards                                          |     :warning:      | `dt.dashboards`                       |
+ Data privacy and security                           |        :x:         |                                       |
+ Extensions                                          | :heavy_check_mark: | `dt.extensions`                       |
+ Frequent issue detection                            |        :x:         |                                       |
+ Kubernetes credentials configuration                |        :x:         |                                       |
+ Maintenance windows                                 |     :warning:      | `dt.maintenance_windows`              |
+ Management zones                                    |     :warning:      | `dt.management_zones`                 |
+ Notifications                                       |     :warning:      | `dt.notifications`                    |
+ OneAgent - Environment-wide configuration           | :heavy_check_mark: | `dt.oneagents_config_environment`     |
+ OneAgent in a host group                            | :heavy_check_mark: | `dt.oneagents_config_hostgroup`       |
+ OneAgent on a host                                  | :heavy_check_mark: | `dt.oneagents_config_host`            |
+ Plugins                                             |     :warning:      | `dt.plugins`                          |
+ Remote environments                                 |        :x:         |                                       |
+ Reports                                             |        :x:         |                                       |
+ RUM - Allowed beacon origins for CORS               |        :x:         |                                       |
+ RUM - Application detection rules                   |        :x:         |                                       |
+ RUM - Application detection rules - Host detection  |        :x:         |                                       |
+ RUM - Content resources                             |        :x:         |                                       |
+ RUM - Geographic regions - custom client IP headers |        :x:         |                                       |
+ RUM - Geographic regions - IP address mapping       |        :x:         |                                       |
+ RUM - Mobile and custom application configuration   |        :x:         |                                       |
+ RUM - Web application configuration                 |        :x:         |                                       |
+ Service - Custom services                           |        :x:         |                                       |
+ Service - Detection full web request                |        :x:         |                                       |
+ Service - Detection full web service                |        :x:         |                                       |
+ Service - Detection opaque and external web request |        :x:         |                                       |
+ Service - Detection opaque and external web service |        :x:         |                                       |
+ Service - Failure detection parameter sets          |        :x:         |                                       |
+ Service - Failure detection rules                   |        :x:         |                                       |
+ Service - IBM MQ tracing                            |        :x:         |                                       |
+ Service - Request attributes                        |        :x:         |                                       |
+ Service - Request naming                            |        :x:         |                                       |
