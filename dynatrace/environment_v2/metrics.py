@@ -37,6 +37,7 @@ class MetricService:
         time_from: Optional[Union[datetime, str]] = None,
         time_to: Optional[Union[datetime, str]] = None,
         entity_selector: Optional[str] = None,
+        mz_selector: Optional[str] = None,
     ) -> PaginatedList["MetricSeriesCollection"]:
 
         params = {
@@ -45,6 +46,7 @@ class MetricService:
             "from": timestamp_to_string(time_from),
             "to": timestamp_to_string(time_to),
             "entitySelector": entity_selector,
+            "mzSelector": mz_selector
         }
         return PaginatedList(MetricSeriesCollection, self.__http_client, "/api/v2/metrics/query", params, list_item="result")
 
