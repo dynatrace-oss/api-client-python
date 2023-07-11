@@ -193,6 +193,11 @@ class ExtensionsServiceV2:
         response = self.__http_client.make_request(url, method="PUT", params=params)
         return MonitoringConfigurationResponse(raw_element=response.json())
 
+    def delete_monitoring_configuration(self,
+                                        extension_name:str,
+                                        config_id: str):
+        url = f"{self.ENDPOINT}/{extension_name}/monitoringConfigurations/{config_id}"
+        return self.__http_client.make_request(url, method="DELETE")
 
 class SchemaFiles(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
