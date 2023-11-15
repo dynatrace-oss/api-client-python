@@ -62,7 +62,7 @@ class SettingService:
         response = self.__http_client.make_request(f"{self.ENDPOINT}/{object_id}").json()
         return Settings(raw_element=response)
 
-    def update(self, object_id: str,  ):
+    def update(self, object_id: str,  value):
         """Updates an existing network zone or creates a new one
 
         :param networkzone_id: the ID of the network zone, if none exists, will create
@@ -70,7 +70,7 @@ class SettingService:
         :param description: optional text body for short description of network zone
         :return: HTTP response
         """
-        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{object_id}", params=params, method="PUT")
+        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{object_id}", params=value, method="PUT")
 
     def delete(self, object_id: str):
         """Deletes the specified object
@@ -85,5 +85,6 @@ class Settings(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         # Mandatory
         self.objectId: str = raw_element["objectId"]
+        self.value: str = raw_element["value"]
     def to_json(self):
         return  self.value
