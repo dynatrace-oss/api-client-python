@@ -35,7 +35,17 @@ class SettingService:
         return PaginatedList(Settings, self.__http_client, target_url=self.ENDPOINT, list_item="items", target_params=params)
     
     def post(self,external_id,object_id,schema_id,schema_version,scope, value,validate_only):
-        
+        """Creates a new settings object
+
+        :param external_id: External identifier for the object being created
+        :param object_id: The ID of the settings object that should be replaced. Only applicable if an external identifier
+        :param object_id: the ID of the object
+        :param schema_id: The schema on which the object is based
+        :param schema_version: The version of the schema on which the object is based.
+        :param scope The scope that the object targets. For more details, please see Dynatrace Documentation﻿.
+        :param value The value of the setting.
+        :return: a Settings object
+        """        
         params = {
             "validate_only": validate_only,
         }
@@ -56,26 +66,23 @@ class SettingService:
     def get(self, object_id: str):
         """Gets parameters of specified settings object
 
-        :param object_id: the ID of the network zone
+        :param object_id: the ID of the object
         :return: a Settings object
         """
         response = self.__http_client.make_request(f"{self.ENDPOINT}/{object_id}").json()
         return Settings(raw_element=response)
 
     def update(self, object_id: str,  value):
-        """Updates an existing network zone or creates a new one
+        """Updates an existing settings object
+        :param object_id: the ID of the object
 
-        :param networkzone_id: the ID of the network zone, if none exists, will create
-        :param alternate_zones: optional list of text body of alternative network zones
-        :param description: optional text body for short description of network zone
-        :return: HTTP response
         """
         return self.__http_client.make_request(path=f"{self.ENDPOINT}/{object_id}", params=value, method="PUT")
 
     def delete(self, object_id: str):
         """Deletes the specified object
 
-        :param object_id: the ID of the network zone
+        :param object_id: the ID of the object
         :return: HTTP response
         """
         return self.__http_client.make_request(path=f"{self.ENDPOINT}/{object_id}", method="DELETE")
