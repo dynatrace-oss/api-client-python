@@ -50,7 +50,7 @@ class SettingService:
         }]
    
         response = self.__http_client.make_request(self.ENDPOINT,params=body, method="POST",query_params=params).json()
-
+        return response
     
     
     def get(self, object_id: str):
