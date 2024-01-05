@@ -56,6 +56,8 @@ from dynatrace.environment_v2.tokens_tenant import TenantTokenService
 from dynatrace.environment_v2.problems import ProblemService
 from dynatrace.environment_v2.service_level_objectives import SloService
 from dynatrace.environment_v2.logs import LogService
+from dynatrace.environment_v2.settings import SettingService
+
 from dynatrace.http_client import HttpClient
 
 
@@ -118,6 +120,7 @@ class Dynatrace:
         self.oneagents_config_environment: OneAgentEnvironmentWideConfigService = OneAgentEnvironmentWideConfigService(self.__http_client)
         self.oneagents_config_host: OneAgentOnAHostConfigService = OneAgentOnAHostConfigService(self.__http_client)
         self.oneagents_config_hostgroup: OneAgentInAHostGroupService = OneAgentInAHostGroupService(self.__http_client)
+        self.settings : SettingService = SettingService(self.__http_client)
         self.plugins: PluginService = PluginService(self.__http_client)
         self.problems: ProblemService = ProblemService(self.__http_client)
         self.slos: SloService = SloService(self.__http_client)

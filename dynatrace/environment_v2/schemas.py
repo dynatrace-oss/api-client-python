@@ -49,3 +49,4 @@ class ManagementZone(DynatraceObject):
 
     def to_json(self) -> Dict[str, Any]:
         return {"name": self.name, "id": self.id}
+    
