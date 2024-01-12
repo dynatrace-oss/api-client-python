@@ -1,0 +1,69 @@
+{
+    "items": [
+        {
+            "objectId": "vu9U3hXa3q0AAAABACdidWlsdGluOmFub21hbHktZGV0ZWN0aW9uLm1ldHJpYy1ldmVudHMABnRlbmFudAAGdGVuYW50ACQ4OWNhMmY2Ny0wY2Q3LTM0MzAtYmU5Ny1kOTg4YTRmMWRiYWa-71TeFdrerQ",
+            "value": {
+                "enabled": true,
+                "summary": "OnTap Node Field Replaceable Unit in Error State",
+                "queryDefinition": {
+                    "type": "METRIC_KEY",
+                    "metricKey": "netapp.ontap.node.fru.state",
+                    "aggregation": "AVG",
+                    "entityFilter": {
+                        "dimensionKey": "dt.entity.netapp_ontap:fru",
+                        "conditions": []
+                    },
+                    "dimensionFilter": []
+                },
+                "modelProperties": {
+                    "type": "STATIC_THRESHOLD",
+                    "threshold": 100.0,
+                    "alertOnNoData": false,
+                    "alertCondition": "BELOW",
+                    "violatingSamples": 3,
+                    "samples": 5,
+                    "dealertingSamples": 5
+                },
+                "eventTemplate": {
+                    "title": "OnTap {dims:type} {dims:fru_id} is in Error State",
+                    "description": "OnTap field replaceable unit (FRU) {dims:type} with id {dims:fru_id} on node {dims:node} in cluster {dims:cluster} is in an error state.\n",
+                    "eventType": "RESOURCE",
+                    "davisMerge": true,
+                    "metadata": []
+                },
+                "eventEntityDimensionKey": "dt.entity.netapp_ontap:fru"
+            }
+        },
+        {
+            "objectId": "vu9U3hXa3q0AAAABACdidWlsdGluOmFub21hbHktZGV0ZWN0aW9uLm1ldHJpYy1ldmVudHMABnRlbmFudAAGdGVuYW50ACQ5MjRiNjdiYS00OGQ1LTM0NDctODg4Zi05NzUzMzg5NzcxMze-71TeFdrerQ",
+            "value": {
+                "enabled": false,
+                "summary": "High outbound bandwidth utilization",
+                "queryDefinition": {
+                    "type": "METRIC_SELECTOR",
+                    "metricSelector": "func:com.dynatrace.extension.snmp-generic-cisco-device.if.out.bandwidth"
+                },
+                "modelProperties": {
+                    "type": "STATIC_THRESHOLD",
+                    "threshold": 90.0,
+                    "alertOnNoData": false,
+                    "alertCondition": "ABOVE",
+                    "violatingSamples": 3,
+                    "samples": 5,
+                    "dealertingSamples": 5
+                },
+                "eventTemplate": {
+                    "title": "High outbound bandwidth utilization",
+                    "description": "The {metricname} value of {severity} was {alert_condition} your custom threshold of {threshold}.",
+                    "eventType": "CUSTOM_ALERT",
+                    "davisMerge": false,
+                    "metadata": []
+                },
+                "eventEntityDimensionKey": "dt.entity.snmp:com_dynatrace_extension_snmp_generic_cisco_network_interface",
+                "legacyId": "E|649d5713-380b-6751-a64f-6904a2c4cd2f"
+            }
+        }
+    ],
+    "totalCount": 25,
+    "pageSize": 100
+}

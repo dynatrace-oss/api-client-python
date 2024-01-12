@@ -1,8 +1,10 @@
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List, Union
+from datetime import datetime
 
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
+from dynatrace.utils import int64_to_datetime
 
 
 class SettingService:
@@ -10,11 +12,17 @@ class SettingService:
 
     def __init__(self, http_client: HttpClient):
         self.__http_client = http_client
-    
-    def list_objects(self,schema_id: Optional[str] = None,
-             scope: Optional[str] = None,external_ids: Optional[str] = None,
-             fields: Optional[str] = None,
-             filter:Optional[str] = None, sort:Optional[str] = None, page_size:Optional[str] = None) -> PaginatedList["DynatraceObject"]:
+
+    def list_objects(
+        self,
+        schema_id: Optional[str] = None,
+        scope: Optional[str] = None,
+        external_ids: Optional[str] = None,
+        fields: Optional[str] = None,
+        filter: Optional[str] = None,
+        sort: Optional[str] = None,
+        page_size: Optional[str] = None,
+    ) -> PaginatedList["SettingsObject"]:
         """Lists settings
 
         :return: a list of settings with details
@@ -28,64 +36,151 @@ class SettingService:
             "sort": sort,
             "pageSize": page_size,
         }
-        return PaginatedList(Settings, self.__http_client, target_url=self.ENDPOINT, list_item="items", target_params=params)
-    
-    def create_object(self,external_id,object_id,schema_id,schema_version,scope, value,validate_only):
-        """Creates a new settings object
+        return PaginatedList(
+            SettingsObject,
+            self.__http_client,
+            target_url=self.ENDPOINT,
+            list_item="items",
+            target_params=params,
+        )
 
-        :param external_id: External identifier for the object being created
-        :param object_id: The ID of the settings object that should be replaced. Only applicable if an external identifier
-        :param object_id: the ID of the object
-        :param schema_id: The schema on which the object is based
-        :param schema_version: The version of the schema on which the object is based.
-        :param scope The scope that the object targets. For more details, please see Dynatrace Documentation.
-        :param value The value of the setting.
-        :return: a Settings object
-        """        
-        params = {
-            "validate_only": validate_only,
-        }
-        body =[ {
-            "externalId" : external_id,
-            "objectId": object_id,
-            "schemaId": schema_id,
-            "schemaVersion": schema_version,
-            "scope": scope,
-            "value" : value
+    def create_object(
+        self,
+        validate_only: Optional[bool] = False,
+        body: Union[
+            Optional[List["SettingsObjectCreate"]], Optional["SettingsObjectCreate"]
+        ] = [],
+    ):
+        """
+        Creates a new settings object or validates the provided settigns object
 
-        }]
-   
-        response = self.__http_client.make_request(self.ENDPOINT,params=body, method="POST",query_params=params).json()
+        :param validate_only: If true, the request runs only validation of the submitted settings objects, without saving them
+        :param body: The JSON body of the request. Contains the settings objects
+        """
+        query_params = {"validateOnly": validate_only}
+
+        if isinstance(body, SettingsObjectCreate):
+            body = [body]
+
+        body = [o.json() for o in body]
+
+        response = self.__http_client.make_request(
+            self.ENDPOINT, params=body, method="POST", query_params=query_params
+        ).json()
         return response
-    
-    
+
     def get_object(self, object_id: str):
         """Gets parameters of specified settings object
 
         :param object_id: the ID of the object
         :return: a Settings object
         """
-        response = self.__http_client.make_request(f"{self.ENDPOINT}/{object_id}").json()
-        return Settings(raw_element=response)
+        response = self.__http_client.make_request(
+            f"{self.ENDPOINT}/{object_id}"
+        ).json()
+        return SettingsObject(raw_element=response)
 
-    def update_object(self, object_id: str,  value):
+    def update_object(
+        self, object_id: str, value: Optional["SettingsObjectCreate"] = None
+    ):
         """Updates an existing settings object
-        
+
         :param object_id: the ID of the object
-
+        :param value: the JSON body of the request. Contains updated parameters of the settings object.
         """
-        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{object_id}", params=value, method="PUT")
+        return self.__http_client.make_request(
+            f"{self.ENDPOINT}/{object_id}", params=value.json(), method="PUT"
+        )
 
-    def delete_object(self, object_id: str):
+    def delete_object(self, object_id: str, update_token: Optional[str] = None):
         """Deletes the specified object
 
         :param object_id: the ID of the object
+        :param update_token: The update token of the object. You can use it to detect simultaneous modifications by different users
         :return: HTTP response
         """
-        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{object_id}", method="DELETE")
+        query_params = {"updateToken": update_token}
+        return self.__http_client.make_request(
+            f"{self.ENDPOINT}/{object_id}",
+            method="DELETE",
+            query_params=query_params,
+        ).json()
 
-class Settings(DynatraceObject):
+
+class ModificationInfo(DynatraceObject):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        self.deleteable: bool = raw_element.get("deleteable")
+        self.first: bool = raw_element.get("first")
+        self.modifiable: bool = raw_element.get("modifiable")
+        self.modifiable_paths: List[str] = raw_element.get("modifiablePaths", [])
+        self.movable: bool = raw_element.get("movable")
+        self.non_modifiable_paths: List[str] = raw_element.get("nonModifiablePaths", [])
+
+
+class SettingsObject(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         # Mandatory
         self.objectId: str = raw_element["objectId"]
-        self.value: str = raw_element["value"]
+        self.value: dict = raw_element["value"]
+        # Optional
+        self.author: str = raw_element.get("author")
+        self.created: datetime = (
+            int64_to_datetime(int(raw_element.get("created")))
+            if raw_element.get("created")
+            else None
+        )
+        self.created_by: str = raw_element.get("createdBy")
+        self.external_id: str = raw_element.get("externalId")
+        self.modification_info: ModificationInfo = (
+            ModificationInfo(
+                self._http_client, self._headers, raw_element.get("modificationInfo")
+            )
+            if raw_element.get("modificationInfo")
+            else None
+        )
+        self.modified: datetime = (
+            int64_to_datetime(int(raw_element.get("modified")))
+            if raw_element.get("modified")
+            else None
+        )
+        self.modified_by: str = raw_element.get("modifiedBy")
+        self.schema_id: str = raw_element.get("schemaId")
+        self.schema_version: str = raw_element.get("schemaVersion")
+        self.scope: str = raw_element.get("scope")
+        self.search_summary: str = raw_element.get("searchSummary")
+        self.summary: str = raw_element.get("summary")
+        self.update_token: str = raw_element.get("updateToken")
+
+
+class SettingsObjectCreate:
+    def __init__(
+        self,
+        schema_id: str,
+        value: dict,
+        scope: str,
+        external_id: Optional[str] = None,
+        insert_after: Optional[str] = None,
+        object_id: Optional[str] = None,
+        schema_version: Optional[str] = None,
+    ):
+        self.schema_id = schema_id
+        self.value = value
+        self.scope = scope
+        self.external_id = external_id
+        self.insert_after = insert_after
+        self.object_id = object_id
+        self.schema_version = schema_version
+
+    def json(self) -> dict:
+        body = {"schemaId": self.schema_id, "value": self.value, "scope": self.scope}
+
+        if self.external_id:
+            body["externalId"] = self.external_id
+        if self.insert_after:
+            body["insertAfter"] = self.insert_after
+        if self.object_id:
+            body["objectId"] = self.object_id
+        if self.schema_version:
+            body["schemaVersion"] = self.schema_version
+
+        return body
