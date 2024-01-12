@@ -59,7 +59,7 @@ class SettingService:
         """
         query_params = {"validateOnly": validate_only}
 
-        if type(body) == SettingsObjectCreate:
+        if isinstance(body, SettingsObjectCreate):
             body = [body]
 
         body = [o.json() for o in body]
