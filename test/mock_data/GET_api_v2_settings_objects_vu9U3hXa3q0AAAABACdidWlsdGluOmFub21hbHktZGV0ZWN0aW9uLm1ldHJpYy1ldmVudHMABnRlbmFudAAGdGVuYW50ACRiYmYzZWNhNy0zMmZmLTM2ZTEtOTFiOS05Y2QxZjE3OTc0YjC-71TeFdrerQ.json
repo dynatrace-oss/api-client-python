@@ -1,0 +1,43 @@
+{
+    "objectId": "vu9U3hXa3q0AAAABACdidWlsdGluOmFub21hbHktZGV0ZWN0aW9uLm1ldHJpYy1ldmVudHMABnRlbmFudAAGdGVuYW50ACRiYmYzZWNhNy0zMmZmLTM2ZTEtOTFiOS05Y2QxZjE3OTc0YjC-71TeFdrerQ",
+    "summary": "DT API TEST 22",
+    "searchSummary": "DT API TEST 22",
+    "created": 1705095249587,
+    "modified": 1705095274757,
+    "author": "dt0c01.EZN2OP5XE26C3I5ZA2NTHTF5",
+    "updateToken": "vu9U3hXY3q0ATAAkYmJmM2VjYTctMzJmZi0zNmUxLTkxYjktOWNkMWYxNzk3NGIwACQ2MTFiMTM1MC1iMTkyLTExZWUtODAwMS0wMTAwMDAwMDAwMDi-71TeFdjerQ",
+    "scope": "environment",
+    "schemaId": "builtin:anomaly-detection.metric-events",
+    "schemaVersion": "1.0.16",
+    "value": {
+        "enabled": true,
+        "summary": "DT API TEST 22",
+        "queryDefinition": {
+            "type": "METRIC_KEY",
+            "metricKey": "netapp.ontap.node.fru.state",
+            "aggregation": "AVG",
+            "entityFilter": {
+                "dimensionKey": "dt.entity.netapp_ontap:fru",
+                "conditions": []
+            },
+            "dimensionFilter": []
+        },
+        "modelProperties": {
+            "type": "STATIC_THRESHOLD",
+            "threshold": 100.0,
+            "alertOnNoData": false,
+            "alertCondition": "BELOW",
+            "violatingSamples": 3,
+            "samples": 5,
+            "dealertingSamples": 5
+        },
+        "eventTemplate": {
+            "title": "OnTap {dims:type} {dims:fru_id} is in Error State",
+            "description": "OnTap field replaceable unit (FRU) {dims:type} with id {dims:fru_id} on node {dims:node} in cluster {dims:cluster} is in an error state.\n",
+            "eventType": "RESOURCE",
+            "davisMerge": true,
+            "metadata": []
+        },
+        "eventEntityDimensionKey": "dt.entity.netapp_ontap:fru"
+    }
+}
