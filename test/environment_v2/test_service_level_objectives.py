@@ -2,14 +2,14 @@ from dynatrace import Dynatrace
 from dynatrace.environment_v2.service_level_objectives import Slo, SloStatus, SloError, SloEvaluationType
 from dynatrace.pagination import PaginatedList
 
-SLO_ID = "d4adc421-245e-3bc5-a683-df2ed030997c"
+SLO_ID = "88991da4-be17-3d57-aada-cfb3977767f4"
 
 
 def test_list(dt: Dynatrace):
-    slos = dt.slos.list(page_size=20, evaluate=True)
+    slos = dt.slos.list(enabled_slos="all")
 
     assert isinstance(slos, PaginatedList)
-    assert len(list(slos)) == 2
+    assert len(list(slos)) == 4
     assert all(isinstance(s, Slo) for s in slos)
 
 
@@ -41,21 +41,20 @@ def test_get(dt: Dynatrace):
     # value checks
     assert slo.id == SLO_ID
     assert slo.enabled == True
-    assert slo.name == "MySLOService"
-    assert slo.custom_description == "Service Errors Fivexx SuccessCount / Service RequestCount Total"
-    assert slo.evaluated_percentage == 99.92798959015639
-    assert slo.error_budget == -0.022010409843616685
-    assert slo.status == SloStatus.FAILURE
+    assert slo.name == "test123"
+    assert slo.custom_description == "test"
+    assert slo.evaluated_percentage == 100.0
+    assert slo.error_budget == 2.0
+    assert slo.status == SloStatus.SUCCESS
     assert slo.error == SloError.NONE
-    assert slo.use_rate_metric == False
     assert slo.metric_rate == ""
-    assert slo.metric_numerator == "builtin:service.errors.fivexx.successCount:splitBy()"
-    assert slo.metric_denominator == "builtin:service.requestCount.total:splitBy()"
-    assert slo.numerator_value == 1704081
-    assert slo.denominator_value == 1705309
-    assert slo.target == 99.95
-    assert slo.warning == 99.97
+    assert slo.metric_numerator == ""
+    assert slo.metric_denominator == ""
+    assert slo.numerator_value == 0.0
+    assert slo.denominator_value == 0.0
+    assert slo.target == 98.0
+    assert slo.warning == 99.0
     assert slo.evaluation_type == SloEvaluationType.AGGREGATE
-    assert slo.timeframe == "-2h"
-    assert slo.filter == "type(SERVICE),entityId(SERVICE-D89AF859A68D9072)"
+    assert slo.timeframe == "now-1h"
+    assert slo.filter == ""
     assert slo.related_open_problems == 0

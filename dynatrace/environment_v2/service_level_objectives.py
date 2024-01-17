@@ -41,7 +41,8 @@ class SloService:
         time_frame: Optional[str] = "CURRENT",
         page_idx: Optional[int] = 1,
         demo: Optional[bool] = False,
-        evaluate: Optional[bool] = False,
+        evaluate: Optional[str] = "false",
+        enabled_slos: Optional[str] = "all"
     ) -> PaginatedList["Slo"]:
         """Lists all available SLOs along with calculated values
 
@@ -53,7 +54,8 @@ class SloService:
         :param time_frame: The timeframe to calculate the SLO values. CURRENT: SLO's own timeframe. GTF: timeframe specified by from and to parameters.
         :param page_idx: Only SLOs on the given page are included in the response. The first page has the index '1'.
         :param demo: Get your SLOs (false) or a set of demo SLOs (true)
-        :param evaluate: Get your SLOs without them being evaluated (false) or with evaluations (true).
+        :param evaluate: Get your SLOs without them being evaluated ("false") or with evaluations ("true"). This value must be a lowercase string.
+        :param enabled_slos: Get your enabled SLOs ("true"), disabled ones ("false") or both enabled and disabled ones ("all"). This value must be a lowercase string.
 
         :returns PaginatedList[Slo]: the list of SLOs matching criteria
         """
@@ -67,6 +69,7 @@ class SloService:
             "pageIdx": page_idx,
             "demo": demo,
             "evaluate": evaluate,
+            "enabledSlos": enabled_slos
         }
         return PaginatedList(target_class=Slo, http_client=self.__http_client, target_params=params, target_url=f"{self.ENDPOINT}", list_item="slo")
 
@@ -91,7 +94,7 @@ class SloService:
             "to": timestamp_to_string(time_to),
             "timeFrame": time_frame,
         }
-        response = self.__http_client.make_request(path=f"{self.ENDPOINT}/{slo_id}", params=params).json()
+        response = self.__http_client.make_request(f"{self.ENDPOINT}/{slo_id}", params=params).json()
         return Slo(raw_element=response)
 
     def post(self, slo: "Slo") -> "Response":
@@ -127,10 +130,12 @@ class SloService:
         target: float,
         warning: float,
         timeframe: str,
-        use_rate_metric: bool,
+        use_rate_metric: Optional[bool] = None,
         metric_rate: Optional[str] = None,
         metric_numerator: Optional[str] = None,
         metric_denominator: Optional[str] = None,
+        metric_expression: Optional[str] = None,
+        metric_name: Optional[str] = None,
         filter_: Optional[str] = None,
         evaluation_type: Optional[str] = "AGGREGATE",
         custom_description: Optional[str] = None,
@@ -142,10 +147,11 @@ class SloService:
         :param target: The target value of the SLO.
         :param warning: The warning value of the SLO. At warning state the SLO is still fulfilled but is getting close to failure.
         :param timeframe: The timeframe for the SLO evaluation. Use the syntax of the global timeframe selector.
-        :param use_rate_metric: The type of the metric to use for SLO calculation - an existing percentage-based metric (true) or a ratio of two metrics (false)
-        :param metric_rate: The percentage-based metric for the calculation of the SLO. Required when the useRateMetric is set to true.
-        :param metric_numerator: The metric for the count of successes (the numerator in rate calculation).Required when the useRateMetric is set to false.
-        :param metric_denominator: The total count metric (the denominator in rate calculation). Required when the useRateMetric is set to false.
+        :param use_rate_metric: [DEPRECATED] The type of the metric to use for SLO calculation - an existing percentage-based metric (true) or a ratio of two metrics (false)
+        :param metric_rate: [DEPRECATED] The percentage-based metric for the calculation of the SLO. Required when the useRateMetric is set to true.
+        :param metric_numerator: [DEPRECATED] The metric for the count of successes (the numerator in rate calculation).Required when the useRateMetric is set to false.
+        :param metric_denominator: [DEPRECATED] The total count metric (the denominator in rate calculation). Required when the useRateMetric is set to false.
+        :param metric_expression: The percentage-based metric expression for the calculation of the SLO.
         :param evaluation_type: The evaluation type of the SLO.
         :param filter_: The entity filter for the SLO evaluation. Use the syntax of entity selector.
         :param custom_description: The custom description of the SLO.
@@ -162,6 +168,8 @@ class SloService:
             "metricRate": metric_rate if use_rate_metric else "",
             "metricNumerator": metric_numerator if not use_rate_metric else "",
             "metricDenominator": metric_denominator if not use_rate_metric else "",
+            "metricExpression": metric_expression,
+            "metricName": metric_name,
             "filter": filter_,
             "evaluationType": evaluation_type,
             "description": custom_description,
@@ -179,13 +187,14 @@ class Slo(DynatraceObject):
         self.warning: float = raw_element.get("warning")
         self.timeframe: str = raw_element.get("timeframe")
         self.evaluation_type: SloEvaluationType = SloEvaluationType(raw_element.get("evaluationType"))
-        self.use_rate_metric: bool = raw_element.get("useRateMetric")
 
         # optional
         self.status: Optional[SloStatus] = SloStatus(raw_element.get("status")) if raw_element.get("status") else None
         self.metric_rate: Optional[str] = raw_element.get("metricRate")
         self.metric_numerator: Optional[str] = raw_element.get("metricNumerator")
         self.metric_denominator: Optional[str] = raw_element.get("metricDenominator")
+        self.metric_expression: Optional[str] = raw_element.get("metricExpression")
+        self.metric_name: Optional[str] = raw_element.get("metricName")
         self.error_budget: Optional[float] = raw_element.get("errorBudget", 0)
         self.numerator_value: Optional[float] = raw_element.get("numeratorValue", 0)
         self.denominator_value: Optional[float] = raw_element.get("denominatorValue", 0)
@@ -193,8 +202,9 @@ class Slo(DynatraceObject):
         self.evaluated_percentage: Optional[float] = raw_element.get("evaluatedPercentage", 0)
         self.filter: Optional[str] = raw_element.get("filter")
         self.enabled: Optional[bool] = raw_element.get("enabled", False)
-        self.custom_description: Optional[str] = raw_element.get("description", "")
+        self.custom_description: Optional[str] = raw_element.get("description")
         self.error: Optional[SloError] = SloError(raw_element.get("error", SloError.NONE))
+        self.use_rate_metric: Optional[bool] = raw_element.get("useRateMetric")
 
     def to_json(self) -> Dict[str, Any]:
         """Translates an Slo to a JSON dict."""
@@ -209,6 +219,8 @@ class Slo(DynatraceObject):
             "metricRate": self.metric_rate,
             "metricNumerator": self.metric_numerator,
             "metricDenominator": self.metric_denominator,
+            "metricExpression": self.metric_expression,
+            "metricName": self.metric_name,
             "filter": self.filter,
             "customDescription": self.custom_description,
         }
