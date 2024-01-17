@@ -118,7 +118,8 @@ print(r.id)
  Network zones                           |     :warning:      | `dt.network_zones`                        |
  Problems                                | :heavy_check_mark: | `dt.problems`                             |
  Security problems                       |        :x:         |                                           |
- Service-level objectives                | :heavy_check_mark: | `dt.slos`                                 | 
+ Service-level objectives                | :heavy_check_mark: | `dt.slos`                                 |
+ Settings                                |     :warning:      | `dt.settings`                             | 
 
 ### Environment API V1
 
