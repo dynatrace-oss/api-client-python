@@ -1,10 +1,10 @@
 from datetime import datetime
 
-from dynatrace.environment_v2.settings import SettingsObject, SettingsObjectCreate
+from dynatrace.environment_v2.settings import SettingsObject, SettingsObjectCreate, SchemaStub
 from dynatrace import Dynatrace
 from dynatrace.pagination import PaginatedList
 
-settings_value = {
+settings_dict = {
         "enabled": True,
         "summary": "DT API TEST 22",
         "queryDefinition": {
@@ -35,8 +35,14 @@ settings_value = {
         },
         "eventEntityDimensionKey": "dt.entity.netapp_ontap:fru",
     }
-settings_object = SettingsObjectCreate("builtin:anomaly-detection.metric-events", settings_value, "environment")
+settings_object = SettingsObjectCreate("builtin:anomaly-detection.metric-events", settings_dict, "environment")
 test_object_id = "vu9U3hXa3q0AAAABACdidWlsdGluOmFub21hbHktZGV0ZWN0aW9uLm1ldHJpYy1ldmVudHMABnRlbmFudAAGdGVuYW50ACRiYmYzZWNhNy0zMmZmLTM2ZTEtOTFiOS05Y2QxZjE3OTc0YjC-71TeFdrerQ"
+
+def test_list_schemas(dt: Dynatrace):
+    schemas = dt.settings.list_schemas()
+    assert isinstance(schemas, PaginatedList)
+    assert len(list(schemas)) == 3
+    assert all(isinstance(s, SchemaStub) for s in schemas)
 
 def test_list_objects(dt: Dynatrace):
     settings = dt.settings.list_objects(schema_id="builtin:anomaly-detection.metric-events")

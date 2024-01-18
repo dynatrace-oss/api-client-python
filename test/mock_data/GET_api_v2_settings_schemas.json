@@ -1,0 +1,20 @@
+{
+    "items": [
+        {
+            "schemaId": "builtin:attribute-block-list",
+            "displayName": "Blocked attributes",
+            "latestSchemaVersion": "0.0.1"
+        },
+        {
+            "schemaId": "builtin:ua.attribute-table",
+            "displayName": "Attribute table cards",
+            "latestSchemaVersion": "0.10"
+        },
+        {
+            "schemaId": "builtin:span-attribute",
+            "displayName": "Span attributes",
+            "latestSchemaVersion": "0.0.42"
+        }
+    ],
+    "totalCount": 3
+}

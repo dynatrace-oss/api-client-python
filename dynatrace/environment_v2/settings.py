@@ -8,10 +8,23 @@ from dynatrace.utils import int64_to_datetime
 
 
 class SettingService:
-    ENDPOINT = "/api/v2/settings/objects"
+    OBJECTS_ENDPOINT = "/api/v2/settings/objects"
+    SCHEMAS_ENDPOINT = "/api/v2/settings/schemas"
 
     def __init__(self, http_client: HttpClient):
         self.__http_client = http_client
+        
+
+    def list_schemas(self) -> PaginatedList["SchemaStub"]:
+        """Lists all settings schemas available in your environment"""
+
+        return PaginatedList(
+            SchemaStub,
+            self.__http_client,
+            target_url=self.SCHEMAS_ENDPOINT,
+            list_item="items"
+        )
+
 
     def list_objects(
         self,
@@ -39,7 +52,7 @@ class SettingService:
         return PaginatedList(
             SettingsObject,
             self.__http_client,
-            target_url=self.ENDPOINT,
+            target_url=self.OBJECTS_ENDPOINT,
             list_item="items",
             target_params=params,
         )
@@ -65,7 +78,7 @@ class SettingService:
         body = [o.json() for o in body]
 
         response = self.__http_client.make_request(
-            self.ENDPOINT, params=body, method="POST", query_params=query_params
+            self.OBJECTS_ENDPOINT, params=body, method="POST", query_params=query_params
         ).json()
         return response
 
@@ -76,7 +89,7 @@ class SettingService:
         :return: a Settings object
         """
         response = self.__http_client.make_request(
-            f"{self.ENDPOINT}/{object_id}"
+            f"{self.OBJECTS_ENDPOINT}/{object_id}"
         ).json()
         return SettingsObject(raw_element=response)
 
@@ -89,7 +102,7 @@ class SettingService:
         :param value: the JSON body of the request. Contains updated parameters of the settings object.
         """
         return self.__http_client.make_request(
-            f"{self.ENDPOINT}/{object_id}", params=body.json(), method="PUT"
+            f"{self.OBJECTS_ENDPOINT}/{object_id}", params=body.json(), method="PUT"
         )
 
     def delete_object(self, object_id: str, update_token: Optional[str] = None):
@@ -101,7 +114,7 @@ class SettingService:
         """
         query_params = {"updateToken": update_token}
         return self.__http_client.make_request(
-            f"{self.ENDPOINT}/{object_id}",
+            f"{self.OBJECTS_ENDPOINT}/{object_id}",
             method="DELETE",
             query_params=query_params,
         ).json()
@@ -210,3 +223,10 @@ class SettingsObjectUpdate:
         if self.update_token:
             body["updateToken"] = self.update_token
         return body
+
+
+class SchemaStub(DynatraceObject):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        self.display_name = raw_element["displayName"]
+        self.latest_schema_version = raw_element["latestSchemaVersion"]
+        self.schema_id = raw_element["schemaId"]
