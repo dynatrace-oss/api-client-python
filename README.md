@@ -18,6 +18,7 @@ from dynatrace import Dynatrace
 from dynatrace import TOO_MANY_REQUESTS_WAIT
 from dynatrace.environment_v2.tokens_api import SCOPE_METRICS_READ, SCOPE_METRICS_INGEST
 from dynatrace.configuration_v1.credential_vault import PublicCertificateCredentials
+from dynatrace.environment_v2.settings import SettingsObject, SettingsObjectCreate
 
 from datetime import datetime, timedelta
 
@@ -95,6 +96,42 @@ my_cred = PublicCertificateCredentials(
 
 r = dt.credentials.post(my_cred)
 print(r.id)
+
+# Create a new settings 2.0 object
+settings_value = {
+    "enabled": True,
+    "summary": "DT API TEST 1",
+    "queryDefinition": {
+        "type": "METRIC_KEY",
+        "metricKey": "netapp.ontap.node.fru.state",
+        "aggregation": "AVG",
+        "entityFilter": {
+            "dimensionKey": "dt.entity.netapp_ontap:fru",
+            "conditions": [],
+        },
+        "dimensionFilter": [],
+    },
+    "modelProperties": {
+        "type": "STATIC_THRESHOLD",
+        "threshold": 100.0,
+        "alertOnNoData": False,
+        "alertCondition": "BELOW",
+        "violatingSamples": 3,
+        "samples": 5,
+        "dealertingSamples": 5,
+    },
+    "eventTemplate": {
+        "title": "OnTap {dims:type} {dims:fru_id} is in Error State",
+        "description": "OnTap field replaceable unit (FRU) {dims:type} with id {dims:fru_id} on node {dims:node} in cluster {dims:cluster} is in an error state.\n",
+        "eventType": "RESOURCE",
+        "davisMerge": True,
+        "metadata": [],
+    },
+    "eventEntityDimensionKey": "dt.entity.netapp_ontap:fru",
+}
+
+settings_object = SettingsObjectCreate(schema_id="builtin:anomaly-detection.metric-events", value=settings_value, scope="environment")
+dt.settings.create_object(validate_only=False, body=settings_object)
 ```
 
 ## Implementation Progress
@@ -118,7 +155,8 @@ print(r.id)
  Network zones                           |     :warning:      | `dt.network_zones`                        |
  Problems                                | :heavy_check_mark: | `dt.problems`                             |
  Security problems                       |        :x:         |                                           |
- Service-level objectives                | :heavy_check_mark: | `dt.slos`                                 | 
+ Service-level objectives                | :heavy_check_mark: | `dt.slos`                                 |
+ Settings                                |     :warning:      | `dt.settings`                             | 
 
 ### Environment API V1
 

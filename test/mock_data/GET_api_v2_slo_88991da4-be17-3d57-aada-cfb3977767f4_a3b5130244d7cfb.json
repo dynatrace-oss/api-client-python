@@ -1,0 +1,31 @@
+{
+    "id": "88991da4-be17-3d57-aada-cfb3977767f4",
+    "enabled": true,
+    "name": "test123",
+    "description": "test",
+    "evaluatedPercentage": 100.0,
+    "errorBudget": 2.0,
+    "status": "SUCCESS",
+    "error": "NONE",
+    "errorBudgetBurnRate": {
+        "burnRateVisualizationEnabled": false
+    },
+    "metricKey": "func:slo.test123",
+    "burnRateMetricKey": "func:slo.errorBudgetBurnRate.test123",
+    "errorBudgetMetricKey": "func:slo.errorBudget.test123",
+    "normalizedErrorBudgetMetricKey": "func:slo.normalizedErrorBudget.test123",
+    "metricExpression": "(100)*(builtin:service.errors.server.successCount:splitBy())/(builtin:service.requestCount.server:splitBy())",
+    "target": 98.0,
+    "warning": 99.0,
+    "evaluationType": "AGGREGATE",
+    "timeframe": "now-1h",
+    "filter": "",
+    "relatedOpenProblems": 0,
+    "relatedTotalProblems": 0,
+    "metricRate": "",
+    "numeratorValue": 0.0,
+    "denominatorValue": 0.0,
+    "metricDenominator": "",
+    "useRateMetric": true,
+    "metricNumerator": ""
+}
