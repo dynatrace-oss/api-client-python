@@ -4,7 +4,7 @@ from dynatrace.environment_v2.settings import SettingsObject, SettingsObjectCrea
 from dynatrace import Dynatrace
 from dynatrace.pagination import PaginatedList
 
-settings_dict = {
+settings_value = {
         "enabled": True,
         "summary": "DT API TEST 22",
         "queryDefinition": {
@@ -35,7 +35,7 @@ settings_dict = {
         },
         "eventEntityDimensionKey": "dt.entity.netapp_ontap:fru",
     }
-settings_object = SettingsObjectCreate("builtin:anomaly-detection.metric-events", settings_dict, "environment")
+settings_object = SettingsObjectCreate("builtin:anomaly-detection.metric-events", settings_value, "environment")
 test_object_id = "vu9U3hXa3q0AAAABACdidWlsdGluOmFub21hbHktZGV0ZWN0aW9uLm1ldHJpYy1ldmVudHMABnRlbmFudAAGdGVuYW50ACRiYmYzZWNhNy0zMmZmLTM2ZTEtOTFiOS05Y2QxZjE3OTc0YjC-71TeFdrerQ"
 
 def test_list_objects(dt: Dynatrace):
