@@ -15,6 +15,7 @@ limitations under the License.
 """
 
 from typing import List, Dict, Any
+from enum import Enum
 
 from dynatrace.environment_v2.schemas import ConfigurationMetadata
 from dynatrace.dynatrace_object import DynatraceObject
@@ -26,8 +27,43 @@ from dynatrace.configuration_v1.auto_tags import (
     ConditionKeyAttribute,
     ConditionKeyType,
     PropagationType,
-    RuleType,
 )
+
+
+class RuleType(Enum):
+    APPMON_SERVER = "APPMON_SERVER"
+    APPMON_SYSTEM_PROFILE = "APPMON_SYSTEM_PROFILE"
+    AWS_ACCOUNT = "AWS_ACCOUNT"
+    AWS_APPLICATION_LOAD_BALANCER = "AWS_APPLICATION_LOAD_BALANCER"
+    AWS_AUTO_SCALING_GROUP = "AWS_AUTO_SCALING_GROUP"
+    AWS_CLASSIC_LOAD_BALANCER = "AWS_CLASSIC_LOAD_BALANCER"
+    AWS_NETWORK_LOAD_BALANCER = "AWS_NETWORK_LOAD_BALANCER"
+    AWS_RELATIONAL_DATABASE_SERVICE = "AWS_RELATIONAL_DATABASE_SERVICE"
+    AZURE = "AZURE"
+    BROWSER_MONITOR = "BROWSER_MONITOR"
+    CLOUD_APPLICATION = "CLOUD_APPLICATION"
+    CLOUD_APPLICATION_NAMESPACE = "CLOUD_APPLICATION_NAMESPACE"
+    CLOUD_FOUNDRY_FOUNDATION = "CLOUD_FOUNDRY_FOUNDATION"
+    CUSTOM_APPLICATION = "CUSTOM_APPLICATION"
+    CUSTOM_DEVICE = "CUSTOM_DEVICE"
+    CUSTOM_DEVICE_GROUP = "CUSTOM_DEVICE_GROUP"
+    DATA_CENTER_SERVICE = "DATA_CENTER_SERVICE"
+    ENTERPRISE_APPLICATION = "ENTERPRISE_APPLICATION"
+    ESXI_HOST = "ESXI_HOST"
+    EXTERNAL_MONITOR = "EXTERNAL_MONITOR"
+    HOST = "HOST"
+    HOST_GROUP = "HOST_GROUP"
+    HTTP_MONITOR = "HTTP_MONITOR"
+    KUBERNETES_CLUSTER = "KUBERNETES_CLUSTER"
+    KUBERNETES_SERVICE = "KUBERNETES_SERVICE"
+    MOBILE_APPLICATION = "MOBILE_APPLICATION"
+    MULTIPROTOCOL_MONITOR = "MULTIPROTOCOL_MONITOR"
+    OPENSTACK_ACCOUNT = "OPENSTACK_ACCOUNT"
+    PROCESS_GROUP = "PROCESS_GROUP"
+    QUEUE = "QUEUE"
+    SERVICE = "SERVICE"
+    WEB_APPLICATION = "WEB_APPLICATION"
+    NONE = None
 
 
 class ManagementZoneService:
@@ -36,7 +72,9 @@ class ManagementZoneService:
     def __init__(self, http_client: HttpClient):
         self.__http_client = http_client
 
-    def list(self, page_size: int = 200) -> PaginatedList["ManagementZoneShortRepresentation"]:
+    def list(
+        self, page_size: int = 200
+    ) -> PaginatedList["ManagementZoneShortRepresentation"]:
         """
         List all management zones.
 
@@ -44,7 +82,13 @@ class ManagementZoneService:
             Default value : 200
         """
         params = {"pageSize": page_size}
-        return PaginatedList(ManagementZoneShortRepresentation, self.__http_client, f"{self.ENDPOINT}", params, list_item="values")
+        return PaginatedList(
+            ManagementZoneShortRepresentation,
+            self.__http_client,
+            f"{self.ENDPOINT}",
+            params,
+            list_item="values",
+        )
 
     def get(self, management_zone_id: str) -> "ManagementZone":
         """Gets the description of a management zone referenced by ID.
@@ -53,8 +97,12 @@ class ManagementZoneService:
 
         :returns Event: the requested management zone
         """
-        response = self.__http_client.make_request(path=f"{self.ENDPOINT}/{management_zone_id}")
-        return ManagementZone(raw_element=response.json(), http_client=self.__http_client)
+        response = self.__http_client.make_request(
+            path=f"{self.ENDPOINT}/{management_zone_id}"
+        )
+        return ManagementZone(
+            raw_element=response.json(), http_client=self.__http_client
+        )
 
     def delete(self, management_zone_id: str):
         """Deletes the specified management zone
@@ -62,7 +110,9 @@ class ManagementZoneService:
         :param networkzone_id: the ID of the management zone
         :return: HTTP response
         """
-        return self.__http_client.make_request(path=f"{self.ENDPOINT}/{management_zone_id}", method="DELETE")
+        return self.__http_client.make_request(
+            path=f"{self.ENDPOINT}/{management_zone_id}", method="DELETE"
+        )
 
 
 class ComparisonBasic(DynatraceObject):
@@ -76,14 +126,18 @@ class ComparisonBasic(DynatraceObject):
 
 class ConditionKey(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.attribute: ConditionKeyAttribute = ConditionKeyAttribute(raw_element.get("attribute"))
+        self.attribute: ConditionKeyAttribute = ConditionKeyAttribute(
+            raw_element.get("attribute")
+        )
         self.type: ConditionKeyType = ConditionKeyType(raw_element.get("type"))
 
 
 class EntityRuleEngineCondition(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
         self.key: ConditionKey = ConditionKey(raw_element=raw_element.get("key"))
-        self.comparison_info: ComparisonBasic = ComparisonBasic(raw_element=raw_element.get("comparisonInfo"))
+        self.comparison_info: ComparisonBasic = ComparisonBasic(
+            raw_element=raw_element.get("comparisonInfo")
+        )
 
 
 class EntitySelectorBasedManagementZoneRule(DynatraceObject):
@@ -98,21 +152,32 @@ class ManagementZoneRule(DynatraceObject):
         self.type: RuleType = RuleType(raw_element.get("type"))
         self.enabled: bool = raw_element.get("enabled")
         self.value_format: str = raw_element.get("valueFormat")
-        self.propagation_types: List[PropagationType] = [PropagationType(prop_type) for prop_type in (raw_element.get("propagationTypes") or [])]
+        self.propagation_types: List[PropagationType] = [
+            PropagationType(prop_type)
+            for prop_type in (raw_element.get("propagationTypes") or [])
+        ]
         self.conditions: List[EntityRuleEngineCondition] = [
-            EntityRuleEngineCondition(raw_element=condition) for condition in (raw_element.get("conditions") or [])
+            EntityRuleEngineCondition(raw_element=condition)
+            for condition in (raw_element.get("conditions") or [])
         ]
 
 
 class ManagementZone(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.metadata: ConfigurationMetadata = ConfigurationMetadata(self._http_client, None, raw_element.get("metadata"))
+        self.metadata: ConfigurationMetadata = ConfigurationMetadata(
+            self._http_client, None, raw_element.get("metadata")
+        )
         self.id: str = raw_element.get("id")
         self.name: str = raw_element.get("name")
         self.description: str = raw_element.get("description")
-        self.rules: List[ManagementZoneRule] = [ManagementZoneRule(raw_element=rule) for rule in raw_element.get("rules")]
-        self.entity_selector_based_rules: List[EntitySelectorBasedManagementZoneRule] = [
-            EntitySelectorBasedManagementZoneRule(raw_element=rule) for rule in (raw_element.get("entitySelectorBasedRules") or [])
+        self.rules: List[ManagementZoneRule] = [
+            ManagementZoneRule(raw_element=rule) for rule in raw_element.get("rules")
+        ]
+        self.entity_selector_based_rules: List[
+            EntitySelectorBasedManagementZoneRule
+        ] = [
+            EntitySelectorBasedManagementZoneRule(raw_element=rule)
+            for rule in (raw_element.get("entitySelectorBasedRules") or [])
         ]
 
 
@@ -121,5 +186,7 @@ class ManagementZoneShortRepresentation(EntityShortRepresentation):
         """
         Get the full configuration for this management zone short representation.
         """
-        response = self._http_client.make_request(f"{ManagementZoneService.ENDPOINT}/{self.id}").json()
+        response = self._http_client.make_request(
+            f"{ManagementZoneService.ENDPOINT}/{self.id}"
+        ).json()
         return ManagementZone(http_client=self._http_client, raw_element=response)
