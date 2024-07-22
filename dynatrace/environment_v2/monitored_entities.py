@@ -178,6 +178,7 @@ class EntityService:
 
 class Entity(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        print("hi")
         self.last_seen: Optional[datetime] = int64_to_datetime(raw_element.get("lastSeenTms", 0))
         self.first_seen: Optional[datetime] = int64_to_datetime(raw_element.get("firstSeenTms", 0))
 
@@ -194,6 +195,7 @@ class Entity(DynatraceObject):
         self.icon: Optional[
             EntityIcon] = EntityIcon(raw_element=raw_element.get("icon")) if raw_element.get("icon") else None
         self.display_name: str = raw_element["displayName"]
+        self.type: str = raw_element['type']
         self.entity_id: str = raw_element["entityId"]
         self.properties: Optional[Dict[str, Any]] = raw_element.get("properties", {})
         self.tags: List[METag] = [METag(raw_element=tag) for tag in raw_element.get("tags", [])]
