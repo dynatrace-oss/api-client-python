@@ -178,7 +178,6 @@ class EntityService:
 
 class Entity(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        print("hi")
         self.last_seen: Optional[datetime] = int64_to_datetime(raw_element.get("lastSeenTms", 0))
         self.first_seen: Optional[datetime] = int64_to_datetime(raw_element.get("firstSeenTms", 0))
 
