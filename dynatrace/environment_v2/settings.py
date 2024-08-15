@@ -117,7 +117,7 @@ class SettingService:
             f"{self.OBJECTS_ENDPOINT}/{object_id}",
             method="DELETE",
             query_params=query_params,
-        ).json()
+        )
 
 
 class ModificationInfo(DynatraceObject):
