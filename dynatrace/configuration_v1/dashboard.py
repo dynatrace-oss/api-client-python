@@ -45,6 +45,13 @@ class DashboardService:
         response = self.__http_client.make_request(f"/api/config/v1/dashboards/{dashboard_id}").json()
         return Dashboard(self.__http_client, None, response)
 
+    def post(self, body: dict):
+        return self.__http_client.make_request(f"/api/config/v1/dashboards", params=body, method="POST")
+    
+    def put(self, dashboard_id: str, body: dict):
+        params = {"id": dashboard_id, "body": body}
+        return self.__http_client.make_request(f"/api/config/v1/dashboards/{dashboard_id}", params={params}, method="PUT")
+
     def delete(self, dashboard_id: str) -> Response:
         """
         Deletes the specified dashboard
@@ -80,6 +87,7 @@ class Dashboard(DynatraceObject):
         self.id: str = raw_element.get("id")
         self.dashboard_metadata: DashboardMetadata = DashboardMetadata(self._http_client, None, raw_element.get("dashboardMetadata"))
         self.tiles: List[Tile] = [Tile(self._http_client, None, raw_tile) for raw_tile in raw_element.get("tiles", [])]
+        self.raw_json: dict = raw_element
 
 
 class DashboardStub(DynatraceObject):
