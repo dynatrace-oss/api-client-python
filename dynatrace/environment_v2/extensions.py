@@ -100,7 +100,8 @@ class ExtensionsServiceV2:
         file = Path(zip_file_path)
         with open(file, "rb") as f:
             response = self.__http_client.make_request(f"{self.ENDPOINT}",
-                                                       params=params,
+                                                       query_params=params,
+                                                       headers={"Content-Type": "application/octet-stream"},
                                                        method="POST",
                                                        files={"file": f}).json()
             return Extension(raw_element=response)
