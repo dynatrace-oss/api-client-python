@@ -45,12 +45,14 @@ class ActiveGatesRemoteConfigurationService:
             target_params=params
         )
 
-    def post(self, payload: "RemoteConfigurationManagementOperationActiveGateRequest") -> "RemoteConfigurationManagementJob":
+    def post(self, entities: List[str], operations: List["RemoteConfigurationManagementOperation"]) -> "RemoteConfigurationManagementJob":
         """Creates a new remote configuration management job
 
-        :param payload: The remote configuration management job definition
+        :param entities: The list of entities to apply the operations to
+        :param operations: The list of operations to apply
         :return: The created job
         """
+        payload = RemoteConfigurationManagementOperationActiveGateRequest(entities=entities, operations=operations)
         response = self.__http_client.make_request(
             self.ENDPOINT,
             method="POST",
@@ -68,12 +70,14 @@ class ActiveGatesRemoteConfigurationService:
             return None
         return RemoteConfigurationManagementJob(raw_element=response.json())
 
-    def post_preview(self, payload: "RemoteConfigurationManagementOperationActiveGateRequest") -> "PaginatedList[RemoteConfigurationManagementJobPreview]":
+    def post_preview(self, entities: List[str], operations: List["RemoteConfigurationManagementOperation"]) -> "PaginatedList[RemoteConfigurationManagementJobPreview]":
         """Creates a preview for remote configuration management job
 
-        :param payload: The remote configuration management job definition
+        :param entities: The list of entities to apply the operations to
+        :param operations: The list of operations to apply
         :return: A paginated list of job previews
         """
+        payload = RemoteConfigurationManagementOperationActiveGateRequest(entities=entities, operations=operations)
         return PaginatedList(
             RemoteConfigurationManagementJobPreview,
             self.__http_client,
@@ -82,18 +86,19 @@ class ActiveGatesRemoteConfigurationService:
             target_params=payload.to_json()
         )
 
-    def validate(self, payload: "RemoteConfigurationManagementOperationActiveGateRequest") -> Optional["RemoteConfigurationManagementValidationResult"]:
+    def validate(self, entities: List[str], operations: List["RemoteConfigurationManagementOperation"]) -> Optional["RemoteConfigurationManagementValidationResult"]:
         """Validates the payload for a remote configuration management job
 
-        :param payload: The remote configuration management job definition to validate
+        :param entities: The list of entities to apply the operations to
+        :param operations: The list of operations to apply
         :return: Validation result if validation failed, None if validation succeeded
         """
+        payload = RemoteConfigurationManagementOperationActiveGateRequest(entities=entities, operations=operations)
         response = self.__http_client.make_request(
             f"{self.ENDPOINT}/validator",
             method="POST",
             data=payload.to_json()
         )
-        print(f"RESPONSE: '{response.content}'")
         if not response.content:
             return None
         return RemoteConfigurationManagementValidationResult(raw_element=response.json())
@@ -132,12 +137,14 @@ class OneAgentsRemoteConfigurationService:
             target_params=params
         )
 
-    def post(self, payload: "RemoteConfigurationManagementOperationOneAgentRequest") -> "RemoteConfigurationManagementJob":
+    def post(self, entities: List[str], operations: List["RemoteConfigurationManagementOperation"]) -> "RemoteConfigurationManagementJob":
         """Creates a new remote configuration management job
 
-        :param payload: The remote configuration management job definition
+        :param entities: The list of entities to apply the operations to
+        :param operations: The list of operations to apply
         :return: The created job
         """
+        payload = RemoteConfigurationManagementOperationOneAgentRequest(entities=entities, operations=operations)
         response = self.__http_client.make_request(
             self.ENDPOINT,
             method="POST",
@@ -155,12 +162,14 @@ class OneAgentsRemoteConfigurationService:
             return None
         return RemoteConfigurationManagementJob(raw_element=response.json())
 
-    def post_preview(self, payload: "RemoteConfigurationManagementOperationOneAgentRequest") -> "PaginatedList[RemoteConfigurationManagementJobPreview]":
+    def post_preview(self, entities: List[str], operations: List["RemoteConfigurationManagementOperation"]) -> "PaginatedList[RemoteConfigurationManagementJobPreview]":
         """Creates a preview for remote configuration management job
 
-        :param payload: The remote configuration management job definition
+        :param entities: The list of entities to apply the operations to
+        :param operations: The list of operations to apply
         :return: A paginated list of job previews
         """
+        payload = RemoteConfigurationManagementOperationOneAgentRequest(entities=entities, operations=operations)
         return PaginatedList(
             RemoteConfigurationManagementJobPreview,
             self.__http_client,
@@ -169,18 +178,19 @@ class OneAgentsRemoteConfigurationService:
             target_params=payload.to_json()
         )
 
-    def validate(self, payload: "RemoteConfigurationManagementOperationOneAgentRequest") -> Optional["RemoteConfigurationManagementValidationResult"]:
+    def validate(self, entities: List[str], operations: List["RemoteConfigurationManagementOperation"]) -> Optional["RemoteConfigurationManagementValidationResult"]:
         """Validates the payload for a remote configuration management job
 
-        :param payload: The remote configuration management job definition to validate
+        :param entities: The list of entities to apply the operations to
+        :param operations: The list of operations to apply
         :return: Validation result if validation failed, None if validation succeeded
         """
+        payload = RemoteConfigurationManagementOperationOneAgentRequest(entities=entities, operations=operations)
         response = self.__http_client.make_request(
             f"{self.ENDPOINT}/validator",
             method="POST",
             data=payload.to_json()
         )
-        print(f"RESPONSE: '{response.content}'")
         if not response.content:
             return None
         return RemoteConfigurationManagementValidationResult(raw_element=response.json())
@@ -228,6 +238,14 @@ class RemoteConfigurationManagementOperation(DynatraceObject):
             "operation": self.operation.value,
             "value": self.value
         }
+    
+    @staticmethod
+    def build(attribute: AttributeType, operation: OperationType, value: Optional[str] = None) -> "RemoteConfigurationManagementOperation":
+        return RemoteConfigurationManagementOperation(raw_element={
+            "attribute": attribute.value,
+            "operation": operation.value,
+            "value": value
+        })
 
 class RemoteConfigurationManagementOperationActiveGateRequest:
     """Remote configuration management operation creation request"""

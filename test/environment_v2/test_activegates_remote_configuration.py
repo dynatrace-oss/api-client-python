@@ -28,18 +28,13 @@ def test_list(dt: Dynatrace):
         break
 
 def test_post(dt: Dynatrace):
-    operation = RemoteConfigurationManagementOperation(raw_element={
-        "attribute": "networkZone",
-        "operation": "set",
-        "value": "test-zone"
-    })
-    
-    request = RemoteConfigurationManagementOperationActiveGateRequest(
-        entities=[TEST_ENTITY_ID],
-        operations=[operation]
+    operation = RemoteConfigurationManagementOperation.build(
+        attribute=AttributeType.NETWORK_ZONE,
+        operation=OperationType.SET,
+        value="test-zone",
     )
     
-    job = dt.activegates_remote_configuration.post(request)
+    job = dt.activegates_remote_configuration.post(entities=[TEST_ENTITY_ID], operations=[operation])
     
     assert job is not None
     assert job.id is not None
@@ -58,18 +53,16 @@ def test_get_current(dt: Dynatrace):
         assert current_job.processed_entities_count <= current_job.total_entities_count
 
 def test_post_preview(dt: Dynatrace):
-    operation = RemoteConfigurationManagementOperation(raw_element={
-        "attribute": "networkZone",
-        "operation": "set",
-        "value": "test-zone"
-    })
-    
-    request = RemoteConfigurationManagementOperationActiveGateRequest(
-        entities=[TEST_ENTITY_ID],
-        operations=[operation]
+    operation = RemoteConfigurationManagementOperation.build(
+        attribute=AttributeType.NETWORK_ZONE,
+        operation=OperationType.SET,
+        value="test-zone",
     )
     
-    previews = dt.activegates_remote_configuration.post_preview(request)
+    previews = dt.activegates_remote_configuration.post_preview(
+        entities=[TEST_ENTITY_ID],
+        operations=[operation],
+    )
     
     assert isinstance(previews, PaginatedList)
     
@@ -83,18 +76,15 @@ def test_post_preview(dt: Dynatrace):
         break
 
 def test_validate(dt: Dynatrace):
-    operation = RemoteConfigurationManagementOperation(raw_element={
-        "attribute": "networkZone",
-        "operation": "set",
-        "value": "test-zone"
-    })
-    
-    request = RemoteConfigurationManagementOperationActiveGateRequest(
+    operation = RemoteConfigurationManagementOperation.build(
+        attribute=AttributeType.NETWORK_ZONE,
+        operation=OperationType.SET,
+        value="test-zone",
+    )
+    validation_result = dt.activegates_remote_configuration.validate(
         entities=[TEST_ENTITY_ID],
         operations=[operation]
     )
-    
-    validation_result = dt.activegates_remote_configuration.validate(request)
     
     # If validation succeeds, result should be None
     # If validation fails, result should contain error details
@@ -105,25 +95,11 @@ def test_validate(dt: Dynatrace):
         assert isinstance(validation_result.invalid_operations, list)
 
 def test_get_job(dt: Dynatrace):
-    # First create a job to get its ID
-    operation = RemoteConfigurationManagementOperation(raw_element={
-        "attribute": "networkZone",
-        "operation": "set",
-        "value": "test-zone"
-    })
-    
-    request = RemoteConfigurationManagementOperationActiveGateRequest(
-        entities=[TEST_ENTITY_ID],
-        operations=[operation]
-    )
-    
-    created_job = dt.activegates_remote_configuration.post(request)
-    
-    # Then get the job by ID
-    job = dt.activegates_remote_configuration.get(created_job.id)
+    ID = "7974003406714390819"
+    job = dt.activegates_remote_configuration.get(ID)
     
     assert job is not None
-    assert job.id == created_job.id
+    assert job.id == ID
     assert job.entity_type == EntityType.ACTIVE_GATE
     assert len(job.operations) == 1
     assert job.operations[0].attribute == AttributeType.NETWORK_ZONE
