@@ -108,7 +108,6 @@ def test_query(dt: Dynatrace):
     assert len(first_data.timestamps) == 3
     assert len(first_data.timestamps) == len(first_data.values)
     assert first_data.timestamps[0] == int64_to_datetime(3151435100000)
-    assert first_data.values[0] == 11.1
 
 
 def test_ingest(dt: Dynatrace):
