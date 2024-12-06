@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 setup(
     name="dt",
     version="1.1.68",
-    packages=find_packages(),
+    packages=find_packages(include=["dynatrace"]),
     install_requires=["requests>=2.22"],
     tests_require=["pytest", "mock", "tox"],
     python_requires=">=3.6",
