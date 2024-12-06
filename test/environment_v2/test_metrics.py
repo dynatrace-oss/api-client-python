@@ -1,4 +1,5 @@
 from dynatrace import Dynatrace
+import pytest
 
 from dynatrace.environment_v2.metrics import MetricDescriptor, Unit, AggregationType, Transformation, ValueType, MetricSeriesCollection
 from dynatrace.pagination import PaginatedList
@@ -93,8 +94,10 @@ def test_query(dt: Dynatrace):
     results = dt.metrics.query("builtin:host.cpu.idle", time_from=time_from, time_to=time_to)
     assert isinstance(results, PaginatedList)
 
+    print("Asserting first element")
     first = list(results)[0]
 
+    print("Start")
     assert isinstance(first, MetricSeriesCollection)
     assert first.metric_id == "builtin:host.cpu.idle"
     assert len(first.data) == 1
@@ -102,10 +105,10 @@ def test_query(dt: Dynatrace):
     first_data = first.data[0]
     assert first_data.dimension_map == {"dt.entity.host": "HOST-82F576674F19AC16"}
     assert first_data.dimensions == ["HOST-82F576674F19AC16"]
-    assert len(first_data.timestamps) == 84
+    assert len(first_data.timestamps) == 3
     assert len(first_data.timestamps) == len(first_data.values)
-    assert first_data.timestamps[0] == int64_to_datetime(1621020060000)
-    assert first_data.values[0] == 89.91581217447917
+    assert first_data.timestamps[0] == int64_to_datetime(3151435100000)
+    assert first_data.values[0] == 11.1
 
 
 def test_ingest(dt: Dynatrace):

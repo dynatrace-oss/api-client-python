@@ -29,7 +29,6 @@ def test_list(dt: Dynatrace):
 def test_get(dt: Dynatrace):
     tags = dt.auto_tags.list()
     for tag in tags:
-        print(tag.name)
         full_tag = tag.get_full_configuration()
         assert isinstance(full_tag, AutoTag)
         assert isinstance(full_tag.metadata, ConfigurationMetadata)
@@ -38,7 +37,6 @@ def test_get(dt: Dynatrace):
         assert full_tag.name == "frontend"
         assert isinstance(full_tag.rules, List)
         for rule in full_tag.rules:
-            print(rule)
             assert isinstance(rule, AutoTagRule)
             assert rule.type == RuleType.SERVICE
             assert rule.enabled == True

@@ -1,0 +1,42 @@
+{
+    "nextPageKey": null,
+    "resolution": "1h",
+    "result": [
+      {
+        "data": [
+          {
+            "dimensionMap": {
+              "dt.entity.host": "HOST-82F576674F19AC16"
+            },
+            "dimensions": [
+              "HOST-82F576674F19AC16"
+            ],
+            "timestamps": [
+              3151435100000,
+              3151438700000,
+              3151442300000
+            ],
+            "values": [
+              11.1,
+              22.2,
+              33.3
+            ]
+          }
+        ],
+        "dataPointCountRatio": "0.1211",
+        "dimensionCountRatio": "0.0322",
+        "metricId": "builtin:host.cpu.idle"
+      },
+      {
+        "data": [],
+        "metricId": "builtin:host.cpu.idle:filter(eq(\"dt.entityhost\",HOST-123))",
+        "warnings": [
+          "The dimension key `dt.entityhost` has been referenced, but the metric has no such key."
+        ]
+      }
+    ],
+    "totalCount": 3,
+    "warnings": [
+      "The dimension key `dt.entityhost` has been referenced, but the metric has no such key."
+    ]
+  }

@@ -1,0 +1,163 @@
+[
+    {
+      "agentVersion": {
+        "major": 0,
+        "minor": 0,
+        "revision": 0,
+        "sourceRevision": "string",
+        "timestamp": "string"
+      },
+      "amiId": "string",
+      "autoInjection": "DISABLED_MANUALLY",
+      "autoScalingGroup": "string",
+      "awsInstanceId": "string",
+      "awsInstanceType": "string",
+      "awsNameTag": "string",
+      "awsSecurityGroup": [
+        "string"
+      ],
+      "azureComputeModeName": "DEDICATED",
+      "azureEnvironment": "string",
+      "azureHostNames": [
+        "string"
+      ],
+      "azureResourceGroupName": "string",
+      "azureResourceId": "string",
+      "azureSiteNames": [
+        "string"
+      ],
+      "azureSku": "BASIC",
+      "azureVmName": "string",
+      "azureVmScaleSetName": "string",
+      "azureVmSizeLabel": "string",
+      "azureZone": "string",
+      "beanstalkEnvironmentName": "string",
+      "bitness": "32bit",
+      "boshAvailabilityZone": "string",
+      "boshDeploymentId": "string",
+      "boshInstanceId": "string",
+      "boshInstanceName": "string",
+      "boshName": "string",
+      "boshStemcellVersion": "string",
+      "cloudPlatformVendorVersion": "string",
+      "cloudType": "AZURE",
+      "consumedHostUnits": 2.0,
+      "cpuCores": 8,
+      "customizedName": "string",
+      "discoveredName": "TAG009444368559.clients.example.com",
+      "displayName": "string",
+      "entityId": "HOST-7EC661999923A6B9",
+      "esxiHostName": "string",
+      "firstSeenTimestamp": 0,
+      "fromRelationships": {
+        "isNetworkClientOfHost": [
+          "string"
+        ]
+      },
+      "gceInstanceId": "string",
+      "gceInstanceName": "string",
+      "gceMachineType": "string",
+      "gceProject": "string",
+      "gceProjectId": "string",
+      "gcePublicIpAddresses": [
+        "string"
+      ],
+      "gcpZone": "string",
+      "hostGroup": {
+        "meId": "string",
+        "name": "string"
+      },
+      "hypervisorType": "AHV",
+      "ipAddresses": [
+        "string"
+      ],
+      "isMonitoringCandidate": true,
+      "kubernetesCluster": "string",
+      "kubernetesLabels": {
+        "additionalProp1": {},
+        "additionalProp2": {},
+        "additionalProp3": {}
+      },
+      "kubernetesNode": "string",
+      "lastSeenTimestamp": 1621519976487,
+      "localHostName": "string",
+      "localIp": "string",
+      "logicalCpuCores": 0,
+      "logicalCpus": 0,
+      "managementZones": [
+        {
+          "description": "Dynatrace entity for the REST API example",
+          "id": "6a98d7bc-abb9-44f8-ae6a-73e68e71812a",
+          "name": "Dynatrace entity"
+        }
+      ],
+      "monitoringMode": "FULL_STACK",
+      "networkZoneId": "string",
+      "oneAgentCustomHostName": "string",
+      "openStackInstaceType": "string",
+      "openstackAvZone": "string",
+      "openstackComputeNodeName": "string",
+      "openstackProjectName": "string",
+      "openstackSecurityGroups": [
+        "string"
+      ],
+      "openstackVmName": "string",
+      "osArchitecture": "X86",
+      "osType": "AIX",
+      "osVersion": "Windows 10 Enterprise 20H2 2009, ver. 10.0.19042",
+      "paasAgentVersions": [
+        {
+          "major": 0,
+          "minor": 0,
+          "revision": 0,
+          "sourceRevision": "string",
+          "timestamp": "string"
+        }
+      ],
+      "paasMemoryLimit": 0,
+      "paasType": "AWS_ECS_EC2",
+      "publicHostName": "string",
+      "publicIp": "string",
+      "scaleSetName": "string",
+      "simultaneousMultithreading": 0,
+      "softwareTechnologies": [
+        {
+          "edition": "string",
+          "type": "string",
+          "version": "string"
+        }
+      ],
+      "tags": [
+        {
+          "context": "CONTEXTLESS",
+          "key": "APP1234567",
+          "value": "string"
+        }
+      ],
+      "toRelationships": {
+        "isNetworkClientOfHost": [
+          "string"
+        ],
+        "isProcessOf": [
+          "string"
+        ],
+        "isSiteOf": [
+          "string"
+        ],
+        "runsOn": [
+          "string"
+        ]
+      },
+      "userLevel": "NON_SUPERUSER",
+      "virtualCpus": 0,
+      "vmwareName": "string",
+      "zosCPUModelNumber": "string",
+      "zosCPUSerialNumber": "string",
+      "zosLpaName": "string",
+      "zosSystemName": "string",
+      "zosTotalGeneralPurposeProcessors": 0,
+      "zosTotalPhysicalMemory": 0,
+      "zosTotalZiipProcessors": 0,
+      "zosVirtualization": "string"
+    }
+  ]
