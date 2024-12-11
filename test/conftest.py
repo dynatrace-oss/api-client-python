@@ -18,6 +18,7 @@ class MockResponse:
     def __init__(self, json_data):
         self.json_data = json_data
         self.headers = {}
+        self.content = json.dumps(json_data).encode() if json_data else None
 
     def json(self):
         return self.json_data
@@ -38,7 +39,8 @@ def local_make_request(
     file_name = f"{method}{path}{params}.json"
     file_path = Path(current_file_path, "mock_data", file_name)
     with open(file_path) as f:
-        json_data = json.load(f)
+        content = f.read()
+        json_data = json.loads(content) if content else None
         return MockResponse(json_data)
 
 

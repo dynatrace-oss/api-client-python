@@ -227,7 +227,7 @@ class MetricDescriptor(DynatraceObject):
         self.root_cause_relevant: Optional[bool] = raw_element.get("rootCauseRelevant")
         self.tags: Optional[List[str]] = raw_element.get("tags")
         self.transformations: Optional[List[Transformation]] = [Transformation(element) for element in raw_element.get("transformations", [])]
-        self.unit: Optional[Unit] = Unit(raw_element.get("unit"))
+        self.unit: Optional[Unit] = Unit(raw_element.get("unit")) if raw_element.get("unit") else None
         self.warnings: Optional[List[str]] = raw_element.get("warnings")
 
 

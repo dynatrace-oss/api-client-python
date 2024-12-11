@@ -1,0 +1,11 @@
+{
+    "previews": [
+      {
+        "alreadyConfiguredEntitiesCount": 1,
+        "attribute": "networkZone",
+        "operation": "set",
+        "targetEntitiesCount": 2,
+        "value": "test-zone"
+      }
+    ]
+  }

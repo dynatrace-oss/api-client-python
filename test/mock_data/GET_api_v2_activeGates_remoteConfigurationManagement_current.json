@@ -1,0 +1,16 @@
+{
+    "endTime": "2020-11-05T08:15:30.144Z",
+    "entityType": "ACTIVE_GATE",
+    "id": "7974003406714390819",
+    "operations": [
+      {
+        "attribute": "networkZone",
+        "operation": "set",
+        "value": "exampleNetworkZoneName"
+      }
+    ],
+    "processedEntitiesCount": 1,
+    "startTime": "2020-11-05T08:15:30.144Z",
+    "timeoutTime": "2020-11-05T08:15:30.144Z",
+    "totalEntitiesCount": 1
+  }

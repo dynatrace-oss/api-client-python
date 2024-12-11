@@ -44,6 +44,7 @@ from dynatrace.environment_v1.deployment import DeploymentService
 from dynatrace.environment_v2.activegates import ActiveGateService
 from dynatrace.environment_v2.activegates_autoupdate_configuration import ActiveGateAutoUpdateConfigurationService
 from dynatrace.environment_v2.activegates_autoupdate_jobs import ActiveGateAutoUpdateJobsService
+from dynatrace.environment_v2.remote_configuration import ActiveGatesRemoteConfigurationService, OneAgentsRemoteConfigurationService
 from dynatrace.environment_v2.audit_logs import AuditLogsService
 from dynatrace.environment_v2.extensions import ExtensionsServiceV2
 from dynatrace.environment_v2.events import EventServiceV2
@@ -95,6 +96,7 @@ class Dynatrace:
         self.activegates: ActiveGateService = ActiveGateService(self.__http_client)
         self.activegates_autoupdate_configuration: ActiveGateAutoUpdateConfigurationService = ActiveGateAutoUpdateConfigurationService(self.__http_client)
         self.activegates_autoupdate_jobs = ActiveGateAutoUpdateJobsService(self.__http_client)
+        self.activegates_remote_configuration: ActiveGatesRemoteConfigurationService = ActiveGatesRemoteConfigurationService(self.__http_client)
         self.alerting_profiles: AlertingProfileService = AlertingProfileService(self.__http_client)
         self.anomaly_detection_metric_events = MetricEventService(self.__http_client)
         self.anomaly_detection_process_groups = AnomalyDetectionPGService(self.__http_client)
@@ -120,6 +122,7 @@ class Dynatrace:
         self.oneagents_config_environment: OneAgentEnvironmentWideConfigService = OneAgentEnvironmentWideConfigService(self.__http_client)
         self.oneagents_config_host: OneAgentOnAHostConfigService = OneAgentOnAHostConfigService(self.__http_client)
         self.oneagents_config_hostgroup: OneAgentInAHostGroupService = OneAgentInAHostGroupService(self.__http_client)
+        self.oneagents_remote_configuration: OneAgentsRemoteConfigurationService = OneAgentsRemoteConfigurationService(self.__http_client)
         self.settings : SettingService = SettingService(self.__http_client)
         self.plugins: PluginService = PluginService(self.__http_client)
         self.problems: ProblemService = ProblemService(self.__http_client)

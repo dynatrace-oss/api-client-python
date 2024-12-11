@@ -194,7 +194,7 @@ class Entity(DynatraceObject):
         self.icon: Optional[
             EntityIcon] = EntityIcon(raw_element=raw_element.get("icon")) if raw_element.get("icon") else None
         self.display_name: str = raw_element["displayName"]
-        self.type: str = raw_element['type']
+        self.type: str | None = raw_element.get('type')
         self.entity_id: str = raw_element["entityId"]
         self.properties: Optional[Dict[str, Any]] = raw_element.get("properties", {})
         self.tags: List[METag] = [METag(raw_element=tag) for tag in raw_element.get("tags", [])]
