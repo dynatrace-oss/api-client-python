@@ -56,7 +56,7 @@ class ActiveGatesRemoteConfigurationService:
         response = self.__http_client.make_request(
             self.ENDPOINT,
             method="POST",
-            data=payload.to_json()
+            params=payload.to_json()
         ).json()
         return RemoteConfigurationManagementJob(raw_element=response)
 
@@ -97,7 +97,7 @@ class ActiveGatesRemoteConfigurationService:
         response = self.__http_client.make_request(
             f"{self.ENDPOINT}/validator",
             method="POST",
-            data=payload.to_json()
+            params=payload.to_json()
         )
         if not response.content:
             return None
@@ -148,7 +148,7 @@ class OneAgentsRemoteConfigurationService:
         response = self.__http_client.make_request(
             self.ENDPOINT,
             method="POST",
-            data=payload.to_json()
+            params=payload.to_json()
         ).json()
         return RemoteConfigurationManagementJob(raw_element=response)
 
@@ -189,7 +189,7 @@ class OneAgentsRemoteConfigurationService:
         response = self.__http_client.make_request(
             f"{self.ENDPOINT}/validator",
             method="POST",
-            data=payload.to_json()
+            params=payload.to_json()
         )
         if not response.content:
             return None
