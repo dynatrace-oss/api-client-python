@@ -7,7 +7,6 @@ To contribute, [fork](https://www.dynatrace.com/support/help/dynatrace-api) this
 [Tests](#tests)  
 [Code formatting](#code-formatting)  
 
-
 <a name="setup"/>
 
 ## Setup
@@ -29,10 +28,18 @@ source .venv/bin/activate # On linux
 # On Windows cmd: .venv/Scripts/activate.bat
 ```
 
+You need Poetry on your system to be able to build and release the package.
+If you don't have a system-wide installation of Poetry, you can install it
+in the same virtual environment.
+
+```shell
+pip install poetry
+```
+
 Install the dev requirements:
 
 ```shell
-pip install -r requirements_dev.txt
+poetry install
 ```
 
 Make sure tests pass:

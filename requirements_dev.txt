@@ -1,5 +1,0 @@
-requests>=2.22
-pytest>=6.2.3
-mock
-tox
-wrapt==1.12.1
