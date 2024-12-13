@@ -1,22 +1,31 @@
 name: Build and publish to PyPi
-on: push
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to publish (v*.*.*)'
+        required: true
+        type: string
 
 jobs:
   build-n-publish:
     name: Build and publish to PyPi
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@master
-    - uses: actions/setup-python@v2
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ inputs.tag }}
+    - uses: actions/setup-python@v5
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade setuptools wheel
+        python -m pip install --upgrade poetry
+        poetry install
     - name: Build
       run: |
-        python setup.py sdist bdist_wheel
+        poetry build
+    - name: Configure Poetry credentials
+      run: |
+        poetry config pypi-token.pypi ${{ secrets.PYPI_API_TOKEN }}
     - name: Publish
-      if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
-      uses: pypa/gh-action-pypi-publish@release/v1
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
+      run: |
+        poetry publish

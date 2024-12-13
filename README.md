@@ -145,6 +145,7 @@ dt.settings.create_object(validate_only=False, body=settings_object)
  ActiveGates                             | :heavy_check_mark: | `dt.activegates`                          |
  ActiveGates - Auto-update configuration | :heavy_check_mark: | `dt.activegates_autoupdate_configuration` |
  ActiveGates - Auto-update jobs          | :heavy_check_mark: | `dt.activegates_autoupdate_jobs`          |
+ ActiveGates - Remote configuration      | :heavy_check_mark: | `dt.activegates_remote_configuration`     |
  Audit Logs                              | :heavy_check_mark: | `dt.audit_logs`                           |
  Events                                  |     :warning:      | `dt.events_v2`                            |
  Extensions 2.0                          | :heavy_check_mark: | `dt.extensions_v2`                        |
@@ -153,6 +154,7 @@ dt.settings.create_object(validate_only=False, body=settings_object)
  Monitored entities                      |     :warning:      | `dt.entities`                             |
  Monitored entities - Custom tags        | :heavy_check_mark: | `dt.custom_tags`                          |
  Network zones                           |     :warning:      | `dt.network_zones`                        |
+ OneAgents - Remote configuration        | :heavy_check_mark: | `dt.oneagents_remote_configuration`       |
  Problems                                | :heavy_check_mark: | `dt.problems`                             |
  Security problems                       |        :x:         |                                           |
  Service-level objectives                | :heavy_check_mark: | `dt.slos`                                 |
