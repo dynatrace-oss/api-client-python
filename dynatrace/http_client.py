@@ -55,13 +55,6 @@ class HttpClient:
             base_url = base_url[:-1]
         self.base_url = base_url
 
-        # Persistent session
-        self.session = requests.Session()
-        
-        # Mount the adapter once during initialization
-        self.session.mount("https://", HTTPAdapter(max_retries=self.retries))
-        self.session.mount("http://", HTTPAdapter(max_retries=self.retries))
-
         # Custom headers
         self.headers = headers.copy() if headers else {}
 
@@ -100,6 +93,13 @@ class HttpClient:
                 method_whitelist=["TRACE", "PUT", "DELETE", "OPTIONS", "HEAD", "GET", "POST"],
                 raise_on_status=False,
             )
+
+        # Persistent session
+        self.session = requests.Session()
+        
+        # Mount the adapter once during initialization
+        self.session.mount("https://", HTTPAdapter(max_retries=self.retries))
+        self.session.mount("http://", HTTPAdapter(max_retries=self.retries))
 
         # This is for internal dynatrace usage
         self.mc_jsession_id = mc_jsession_id

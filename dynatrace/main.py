@@ -79,6 +79,11 @@ class Dynatrace:
         timeout: Optional[int] = None,
         headers: Optional[Dict] = None,
     ):
+        if not base_url:
+            raise ValueError("base_url is required")
+        if not token:
+            raise ValueError("token is required")
+
         self.__http_client = HttpClient(
             base_url,
             token,
