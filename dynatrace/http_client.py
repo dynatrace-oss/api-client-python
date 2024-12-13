@@ -48,11 +48,15 @@ class HttpClient:
         mc_b925d32c: Optional[str] = None,
         mc_sso_csrf_cookie: Optional[str] = None,
         print_bodies: bool = False,
-        timeout: Optional[int] = None
+        timeout: Optional[int] = None,
+        headers: Optional[Dict] = None,
     ):
         while base_url.endswith("/"):
             base_url = base_url[:-1]
         self.base_url = base_url
+
+        # Custom headers
+        self.headers = headers.copy() if headers else {}
 
         if proxies is None:
             proxies = {}
@@ -90,6 +94,13 @@ class HttpClient:
                 raise_on_status=False,
             )
 
+        # Persistent session
+        self.session = requests.Session()
+        
+        # Mount the adapter once during initialization
+        self.session.mount("https://", HTTPAdapter(max_retries=self.retries))
+        self.session.mount("http://", HTTPAdapter(max_retries=self.retries))
+
         # This is for internal dynatrace usage
         self.mc_jsession_id = mc_jsession_id
         self.mc_b925d32c = mc_b925d32c
@@ -105,33 +116,31 @@ class HttpClient:
             body = params
             params = query_params
 
-        if headers is None:
-            headers = {}
-        if files is None and "content-type" not in [key.lower() for key in headers.keys()]:
-            headers.update({"content-type": "application/json"})
-        headers.update(self.auth_header)
+        request_headers = self.headers.copy()
+        if headers:
+            request_headers.update(headers)
+        if files is None and "content-type" not in [key.lower() for key in request_headers.keys()]:
+            request_headers.update({"content-type": "application/json"})
+        request_headers.update(self.auth_header)
 
         cookies = None
         if self.mc_b925d32c and self.mc_sso_csrf_cookie and self.mc_jsession_id:
-            headers.update({"Cookie": f"JSESSIONID={self.mc_jsession_id}; ssoCSRFCookie={self.mc_sso_csrf_cookie}; b925d32c={self.mc_b925d32c}"})
+            request_headers.update({"Cookie": f"JSESSIONID={self.mc_jsession_id}; ssoCSRFCookie={self.mc_sso_csrf_cookie}; b925d32c={self.mc_b925d32c}"})
             cookies = {"JSESSIONID": self.mc_jsession_id, "ssoCSRFCookie": self.mc_sso_csrf_cookie, "b925d32c": self.mc_b925d32c}
-
-        s = requests.Session()
-        s.mount("https://", HTTPAdapter(max_retries=self.retries))
 
         self.log.debug(f"Making {method} request to '{url}' with params {params} and body: {body}")
         if self.print_bodies:
             print(method, url)
             if body:
                 print(json.dumps(body, indent=2))
-        r = s.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies, data=data, cookies=cookies, files=files, timeout=self.timeout)
+        r = self.session.request(method, url, headers=request_headers, params=params, json=body, verify=False, proxies=self.proxies, data=data, cookies=cookies, files=files, timeout=self.timeout)
         self.log.debug(f"Received response '{r}'")
 
         while r.status_code == 429 and self.too_many_requests_strategy == TOO_MANY_REQUESTS_WAIT:
             sleep_amount = int(r.headers.get("retry-after", 5))
             self.log.warning(f"Sleeping for {sleep_amount}s because we have received an HTTP 429")
             time.sleep(sleep_amount)
-            r = requests.request(method, url, headers=headers, params=params, json=body, verify=False, proxies=self.proxies, timeout=self.timeout)
+            r = self.session.request(method, url, headers=request_headers, params=params, json=body, verify=False, proxies=self.proxies, timeout=self.timeout)
 
         if r.status_code >= 400:
             raise Exception(f"Error making request to {url}: {r}. Response: {r.text}")

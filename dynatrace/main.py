@@ -76,8 +76,14 @@ class Dynatrace:
         mc_b925d32c: Optional[str] = None,
         mc_sso_csrf_cookie: Optional[str] = None,
         print_bodies = False,
-        timeout: Optional[int] = None
+        timeout: Optional[int] = None,
+        headers: Optional[Dict] = None,
     ):
+        if not base_url:
+            raise ValueError("base_url is required")
+        if not token:
+            raise ValueError("token is required")
+
         self.__http_client = HttpClient(
             base_url,
             token,
@@ -90,7 +96,8 @@ class Dynatrace:
             mc_b925d32c,
             mc_sso_csrf_cookie,
             print_bodies,
-            timeout
+            timeout,
+            headers,
         )
 
         self.activegates: ActiveGateService = ActiveGateService(self.__http_client)
