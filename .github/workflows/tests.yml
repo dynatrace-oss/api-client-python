@@ -10,9 +10,10 @@ jobs:
       matrix:
         # https://help.github.com/articles/virtual-environments-for-github-actions
         platform:
-          - ubuntu-22.04
+          - ubuntu-20.04
           - macos-latest
           - windows-latest
+        # https://raw.githubusercontent.com/actions/python-versions/main/versions-manifest.json
         python-version: [ '3.6', '3.7', '3.8', '3.9', '3.10', '3.11', '3.12', '3.13' ]
         exclude:
           - platform: macos-latest
