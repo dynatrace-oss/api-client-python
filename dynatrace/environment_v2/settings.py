@@ -42,7 +42,7 @@ class SettingService:
         """
         params = {
             "schemaIds": schema_id,
-            "scope": scope,
+            "scopes": scope,
             "fields": fields,
             "externalIds": external_ids,
             "filter": filter,
