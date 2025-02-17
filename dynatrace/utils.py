@@ -23,6 +23,7 @@ import re
 
 
 ISO_8601 = "%Y-%m-%dT%H:%M:%S.%fZ"
+ISO_8601_NO_MS = "%Y-%m-%dT%H:%M:%SZ"
 
 
 def slugify(value):
@@ -53,7 +54,11 @@ def timestamp_to_string(timestamp: Optional[Union[datetime, str]]) -> Optional[s
 
 def iso8601_to_datetime(timestamp: Optional[str]) -> Optional[datetime]:
     if isinstance(timestamp, str):
-        return datetime.strptime(timestamp, ISO_8601)
+        try:
+            return datetime.strptime(timestamp, ISO_8601)
+        except ValueError:
+            # DT API currently omitts milliseconds in response if they are 000
+            return datetime.strptime(timestamp, ISO_8601_NO_MS)
     return timestamp
 
 
