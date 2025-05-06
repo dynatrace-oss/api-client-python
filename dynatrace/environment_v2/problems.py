@@ -28,7 +28,7 @@ from dynatrace.environment_v2.monitored_entities import EntityStub
 from dynatrace.environment_v2.custom_tags import METag
 from dynatrace.configuration_v1.alerting_profiles import AlertingProfileStub
 from dynatrace.pagination import PaginatedList
-from dynatrace.utils import int64_to_datetime
+from dynatrace.utils import int64_to_datetime, timestamp_to_string
 
 
 class ProblemService:
@@ -55,8 +55,8 @@ class ProblemService:
             "problemSelector": problem_selector,
             "entitySelector": entity_selector,
             "fields": fields,
-            "from": time_from,
-            "to": time_to,
+            "from": timestamp_to_string(time_from),
+            "to": timestamp_to_string(time_to),
             "sort": sort,
             "pageSize": page_size,
         }
