@@ -141,65 +141,6 @@ class Transformation(Enum):
     SETUNIT = "setUnit"
 
 
-class Unit(Enum):
-    BIT = "Bit"
-    BITPERHOUR = "BitPerHour"
-    BITPERMINUTE = "BitPerMinute"
-    BITPERSECOND = "BitPerSecond"
-    BYTE = "Byte"
-    BYTEPERHOUR = "BytePerHour"
-    BYTEPERMINUTE = "BytePerMinute"
-    BYTEPERSECOND = "BytePerSecond"
-    CORES = "Cores"
-    COUNT = "Count"
-    DAY = "Day"
-    DECIBELMILLIWATT = "DecibelMilliWatt"
-    GIBIBYTE = "GibiByte"
-    GIGA = "Giga"
-    GIGABYTE = "GigaByte"
-    HOUR = "Hour"
-    KIBIBYTE = "KibiByte"
-    KIBIBYTEPERHOUR = "KibiBytePerHour"
-    KIBIBYTEPERMINUTE = "KibiBytePerMinute"
-    KIBIBYTEPERSECOND = "KibiBytePerSecond"
-    KILO = "Kilo"
-    KILOBYTE = "KiloByte"
-    KILOBYTEPERHOUR = "KiloBytePerHour"
-    KILOBYTEPERMINUTE = "KiloBytePerMinute"
-    KILOBYTEPERSECOND = "KiloBytePerSecond"
-    MSU = "MSU"
-    MEBIBYTE = "MebiByte"
-    MEBIBYTEPERHOUR = "MebiBytePerHour"
-    MEBIBYTEPERMINUTE = "MebiBytePerMinute"
-    MEBIBYTEPERSECOND = "MebiBytePerSecond"
-    MEGA = "Mega"
-    MEGABYTE = "MegaByte"
-    MEGABYTEPERHOUR = "MegaBytePerHour"
-    MEGABYTEPERMINUTE = "MegaBytePerMinute"
-    MEGABYTEPERSECOND = "MegaBytePerSecond"
-    MICROSECOND = "MicroSecond"
-    MILLICORES = "MilliCores"
-    MILLISECOND = "MilliSecond"
-    MILLISECONDPERMINUTE = "MilliSecondPerMinute"
-    MINUTE = "Minute"
-    MONTH = "Month"
-    NANOSECOND = "NanoSecond"
-    NANOSECONDPERMINUTE = "NanoSecondPerMinute"
-    NOTAPPLICABLE = "NotApplicable"
-    PERHOUR = "PerHour"
-    PERMINUTE = "PerMinute"
-    PERSECOND = "PerSecond"
-    PERCENT = "Percent"
-    PIXEL = "Pixel"
-    PROMILLE = "Promille"
-    RATIO = "Ratio"
-    SECOND = "Second"
-    STATE = "State"
-    UNSPECIFIED = "Unspecified"
-    WEEK = "Week"
-    YEAR = "Year"
-
-
 class MetricDescriptor(DynatraceObject):
     def _create_from_raw_data(self, raw_element):
 
@@ -227,7 +168,7 @@ class MetricDescriptor(DynatraceObject):
         self.root_cause_relevant: Optional[bool] = raw_element.get("rootCauseRelevant")
         self.tags: Optional[List[str]] = raw_element.get("tags")
         self.transformations: Optional[List[Transformation]] = [Transformation(element) for element in raw_element.get("transformations", [])]
-        self.unit: Optional[Unit] = Unit(raw_element.get("unit")) if raw_element.get("unit") else None
+        self.unit: Optional[str] = raw_element.get("unit")
         self.warnings: Optional[List[str]] = raw_element.get("warnings")
 
 
