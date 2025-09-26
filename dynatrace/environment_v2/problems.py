@@ -23,7 +23,6 @@ from typing import Optional, Union, Dict, Any, List
 from dynatrace.http_client import HttpClient
 from dynatrace.dynatrace_object import DynatraceObject
 from dynatrace.environment_v2.schemas import ManagementZone
-from dynatrace.environment_v2.metrics import Unit
 from dynatrace.environment_v2.monitored_entities import EntityStub
 from dynatrace.environment_v2.custom_tags import METag
 from dynatrace.configuration_v1.alerting_profiles import AlertingProfileStub
@@ -228,7 +227,7 @@ class TransactionalEvidence(Evidence):
         self.value_before_change_point: Optional[float] = raw_element.get("valueBeforeChangePoint")
         self.value_after_change_point: Optional[float] = raw_element.get("valueAfterChangePoint")
         self.end_time: Optional[datetime] = int64_to_datetime(raw_element.get("endTime"))
-        self.unit: Optional[Unit] = Unit(raw_element.get("unit"))
+        self.unit: Optional[str] = raw_element.get("unit")
 
 
 class MetricEvidence(Evidence):
@@ -237,7 +236,7 @@ class MetricEvidence(Evidence):
         self.value_before_change_point: Optional[float] = raw_element.get("valueBeforeChangePoint")
         self.value_after_change_point: Optional[float] = raw_element.get("valueAfterChangePoint")
         self.end_time: Optional[datetime] = int64_to_datetime(raw_element.get("endTime"))
-        self.unit: Optional[Unit] = Unit(raw_element.get("unit"))
+        self.unit: Optional[str] = raw_element.get("unit")
         self.metric_id: Optional[str] = raw_element.get("metricId")
 
 

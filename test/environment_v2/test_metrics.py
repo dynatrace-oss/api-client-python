@@ -1,7 +1,7 @@
 from dynatrace import Dynatrace
 import pytest
 
-from dynatrace.environment_v2.metrics import MetricDescriptor, Unit, AggregationType, Transformation, ValueType, MetricSeriesCollection
+from dynatrace.environment_v2.metrics import MetricDescriptor, AggregationType, Transformation, ValueType, MetricSeriesCollection
 from dynatrace.pagination import PaginatedList
 from dynatrace.utils import int64_to_datetime
 
@@ -14,7 +14,7 @@ def test_list(dt: Dynatrace):
         assert metric.metric_id == "builtin:apps.other.apdex.osAndGeo"
         assert metric.display_name == "Apdex (by OS, geolocation) [mobile, custom]"
         assert metric.description == ""
-        assert metric.unit == Unit.NOTAPPLICABLE
+        assert metric.unit == "NotApplicable"
         break
 
 
@@ -29,7 +29,7 @@ def test_list_fields(dt: Dynatrace):
         assert metric.metric_id == "builtin:apps.other.apdex.osAndGeo"
         assert metric.display_name == "Apdex (by OS, geolocation) [mobile, custom]"
         assert metric.description == ""
-        assert metric.unit == Unit.NOTAPPLICABLE
+        assert metric.unit == "NotApplicable"
         assert not metric.ddu_billable
         assert metric.created is None
         assert metric.last_written == int64_to_datetime(1620514220905)
@@ -60,7 +60,7 @@ def test_list_params(dt: Dynatrace):
         assert metric.metric_id == "builtin:host.cpu.idle"
         assert metric.display_name == "CPU idle"
         assert metric.description == ""
-        assert metric.unit == Unit.PERCENT
+        assert metric.unit == "Percent"
         assert not metric.ddu_billable
         assert metric.last_written == int64_to_datetime(1621030025348)
         assert metric.entity_type == ["HOST"]
@@ -77,7 +77,7 @@ def test_get(dt: Dynatrace):
     assert metric.metric_id == "builtin:host.cpu.idle"
     assert metric.display_name == "CPU idle"
     assert metric.description == ""
-    assert metric.unit == Unit.PERCENT
+    assert metric.unit == "Percent"
     assert not metric.ddu_billable
     assert metric.last_written == int64_to_datetime(1621030565348)
     assert metric.entity_type == ["HOST"]
