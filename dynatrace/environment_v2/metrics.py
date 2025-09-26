@@ -195,6 +195,7 @@ class Unit(Enum):
     RATIO = "Ratio"
     SECOND = "Second"
     STATE = "State"
+    UNRECOGNIZED = "Unrecognized"
     UNSPECIFIED = "Unspecified"
     WEEK = "Week"
     YEAR = "Year"
@@ -227,9 +228,13 @@ class MetricDescriptor(DynatraceObject):
         self.root_cause_relevant: Optional[bool] = raw_element.get("rootCauseRelevant")
         self.tags: Optional[List[str]] = raw_element.get("tags")
         self.transformations: Optional[List[Transformation]] = [Transformation(element) for element in raw_element.get("transformations", [])]
-        self.unit: Optional[Unit] = Unit(raw_element.get("unit")) if raw_element.get("unit") else None
         self.warnings: Optional[List[str]] = raw_element.get("warnings")
 
+        # any metrics with a custom unit (not present in the Enum) will be set to 'Unrecognized'.
+        try:
+            self.unit: Optional[Unit] = Unit(raw_element.get("unit")) if raw_element.get("unit") else None
+        except ValueError:
+            self.unit = Unit.UNRECOGNIZED
 
 class ValueType(Enum):
     ERROR = "error"
