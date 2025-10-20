@@ -66,16 +66,6 @@ class EventType(Enum):
     UPDATE = "UPDATE"
 
 
-class Category(Enum):
-    ACTIVEGATE_TOKEN = "ACTIVEGATE_TOKEN"
-    CONFIG = "CONFIG"
-    DEBUG_UI = "DEBUG_UI"
-    MANUAL_TAGGING_SERVICE = "MANUAL_TAGGING_SERVICE"
-    REST = "REST"
-    TOKEN = "TOKEN"
-    WEB_UI = "WEB_UI"
-
-
 class UserType(Enum):
     PUBLIC_TOKEN_IDENTIFIER = "PUBLIC_TOKEN_IDENTIFIER"
     REQUEST_ID = "REQUEST_ID"
@@ -86,7 +76,7 @@ class UserType(Enum):
 
 class AuditLogEntry(DynatraceObject):
     def _create_from_raw_data(self, raw_element: Dict[str, Any]):
-        self.category: Category = Category(raw_element.get("category"))
+        self.category: str = raw_element.get("category")
         self.environment_id: str = raw_element.get("environmentId")
         self.event_type: EventType = EventType(raw_element.get("eventType"))
         self.log_id: str = raw_element.get("logId")
