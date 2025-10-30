@@ -49,8 +49,7 @@ class DashboardService:
         return self.__http_client.make_request("/api/config/v1/dashboards", params=body, method="POST")
     
     def put(self, dashboard_id: str, body: dict):
-        params = {"id": dashboard_id, "body": body}
-        return self.__http_client.make_request(f"/api/config/v1/dashboards/{dashboard_id}", params=params, method="PUT")
+        return self.__http_client.make_request(f"/api/config/v1/dashboards/{dashboard_id}", params=body, method="PUT")
 
     def delete(self, dashboard_id: str) -> Response:
         """
