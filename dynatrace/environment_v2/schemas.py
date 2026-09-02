@@ -49,4 +49,8 @@ class ManagementZone(DynatraceObject):
 
     def to_json(self) -> Dict[str, Any]:
         return {"name": self.name, "id": self.id}
-    
+
+class EnrichedManagementZoneDto(ManagementZone):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        super()._create_from_raw_data(raw_element)
+        self.source_setting: Optional[str] = raw_element.get("sourceSetting")

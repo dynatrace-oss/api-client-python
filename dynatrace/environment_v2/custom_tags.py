@@ -140,3 +140,19 @@ class TagContext(Enum):
 
     def __str__(self) -> str:
         return self.value
+
+
+class EnrichedTagDto(METag):
+    def _create_from_raw_data(self, raw_element: Dict[str, Any]):
+        super()._create_from_raw_data(raw_element)
+        self.source: Optional[TagSource] = TagSource(raw_element.get("source")) if raw_element.get("source") else None
+        self.source_setting: Optional[str] = raw_element.get("sourceSetting")
+
+
+class TagSource(Enum):
+    USER = "User provided tags"
+    AUTO = "Auto tags"
+    ENVT = "Environment tags"
+
+    def __str__(self) -> str:
+        return self.value

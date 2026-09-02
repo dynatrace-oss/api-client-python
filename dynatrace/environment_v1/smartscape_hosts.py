@@ -48,6 +48,7 @@ class OSArchitecture(Enum):
 
 
 class MonitoringMode(Enum):
+    DISCOVERY = "DISCOVERY"
     FULL_STACK = "FULL_STACK"
     INFRASTRUCTURE = "INFRASTRUCTURE"
     OFF = "OFF"

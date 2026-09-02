@@ -21,8 +21,8 @@ from typing import Any, Dict, List, Optional, Union
 from requests import Response
 
 from dynatrace.dynatrace_object import DynatraceObject
-from dynatrace.environment_v2.custom_tags import METag
-from dynatrace.environment_v2.schemas import ManagementZone
+from dynatrace.environment_v2.custom_tags import EnrichedTagDto
+from dynatrace.environment_v2.schemas import EnrichedManagementZoneDto
 from dynatrace.http_client import HttpClient
 from dynatrace.pagination import PaginatedList
 from dynatrace.utils import int64_to_datetime, timestamp_to_string
@@ -189,7 +189,7 @@ class Entity(DynatraceObject):
             key: [EntityId(raw_element=entity) for entity in entities] for key, entities in
             raw_element.get("toRelationships", {}).items()
         }
-        self.management_zones: List[ManagementZone] = [ManagementZone(raw_element=m) for m in
+        self.management_zones: List[EnrichedManagementZoneDto] = [EnrichedManagementZoneDto(raw_element=m) for m in
                                                        raw_element.get("managementZones", [])]
         self.icon: Optional[
             EntityIcon] = EntityIcon(raw_element=raw_element.get("icon")) if raw_element.get("icon") else None
@@ -197,7 +197,7 @@ class Entity(DynatraceObject):
         self.type: str | None = raw_element.get('type')
         self.entity_id: str = raw_element["entityId"]
         self.properties: Optional[Dict[str, Any]] = raw_element.get("properties", {})
-        self.tags: List[METag] = [METag(raw_element=tag) for tag in raw_element.get("tags", [])]
+        self.tags: List[EnrichedTagDto] = [EnrichedTagDto(raw_element=tag) for tag in raw_element.get("tags", [])]
 
 
 class EntityShortRepresentation(DynatraceObject):
