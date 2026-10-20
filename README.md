@@ -132,9 +132,19 @@ settings_value = {
 
 settings_object = SettingsObjectCreate(schema_id="builtin:anomaly-detection.metric-events", value=settings_value, scope="environment")
 dt.settings.create_object(validate_only=False, body=settings_object)
+
+events = [
+    {
+        "id": "HOST-82F576674F19AC16",
+        "tags:custom.test": {"test": "test"},
+    }
+]
+response = dt.openpipeline.smartscape_eventv1_ingest(events)
+print(response.status_code)
 ```
 
 ## Implementation Progress
+
 
 ### Environment API V2
 
@@ -250,3 +260,12 @@ dt.settings.create_object(validate_only=False, body=settings_object)
  Service - IBM MQ tracing                            |        :x:         |                                       |
  Service - Request attributes                        |        :x:         |                                       |
  Service - Request naming                            |        :x:         |                                       |
+
+### OpenPipeline
+
+ API                                     |       Level        | Access                                    |
+:----------------------------------------|:------------------:|:------------------------------------------|
+ ingest Built-in Smartscape v1 events               | :heavy_check_mark: | `dt.openpipeline.smartscape_eventv1_ingest` |
+ ingest Generic Events                           |        :x:         |                                       |
+ ingest SDLC Events                              |        :x:         |                                       |
+ ingest Security Events                              |        :x:         |                                       |

@@ -58,6 +58,7 @@ from dynatrace.environment_v2.problems import ProblemService
 from dynatrace.environment_v2.service_level_objectives import SloService
 from dynatrace.environment_v2.logs import LogService
 from dynatrace.environment_v2.settings import SettingService
+from dynatrace.openpipeline.ingest import OpenPipelineService
 
 from dynatrace.http_client import HttpClient
 
@@ -144,3 +145,4 @@ class Dynatrace:
 
         # New implementations should be done here, above is deprecated
         self.config_v1: ConfigurationV1 = ConfigurationV1(self.__http_client)
+        self.openpipeline: OpenPipelineService = OpenPipelineService(self.__http_client)
